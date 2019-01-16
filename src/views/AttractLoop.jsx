@@ -14,7 +14,7 @@ class AttractLoop extends Component {
 
     const slideImages = [
       Image_coupon,
-      Barcode_Image,
+      Image_coupon,
       Image_coupon,
     ];
 

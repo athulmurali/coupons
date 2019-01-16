@@ -7,13 +7,19 @@ div.screen {
     border: 3px solid;
     text-align: center;
     border-radius:50%;
-    left:160px;
+    left:230px;
     background-color: #E0004D;
     z-index: 1;
-    bottom: 10px;
+    bottom: 5%;
     position: absolute;
-    width: 100%;
+    width: 1228px;
 }
+
+.barcodeImage{
+  right: 250px;
+  position: absolute;
+}
+
 
 @media screen and (min-width: 1700px) {
   div.screen {
@@ -21,15 +27,19 @@ div.screen {
       border: 3px solid;
       text-align: center;
       border-radius:50%;
-      left:190px;
+      left:350px;
       background-color: #E0004D;
       z-index: 1;
-      bottom: 11%;
+      bottom: 9%;
       position: absolute;
       width: 100%;
   }
   .couponImageCover{
     background-size: cover;
+  }
+  .barcodeImage{
+    right: 350px;
+    position: absolute;
   }
 
 }
@@ -37,22 +47,18 @@ div.screen {
   background-size: cover;
 }
 .each-slide{
-  width: 100%;
-  height: 600px;
+  width: 1228px;
+  height: 647px;
   background-size: cover;
 }
 .react-slideshow-wrapper .images-wrap *{
-  width: 100%;
-  height: 600px;
+    width: 1228px;
+    height: 647px;
 }
 #one {
     height: 180px;
     width: 180px;
     border-color: #E0004D;
-}
-.barcodeImage{
-  right: 170px;
-  position: absolute;
 }
 
 span {
@@ -93,10 +99,11 @@ div.container {
 }
 
 .couponScreenBackground{
-  height: 600px;
-  width:  80%;
+  height: 647px;
+  width:  1228px;
   background-color: lightgrey;
   margin:auto;
   background-repeat: repeat-y;
   background-size: 100%;
+
 }
