@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
-import { ThemeProvider } from 'styled-components';
-import Themes from '../config/themes';
-import AttractLoop from '../views/AttractLoop';
-import SelectStorePage from '../views/SelectStorePage';
-import SearchPage from '../views/SearchPage';
-import ResultsPage from '../views/ResultsPage';
+import AttractLoop from  '../views/AttractLoop';
+import LoadingPage from  '../views/LoadingPage';
 import Config from '../config/config';
 import API from './API';
 
@@ -22,7 +18,7 @@ class Router extends Component {
   }
 
   componentWillMount() {
-    sessionStorage.setItem('searchTerm', '');
+    sessionStorage.setItem('Phone-Number', '');
   }
 
   /**
@@ -54,7 +50,7 @@ class Router extends Component {
     this.reset = true;
     if (RESET_TIME !== 0 && Config.device === 'kiosk') {
       API.recordTime(Config.storeNumber, useTime);
-      sessionStorage.setItem('searchTerm', '');
+      sessionStorage.setItem('Phone-number', '');
       this.setState({
         overtime: true,
       });
@@ -63,7 +59,7 @@ class Router extends Component {
 
   render() {
     return (
-      <ThemeProvider theme={Themes[Config.brand]}>
+      
         <HashRouter>
           <div
             onClick={this.handleUserInteract}
@@ -71,15 +67,16 @@ class Router extends Component {
             onScroll={this.handleUserInteract}
             role="button"
           >
-            <Switch>
-              <Route exact path="/search/:storeNumber" render={props => <SearchPage overtime={this.state.overtime} {...props} />} />
-              <Route exact path="/item-detail/:upc/:storeNumber" render={props => <ResultsPage overtime={this.state.overtime} {...props} />} />
-              <Route exact path="/" component={SelectStorePage} />
-              <Route path="/:storeNumber" component={AttractLoop} />
-            </Switch>
+          <AttractLoop></AttractLoop>
+          <Switch>
+            <Route>
+            </Route>
+
+          </Switch>
+            
           </div>
         </HashRouter>
-      </ThemeProvider>
+      
     );
   }
 }
