@@ -22,7 +22,7 @@ class AppProvider extends Component {
   };
 
   render() {
-    return (<AppContext.Provider value={this.state}>{this.props.children} {alert("Inside App Provider")}</AppContext.Provider>);
+    return (<AppContext.Provider value={this.state}>{this.props.children}</AppContext.Provider>);
   }
 }
 

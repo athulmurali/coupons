@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import AttractLoop from  '../views/AttractLoop';
-import LoadingPage from  '../views/LoadingPage';
-
+import API from './API';
 import {TestComponent} from '../components/TestComponent';
 import Config from '../config/config';
 
@@ -64,14 +63,15 @@ class Router extends Component {
     return (
       <HashRouter>
         <div
-          onClick=''
-          onKeyDown=''
-          onScroll=''
+          onClick={this.handleUserInteract}
+          onKeyDown={this.handleUserInteract}
+          onScroll={this.handleUserInteract}
           role="button"
         >
-        "fxghgjhkl;"
+        <AttractLoop></AttractLoop>
           <Switch>
-            <Route exact path="/test" render={TestComponent} />
+            <Route exact path="/" />
+
           </Switch>
         </div>
       </HashRouter>
