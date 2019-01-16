@@ -27,21 +27,21 @@ class AttractLoop extends Component {
     }
 
     return (
-      <div className="App" onClick={() => alert("This should check for user authentication")}>
-        <header className="App-Header">
+      <div className="AttractLoop" onClick={() => alert("This should check for user authentication")}>
+        <header className="AttractLoop-Header">
           <h1> Savings & Coupons</h1>
         </header>
           <Slide {...properties} className="couponScreenBackground">
                 <div className="each-slide">
-                  <div style={{'backgroundImage': `url(${slideImages[0]})`}}>
+                  <div className="couponImageCover" style={{'backgroundImage': `url(${slideImages[0]})`}}>
                   </div>
                 </div>
                 <div className="each-slide">
-                  <div style={{'backgroundImage': `url(${slideImages[1]})`}}>
+                  <div className="couponImageCover" style={{'backgroundImage': `url(${slideImages[1]})`}}>
                   </div>
                 </div>
                 <div className="each-slide">
-                  <div style={{'backgroundImage': `url(${slideImages[2]})`}}>
+                  <div className="couponImageCover" style={{'backgroundImage': `url(${slideImages[2]})`}}>
                   </div>
                 </div>
         </Slide>

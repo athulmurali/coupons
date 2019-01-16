@@ -1,4 +1,4 @@
-.App {
+.AttractLoop {
   text-align: center;
 }
 
@@ -15,9 +15,31 @@ div.screen {
     width: 100%;
 }
 
+@media screen and (min-width: 1700px) {
+  div.screen {
+      margin: 0 0 10px;
+      border: 3px solid;
+      text-align: center;
+      border-radius:50%;
+      left:190px;
+      background-color: #E0004D;
+      z-index: 1;
+      bottom: 11%;
+      position: absolute;
+      width: 100%;
+  }
+  .couponImageCover{
+    background-size: cover;
+  }
+
+}
+.couponImageCover{
+  background-size: cover;
+}
 .each-slide{
   width: 100%;
   height: 600px;
+  background-size: cover;
 }
 .react-slideshow-wrapper .images-wrap *{
   width: 100%;
@@ -32,6 +54,7 @@ div.screen {
   right: 170px;
   position: absolute;
 }
+
 span {
     height: 20px;
     font-size: 20px;
@@ -50,12 +73,9 @@ div.container {
     margin-top: -15px;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-}
 
-.App-header {
+
+.AttractLoop-header {
   background-color: #63666A;
   min-height: 100vh;
   display: flex;
@@ -71,7 +91,6 @@ div.container {
 .App-link {
   color: #61dafb;
 }
-
 
 .couponScreenBackground{
   height: 600px;
