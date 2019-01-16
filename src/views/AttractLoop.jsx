@@ -3,11 +3,19 @@ import './AttractLoop.css';
 import '../assets/Barcode.png';
 import { Slide } from 'react-slideshow-image';
 
+import PropTypes from 'prop-types';
+import Config from '../config/config';
+
 
 class AttractLoop extends Component {
   state = {
-      number : 10
-    }
+    number : 10
+  }
+
+  handleScreenTap = () => {
+    this.props.history.push(`/userIdentification`);
+  };
+
   render() {
     const Barcode_Image = require('../assets/Barcode.png');
     const Image_coupon = require('../assets/Attract-loop-image.png');
@@ -27,7 +35,7 @@ class AttractLoop extends Component {
     }
 
     return (
-      <div className="AttractLoop" onClick={() => alert("This should check for user authentication")}>
+      <div className="AttractLoop" onClick={this.handleScreenTap}>
         <header className="AttractLoop-Header">
           <h1> Savings & Coupons</h1>
         </header>
@@ -61,3 +69,9 @@ class AttractLoop extends Component {
 }
 
 export default AttractLoop;
+
+AttractLoop.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
