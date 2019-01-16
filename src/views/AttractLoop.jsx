@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD
 import logo from './logo.svg';
 import './AttractLoop.css';
 
@@ -26,15 +25,3 @@ class AttractLoop extends Component {
 }
 
 export default AttractLoop;
-=======
-class AttractLoop extends Component {
-
-
-    render(){
-        return(<h2>ddfgh</h2>);
-
-    };
-}
-
-export default AttractLoop;
->>>>>>> f1b41ecad2d4e5830895e25a8d668cd49ee17af9

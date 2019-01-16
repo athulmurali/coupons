@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-=======
+
 import React, { Component } from 'react';
 
 import './App.css';
@@ -23,7 +22,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        
+
           <HashRouter>
             <div>
               <p>App JS Page</p>
@@ -37,4 +36,3 @@ class App extends Component {
 }
 
 export default App;
->>>>>>> 47506d0e8b4c93ef5fed37c3c9c7c35475d385c0

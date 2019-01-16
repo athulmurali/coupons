@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
-<<<<<<< HEAD
 import AttractLoop from  '../views/AttractLoop';
 import LoadingPage from  '../views/LoadingPage';
-=======
 
 import {TestComponent} from '../components/TestComponent';
->>>>>>> 47506d0e8b4c93ef5fed37c3c9c7c35475d385c0
 import Config from '../config/config';
 
 
@@ -22,7 +19,6 @@ class Router extends Component {
     };
   }
 
-<<<<<<< HEAD
   componentWillMount() {
     sessionStorage.setItem('Phone-Number', '');
   }
@@ -63,27 +59,6 @@ class Router extends Component {
     }
   };
 
-  render() {
-    return (
-      
-        <HashRouter>
-          <div
-            onClick={this.handleUserInteract}
-            onKeyDown={this.handleUserInteract}
-            onScroll={this.handleUserInteract}
-            role="button"
-          >
-          <AttractLoop></AttractLoop>
-          <Switch>
-            <Route>
-            </Route>
-
-          </Switch>
-            
-          </div>
-        </HashRouter>
-      
-=======
 
   render() {
     return (
@@ -100,7 +75,6 @@ class Router extends Component {
           </Switch>
         </div>
       </HashRouter>
->>>>>>> 47506d0e8b4c93ef5fed37c3c9c7c35475d385c0
     );
   }
 }
