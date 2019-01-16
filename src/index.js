@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './utils/App';
 import * as serviceWorker from './serviceWorker';
 import Router from './utils/Router';
 
 ReactDOM.render(
     <App>
         <Router/>
-    </App>, 
+    </App>,
     document.getElementById('root')
 );
 
