@@ -1,0 +1,17 @@
+@media screen and (min-width: 1700px) {
+  div.screen {
+      margin: 0 0 10px;
+      border: 3px solid;
+      text-align: center;
+      border-radius:50%;
+      left:350px;
+      background-color: #E0004D;
+      z-index: 1;
+      bottom: 9%;
+      position: absolute;
+      width: 100%;
+  .barcodeImage{
+    right: 350px;
+    position: absolute;
+  }
+}

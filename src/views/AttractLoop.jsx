@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import './AttractLoop.css';
 import '../assets/Barcode.png';
 import { Slide } from 'react-slideshow-image';
-
 import PropTypes from 'prop-types';
-import Config from '../config/config';
-
-
+import slideDuration from '../config/config';
+import Header from '../components/Header';
+import Scanner from '../components/BarcodeScanner';
 class AttractLoop extends Component {
 
   handleScreenTap = () => {
@@ -23,20 +22,18 @@ class AttractLoop extends Component {
       Image_coupon,
     ];
 
-    const properties = {
-      duration: 5000,
+    const slide_properties = {
+      duration: slideDuration.duration,
       transitionDuration: 500,
       infinite: true,
       indicators: false,
-      arrows: false
+      arrows: false,
     }
 
     return (
       <div className="AttractLoop" onClick={this.handleScreenTap}>
-        <header className="AttractLoop-Header">
-          <h1> Savings & Coupons</h1>
-        </header>
-          <Slide {...properties} className="couponScreenBackground">
+          <Header />
+          <Slide {...slide_properties} className="couponScreenBackground">
                 <div className="each-slide">
                   <div className="couponImageCover" style={{'backgroundImage': `url(${slideImages[0]})`}}>
                   </div>
@@ -50,16 +47,12 @@ class AttractLoop extends Component {
                   </div>
                 </div>
         </Slide>
-
         <div id="one" className="screen">
             <div className="container">
                 <span>Tap anywhere to start</span>
             </div>
         </div>
-        <div className="barcodeImage">
-          <h3> Scan card to start </h3>
-          <img src={Barcode_Image} height="100px" alt="Barcode"/>
-        </div>
+        <Scanner />
       </div>
     );
   }
