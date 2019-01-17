@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import AttractLoop from  '../views/AttractLoop';
+import UserIdentification from '../views/UserIdentification';
 import API from './API';
 import {TestComponent} from '../components/TestComponent';
 import Config from '../config/config';
-import PhoneNumberIdentification from '../views/UserIdentification';
-import UserIdentification from '../views/UserIdentification';
-
 
 const RESET_TIME = Config.resetTime * 1000;
 
@@ -70,11 +68,9 @@ class Router extends Component {
           onScroll={this.handleUserInteract}
           role="button"
         >
-        
           <Switch>
-            <Route exact path="/" component = {AttractLoop}/>
-            <Route exact path ="/phoneidentification"  component={UserIdentification}/>
-
+            <Route exact path="/" component={AttractLoop} />
+            <Route exact path="/userIdentification" render={props => <UserIdentification overtime={this.state.overtime} {...props} />} />
           </Switch>
         </div>
       </HashRouter>

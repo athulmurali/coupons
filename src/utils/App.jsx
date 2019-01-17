@@ -3,7 +3,6 @@ import logo from './logo.svg';
 import './App.css';
 
 
-
 import Config from '../config/config';
 
 const AppContext = React.createContext();
@@ -13,7 +12,6 @@ const AppConsumer = AppContext.Consumer;
 class AppProvider extends Component {
   constructor(props){
     super(props);
-
   }
 
   state = {
