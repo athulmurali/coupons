@@ -6,9 +6,10 @@ import { App } from './utils/App';
 import * as serviceWorker from './serviceWorker';
 import Router from './utils/Router';
 
-ReactDOM.render(<App>
- <Router value= "Basic Router Setup"/>
-</App>,
+ReactDOM.render(
+    <App>
+        <Router/>
+    </App>,
      document.getElementById('root'));
 
 
