@@ -3,7 +3,7 @@ import './AttractLoop.css';
 import '../assets/Barcode.png';
 import { Slide } from 'react-slideshow-image';
 import PropTypes from 'prop-types';
-import Config from '../config/config';
+import slideDuration from '../config/config';
 
 
 class AttractLoop extends Component {
