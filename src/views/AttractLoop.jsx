@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import './AttractLoop.css';
 import '../assets/Barcode.png';
 import { Slide } from 'react-slideshow-image';
-
 import PropTypes from 'prop-types';
-import Config from '../config/config';
+import slideDuration from '../config/config';
 
 
 class AttractLoop extends Component {
@@ -23,12 +22,12 @@ class AttractLoop extends Component {
       Image_coupon,
     ];
 
-    const properties = {
-      duration: 5000,
+    const slide_properties = {
+      duration: slideDuration.duration,
       transitionDuration: 500,
       infinite: true,
       indicators: false,
-      arrows: false
+      arrows: false,
     }
 
     return (
@@ -36,7 +35,7 @@ class AttractLoop extends Component {
         <header className="AttractLoop-Header">
           <h1> Savings & Coupons</h1>
         </header>
-          <Slide {...properties} className="couponScreenBackground">
+          <Slide {...slide_properties} className="couponScreenBackground">
                 <div className="each-slide">
                   <div className="couponImageCover" style={{'backgroundImage': `url(${slideImages[0]})`}}>
                   </div>
