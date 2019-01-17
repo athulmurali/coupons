@@ -8,9 +8,6 @@ import Config from '../config/config';
 
 
 class AttractLoop extends Component {
-  state = {
-    number : 10
-  }
 
   handleScreenTap = () => {
     this.props.history.push(`/userIdentification`);
