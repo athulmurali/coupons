@@ -21,7 +21,6 @@ class App extends Component {
   render() {
     return (
       <div>
-
           <HashRouter>
             <div>
               <p>App JS Page</p>
