@@ -4,6 +4,8 @@ import AttractLoop from  '../views/AttractLoop';
 import API from './API';
 import {TestComponent} from '../components/TestComponent';
 import Config from '../config/config';
+import PhoneNumberIdentification from '../views/UserIdentification';
+import UserIdentification from '../views/UserIdentification';
 
 
 const RESET_TIME = Config.resetTime * 1000;
@@ -68,9 +70,10 @@ class Router extends Component {
           onScroll={this.handleUserInteract}
           role="button"
         >
-        <AttractLoop></AttractLoop>
+        
           <Switch>
-            <Route exact path="/" />
+            <Route exact path="/" component = {AttractLoop}/>
+            <Route exact path ="/phoneidentification"  component={UserIdentification}/>
 
           </Switch>
         </div>
