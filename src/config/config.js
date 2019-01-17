@@ -23,6 +23,10 @@ const env = {
   https: false,
 };
 
+const slideDuration = {
+  duration: 5000
+};
+
 const devSize = size => size / 8;
 
 const constants = {
