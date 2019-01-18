@@ -9,28 +9,33 @@
   display: flex;
   justify-content: flex-end;
   margin-right: 20px;
+  margin-bottom: 0;
 }
 
 .logoutButton {
   width: 100px;
   height: 40px;
-  margin: 15px 20px 0px 20px;
+  margin: 15px 10px 10px 20px;
   font-size: 20px;
   font-weight: bold;
   color: grey;
+  margin-bottom: 0;
 }
 .printDiv{
   display: flex;
   justify-content: flex-end;
   margin-right: 20px;
+  margin-bottom: 0;
 }
 .printButton{
-  width: 100px;
-  height: 40px;
   font-size: 20px;
   font-weight: bold;
   color: #E0004D;
   border: none;
+  margin-bottom: 0;
+}
+.printButton:hover{
+  border: 0;
 }
 .userName{
   font-style: italic;
@@ -44,6 +49,7 @@ ul {
   max-width: 230px;
   background-color: white;
   height: 100%vh;
+  border: 2px solid lightgrey;
 }
 h4, h5 {
   padding: 0;
@@ -91,6 +97,7 @@ li a:hover:not(.active) {
   padding: 10px 20px 10px 50px;
   background-color: #EEF0F3;
   height: 100%vh;
+  border-top: 2px solid lightgrey;
 }
 .Cards{
   display: inline-flex;
@@ -101,7 +108,4 @@ li a:hover:not(.active) {
   width: 171px;
   background-color: white;
   align-items: flex-start;
-}
-.Cards:hover{
-  border: 2px solid #E0004D;
 }
