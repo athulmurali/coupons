@@ -3,6 +3,7 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 
 import AttractLoop from  '../views/AttractLoop';
 import UserIdentification from '../views/UserIdentification';
+import Coupons from '../views/DisplayCoupons';
 
 import API from './API';
 import {TestComponent} from '../components/TestComponent';
@@ -74,6 +75,8 @@ class Router extends Component {
           <Switch>
             <Route exact path="/" component={AttractLoop} />
             <Route exact path="/userIdentification" render={props => <UserIdentification overtime={this.state.overtime} {...props} />} />
+            <Route exact path="/DisplayCoupons" render={props => <Coupons  overtime={this.state.overtime}  {...props} />} />
+
           </Switch>
         </div>
       </HashRouter>

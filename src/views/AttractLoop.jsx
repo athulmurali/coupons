@@ -6,8 +6,9 @@ import PropTypes from 'prop-types';
 import slideDuration from '../config/config';
 import Header from '../components/Header';
 import Scanner from '../components/BarcodeScanner';
-class AttractLoop extends Component {
 
+
+class AttractLoop extends Component {
   handleScreenTap = () => {
     this.props.history.push(`/userIdentification`);
   };
@@ -31,7 +32,7 @@ class AttractLoop extends Component {
     }
 
     return (
-      <div className="AttractLoop" onClick={this.handleScreenTap}>
+      <div onClick={this.handleScreenTap}>
           <Header />
           <Slide {...slide_properties} className="couponScreenBackground">
                 <div className="each-slide">

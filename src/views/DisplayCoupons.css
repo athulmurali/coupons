@@ -1,0 +1,107 @@
+.AllCoupons{
+  margin-top: 0;
+  display: flex;
+  width: 100%;
+  height: 100%vh;
+}
+
+.WelcomeUser_Logout{
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 20px;
+}
+
+.logoutButton {
+  width: 100px;
+  height: 40px;
+  margin: 15px 20px 0px 20px;
+  font-size: 20px;
+  font-weight: bold;
+  color: grey;
+}
+.printDiv{
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 20px;
+}
+.printButton{
+  width: 100px;
+  height: 40px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #E0004D;
+  border: none;
+}
+.userName{
+  font-style: italic;
+  color: grey;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 230px;
+  background-color: white;
+  height: 100%vh;
+}
+h4, h5 {
+  padding: 0;
+  margin: 5px;
+  text-align: left;
+  color: black;
+}
+img{
+  margin-bottom: 8px;
+}
+h6{
+  padding: 0;
+  margin: 5px;
+  text-align: left;
+  color: grey;
+}
+.LoadedCouponCount {
+  padding: 0;
+  margin: 5px;
+  text-align: left;
+  color: grey;
+  font-weight: normal;
+}
+
+li a {
+  display: flex;
+  color: #000;
+  text-decoration: none;
+  height: 40px;
+  font-weight: bold;
+  padding: 20px 10px 5px 15px;
+}
+
+li a.active {
+  background-color: #E0004D;
+  color: white;
+}
+
+li a:hover:not(.active) {
+  background-color: #E0004D;
+  color: white;
+}
+.LoadedCoupons{
+  color: grey;
+  padding: 10px 20px 10px 50px;
+  background-color: #EEF0F3;
+  height: 100%vh;
+}
+.Cards{
+  display: inline-flex;
+  margin-right: 14px;
+  text-align: center;
+  margin-top: 10px;
+  height: 264px;
+  width: 171px;
+  background-color: white;
+  align-items: flex-start;
+}
+.Cards:hover{
+  border: 2px solid #E0004D;
+}
