@@ -108,4 +108,9 @@ li a:hover:not(.active) {
   width: 171px;
   background-color: white;
   align-items: flex-start;
+  cursor: pointer;
+}
+
+.viewMore{
+  text-decoration: underline;
 }

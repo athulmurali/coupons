@@ -13,12 +13,6 @@ div.screen {
     width: 1228px;
 }
 
-.barcodeImage{
-  right: 250px;
-  position: absolute;
-}
-
-
 @media screen and (min-width: 1700px) and (min-height: 900px) {
   div.screen {
       margin: 0 0 10px;
@@ -34,10 +28,6 @@ div.screen {
   }
   .couponImageCover{
     background-size: cover;
-  }
-  .barcodeImage{
-    right: 350px;
-    position: absolute;
   }
 
 }

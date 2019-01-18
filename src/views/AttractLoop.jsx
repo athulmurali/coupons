@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import './AttractLoop.css';
-import '../assets/Barcode.png';
 import { Slide } from 'react-slideshow-image';
+import ScanBarcode from '../components/ScanBarcode/ScanBarcode';
+import Header from '../components/Header';
 import PropTypes from 'prop-types';
 import slideDuration from '../config/config';
-import Header from '../components/Header';
-import Scanner from '../components/BarcodeScanner';
 
 
 class AttractLoop extends Component {
@@ -14,7 +13,6 @@ class AttractLoop extends Component {
   };
 
   render() {
-    const Barcode_Image = require('../assets/Barcode.png');
     const Image_coupon = require('../assets/Attract-loop-image.png');
 
     const slideImages = [
@@ -32,28 +30,28 @@ class AttractLoop extends Component {
     }
 
     return (
-      <div onClick={this.handleScreenTap}>
-          <Header />
-          <Slide {...slide_properties} className="couponScreenBackground">
-                <div className="each-slide">
-                  <div className="couponImageCover" style={{'backgroundImage': `url(${slideImages[0]})`}}>
-                  </div>
-                </div>
-                <div className="each-slide">
-                  <div className="couponImageCover" style={{'backgroundImage': `url(${slideImages[1]})`}}>
-                  </div>
-                </div>
-                <div className="each-slide">
-                  <div className="couponImageCover" style={{'backgroundImage': `url(${slideImages[2]})`}}>
-                  </div>
-                </div>
+      <div className="AttractLoop" onClick={this.handleScreenTap}>
+        <Header />
+        <Slide {...slide_properties} className="couponScreenBackground">
+          <div className="each-slide">
+            <div className="couponImageCover" style={{ 'backgroundImage': `url(${slideImages[0]})` }}>
+            </div>
+          </div>
+          <div className="each-slide">
+            <div className="couponImageCover" style={{ 'backgroundImage': `url(${slideImages[1]})` }}>
+            </div>
+          </div>
+          <div className="each-slide">
+            <div className="couponImageCover" style={{ 'backgroundImage': `url(${slideImages[2]})` }}>
+            </div>
+          </div>
         </Slide>
         <div id="one" className="screen">
-            <div className="container">
-                <span>Tap anywhere to start</span>
-            </div>
+          <div className="container">
+            <span>Tap anywhere to start</span>
+          </div>
         </div>
-        <Scanner />
+        <ScanBarcode />
       </div>
     );
   }
