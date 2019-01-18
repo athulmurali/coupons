@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './UserIdentification.css';
-import './AttractLoop.css';
-import Header from './Header';
-import DialPad from './DialPad';
-
+import Header from '../../views/Header';
+import DialPad from '../DialPadComponent/DialPad';
+import AttractLoop from '../../views/Header';
 
 
 class UserIdentification extends Component{
@@ -16,8 +15,10 @@ class UserIdentification extends Component{
             defaultMessage:'Enter the Phone number associated with the account',
         };
         
+        
     }
     succesfullIdentification = (booleanDataFromDialPad,phoneNumber) => {
+        console.log(this.props)
         booleanDataFromDialPad ? this.props.history.push(`/`):alert('new user');
     };
     render(){
@@ -25,8 +26,8 @@ class UserIdentification extends Component{
         return(
             <div>
                 
-                <Header />
-                <DialPad identificationfromDiaPad = {this.succesfullIdentification}/>  
+                <Header history={this.props.history}/>
+                <DialPad history={this.props.history} identificationfromDiaPad = {this.succesfullIdentification}/>  
                 
             </div>
         );

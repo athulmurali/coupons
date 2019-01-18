@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import AttractLoop from  '../views/AttractLoop';
-import UserIdentification from '../views/UserIdentification';
+import UserIdentification from '../components/UserIdentificationComponent/UserIdentification';
 import API from './API';
 import {TestComponent} from '../components/TestComponent';
 import Config from '../config/config';
+import UserIdentificationView from '../views/UserIdentificationView';
+import PropTypes from 'prop-types';
 
 const RESET_TIME = Config.resetTime * 1000;
 
 class Router extends Component {
   constructor(props) {
     super(props);
+    
     this.timer = null;
     this.reset = true;
     this.state = {
@@ -69,8 +72,9 @@ class Router extends Component {
           role="button"
         >
           <Switch>
-            <Route exact path="/" component={AttractLoop} />
-            <Route exact path="/userIdentification" render={props => <UserIdentification overtime={this.state.overtime} {...props} />} />
+            <Route exact path="/" history={this.props.history} component={AttractLoop} />
+            
+            <Route exact path="/userIdentification" render={props => <UserIdentificationView history={this.props.history} overtime={this.state.overtime} {...props} />} />
           </Switch>
         </div>
       </HashRouter>
@@ -79,3 +83,9 @@ class Router extends Component {
 }
 
 export default Router;
+Router.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
+
