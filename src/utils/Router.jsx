@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
-
 import AttractLoop from  '../views/AttractLoop';
-import UserIdentification from '../views/UserIdentification';
-
+import UserIdentification from '../components/UserIdentificationComponent/UserIdentification';
 import API from './API';
 import {TestComponent} from '../components/TestComponent';
 import Config from '../config/config';
-
+import UserIdentificationView from '../views/UserIdentificationView';
+import PropTypes from 'prop-types';
 
 const RESET_TIME = Config.resetTime * 1000;
 
 class Router extends Component {
   constructor(props) {
     super(props);
+    this.flag = false;
     this.timer = null;
     this.reset = true;
     this.state = {
@@ -31,13 +31,13 @@ class Router extends Component {
    * starts the timer.
    */
   handleUserInteract = () => {
-    if (this.reset) {
-      window.lastReset = new Date();
-      this.reset = false;
-      this.setState({ overtime: false });
-    }
+    
     clearTimeout(this.timer);
-    this.timer = setTimeout(this.navigateToAttractLoop, RESET_TIME);
+    this.timer = setTimeout(function(){
+      
+      window.location.href= "http://localhost:3000/";
+    }, 5000);
+    
   };
 
   /**
@@ -47,33 +47,24 @@ class Router extends Component {
    * The exception to the last sentence is if the RESET_TIME is equal to 0. This is for development
    * purposes.
    */
-  navigateToAttractLoop = () => {
-    let useTime = Math.abs(window.lastReset - new Date());
-    useTime -= RESET_TIME;
-    clearTimeout(this.time);
-    this.reset = true;
-    if (RESET_TIME !== 0 && Config.device === 'kiosk') {
-      API.recordTime(Config.storeNumber, useTime);
-      sessionStorage.setItem('Phone-number', '');
-      this.setState({
-        overtime: true,
-      });
-    }
-  };
+  
 
 
   render() {
     return (
-      <HashRouter>
+      <HashRouter >
         <div
           onClick={this.handleUserInteract}
           onKeyDown={this.handleUserInteract}
           onScroll={this.handleUserInteract}
           role="button"
+          
         >
+        
           <Switch>
-            <Route exact path="/" component={AttractLoop} />
-            <Route exact path="/userIdentification" render={props => <UserIdentification overtime={this.state.overtime} {...props} />} />
+            <Route exact path="/" history={this.props.history} component={AttractLoop} />
+            
+            <Route exact path="/userIdentification" render={props => <UserIdentificationView history={this.props.history} overtime={this.state.overtime} {...props} />} />
           </Switch>
         </div>
       </HashRouter>
@@ -82,3 +73,10 @@ class Router extends Component {
 }
 
 export default Router;
+Router.propTypes = {
+    
+
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};

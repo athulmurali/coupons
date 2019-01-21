@@ -13,6 +13,9 @@ import {
 } from 'react-router-dom';
 
 class App extends Component {
+  constructor(props){
+    super(props);
+  }
   state = {
     timestamp: '',
     location: ''
@@ -23,10 +26,10 @@ class App extends Component {
     return (
       <div>
 
-          <HashRouter>
+          <HashRouter >
             <div>
               <p>App JS Page</p>
-              <Route path="/test" component={TestComponent} />
+              <Route path="/test" component =  {TestComponent} />
             </div>
           </HashRouter>
           {/* {alert("sadfgh")} */}
