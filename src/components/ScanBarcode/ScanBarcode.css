@@ -9,8 +9,9 @@
 }
 
 @media screen and (min-width: 1700px) {
-    .barcodeImage{
+    .scanBarcode{
       right: 350px;
       position: absolute;
-    } 
+      text-align: center;
+    }
 }

@@ -1,97 +1,113 @@
-.messsgeDisplay{
-    margin-top: 100px;
-    text-align: center;
-}
-.inputText{
-    width: 400px;
-    height: 50px;
-    background-color:lightgray;
-    text-align: center;
-    font-size: x-large;
+.messsgeDisplay {
+	margin-top: 100px;
+	text-align: center;
 }
 
-    body {  
-    font: 71%/1.5 Verdana, Sans-Serif;  
-    background:#f9f9f9;  
-    align-content: center;
-    }  
-    #container {  
-       
-    margin: 20px auto;  
-    width: 760px;  
-    display: flex;
-    justify-content: center;
-    }   
-    #keyboard {  
-    margin: 0;  
-    padding: 0;  
-    list-style: none;  
-    }  
-        #keyboard li {  
-        float: left;  
-         
-        width: 60px;  
-        height: 60px;  
-        font-size: 24px;
-        line-height: 60px;  
-        text-align: center;  
-        background: #f9f9f9;  
-        border: 1px solid #f9f9f9;  
-        border-radius: 5px;  
-        }  
-            .capslock, .tab, .left-shift, .clearl, .switch {  
-            clear: left;  
-            }  
-                #keyboard .tab, #keyboard .delete {  
-                width: 70px;  
-                }  
-                #keyboard .capslock {  
-                width: 80px;  
-                }  
-                #keyboard .return {  
-                width: 90px;  
-                }  
-                #keyboard .left-shift{  
-                width: 70px;  
-                }  
-    
-                #keyboard .switch {
-                    width: 193px;
-                    background-color: #E0004D;
-                    color: white;
-                }
-                #keyboard .rightright-shift {  
-                width: 109px;  
-                }  
-            .lastitem {  
-            margin-right: 0;  
-            }  
-            .uppercase {  
-            text-transform: uppercase;  
-            }  
-            #keyboard .space {  
-            float: left;
-            width: 556px;  
-            }  
-            #keyboard .switch, #keyboard .space, #keyboard .return{
-            font-size: 16px;
-            height: 50px;
-            }
-            .on {  
-            display: none;  
-            } 
-             
-            #keyboard li:hover {  
-            position: relative;  
-            top: 1px;  
-            left: 1px;  
-            border-color: #e5e5e5;  
-            cursor: pointer;  
-            }  
-    .switchNoCard{
-                clear: left;
-                font-size: 16px;
-                height: 50px; 
-                text-decoration: underline;
-                text-underline-position: under;
-    }
+.inputText {
+	width: 400px;
+	height: 50px;
+	background-color: lightgray;
+	text-align: center;
+    font-size: x-large;
+    border: 1px solid lightgrey;
+}
+
+#container {
+	margin: 20px auto;
+	width: 760px;
+	display: flex;
+	justify-content: center;
+}
+
+#keyboard {
+	margin: 0;
+	padding-left: 50px;
+	list-style: none;
+	background-color: white;
+	border: none;
+}
+
+#keyboard li {
+	float: left;
+	width: 60px;
+	height: 60px;
+	font-size: 24px;
+	line-height: 60px;
+	text-align: center;
+	border-radius: 5px;
+}
+
+.capslock,
+.tab,
+.left-shift,
+.clearl,
+.switch {
+	clear: left;
+}
+
+#keyboard .tab,
+#keyboard .delete {
+	width: 70px;
+}
+
+#keyboard .capslock {
+	width: 80px;
+}
+
+#keyboard .return {
+	width: 90px;
+}
+
+#keyboard .left-shift {
+	width: 70px;
+}
+
+#keyboard .switch {
+	width: 193px;
+	background-color: #E0004D;
+	color: white;
+}
+
+#keyboard .rightright-shift {
+	width: 109px;
+}
+
+.lastitem {
+	margin-right: 0;
+}
+
+.uppercase {
+	text-transform: uppercase;
+}
+
+#keyboard .space {
+	float: left;
+	width: 556px;
+}
+
+#keyboard .switch,
+#keyboard .space,
+#keyboard .return {
+	font-size: 16px;
+}
+
+.on {
+	display: none;
+}
+
+#keyboard li:hover {
+	position: relative;
+	top: 1px;
+	left: 1px;
+	border-color: #e5e5e5;
+	cursor: pointer;
+}
+
+.switchNoCard {
+	clear: left;
+	font-size: 16px;
+	height: 50px;
+	text-decoration: underline;
+	text-underline-position: under;
+	padding-left: 15px;
+}

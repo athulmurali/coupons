@@ -18,21 +18,18 @@ class App extends Component {
   }
   state = {
     timestamp: '',
-    location: ''
-
-  }
+    location: '',
+  };
 
   render() {
     return (
       <div>
-
           <HashRouter >
             <div>
               <p>App JS Page</p>
               <Route path="/test" component =  {TestComponent} />
             </div>
           </HashRouter>
-          {/* {alert("sadfgh")} */}
       </div>
     );
   }
