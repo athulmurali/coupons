@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './UserIdentification.css';
-import Header from '../../views/Header';
+import Header from '../../components/Header';
 import DialPad from '../DialPadComponent/DialPad';
 
 class UserIdentification extends Component{

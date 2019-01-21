@@ -1,5 +1,5 @@
 .messsgeDisplay {
-	margin-top: 100px;
+	margin-top: 70px;
 	text-align: center;
 }
 
@@ -8,8 +8,8 @@
 	height: 50px;
 	background-color: lightgray;
 	text-align: center;
-    font-size: x-large;
-    border: 1px solid lightgrey;
+ font-size: x-large;
+ border: 1px solid lightgrey;
 }
 
 #container {
@@ -18,7 +18,10 @@
 	display: flex;
 	justify-content: center;
 }
-
+.statusMessage{
+ color:black;
+ font-weight: normal;
+}
 #keyboard {
 	margin: 0;
 	padding-left: 50px;
