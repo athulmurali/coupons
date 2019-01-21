@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "../components/Header";
+import Header from "../Header";
 import "./DisplayCoupons.css";
 import Flippy, { FrontSide, BackSide } from "react-flippy";
 import Popup from "reactjs-popup";
@@ -12,10 +12,11 @@ class Coupons extends React.Component {
 
 	render() {
 		var indents = [];
-		const Image_coupon = require("../assets/Attract-loop-image.png");
+		const Image_coupon = require("../../assets/Attract-loop-image.png");
 		let incidentsLength = 17;
 		for (var i = 0; i < incidentsLength; i++) {
-			indents.push(< div className="Cards" key={i}>
+			indents.push(
+				<div className="Cards" key={i}>
 				<Flippy flipOnHover={false} // default false
 					flipOnClick={true} // default false
 					flipDirection="horizontal" // horizontal or vertical
@@ -95,6 +96,6 @@ class Coupons extends React.Component {
 			</div>
 		);
 	}
-}
+};
   
 export default Coupons;

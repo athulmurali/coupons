@@ -8,8 +8,8 @@
 	height: 50px;
 	background-color: lightgray;
 	text-align: center;
-    font-size: x-large;
-    border: 1px solid lightgrey;
+ font-size: x-large;
+ border: 1px solid lightgrey;
 }
 
 #container {
@@ -19,8 +19,13 @@
 	justify-content: center;
 }
 .statusMessage{
+<<<<<<< HEAD
     color:black;
     font-weight: normal;
+=======
+ color:black;
+ font-weight: normal;
+>>>>>>> 8dda2474dfe5dd74384dd1972d2456a9832ce50f
 }
 #keyboard {
 	margin: 0;

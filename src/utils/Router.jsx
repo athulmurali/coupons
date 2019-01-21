@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import AttractLoop from  '../views/AttractLoop';
-import Coupons from  '../views/DisplayCoupons';
+import Coupons from  '../components/DisplayCouponComponent/DisplayCoupons';
 import UserIdentification from '../components/UserIdentificationComponent/UserIdentification';
 import API from './API';
 import {TestComponent} from '../components/TestComponent';
 import Config from '../config/config';
 import UserIdentificationView from '../views/UserIdentificationView';
+import DisplayCouponsView from '../views/DisplayCouponsView';
 import PropTypes from 'prop-types';
 
 const RESET_TIME = Config.resetTime * 1000;
@@ -58,7 +59,7 @@ class Router extends Component {
           <Switch>
             <Route exact path="/" history={this.props.history} component={AttractLoop} />
             <Route exact path="/userIdentification" render={props => <UserIdentificationView history={this.props.history} overtime={this.state.overtime} {...props} />} />
-            <Route exact path="/DisplayCoupons" render={props => <Coupons history={this.props.history}  overtime={this.state.overtime}  {...props} />} />
+            <Route exact path="/DisplayCoupons" render={props => <DisplayCouponsView history={this.props.history}  overtime={this.state.overtime}  {...props} />} />
           </Switch>
         </div>
       </HashRouter>
