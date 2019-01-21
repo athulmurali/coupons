@@ -15,8 +15,8 @@ import {
 class App extends Component {
   state = {
     timestamp: '',
-    location: ''
-  }
+    location: '',
+  };
 
   render() {
     return (
@@ -27,7 +27,6 @@ class App extends Component {
               <Route path="/test" component={TestComponent} />
             </div>
           </HashRouter>
-          {/* {alert("sadfgh")} */}
       </div>
     );
   }
