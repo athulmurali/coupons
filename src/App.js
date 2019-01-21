@@ -29,7 +29,7 @@ class App extends Component {
           <HashRouter >
             <div>
               <p>App JS Page</p>
-              <Route path="/test" component={TestComponent} />
+              <Route path="/test" component =  {TestComponent} />
             </div>
           </HashRouter>
           {/* {alert("sadfgh")} */}

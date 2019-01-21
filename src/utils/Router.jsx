@@ -13,7 +13,7 @@ const RESET_TIME = Config.resetTime * 1000;
 class Router extends Component {
   constructor(props) {
     super(props);
-    
+    this.flag = false;
     this.timer = null;
     this.reset = true;
     this.state = {
@@ -31,13 +31,13 @@ class Router extends Component {
    * starts the timer.
    */
   handleUserInteract = () => {
-    if (this.reset) {
-      window.lastReset = new Date();
-      this.reset = false;
-      this.setState({ overtime: false });
-    }
+    
     clearTimeout(this.timer);
-    this.timer = setTimeout(this.navigateToAttractLoop, RESET_TIME);
+    this.timer = setTimeout(function(){
+      
+      window.location.href= "http://localhost:3000/";
+    }, 5000);
+    
   };
 
   /**
@@ -47,30 +47,20 @@ class Router extends Component {
    * The exception to the last sentence is if the RESET_TIME is equal to 0. This is for development
    * purposes.
    */
-  navigateToAttractLoop = () => {
-    let useTime = Math.abs(window.lastReset - new Date());
-    useTime -= RESET_TIME;
-    clearTimeout(this.time);
-    this.reset = true;
-    if (RESET_TIME !== 0 && Config.device === 'kiosk') {
-      API.recordTime(Config.storeNumber, useTime);
-      sessionStorage.setItem('Phone-number', '');
-      this.setState({
-        overtime: true,
-      });
-    }
-  };
+  
 
 
   render() {
     return (
-      <HashRouter>
+      <HashRouter >
         <div
           onClick={this.handleUserInteract}
           onKeyDown={this.handleUserInteract}
           onScroll={this.handleUserInteract}
           role="button"
+          
         >
+        
           <Switch>
             <Route exact path="/" history={this.props.history} component={AttractLoop} />
             
@@ -84,8 +74,9 @@ class Router extends Component {
 
 export default Router;
 Router.propTypes = {
+    
+
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
 };
-
