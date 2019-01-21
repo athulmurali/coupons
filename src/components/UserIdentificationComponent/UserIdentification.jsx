@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { HashRouter, Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './UserIdentification.css';
 import Header from '../../views/Header';
 import DialPad from '../DialPadComponent/DialPad';
-import AttractLoop from '../../views/Header';
+
 
 
 class UserIdentification extends Component{
