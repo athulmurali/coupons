@@ -4,37 +4,28 @@ import './UserIdentification.css';
 import Header from '../../views/Header';
 import DialPad from '../DialPadComponent/DialPad';
 
-
-
 class UserIdentification extends Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            phoneNumber: '',
-            defaultMessage:'Enter the Phone number associated with the account',
-        };
+	constructor(props){
+		super(props);
+		this.state = {
+			phoneNumber: '',
+      defaultMessage:'Enter the Phone number associated with the account',
+      };
         
-        
-    }
-    succesfullIdentification = (booleanDataFromDialPad,phoneNumber) => {
-        console.log(this.props)
-        booleanDataFromDialPad ? this.props.history.push(`/`):alert('new user');
-    };
+  	}
+		succesfullIdentification = (booleanDataFromDialPad,phoneNumber) => {
+			booleanDataFromDialPad ? this.props.history.push(`/`):alert('new user');
+		};
     render(){
-
-        return(
-            <div>
+			return(
+				<div>
+					<Header history={this.props.history}/>
+						<DialPad history={this.props.history} identificationfromDiaPad = {this.succesfullIdentification}/>  
                 
-                <Header history={this.props.history}/>
-                <DialPad history={this.props.history} identificationfromDiaPad = {this.succesfullIdentification}/>  
-                
-            </div>
-        );
+        </div>
+      );
     };
-
 }
-
-
 export default UserIdentification;
 UserIdentification.propTypes = {
     
