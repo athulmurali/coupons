@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 class DialPad extends Component {
 	constructor(props){
 		super(props);
-		this.state = { 
-				phoneNumber: '',
-				disableTextArea: false,
-				defaultMessage: 'Enter the Phone number associated with the account',
+		this.state = {
+			phoneNumber: '',
+			disableTextArea: false,
+			defaultMessage: 'Enter the Phone number associated with the account',
 		};
 	}
 
