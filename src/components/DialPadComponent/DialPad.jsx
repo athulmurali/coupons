@@ -53,7 +53,6 @@ class DialPad extends Component {
 	render(){
 		return(
 			<div className="messsgeDisplay">
-	
 					<h3> {this.state.defaultMessage} </h3>
 					<input className= "inputText" defaultValue={ this.state.phoneNumber}></input>
 					<div id="container">
@@ -64,17 +63,13 @@ class DialPad extends Component {
 							<li className="letter clearl" onClick={this.handleTheKeyClicks}>4</li>  
 							<li className="letter" onClick={this.handleTheKeyClicks}>5</li>  
 							<li className="letter" onClick={this.handleTheKeyClicks}>6</li> 
-					
 							<li className="letter clearl" onClick={this.handleTheKeyClicks}>7</li>  
 							<li className="letter " onClick={this.handleTheKeyClicks}>8</li>  
 							<li className="letter" onClick={this.handleTheKeyClicks}>9</li> 
-							
 							<li className="letter clearl"></li>
 							<li className="letter" onClick={this.handleTheKeyClicks}>0</li>
 							<li className="letter" onClick= {this.deleteTheLastDigit}>&lt;</li>    
 							<li className="switch" onClick={this.checkPhoneNumber}>Submit</li> 
-							
-							
 						</ul>
 					</div>
 					<div className="switchNoCard">No Card,no problem</div>
