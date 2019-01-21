@@ -1,0 +1,16 @@
+.scanBarcode{
+    right: 250px;
+    position: absolute;
+}
+
+.barcodeImage{
+    height: 100px;
+    alt: "Barcode";
+}
+
+@media screen and (min-width: 1700px) {
+    .barcodeImage{
+      right: 350px;
+      position: absolute;
+    } 
+}

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './AttractLoop.css';
-import '../assets/Barcode.png';
 import { Slide } from 'react-slideshow-image';
+import ScanBarcode from '../components/ScanBarcode/ScanBarcode';
 import slideDuration from '../config/config';
 
 
@@ -13,7 +13,6 @@ class AttractLoop extends Component {
   };
 
   render() {
-    const Barcode_Image = require('../assets/Barcode.png');
     const Image_coupon = require('../assets/Attract-loop-image.png');
 
     const slideImages = [
@@ -55,10 +54,7 @@ class AttractLoop extends Component {
                 <span>Tap anywhere to start</span>
             </div>
         </div>
-        <div className="barcodeImage">
-          <h3> Scan card to start </h3>
-          <img src={Barcode_Image} height="100px" alt="Barcode"/>
-        </div>
+        <ScanBarcode/>
       </div>
     );
   }
