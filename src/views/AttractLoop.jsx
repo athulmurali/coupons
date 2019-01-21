@@ -4,7 +4,7 @@ import { Slide } from 'react-slideshow-image';
 import ScanBarcode from '../components/ScanBarcode/ScanBarcode';
 
 import PropTypes from 'prop-types';
-import slideDuration from '../config/config';
+import Config from '../config/config';
 
 
 class AttractLoop extends Component {
@@ -14,6 +14,7 @@ class AttractLoop extends Component {
   };
 
   render() {
+    console.log(Config.slideDuration);
     const Image_coupon = require('../assets/Attract-loop-image.png');
 
     const slideImages = [
@@ -23,7 +24,7 @@ class AttractLoop extends Component {
     ];
 
     const slide_properties = {
-      duration: slideDuration.duration,
+      duration: Config.slideDuration,
       transitionDuration: 500,
       infinite: true,
       indicators: false,
@@ -31,6 +32,7 @@ class AttractLoop extends Component {
     }
 
     return (
+      
       <div className="AttractLoop" onClick={this.handleScreenTap}>
         <header className="AttractLoop-Header">
           <h1> Savings & Coupons</h1>

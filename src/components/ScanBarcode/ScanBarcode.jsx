@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import './ScanBarcode.css';
+import React, { Component } from "react";
+import "./ScanBarcode.css";
 
 class ScanBarcode extends Component{
-    render(){
-        const Barcode_Image = require('../../assets/Barcode.png');
+	render(){
+		const Barcode_Image = require("../../assets/Barcode.png");
 
-        return(
-            <div className="scanBarcode">
-                <h3> Scan card to start </h3>
-                <img src={Barcode_Image} className="barcodeImage"/>
-            </div>
-        )
-    }
+		return(
+			<div className="scanBarcode">
+				<h3> Scan card to start </h3>
+				<img src={Barcode_Image} className="barcodeImage"/>
+			</div>
+		);
+	}
 }
 
 export default ScanBarcode;

@@ -23,10 +23,6 @@ const env = {
   https: false,
 };
 
-const slideDuration = {
-  duration: 5000
-};
-
 const devSize = size => size / 8;
 
 const constants = {
@@ -36,82 +32,20 @@ const constants = {
   BOTTOM_RIGHT_CORNER: 'bottom_right',
 };
 
-const config = {
+let config = {
   ...env,
   ...constants,
   screen: {
     width: env.device === 'kiosk' ? devSize(2156) : window.innerWidth,
     height: env.device === 'kiosk' ? devSize(3840) : window.innerHeight,
   },
-  resetTime: 60, // If this is 0 then the screen will never go back to the attract screen
+    timeout: 5000, 
   timeoutLength: 60000,
   departments: ['produce', 'dairy', 'meat', 'fish', 'bakery', 'deli'],
-  numberOfAisles: 35,
   searchSize: 20,
-  overscanCount: 5,
-  blacklist: ['ahold', 'delhaize', 'own', 'brands'],
-  blacklistedSearchChars: ['%', '\\', '/', '*', '"', '[', ']', '{', '}', '(', ')', "'"],
-  filters: [
-    {
-      alias: 'Aisles',
-      departments: [
-        'grocery',
-        'dsd',
-        'hbc',
-        'pet',
-        'general',
-        'natural',
-        'ethnic',
-        'seasonal',
-        'beauty',
-        'health',
-        'baby',
-        'household',
-        'caps',
-      ],
-      aisles: [],
-    },
-    {
-      alias: 'Dairy',
-      departments: ['dairy'],
-      aisles: ['dairy'],
-    },
-    {
-      alias: 'Frozen',
-      departments: ['frozen'],
-      aisles: ['frozen'],
-    },
-    {
-      alias: 'Meat',
-      departments: ['meat'],
-      aisles: ['meat'],
-    },
-    {
-      alias: 'Deli',
-      departments: ['deli'],
-      aisles: ['deli'],
-    },
-    {
-      alias: 'Produce',
-      departments: ['produce'],
-      aisles: ['produce'],
-    },
-    {
-      alias: 'Seafood',
-      departments: ['seafood'],
-      aisles: ['seafood'],
-    },
-    {
-      alias: 'Front end',
-      departments: ['font end', 'racks'],
-      aisles: ['mainline', 'front end'],
-    },
-    {
-      alias: 'Bakery',
-      departments: ['bakery'],
-      aisles: ['bakery'],
-    },
-  ],
+  loggedIn: false,
+  slideDuration: 1000,
+
 };
 
 export default config;

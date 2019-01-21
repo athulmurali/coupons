@@ -3,13 +3,10 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 
 import AttractLoop from  '../views/AttractLoop';
 import UserIdentification from '../views/UserIdentification';
+import DisplayCoupons from '../views/DisplayCoupons';
 
-import API from './API';
-import {TestComponent} from '../components/TestComponent';
 import Config from '../config/config';
-
-
-const RESET_TIME = Config.resetTime * 1000;
+import userSS from '../config/config';
 
 class Router extends Component {
   constructor(props) {
@@ -25,44 +22,26 @@ class Router extends Component {
     sessionStorage.setItem('Phone-Number', '');
   }
 
-  /**
-   * This method runs whenever the screen is tapped (or clicked). It checks to see if this is the
-   * first touch since reset. If it is then it stores a date object and sets reset to false. It then
-   * starts the timer.
-   */
   handleUserInteract = () => {
-    if (this.reset) {
-      window.lastReset = new Date();
-      this.reset = false;
-      this.setState({ overtime: false });
-    }
     clearTimeout(this.timer);
-    this.timer = setTimeout(this.navigateToAttractLoop, RESET_TIME);
-  };
 
-  /**
-   * This method runs when the timeout gets through a complete cycle. We then calculate the amount
-   * of time that the user has been browsing minus or timeout time (aka RESET_TIME). It then will
-   * make an API post request to the server and then route the user back to the attract loop page.
-   * The exception to the last sentence is if the RESET_TIME is equal to 0. This is for development
-   * purposes.
-   */
-  navigateToAttractLoop = () => {
-    let useTime = Math.abs(window.lastReset - new Date());
-    useTime -= RESET_TIME;
-    clearTimeout(this.time);
-    this.reset = true;
-    if (RESET_TIME !== 0 && Config.device === 'kiosk') {
-      API.recordTime(Config.storeNumber, useTime);
-      sessionStorage.setItem('Phone-number', '');
-      this.setState({
-        overtime: true,
-      });
-    }
-  };
+    // console.log(Config);
+    const attractLoopUrl = "http://"+Config.client.host + ":" + Config.client.port+ "/";
+    const userIdentificationUrl = attractLoopUrl + "#/userIdentification";
+    const timeout = Config.timeout;
+    this.timer = setTimeout(function(){ 
+      if (Config.loggedIn === false){
+        window.location.href = attractLoopUrl
+      }
+      else
+        window.location.href = userIdentificationUrl
+    }, timeout);
 
+  };
 
   render() {
+    console.log(userSS.loggedIn);
+
     return (
       <HashRouter>
         <div
@@ -72,8 +51,9 @@ class Router extends Component {
           role="button"
         >
           <Switch>
-            <Route exact path="/" component={AttractLoop} />
-            <Route exact path="/userIdentification" render={props => <UserIdentification overtime={this.state.overtime} {...props} />} />
+            <Route exact path="/" history={this.props.history} timer={null} component={AttractLoop} />
+            <Route exact path="/userIdentification" render={props => <UserIdentification history={this.props.history} overtime={this.state.overtime} {...props} />} />
+            <Route exact path="/displayCoupons" render={props => <DisplayCoupons history={this.props.history} overtime={this.state.overtime} {...props} />} />
           </Switch>
         </div>
       </HashRouter>
