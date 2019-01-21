@@ -15,11 +15,10 @@
 .logoutButton {
   width: 100px;
   height: 40px;
-  margin: 15px 10px 10px 20px;
+  margin: 5px 5px 10px 20px;
   font-size: 20px;
   font-weight: bold;
   color: grey;
-  margin-bottom: 0;
 }
 .printDiv{
   display: flex;
@@ -40,6 +39,7 @@
 .userName{
   font-style: italic;
   color: grey;
+  margin-top: 10px;
 }
 ul {
   list-style-type: none;
@@ -113,4 +113,66 @@ li a:hover:not(.active) {
 
 .viewMore{
   text-decoration: underline;
+}
+
+span{
+  color: black;
+}
+
+.bar {
+  border: 1px solid red;
+  height: 2px;
+  width: 100%;
+}
+
+.in {
+  animation: fill 20s linear 1;
+  height: 100%;
+  background-color:#E0004D;
+}
+
+@keyframes fill {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0%;
+  }
+}
+
+.modal {
+  padding: 50px;
+}
+
+.actions{
+  margin: auto;
+  text-align: center;
+  margin-top: 20px;
+}
+.popupHeader{
+  font-family: sans-serif;
+  color:grey;
+  margin: 0;
+  margin-bottom: 10px;
+
+}
+.popupMessage{
+  font-family: sans-serif;
+  color:grey;
+  margin: 0;
+  margin-bottom: 10px;
+  padding-left: 3px;
+}
+.buttons{
+  background-color: white;
+  width: 250px;
+  height: 50px;
+  margin-left: 40px;
+  font-size: 16px;
+  font-weight: bold;
+  color:gray;
+}
+.buttons:hover{
+  background-color: #E0004D;
+  color: white;
 }

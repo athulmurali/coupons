@@ -48,7 +48,7 @@ class AttractLoop extends Component {
         </Slide>
         <div id="one" className="screen">
           <div className="container">
-            <span>Tap anywhere to start</span>
+            <span className="tapAnywhere">Tap anywhere to start</span>
           </div>
         </div>
         <ScanBarcode />
