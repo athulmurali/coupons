@@ -19,13 +19,8 @@
 	justify-content: center;
 }
 .statusMessage{
-<<<<<<< HEAD
     color:black;
     font-weight: normal;
-=======
- color:black;
- font-weight: normal;
->>>>>>> 8dda2474dfe5dd74384dd1972d2456a9832ce50f
 }
 #keyboard {
 	margin: 0;
