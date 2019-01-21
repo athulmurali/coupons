@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, * as react from 'react';
+import PropTypes from 'prop-types';
 import './AttractLoop.css';
 import { Slide } from 'react-slideshow-image';
 import ScanBarcode from '../components/ScanBarcode/ScanBarcode';
@@ -56,7 +57,6 @@ class AttractLoop extends Component {
     );
   }
 }
-
 export default AttractLoop;
 
 AttractLoop.propTypes = {
