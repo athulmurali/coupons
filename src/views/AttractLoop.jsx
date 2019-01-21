@@ -1,14 +1,13 @@
-import React, * as react from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import './AttractLoop.css';
 import { Slide } from 'react-slideshow-image';
 import ScanBarcode from '../components/ScanBarcode/ScanBarcode';
 import Header from '../components/Header';
-import PropTypes from 'prop-types';
 import slideDuration from '../config/config';
 
 
-class AttractLoop extends Component {
+class AttractLoop extends React.Component {
   handleScreenTap = () => {
     this.props.history.push(`/userIdentification`);
   };

@@ -16,13 +16,12 @@ class DialPad extends Component {
 		this.setState({ phoneNumber: prev.slice(0,-1) })
 	};
 	
-	etErrorMessage = () => {
+	setErrorMessage = () => {
 		this.setState({phoneNumber: '',defaultMessage: "Not a valid mobile number Please re enter"});
 	};
 
 	checkPhoneNumber = () => {
 		const extractNumberFromFormat = ( this.state.phoneNumber.substring(1,4) + this.state.phoneNumber.substring(6,9) + this.state.phoneNumber.substring(10) );
-		
 		extractNumberFromFormat.length === 10 && this.state.phoneNumber ? this.props.identificationfromDiaPad(true,this.state.phoneNumber) : this.setErrorMessage();
 	};
 

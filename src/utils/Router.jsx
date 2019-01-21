@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import AttractLoop from  '../views/AttractLoop';
+import Coupons from  '../views/DisplayCoupons';
 import UserIdentification from '../components/UserIdentificationComponent/UserIdentification';
 import API from './API';
 import {TestComponent} from '../components/TestComponent';
@@ -31,13 +32,6 @@ class Router extends Component {
    * starts the timer.
    */
   handleUserInteract = () => {
-    
-    clearTimeout(this.timer);
-    this.timer = setTimeout(function(){
-      
-      window.location.href= "http://localhost:3000/";
-    }, 5000);
-    
   };
 
   /**
@@ -64,7 +58,7 @@ class Router extends Component {
           <Switch>
             <Route exact path="/" history={this.props.history} component={AttractLoop} />
             <Route exact path="/userIdentification" render={props => <UserIdentificationView history={this.props.history} overtime={this.state.overtime} {...props} />} />
-            <Route exact path="/DisplayCoupons" render={props => <Coupons  overtime={this.state.overtime}  {...props} />} />
+            <Route exact path="/DisplayCoupons" render={props => <Coupons history={this.props.history}  overtime={this.state.overtime}  {...props} />} />
           </Switch>
         </div>
       </HashRouter>

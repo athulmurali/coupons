@@ -14,14 +14,13 @@ class UserIdentification extends Component{
         
   	}
 		succesfullIdentification = (booleanDataFromDialPad,phoneNumber) => {
-			booleanDataFromDialPad ? this.props.history.push(`/`):alert('new user');
+			booleanDataFromDialPad ? this.props.history.push(`/DisplayCoupons`):alert('new user');
 		};
     render(){
 			return(
 				<div>
 					<Header history={this.props.history}/>
-						<DialPad history={this.props.history} identificationfromDiaPad = {this.succesfullIdentification}/>  
-                
+						<DialPad history={this.props.history} identificationfromDiaPad = {this.succesfullIdentification}/>                  
         </div>
       );
     };
