@@ -9,7 +9,7 @@ class UserIdentificationView extends Component{
 	}  
 	render(){
 		return(
-      <UserIdentification history={this.props.history}></UserIdentification>
+			<UserIdentification history={this.props.history}></UserIdentification>
 		);
 	}
 }

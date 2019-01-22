@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import API from '../../utils/API';
+import './DialPad.css';
 
 class DialPad extends Component {
 	constructor(props){
@@ -21,7 +22,6 @@ class DialPad extends Component {
 
 	searchForThePhoneNumberInDatabase = async () => {
 		try{	
-			
 			const extractNumberFromFormat = ( this.state.phoneNumber.substring(1,4) + this.state.phoneNumber.substring(6,9) + this.state.phoneNumber.substring(10) );
 			const response = await API.getUserMobileNumber(extractNumberFromFormat);
 			
@@ -73,10 +73,11 @@ class DialPad extends Component {
 	};
 
 	render(){
+
 		return(
 			<div className="messsgeDisplay">
 					<h3 className="statusMessage"> {this.state.defaultMessage} </h3>
-					<input className= "inputText" defaultValue={ this.state.phoneNumber}></input>
+					<input className= "inputText" id="test-input" defaultValue={ this.state.phoneNumber}></input>
 					<div id="container">
 						<ul id="keyboard"  >   
 							<li className="letter" onClick={this.handleTheKeyClicks}>1</li>  

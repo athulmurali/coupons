@@ -5,9 +5,7 @@ import Flippy, { FrontSide, BackSide } from "react-flippy";
 import Popup from "reactjs-popup";
 
 
- 
-const Image_coupon = require("../../assets/Attract-loop-image.png");
-class Coupons extends React.Component {
+ class Coupons extends React.Component {
 
 	constructor(props){
 		super(props);
@@ -42,10 +40,10 @@ class Coupons extends React.Component {
 			couponsLength = userCouponData.length;
 			userName = userCouponData[0].userName;
 		}
-		const Image_coupon = require("../../assets/Attract-loop-image.png");
+		const Image_coupon = require("../../assets/stopandshop.png");
 		for (var i = 0; i < couponsLength; i++) {
 			userCoupons.push(
-				<div className="Cards" >
+				<div className="Cards" key={i}>
 				<Flippy flipOnHover={false} // default false
 					flipOnClick={true} // default false
 					flipDirection="horizontal" // horizontal or vertical
@@ -100,7 +98,7 @@ class Coupons extends React.Component {
 						<li> < a  > New Coupons </a></li >
 						<li> < a className="active"  > Loaded Coupons </a></li >
 					</ul>
-					<div class="LoadedCoupons" >
+					<div className="LoadedCoupons" >
 						<Popup trigger={<button  className="button" ></button>} true modal>
 							{close => (
 								<div className="modal">
