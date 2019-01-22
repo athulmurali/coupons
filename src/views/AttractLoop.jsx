@@ -13,17 +13,17 @@ class AttractLoop extends React.Component {
   };
 
   render() {
-		const Image_coupon1 = require('../assets/coupons-attract-Images-03.png');
-		const Image_coupon2 = require('../assets/coupons-attract-Images-04.png');
-		const Image_coupon3 = require('../assets/coupons-attract-Images-05.png');
- 
- 
-		const slideImages = [
-			Image_coupon1,
-			Image_coupon2,
-			Image_coupon3,
-		];
+    const Image_coupon1 = require('../assets/coupons-attract-Images-03.png');
+    const Image_coupon2 = require('../assets/coupons-attract-Images-04.png');
+    const Image_coupon3 = require('../assets/coupons-attract-Images-05.png');
 
+
+    const slideImages = [
+      Image_coupon1,
+      Image_coupon2,
+      Image_coupon3,
+    ];
+    
     const slide_properties = {
       duration: slideDuration.duration,
       transitionDuration: 500,

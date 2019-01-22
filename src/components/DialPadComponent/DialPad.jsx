@@ -75,7 +75,7 @@ class DialPad extends Component {
 	render(){
 		return(
 			<div className="messsgeDisplay">
-					<h3> {this.state.defaultMessage} </h3>
+					<h3 className="statusMessage"> {this.state.defaultMessage} </h3>
 					<input className= "inputText" defaultValue={ this.state.phoneNumber}></input>
 					<div id="container">
 						<ul id="keyboard"  >   
@@ -94,7 +94,7 @@ class DialPad extends Component {
 							<li className="switch" onClick={this.checkPhoneNumber}>Submit</li> 
 						</ul>
 					</div>
-					<div className="switchNoCard">No Card,no problem</div>
+					<div className="switchNoCard">No card, no problem</div>
 			</div>
 		);
 	};
