@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import AttractLoop from "../components/AttractLoopComponent/AttractLoop";
-import Config from "../config/config";
 // import BarcodeScanner from "../components/BarcodeScanner/BarcodeScanner";
 
 

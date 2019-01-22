@@ -26,6 +26,9 @@
 	color: white;
  }
 
+ .popupButton{
+	 display: none;
+ }
  .modal {
 	padding: 50px;
  }

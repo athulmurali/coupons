@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import API from '../../utils/API';
+import './DialPad.css';
 
 class DialPad extends Component {
 	constructor(props){
@@ -8,24 +10,50 @@ class DialPad extends Component {
 			disableTextArea: false,
 			defaultMessage: 'Enter the Phone number associated with the account',
 		};
+		this.couponsDetails = [];
+		 
 	}
 
-	
 	deleteTheLastDigit = () => {
-		const prev = this.state.phoneNumber
-		this.setState({ phoneNumber: prev.slice(0,-1) })
+		let prev = this.state.phoneNumber.slice(0,-1)
+		if(prev.length === 5){
+				prev += ' '
+		}
+		else if(prev.length === 8){
+				prev += ' '
+		}
+		this.setState({ phoneNumber: prev })
+};
+
+	searchForThePhoneNumberInDatabase = async () => {
+		try{	
+			const extractNumberFromFormat = ( this.state.phoneNumber.substring(1,4) + this.state.phoneNumber.substring(6,9) + this.state.phoneNumber.substring(10) );
+			const response = await API.getUserMobileNumber(extractNumberFromFormat);
+			
+			this.couponsDetails = response.data.response;
+			this.props.identificationfromDiaPad(true,this.state.phoneNumber,this.couponsDetails);
+			
+		} catch (error){
+			this.setErrorMessage();
+		}
+		
+
 	};
 	
 	setErrorMessage = () => {
 		this.setState({phoneNumber: '',defaultMessage: "Not a valid mobile number Please re enter"});
+		
 	};
 
 	checkPhoneNumber = () => {
 		const extractNumberFromFormat = ( this.state.phoneNumber.substring(1,4) + this.state.phoneNumber.substring(6,9) + this.state.phoneNumber.substring(10) );
-		extractNumberFromFormat.length === 10 && this.state.phoneNumber ? this.props.identificationfromDiaPad(true,this.state.phoneNumber) : this.setErrorMessage();
+		this.searchForThePhoneNumberInDatabase(extractNumberFromFormat);
+		extractNumberFromFormat.length === 10 && this.state.phoneNumber ? this.searchForThePhoneNumberInDatabase() : this.setErrorMessage();
+		
 	};
 
 	handleTheKeyClicks = e => {
+		if(this.state.phoneNumber.length < 14){
 		const clickedValue = e.target.innerText.trim() ;
 		let disableInputArea = false;
 		if( !clickedValue ){
@@ -48,13 +76,15 @@ class DialPad extends Component {
 				disableTextArea: disableInputArea
 			});				
 		}
-	};
+	}
+};
 
 	render(){
+
 		return(
 			<div className="messsgeDisplay">
-					<h3> {this.state.defaultMessage} </h3>
-					<input className= "inputText" defaultValue={ this.state.phoneNumber}></input>
+					<h3 className="statusMessage"> {this.state.defaultMessage} </h3>
+					<input className= "inputText" id="test-input" defaultValue={ this.state.phoneNumber}></input>
 					<div id="container">
 						<ul id="keyboard"  >   
 							<li className="letter" onClick={this.handleTheKeyClicks}>1</li>  
@@ -72,12 +102,10 @@ class DialPad extends Component {
 							<li className="switch" onClick={this.checkPhoneNumber}>Submit</li> 
 						</ul>
 					</div>
-					<div className="switchNoCard">No Card,no problem</div>
+					<div className="switchNoCard">No card, no problem</div>
 			</div>
 		);
 	};
 }
 
-
 export default DialPad;
-

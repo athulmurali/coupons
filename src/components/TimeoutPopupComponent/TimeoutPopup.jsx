@@ -11,6 +11,10 @@ class TimeoutPopup extends React.Component {
 		}
 	}
 
+// 	componentDidUpdate(){
+// 		clearTimeout(this.timer);
+//  }
+
 	displayPopup = () => {
 		this.setState({ popup: true });
 	}
@@ -26,8 +30,10 @@ class TimeoutPopup extends React.Component {
 	}
 
 	imHereClick = () => {
+		// console.log(this.timer);
 		clearTimeout(this.timer);
-		clearTimeout(this.timer2);
+		// clearTimeout(this.timer2);
+		// console.log("Clear: " + this.timer);
 		this.setState({
 			popup: false,
 		});
@@ -41,7 +47,7 @@ class TimeoutPopup extends React.Component {
 			popupTrigger = this.handleButtonClick;
 
 		return (
-			<Popup trigger={<button ref={popupTrigger} className="button"></button>} true modal>
+			<Popup trigger={<button ref={popupTrigger} className="popupButton"></button>} true modal>
 				{close => (
 					<div className="modal">
 							<h1 className="popupHeader"> Are you still there? </h1>

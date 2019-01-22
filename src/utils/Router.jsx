@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
-import AttractLoop from  '../components/AttractLoopComponent/AttractLoop';
+import AttractLoopView from  '../views/AttractLoopView';
 import Config from '../config/config';
 import UserIdentificationView from '../views/UserIdentificationView';
 import DisplayCouponsView from '../views/DisplayCouponsView';
@@ -49,11 +49,9 @@ class Router extends Component {
           onKeyDown={this.handleUserInteract}
           onScroll={this.handleUserInteract}
           role="button"
-          
-        >
-        
+        >       
           <Switch>
-            <Route exact path="/" history={this.props.history} component={AttractLoop} />
+            <Route exact path="/" history={this.props.history} component={AttractLoopView} />
             <Route exact path="/userIdentification" render={props => <UserIdentificationView history={this.props.history} overtime={this.state.overtime} {...props} />} />
             <Route exact path="/DisplayCoupons" render={props => <DisplayCouponsView history={this.props.history}  overtime={this.state.overtime}  {...props} />} />
           </Switch>
