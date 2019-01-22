@@ -26,7 +26,7 @@ class Router extends Component {
     clearTimeout(this.timer);
     const attractLoopUrl = "http://"+Config.client.host + ":" + Config.client.port+ "/";
     // const userIdentificationUrl = attractLoopUrl + "#/userIdentification";
-		const logoutTimeout = Config.logoutTimeout;
+		const logoutTimeout = Config.INACTIVE_USER_IDENTIFICATION;
 
 		if (Config.loggedIn === false){
 			this.timer = setTimeout(function() {window.location.href = attractLoopUrl },logoutTimeout);

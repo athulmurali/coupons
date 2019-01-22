@@ -24,7 +24,7 @@ class AttractLoop extends Component {
     ];
     
     const slide_properties = {
-      duration: Config.slideDuration,
+      duration: Config.ATTRACT_LOOP_SLIDE_DURATION,
       transitionDuration: 500,
       infinite: true,
       indicators: false,

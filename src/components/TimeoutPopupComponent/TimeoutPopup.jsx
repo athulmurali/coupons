@@ -1,50 +1,63 @@
 import React from "react";
 import "./TimeoutPopup.css";
 import Popup from "reactjs-popup";
+import Config from "../../config/config";
 
 class TimeoutPopup extends React.Component {
 	constructor(props){
 		super(props);
-		this.timer = null;
+		this.popupTimer = null;
 		this.state = {
 			popup: false
 		}
+		this.startPopupTimer();
 	}
 
-// 	componentDidUpdate(){
-// 		clearTimeout(this.timer);
-//  }
+	componentWillUnmount(){
+		clearTimeout(this.popupTimer)
+	}
 
 	displayPopup = () => {
 		this.setState({ popup: true });
 	}
 
 	handleLogout = () => {
-		// this.setState({});
+		this.stopTimeouts();
 		this.props.history.push(`/`);
 	}
 	
-	handleButtonClick = (clicker) => {
+	handlePopupTrigger = (clicker) => {
 		if (clicker)
 			clicker.click();
 	}
 
 	imHereClick = () => {
-		// console.log(this.timer);
-		clearTimeout(this.timer);
-		// clearTimeout(this.timer2);
-		// console.log("Clear: " + this.timer);
+		this.stopTimeouts();
+		this.startPopupTimer();
 		this.setState({
 			popup: false,
 		});
 	}
 
+	startPopupTimer = () => {
+		this.popupTimer = setTimeout(this.displayPopup,Config.COUPONS_POPUP_TIMER);
+	}
+
+	startLogoutTimer = () => {
+		this.logoutTimer = setTimeout(this.handleLogout,Config.COUPONS_LOGOUT_TIMER);
+	}
+
+	stopTimeouts = () => {
+		clearTimeout(this.popupTimer);
+		clearTimeout(this.logoutTimer);
+	}
+
 	render() {
-		
-		this.timer = setTimeout(this.displayPopup.bind(this),5000);
 		let popupTrigger = " ";
-		if (this.state.popup === true)
-			popupTrigger = this.handleButtonClick;
+		if (this.state.popup === true) {
+			popupTrigger = this.handlePopupTrigger;
+			this.startLogoutTimer();
+		}
 
 		return (
 			<Popup trigger={<button ref={popupTrigger} className="popupButton"></button>} true modal>

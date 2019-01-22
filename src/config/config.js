@@ -11,12 +11,8 @@ const env = {
 		port: "3000",
 	},
 	currentAI: "LUIS",
-	// neServerPort: '',
 	neServerPort: "3526",
 	neServerHost: "innovationd.aholdusa.com",
-	// neServerHost: '169.55.109.83',
-	// neServerHost: '161.247.64.6',
-	// neServerHost: '10.177.134.154',
 	svgContainerHeight: 170,
 	storeNumber: 0,
 	brand: "GL",
@@ -30,6 +26,10 @@ const constants = {
 	TOP_RIGHT_CORNER: "top_right",
 	BOTTOM_LEFT_CORNER: "bottom_left",
 	BOTTOM_RIGHT_CORNER: "bottom_right",
+	INACTIVE_USER_IDENTIFICATION: 15000,
+	COUPONS_POPUP_TIMER: 10000,
+	COUPONS_LOGOUT_TIMER: 10000,
+	ATTRACT_LOOP_SLIDE_DURATION: 3000
 };
 
 let config = {
@@ -39,13 +39,9 @@ let config = {
 		width: env.device === "kiosk" ? devSize(2156) : window.innerWidth,
 		height: env.device === "kiosk" ? devSize(3840) : window.innerHeight,
 	},
-	loginTimeout: 200000, 
-	logoutTimeout: 10000,
-	timeoutLength: 60000,
 	departments: ["produce", "dairy", "meat", "fish", "bakery", "deli"],
 	searchSize: 20,
 	loggedIn: false,
-	slideDuration: 3000,
 	
 };
 
