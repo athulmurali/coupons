@@ -4,7 +4,23 @@ import "./DisplayCoupons.css";
 import Flippy, { FrontSide, BackSide } from "react-flippy";
 import Popup from "reactjs-popup";
 
+
+ 
+const Image_coupon = require("../../assets/Attract-loop-image.png");
 class Coupons extends React.Component {
+
+	constructor(props){
+		super(props);
+		this.state = {
+			couponDetails : [],
+		};
+		this.indents = [];
+		
+	}
+	componentDidMount(){
+		console.log("sagar")
+		console.log(this.props.data);
+	}
 
 	handleScreenTap = () => {
     this.props.history.push(`/`);
@@ -53,7 +69,17 @@ class Coupons extends React.Component {
 					</BackSide>
 				</Flippy>
 			</div>);
-		}
+	};
+	
+
+	render() {
+		
+		
+		let incidentsLength = 17;
+		for (var i = 0; i < incidentsLength; i++) {
+			this.indents.push(
+				this.getTheCouponsData(i));
+		};
 
 		let x = true;
 		let xyz = "";
@@ -75,7 +101,7 @@ class Coupons extends React.Component {
 				<div className="AllCoupons">
 					<ul>
 						<li> < a href="#news" > New Coupons </a></li >
-						<li> < a class="active" href="#displayCoupons" > Loaded Coupons </a></li >
+						<li> < a className="active" href="#displayCoupons" > Loaded Coupons </a></li >
 					</ul>
 					<div class="LoadedCoupons" >
 						<Popup trigger={<button ref={xyz} className="button" ></button>} true modal>
@@ -102,7 +128,7 @@ class Coupons extends React.Component {
 							)}
 						</Popup> 
 						<h4 className="LoadedCouponCount"> Loaded Coupons ({incidentsLength}) </h4>
-						{indents}
+						{this.indents}
                 
 					</div>
 				</div> 
