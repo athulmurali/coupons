@@ -11,9 +11,8 @@ import Popup from "reactjs-popup";
 		super(props);
 		this.state = {
 			couponDetails : [],
-		};
-		this.indents = [];
-		
+			count: 0,
+		};		
 	}
 	componentDidMount(){
 		console.log(this.props.data);
@@ -29,17 +28,45 @@ import Popup from "reactjs-popup";
 		};
 	}
 
+	componentWillUnmount () {
+		clearInterval(this.timer)
+	}
+	tick () {
+		this.setState({count: (this.state.count + 1)})
+	}
+	startTimer () {
+		clearInterval(this.timer)
+		this.timer = setInterval(this.tick.bind(this), 1000)
+	}
+	stopTimer () {
+		clearInterval(this.timer)
+	}
+	timerReset () {
+		this.setState({count: 0})
+	}
+
 	render() {
+
+		let buttonTrigger = "";
+
+		this.startTimer();
+		if(this.state.count > 10){
+			buttonTrigger = this.buttonClick;
+			if(this.state.count > 20) {
+			this.handleScreenTap();
+			}
+		}
+
 		let userCoupons = [];
 		let userCouponData = "";
 		let couponsLength = "";
 		let userName = "";
 		let couponData = this.props.data;
-		if (couponData.length !== 0) {
-			userCouponData = couponData[0].couponDetails;
-			couponsLength = userCouponData.length;
-			userName = userCouponData[0].userName;
-		}
+		// if (couponData.length !== 0 && couponData !== undefined ) {
+		// 	userCouponData = couponData[0].couponDetails;
+		// 	couponsLength = userCouponData.length;
+		// 	userName = userCouponData[0].userName;
+		// }
 		const Image_coupon = require("../../assets/stopandshop.png");
 		for (var i = 0; i < couponsLength; i++) {
 			userCoupons.push(
@@ -76,12 +103,7 @@ import Popup from "reactjs-popup";
 	};	
 
 
-		let x = true;
-		let xyz = "";
 
-		if(x) {
-			xyz = this.buttonClick;
-		}
 
 		return (
 			<div>
@@ -99,7 +121,7 @@ import Popup from "reactjs-popup";
 						<li> < a className="active"  > Loaded Coupons </a></li >
 					</ul>
 					<div className="LoadedCoupons" >
-						<Popup trigger={<button  className="button" ></button>} true modal>
+						<Popup trigger={<button ref={buttonTrigger}  className="button" ></button>} true modal>
 							{close => (
 								<div className="modal">
 									<h1 className="popupHeader"> Are you still there? </h1>
@@ -115,14 +137,14 @@ import Popup from "reactjs-popup";
 										</button>
 										<button
 											className="buttons"
-											onClick={() => {close();}}>
+											onClick={() => {this.timerReset(); close();}}>
                     I'm here
 										</button>
 									</div>
 								</div>
 							)}
 						</Popup> 
-						<h4 className="LoadedCouponCount"> Loaded Coupons ({couponsLength}) </h4>
+						<h4 className="LoadedCouponCount"> Loaded Coupons ({couponsLength})  {this.state.count}</h4>
 						{userCoupons}        
 					</div>
 				</div> 

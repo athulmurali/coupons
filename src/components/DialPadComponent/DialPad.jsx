@@ -9,10 +9,14 @@ class DialPad extends Component {
 			phoneNumber: '',
 			disableTextArea: false,
 			defaultMessage: 'Enter the Phone number associated with the account',
+			count: 0,
 		};
 		this.couponsDetails = [];
 		 
 	}
+
+
+	
 
 	
 	deleteTheLastDigit = () => {
@@ -48,7 +52,7 @@ class DialPad extends Component {
 	};
 
 	handleTheKeyClicks = e => {
-		
+		this.setState({count: 0})
 		if(this.state.phoneNumber.length < 14){
 		const clickedValue = e.target.innerText.trim() ;
 		let disableInputArea = false;
@@ -78,8 +82,31 @@ class DialPad extends Component {
 	
 };
 
-	render(){
 
+	componentWillUnmount () {
+		clearInterval(this.timer)
+	}
+	tick () {
+		this.setState({count: (this.state.count + 1)})
+	}
+	startTimer () {
+		clearInterval(this.timer)
+		this.timer = setInterval(this.tick.bind(this), 1000)
+	}
+	stopTimer () {
+		clearInterval(this.timer)
+	}
+
+	handleScreenTap = () => {
+		this.props.history.push(`/`);
+	};
+
+	render(){
+		this.startTimer();
+		if(this.state.count > 5){
+			this.state.count = 0;
+			this.handleScreenTap();
+		}
 		return(
 			<div className="messsgeDisplay">
 					<h3 className="statusMessage"> {this.state.defaultMessage} </h3>
@@ -102,6 +129,7 @@ class DialPad extends Component {
 						</ul>
 					</div>
 					<div className="switchNoCard">No card, no problem</div>
+					<h1>{this.state.count}</h1>
 			</div>
 		);
 	};
