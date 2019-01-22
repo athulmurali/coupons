@@ -18,7 +18,6 @@ class Coupons extends React.Component {
 		
 	}
 	componentDidMount(){
-		console.log("sagar")
 		console.log(this.props.data);
 	}
 
@@ -30,14 +29,22 @@ class Coupons extends React.Component {
 		if(el) {
 		el.click();
 		};
-	};
+	}
 
 	render() {
-		var indents = [];
+		let userCoupons = [];
+		let userCouponData = "";
+		let couponsLength = "";
+		let userName = "";
+		let couponData = this.props.data;
+		if (couponData.length !== 0) {
+			userCouponData = couponData[0].couponDetails;
+			couponsLength = userCouponData.length;
+			userName = userCouponData[0].userName;
+		}
 		const Image_coupon = require("../../assets/Attract-loop-image.png");
-		let incidentsLength = 17;
-		for (var i = 0; i < incidentsLength; i++) {
-			indents.push(
+		for (var i = 0; i < couponsLength; i++) {
+			userCoupons.push(
 				<div className="Cards" >
 				<Flippy flipOnHover={false} // default false
 					flipOnClick={true} // default false
@@ -53,11 +60,10 @@ class Coupons extends React.Component {
 						height: "264px"
 					}}>
 						<img src={Image_coupon} width="103px" height="103px" alt="image_image" /> <br />
-						<h4> OFFER 50% </h4>
-						<h5> Product Name or Brand </h5>
-						<h6> Some description <br /> description description</h6>
-						<h6> Exp: MM/DD/YYYY </h6>
-						<h6 className="viewMore"> Tap to View more </h6>
+						<h5> {userCouponData[i].couponName}</h5>
+						<h6> {userCouponData[i].couponDescription}</h6>
+						<h6> Exp: {userCouponData[i].expDate.slice(0,10)} </h6>
+						{/* <h6 className="viewMore"> Tap to View more </h6> */}
 					</FrontSide>
 					<BackSide style={{
 						backgroundColor: "white",
@@ -69,17 +75,8 @@ class Coupons extends React.Component {
 					</BackSide>
 				</Flippy>
 			</div>);
-	};
-	
+	};	
 
-	render() {
-		
-		
-		let incidentsLength = 17;
-		for (var i = 0; i < incidentsLength; i++) {
-			this.indents.push(
-				this.getTheCouponsData(i));
-		};
 
 		let x = true;
 		let xyz = "";
@@ -91,8 +88,8 @@ class Coupons extends React.Component {
 		return (
 			<div>
 				<div className="WelcomeUser_Logout">
-					<h2 className="userName"> Welcome Anne! </h2>
-					<button className="logoutButton"> Exit </button>
+					<h2 className="userName"> Welcome {userName}! </h2>
+					<button className="logoutButton" onClick ={this.handleScreenTap}> Exit </button>
 				</div>
 				<Header />
 				<div className="printDiv">
@@ -100,11 +97,11 @@ class Coupons extends React.Component {
 				</div>
 				<div className="AllCoupons">
 					<ul>
-						<li> < a href="#news" > New Coupons </a></li >
-						<li> < a className="active" href="#displayCoupons" > Loaded Coupons </a></li >
+						<li> < a  > New Coupons </a></li >
+						<li> < a className="active"  > Loaded Coupons </a></li >
 					</ul>
 					<div class="LoadedCoupons" >
-						<Popup trigger={<button ref={xyz} className="button" ></button>} true modal>
+						<Popup trigger={<button  className="button" ></button>} true modal>
 							{close => (
 								<div className="modal">
 									<h1 className="popupHeader"> Are you still there? </h1>
@@ -127,9 +124,8 @@ class Coupons extends React.Component {
 								</div>
 							)}
 						</Popup> 
-						<h4 className="LoadedCouponCount"> Loaded Coupons ({incidentsLength}) </h4>
-						{this.indents}
-                
+						<h4 className="LoadedCouponCount"> Loaded Coupons ({couponsLength}) </h4>
+						{userCoupons}        
 					</div>
 				</div> 
 			</div>

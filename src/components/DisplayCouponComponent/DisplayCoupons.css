@@ -96,8 +96,9 @@
 	color: grey;
 	padding: 10px 20px 10px 50px;
 	background-color: #EEF0F3;
-	height: 100%vh;
 	border-top: 2px solid lightgrey;
+	height: -webkit-fill-available;
+	width: -webkit-fill-available;
  }
  .Cards{
 	display: inline-flex;
@@ -109,6 +110,7 @@
 	background-color: white;
 	align-items: flex-start;
 	cursor: pointer;
+	word-wrap: normal;
  }
  
  .viewMore{
