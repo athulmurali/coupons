@@ -5,10 +5,16 @@ import Flippy, { FrontSide, BackSide } from "react-flippy";
 import Popup from "reactjs-popup";
 
 class Coupons extends React.Component {
-	
+
 	handleScreenTap = () => {
     this.props.history.push(`/`);
-  };
+	};
+	
+	buttonClick = (el) => {
+		if(el) {
+		el.click();
+		};
+	};
 
 	render() {
 		var indents = [];
@@ -16,7 +22,7 @@ class Coupons extends React.Component {
 		let incidentsLength = 17;
 		for (var i = 0; i < incidentsLength; i++) {
 			indents.push(
-				<div className="Cards" key={i}>
+				<div className="Cards" >
 				<Flippy flipOnHover={false} // default false
 					flipOnClick={true} // default false
 					flipDirection="horizontal" // horizontal or vertical
@@ -49,6 +55,13 @@ class Coupons extends React.Component {
 			</div>);
 		}
 
+		let x = true;
+		let xyz = "";
+
+		if(x) {
+			xyz = this.buttonClick;
+		}
+
 		return (
 			<div>
 				<div className="WelcomeUser_Logout">
@@ -65,7 +78,7 @@ class Coupons extends React.Component {
 						<li> < a class="active" href="#displayCoupons" > Loaded Coupons </a></li >
 					</ul>
 					<div class="LoadedCoupons" >
-						<Popup trigger={<button className="button"> Open Modal </button>} modal>
+						<Popup trigger={<button ref={xyz} className="button" ></button>} true modal>
 							{close => (
 								<div className="modal">
 									<h1 className="popupHeader"> Are you still there? </h1>

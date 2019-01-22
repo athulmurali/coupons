@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './UserIdentification.css';
@@ -12,7 +13,7 @@ class UserIdentification extends Component{
       defaultMessage:'Enter the Phone number associated with the account',
       };
         
-  	}
+		}
 		succesfullIdentification = (booleanDataFromDialPad,phoneNumber) => {
 			booleanDataFromDialPad ? this.props.history.push(`/DisplayCoupons`):alert('new user');
 		};

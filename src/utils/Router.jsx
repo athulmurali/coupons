@@ -4,7 +4,6 @@ import AttractLoop from  '../views/AttractLoop';
 import Coupons from  '../components/DisplayCouponComponent/DisplayCoupons';
 import UserIdentification from '../components/UserIdentificationComponent/UserIdentification';
 import API from './API';
-import {TestComponent} from '../components/TestComponent';
 import Config from '../config/config';
 import UserIdentificationView from '../views/UserIdentificationView';
 import DisplayCouponsView from '../views/DisplayCouponsView';

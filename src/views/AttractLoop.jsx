@@ -23,7 +23,7 @@ class AttractLoop extends React.Component {
       Image_coupon2,
       Image_coupon3,
     ];
-
+    
     const slide_properties = {
       duration: slideDuration.duration,
       transitionDuration: 500,

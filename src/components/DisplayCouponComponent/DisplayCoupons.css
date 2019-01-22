@@ -143,6 +143,10 @@
  .modal {
 	padding: 50px;
  }
+
+ .button {
+	 display: none;
+ }
  
  .actions{
 	margin: auto;
