@@ -1,0 +1,74 @@
+div.screen {
+	margin: 0 0 10px;
+	border: 3px solid;
+	text-align: center;
+	border-radius:50%;
+	left:230px;
+	background-color: #E0004D;
+	z-index: 1;
+	bottom: 8%;
+	position: absolute;
+	width: 1228px;
+}
+
+@media screen and (min-width: 1700px) and (min-height: 900px) {
+div.screen {
+		margin: 0 0 10px;
+		border: 3px solid;
+		text-align: center;
+		border-radius:50%;
+		left:350px;
+		background-color: #E0004D;
+		z-index: 1;
+		bottom: 12%;
+		position: absolute;
+		width: 100%;
+}
+.couponImageCover{
+	background-size: cover;
+}
+
+}
+.couponImageCover{
+background-size: cover;
+}
+.each-slide{
+width: 1228px;
+height: 647px;
+background-size: cover;
+}
+.react-slideshow-wrapper .images-wrap *{
+	width: 1228px;
+	height: 647px;
+}
+#one {
+	height: 180px;
+	width: 180px;
+	border-color: #E0004D;
+}
+
+.tapAnywhere {
+	height: 20px;
+	font-size: 20px;
+	line-height: 20px;
+	padding: 5px 10px;
+	color:white;
+}
+
+div.container {
+	position: absolute;
+	height: 30px;
+	top: 50%;
+	left: 0;
+	margin-top: -15px;
+}
+
+.couponScreenBackground{
+height: 647px;
+width:  1228px;
+background-color: lightgrey;
+margin:auto;
+background-repeat: repeat-y;
+background-size: 100%;
+
+}

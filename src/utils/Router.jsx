@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
-
-import AttractLoop from  '../views/AttractLoop';
-import UserIdentification from '../views/UserIdentification';
-import DisplayCoupons from '../views/DisplayCoupons';
-
+import AttractLoop from  '../components/AttractLoopComponent/AttractLoop';
 import Config from '../config/config';
-import userSS from '../config/config';
+import UserIdentificationView from '../views/UserIdentificationView';
+import DisplayCouponsView from '../views/DisplayCouponsView';
+import PropTypes from 'prop-types';
 
 class Router extends Component {
   constructor(props) {
     super(props);
+    this.flag = false;
     this.timer = null;
     this.reset = true;
     this.state = {
@@ -23,37 +22,40 @@ class Router extends Component {
   }
 
   handleUserInteract = () => {
+
     clearTimeout(this.timer);
-
-    // console.log(Config);
     const attractLoopUrl = "http://"+Config.client.host + ":" + Config.client.port+ "/";
-    const userIdentificationUrl = attractLoopUrl + "#/userIdentification";
-    const timeout = Config.timeout;
-    this.timer = setTimeout(function(){ 
-      if (Config.loggedIn === false){
-        window.location.href = attractLoopUrl
-      }
-      else
-        window.location.href = userIdentificationUrl
-    }, timeout);
+    // const userIdentificationUrl = attractLoopUrl + "#/userIdentification";
+		const logoutTimeout = Config.logoutTimeout;
 
-  };
+		if (Config.loggedIn === false){
+			this.timer = setTimeout(function() {window.location.href = attractLoopUrl },logoutTimeout);
+		}
+		else {
+			// console.log("User Logged In")
+		}
+	};
+	
+	LoggedInTimeout = () => {
+		
+	}
 
   render() {
-    console.log(userSS.loggedIn);
 
     return (
-      <HashRouter>
+      <HashRouter >
         <div
           onClick={this.handleUserInteract}
           onKeyDown={this.handleUserInteract}
           onScroll={this.handleUserInteract}
           role="button"
+          
         >
+        
           <Switch>
-            <Route exact path="/" history={this.props.history} timer={null} component={AttractLoop} />
-            <Route exact path="/userIdentification" render={props => <UserIdentification history={this.props.history} overtime={this.state.overtime} {...props} />} />
-            <Route exact path="/displayCoupons" render={props => <DisplayCoupons history={this.props.history} overtime={this.state.overtime} {...props} />} />
+            <Route exact path="/" history={this.props.history} component={AttractLoop} />
+            <Route exact path="/userIdentification" render={props => <UserIdentificationView history={this.props.history} overtime={this.state.overtime} {...props} />} />
+            <Route exact path="/DisplayCoupons" render={props => <DisplayCouponsView history={this.props.history}  overtime={this.state.overtime}  {...props} />} />
           </Switch>
         </div>
       </HashRouter>
@@ -62,3 +64,8 @@ class Router extends Component {
 }
 
 export default Router;
+Router.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }),
+};
