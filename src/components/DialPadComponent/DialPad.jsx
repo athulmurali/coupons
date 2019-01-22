@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import API from '../../utils/API';
 
 class DialPad extends Component {
 	constructor(props){
@@ -8,6 +9,8 @@ class DialPad extends Component {
 			disableTextArea: false,
 			defaultMessage: 'Enter the Phone number associated with the account',
 		};
+		this.couponsDetails = [];
+		 
 	}
 
 	
@@ -15,14 +18,33 @@ class DialPad extends Component {
 		const prev = this.state.phoneNumber
 		this.setState({ phoneNumber: prev.slice(0,-1) })
 	};
+
+	searchForThePhoneNumberInDatabase = async () => {
+		try{	
+			
+			const extractNumberFromFormat = ( this.state.phoneNumber.substring(1,4) + this.state.phoneNumber.substring(6,9) + this.state.phoneNumber.substring(10) );
+			const response = await API.getUserMobileNumber(extractNumberFromFormat);
+			
+			this.couponsDetails = response.data.response;
+			this.props.identificationfromDiaPad(true,this.state.phoneNumber,this.couponsDetails);
+			
+		} catch (error){
+			this.setErrorMessage();
+		}
+		
+
+	};
 	
 	setErrorMessage = () => {
 		this.setState({phoneNumber: '',defaultMessage: "Not a valid mobile number Please re enter"});
+		
 	};
 
 	checkPhoneNumber = () => {
 		const extractNumberFromFormat = ( this.state.phoneNumber.substring(1,4) + this.state.phoneNumber.substring(6,9) + this.state.phoneNumber.substring(10) );
-		extractNumberFromFormat.length === 10 && this.state.phoneNumber ? this.props.identificationfromDiaPad(true,this.state.phoneNumber) : this.setErrorMessage();
+		const booleanData = this.searchForThePhoneNumberInDatabase(extractNumberFromFormat);
+		extractNumberFromFormat.length === 10 && this.state.phoneNumber ? this.searchForThePhoneNumberInDatabase() : this.setErrorMessage();
+		
 	};
 
 	handleTheKeyClicks = e => {

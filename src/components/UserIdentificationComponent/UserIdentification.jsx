@@ -11,11 +11,15 @@ class UserIdentification extends Component{
 			phoneNumber: '',
       defaultMessage:'Enter the Phone number associated with the account',
       };
-        
+      
   	}
-		succesfullIdentification = (booleanDataFromDialPad,phoneNumber) => {
-			booleanDataFromDialPad ? this.props.history.push(`/DisplayCoupons`):alert('new user');
-		};
+		succesfullIdentification = (booleanDataFromDialPad,phoneNumber,couponDetails) => {
+			
+			booleanDataFromDialPad ? this.props.history.push({
+				pathname: '/DisplayCoupons',
+				state: {couponDetails: couponDetails},
+			}):alert('new user');
+		}; 
     render(){
 			return(
 				<div>

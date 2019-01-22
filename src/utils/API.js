@@ -1,11 +1,17 @@
-import axios from 'axios';
-import Config from './../config/config';
+import axios from "axios";
+import Config from "./../config/config";
 
-const http = Config.https ? 'https' : 'http';
+const http = Config.https ? "https" : "http";
 
 const getMap = (storeNo = Config.storeNumber) => {
-  const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/findit/api/map/getMap/${storeNo}`;
-  return axios.get(url, { timeout: Config.timeoutLength });
+	// eslint-disable-next-line indent
+  const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/customer/fetchCustomer/`;
+	return axios.get(url, { timeout: Config.timeoutLength });
+};
+const getUserMobileNumber = (mobileNumber) => {
+	const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/customer/fetchCustomer/`+mobileNumber;
+	
+	return axios.get(url);
 };
 
 // const getSearchItem = (keyword, page, category, count = Config.searchSize) => {
@@ -53,13 +59,13 @@ const getMap = (storeNo = Config.storeNumber) => {
 //   );
 
 const API = {
-  getMap,
-  // getSearchItem,
-  // getItemDetails,
-  // getImages,
-  // getPopularItems,
-  // recordTime,
-  // analyzeAudio,
+	getMap,
+	getUserMobileNumber,
+	// getItemDetails,
+	// getImages,
+	// getPopularItems,
+	// recordTime,
+	// analyzeAudio,
 };
 
 export default API;
