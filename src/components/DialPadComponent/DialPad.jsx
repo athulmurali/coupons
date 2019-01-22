@@ -48,12 +48,15 @@ class DialPad extends Component {
 	};
 
 	handleTheKeyClicks = e => {
+		
+		if(this.state.phoneNumber.length < 14){
 		const clickedValue = e.target.innerText.trim() ;
 		let disableInputArea = false;
 		if( !clickedValue ){
 			alert("Passed nothing");
 		}
-		else{
+		
+		else {
 			let prev = this.state.phoneNumber;
 			if( prev.length === 0 ){
 				prev += '(' ;
@@ -64,20 +67,23 @@ class DialPad extends Component {
 			else if( prev.length === 9 ){
 				prev += ' ' ;
 			}
+
 			
 			this.setState({
 				phoneNumber: prev+clickedValue,
 				disableTextArea: disableInputArea
 			});				
 		}
-	};
+	}
+	
+};
 
 	render(){
 
 		return(
 			<div className="messsgeDisplay">
 					<h3 className="statusMessage"> {this.state.defaultMessage} </h3>
-					<input className= "inputText" id="test-input" defaultValue={ this.state.phoneNumber}></input>
+					<input className= "inputText" id="test-input" maxLength= {12}  defaultValue={ this.state.phoneNumber} />
 					<div id="container">
 						<ul id="keyboard"  >   
 							<li className="letter" onClick={this.handleTheKeyClicks}>1</li>  
