@@ -1,0 +1,61 @@
+.popupHeader{
+	font-family: sans-serif;
+	color:grey;
+	margin: 0;
+	margin-bottom: 10px;
+ 
+ }
+ .popupMessage{
+	font-family: sans-serif;
+	color:grey;
+	margin: 0;
+	margin-bottom: 10px;
+	padding-left: 3px;
+ }
+ .buttons{
+	background-color: white;
+	width: 250px;
+	height: 50px;
+	margin-left: 40px;
+	font-size: 16px;
+	font-weight: bold;
+	color:gray;
+ }
+ .buttons:hover{
+	background-color: #E0004D;
+	color: white;
+ }
+
+ .popupButton{
+	 display: none;
+ }
+ .modal {
+	padding: 50px;
+ }
+ 
+ .actions{
+	margin: auto;
+	text-align: center;
+	margin-top: 20px;
+ }
+ 
+ .bar {
+	border: 1px solid red;
+	height: 2px;
+	width: 100%;
+ }
+ 
+ .in {
+	animation: fill 10s linear 1;
+	height: 100%;
+	background-color:#E0004D;
+ }
+ 
+ @keyframes fill {
+	0% {
+		width: 100%;
+	}
+	100% {
+		width: 0%;
+	}
+ }

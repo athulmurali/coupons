@@ -1,9 +1,8 @@
 import React from "react";
-import Header from "../Header";
+import Header from "../HeaderComponent/Header";
 import "./DisplayCoupons.css";
 import Flippy, { FrontSide, BackSide } from "react-flippy";
-import Popup from "reactjs-popup";
-
+import TimeoutPopup from "../TimeoutPopupComponent/TimeoutPopup";
 
  class Coupons extends React.Component {
 
@@ -12,11 +11,6 @@ import Popup from "reactjs-popup";
 		this.state = {
 			couponDetails : [],
 		};
-		this.indents = [];
-		
-	}
-	componentDidMount(){
-		console.log(this.props.data);
 	}
 
 	handleScreenTap = () => {
@@ -44,10 +38,10 @@ import Popup from "reactjs-popup";
 		for (var i = 0; i < couponsLength; i++) {
 			userCoupons.push(
 				<div className="Cards" key={i}>
-				<Flippy flipOnHover={false} // default false
-					flipOnClick={true} // default false
-					flipDirection="horizontal" // horizontal or vertical
-					ref={(r) => this.flippy = r} // to use toggle method like this.flippy.toggle()
+				<Flippy flipOnHover={false} 
+					flipOnClick={true} 
+					flipDirection="horizontal" 
+					ref={(r) => this.flippy = r}
 					style={{
 						width: "170px",
 						height: "150px",
@@ -75,60 +69,30 @@ import Popup from "reactjs-popup";
 			</div>);
 	};	
 
-
-		let x = true;
-		let xyz = "";
-
-		if(x) {
-			xyz = this.buttonClick;
-		}
-
 		return (
 			<div>
 				<div className="WelcomeUser_Logout">
 					<h2 className="userName"> Welcome {userName}! </h2>
 					<button className="logoutButton" onClick ={this.handleScreenTap}> Exit </button>
 				</div>
-				<Header />
+				<Header/>
 				<div className="printDiv">
 					<button className="printButton"> PRINT </button>
 				</div>
 				<div className="AllCoupons">
 					<ul>
-						<li> < a  > New Coupons </a></li >
-						<li> < a className="active"  > Loaded Coupons </a></li >
+						<li> <a href="#news" > New Coupons </a></li>
+						<li> <a className="active" href="#displayCoupons" > Loaded Coupons </a></li>
 					</ul>
 					<div className="LoadedCoupons" >
-						<Popup trigger={<button  className="button" ></button>} true modal>
-							{close => (
-								<div className="modal">
-									<h1 className="popupHeader"> Are you still there? </h1>
-									<h4 className="popupMessage">Your session is about to expire</h4>
-									<div class="bar">
-										<div class="in"></div>
-									</div> 
-									<div className="actions">
-										<button
-											className="buttons"
-											onClick={this.handleScreenTap}>
-                    Logout
-										</button>
-										<button
-											className="buttons"
-											onClick={() => {close();}}>
-                    I'm here
-										</button>
-									</div>
-								</div>
-							)}
-						</Popup> 
+						<TimeoutPopup history={this.props.history}/>						
 						<h4 className="LoadedCouponCount"> Loaded Coupons ({couponsLength}) </h4>
-						{userCoupons}        
+						{userCoupons}    
 					</div>
 				</div> 
 			</div>
 		);
 	}
-};
+}
   
 export default Coupons;

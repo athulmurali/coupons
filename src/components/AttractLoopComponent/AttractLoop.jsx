@@ -2,21 +2,20 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import './AttractLoop.css';
 import { Slide } from 'react-slideshow-image';
-import ScanBarcode from '../components/ScanBarcode/ScanBarcode';
-import Header from '../components/Header';
-import slideDuration from '../config/config';
+import ScanBarcode from '../ScanBarcode/ScanBarcode';
+import Config from '../../config/config';
+import Header from '../HeaderComponent/Header';
 
 
-class AttractLoop extends React.Component {
+class AttractLoop extends Component {
   handleScreenTap = () => {
     this.props.history.push(`/userIdentification`);
   };
 
   render() {
-    const Image_coupon1 = require('../assets/coupons-attract-Images-03.png');
-    const Image_coupon2 = require('../assets/coupons-attract-Images-04.png');
-    const Image_coupon3 = require('../assets/coupons-attract-Images-05.png');
-
+    const Image_coupon1 = require('../../assets/coupons-attract-Images-03.png');
+    const Image_coupon2 = require('../../assets/coupons-attract-Images-04.png');
+    const Image_coupon3 = require('../../assets/coupons-attract-Images-05.png');
 
     const slideImages = [
       Image_coupon1,
@@ -25,14 +24,17 @@ class AttractLoop extends React.Component {
     ];
     
     const slide_properties = {
-      duration: slideDuration.duration,
+      duration: Config.ATTRACT_LOOP_SLIDE_DURATION,
       transitionDuration: 500,
       infinite: true,
       indicators: false,
       arrows: false,
     }
 
+		Config.loggedIn = false;
+		
     return (
+      
       <div className="AttractLoop" onClick={this.handleScreenTap}>
         <Header />
         <Slide {...slide_properties} className="couponScreenBackground">

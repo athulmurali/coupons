@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Coupons from "../components/DisplayCouponComponent/DisplayCoupons";
+import Config from "../config/config";
 
 class DisplayCouponsView extends Component{
 	constructor(props){
@@ -14,9 +15,8 @@ class DisplayCouponsView extends Component{
 		
 	}
 	render(){
-
+		Config.loggedIn = true;
 		return (<Coupons history={this.props.history} data = {this.state.couponsDetails}></Coupons>);
-	};
-
+	}
 }
 export default DisplayCouponsView;

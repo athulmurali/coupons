@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import UserIdentification from "../components/UserIdentificationComponent/UserIdentification";
+import ScanBarcode from "../components/ScanBarcode/ScanBarcode";
+import Config from "../config/config";
 
 
 class UserIdentificationView extends Component{
@@ -8,8 +10,12 @@ class UserIdentificationView extends Component{
 		super(props);
 	}  
 	render(){
+		Config.loggedIn = false;
 		return(
-			<UserIdentification history={this.props.history}></UserIdentification>
+			<div>
+				<UserIdentification history={this.props.history}></UserIdentification>
+				<ScanBarcode/>
+			</div>
 		);
 	}
 }
@@ -19,36 +25,3 @@ UserIdentificationView.propTypes = {
 		push: PropTypes.func,
 	}).isRequired,
 };
-
-
-// const AppContext = React.createContext();
-
-// const AppConsumer = AppContext.Consumer;
-
-// class AppProvider extends Component {
-//     constructor(props){
-//       super(props);
-      
-//     }
-    
-//     state = {
-//       Config,
-//       state: { name: 'Jose' },
-//       updateState: (key, value) => this.updateState(key, value),
-//     };
-//     updateState = (key, value) => {
-//       const { state } = this.state;
-      
-//       state[key] = value;
-//       this.setState({
-//         state,
-//       });
-//     };
-//     render() {
-//       return <AppContext.Provider value={this.state}>{this.props.children}</AppContext.Provider>;
-//     }
-//   }
-  
-//   const UserIdentificationView = ({ children }) => <AppProvider>{children}</AppProvider>;
-  
-//   export { UserIdentificationView, AppProvider, AppContext, AppConsumer };

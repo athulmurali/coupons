@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import './ScanBarcode.css';
+import React, { Component } from "react";
+import "./ScanBarcode.css";
 
 class ScanBarcode extends Component {
 	render(){
-		const Barcode_Image = require('../../assets/Barcode.png');
+		const Barcode_Image = require("../../assets/Barcode.png");
 		return(
 			<div className="scanBarcode">
 				<h3> Scan card to start </h3>
