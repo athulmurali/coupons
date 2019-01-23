@@ -14,14 +14,11 @@ import Popup from "reactjs-popup";
 			count: 0,
 		};		
 	}
-	componentDidMount(){
-		console.log(this.props.data);
-	}
-
+	
 	handleScreenTap = () => {
     this.props.history.push(`/`);
-	};
-	
+	}
+
 	buttonClick = (el) => {
 		if(el) {
 		el.click();
@@ -37,9 +34,6 @@ import Popup from "reactjs-popup";
 	startTimer () {
 		clearInterval(this.timer)
 		this.timer = setInterval(this.tick.bind(this), 1000)
-	}
-	stopTimer () {
-		clearInterval(this.timer)
 	}
 	timerReset () {
 		this.setState({count: 0})
@@ -62,11 +56,12 @@ import Popup from "reactjs-popup";
 		let couponsLength = "";
 		let userName = "";
 		let couponData = this.props.data;
-		// if (couponData.length !== 0 && couponData !== undefined ) {
-		// 	userCouponData = couponData[0].couponDetails;
-		// 	couponsLength = userCouponData.length;
-		// 	userName = userCouponData[0].userName;
-		// }
+		console.log(couponData);
+		if (couponData.length > 1 && couponData !== undefined ) {
+			userCouponData = couponData[0].couponDetails;
+			couponsLength = userCouponData.length;
+			userName = userCouponData[0].userName;
+		}
 		const Image_coupon = require("../../assets/stopandshop.png");
 		for (var i = 0; i < couponsLength; i++) {
 			userCoupons.push(

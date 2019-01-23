@@ -82,7 +82,6 @@ class DialPad extends Component {
 	
 };
 
-
 	componentWillUnmount () {
 		clearInterval(this.timer)
 	}
@@ -92,9 +91,6 @@ class DialPad extends Component {
 	startTimer () {
 		clearInterval(this.timer)
 		this.timer = setInterval(this.tick.bind(this), 1000)
-	}
-	stopTimer () {
-		clearInterval(this.timer)
 	}
 
 	handleScreenTap = () => {
