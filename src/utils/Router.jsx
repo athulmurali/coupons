@@ -17,28 +17,6 @@ class Router extends Component {
     };
   }
 
-  componentWillMount() {
-    sessionStorage.setItem('Phone-Number', '');
-  }
-
-  handleUserInteract = () => {
-
-    clearTimeout(this.timer);
-    const attractLoopUrl = "http://"+Config.client.host + ":" + Config.client.port+ "/";
-    // const userIdentificationUrl = attractLoopUrl + "#/userIdentification";
-		const logoutTimeout = Config.INACTIVE_USER_IDENTIFICATION;
-
-		if (Config.loggedIn === false){
-			this.timer = setTimeout(function() {window.location.href = attractLoopUrl },logoutTimeout);
-		}
-		else {
-			// console.log("User Logged In")
-		}
-	};
-	
-	LoggedInTimeout = () => {
-		
-	}
 
   render() {
 
