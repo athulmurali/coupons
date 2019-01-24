@@ -17,9 +17,15 @@ class DialPad extends Component {
 	}
 
 	deleteTheLastDigit = () => {
-		const prev = this.state.phoneNumber
-		this.setState({ phoneNumber: prev.slice(0,-1) })
-	};
+		let prev = this.state.phoneNumber.slice(0,-1)
+		if(prev.length === 5){
+				prev += ' '
+		}
+		else if(prev.length === 8){
+				prev += ' '
+		}
+		this.setState({ phoneNumber: prev })
+};
 
 	searchForThePhoneNumberInDatabase = async () => {
 		try{	
@@ -43,7 +49,7 @@ class DialPad extends Component {
 
 	checkPhoneNumber = () => {
 		const extractNumberFromFormat = ( this.state.phoneNumber.substring(1,4) + this.state.phoneNumber.substring(6,9) + this.state.phoneNumber.substring(10) );
-		const booleanData = this.searchForThePhoneNumberInDatabase(extractNumberFromFormat);
+		this.searchForThePhoneNumberInDatabase(extractNumberFromFormat);
 		extractNumberFromFormat.length === 10 && this.state.phoneNumber ? this.searchForThePhoneNumberInDatabase() : this.setErrorMessage();
 		
 	};
@@ -129,6 +135,4 @@ class DialPad extends Component {
 	};
 }
 
-
 export default DialPad;
-

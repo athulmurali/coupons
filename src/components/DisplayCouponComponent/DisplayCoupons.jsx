@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "../Header";
+import Header from "../HeaderComponent/Header";
 import "./DisplayCoupons.css";
 import Flippy, { FrontSide, BackSide } from "react-flippy";
 import Popup from "reactjs-popup";
@@ -109,7 +109,7 @@ import Config from '../../config/config';
 					<h2 className="userName"> Welcome {userName}! </h2>
 					<button className="logoutButton" onClick ={this.handleScreenTap}> Exit </button>
 				</div>
-				<Header />
+				<Header/>
 				<div className="printDiv">
 					{/* <button className="printButton" onClick={this.print}> PRINT </button> */}
 					<ReactToPrint
@@ -120,8 +120,8 @@ import Config from '../../config/config';
 				</div>
 				<div className="AllCoupons">
 					<ul>
-						<li> < a  > New Coupons </a></li >
-						<li> < a className="active"  > Loaded Coupons </a></li >
+						<li> <a href="#news" > New Coupons </a></li>
+						<li> <a className="active" href="#displayCoupons" > Loaded Coupons </a></li>
 					</ul>
 					<div className="LoadedCoupons" ref= {el => (this.componentRef = el)} >
 						<Popup trigger={<button ref={buttonTrigger}  className="button" ></button>} true modal>
@@ -154,6 +154,6 @@ import Config from '../../config/config';
 			</div>
 		);
 	}
-};
+}
   
 export default Coupons;
