@@ -11,6 +11,7 @@ class DisplayCouponsView extends Component{
 		
 	}
 	componentDidMount(){
+		
 		this.state.couponsDetails.push(this.props.location.state);
 		
 	}

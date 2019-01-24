@@ -2,20 +2,21 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import './AttractLoop.css';
 import { Slide } from 'react-slideshow-image';
-import ScanBarcode from '../ScanBarcode/ScanBarcode';
-import Header from '../HeaderComponent/Header';
-import Config from '../../config/config';
+import ScanBarcode from '../components/ScanBarcode/ScanBarcode';
+import Header from '../components/Header';
+import Config from '../config/config';
 
 
-class AttractLoop extends Component {
+class AttractLoop extends React.Component {
   handleScreenTap = () => {
     this.props.history.push(`/userIdentification`);
   };
 
   render() {
-    const Image_coupon1 = require('../../assets/coupons-attract-Images-03.png');
-    const Image_coupon2 = require('../../assets/coupons-attract-Images-04.png');
-    const Image_coupon3 = require('../../assets/coupons-attract-Images-05.png');
+    const Image_coupon1 = require('../assets/coupons-attract-Images-03.png');
+    const Image_coupon2 = require('../assets/coupons-attract-Images-04.png');
+    const Image_coupon3 = require('../assets/coupons-attract-Images-05.png');
+
 
     const slideImages = [
       Image_coupon1,
@@ -31,10 +32,7 @@ class AttractLoop extends Component {
       arrows: false,
     }
 
-		Config.loggedIn = false;
-		
     return (
-      
       <div className="AttractLoop" onClick={this.handleScreenTap}>
         <Header />
         <Slide {...slide_properties} className="couponScreenBackground">

@@ -26,10 +26,10 @@ const constants = {
 	TOP_RIGHT_CORNER: "top_right",
 	BOTTOM_LEFT_CORNER: "bottom_left",
 	BOTTOM_RIGHT_CORNER: "bottom_right",
-	INACTIVE_USER_IDENTIFICATION: 15000,
-	COUPONS_POPUP_TIMER: 10000,
-	COUPONS_LOGOUT_TIMER: 10000,
-	ATTRACT_LOOP_SLIDE_DURATION: 3000
+	INACTIVE_USER_IDENTIFICATION: 10000,   // in milli-seconds
+	POPUP_TIMER: 10,						// in seconds
+	LOGOUT_TIMER: 20,						// in seconds
+	ATTRACT_LOOP_SLIDE_DURATION: 3000,  // in milli-seconds
 };
 
 let config = {

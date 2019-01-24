@@ -20,12 +20,14 @@
 	font-weight: bold;
 	color: grey;
  }
+
  .printDiv{
 	display: flex;
 	justify-content: flex-end;
 	margin-right: 20px;
 	margin-bottom: 0;
  }
+
  .printButton{
 	font-size: 20px;
 	font-weight: bold;
@@ -33,14 +35,17 @@
 	border: none;
 	margin-bottom: 0;
  }
+ 
  .printButton:hover{
 	border: 0;
  }
+
  .userName{
 	font-style: italic;
 	color: grey;
 	margin-top: 10px;
  }
+
  ul {
 	list-style-type: none;
 	margin: 0;
@@ -51,21 +56,25 @@
 	height: 100%vh;
 	border: 2px solid lightgrey;
  }
+
  h4, h5 {
 	padding: 0;
 	margin: 5px;
 	text-align: left;
 	color: black;
  }
+
  img{
 	margin-bottom: 8px;
  }
+
  h6{
 	padding: 0;
 	margin: 5px;
 	text-align: left;
 	color: grey;
  }
+
  .LoadedCouponCount {
 	padding: 0;
 	margin: 5px;
@@ -92,6 +101,7 @@
 	background-color: #E0004D;
 	color: white;
  }
+
  .LoadedCoupons{
 	color: grey;
 	padding: 10px 20px 10px 50px;
@@ -100,6 +110,7 @@
 	height: -webkit-fill-available;
 	width: -webkit-fill-available;
  }
+
  .Cards{
 	display: inline-flex;
 	margin-right: 14px;
@@ -121,3 +132,66 @@
 	color: black;
  }
  
+ .bar {
+	border: 1px solid red;
+	height: 2px;
+	width: 100%;
+ }
+ 
+ .in {
+	animation: fill 10s linear 1;
+	height: 100%;
+	background-color:#E0004D;
+ }
+ 
+ @keyframes fill {
+	0% {
+		width: 100%;
+	}
+	100% {
+		width: 0%;
+	}
+ }
+ 
+ .modal {
+	padding: 50px;
+ }
+
+ .button {
+	 display: none;
+ }
+ 
+ .actions{
+	margin: auto;
+	text-align: center;
+	margin-top: 20px;
+ }
+ .popupHeader{
+	font-family: sans-serif;
+	color:grey;
+	margin: 0;
+	margin-bottom: 10px;
+ }
+
+ .popupMessage{
+	font-family: sans-serif;
+	color:grey;
+	margin: 0;
+	margin-bottom: 10px;
+	padding-left: 3px;
+ }
+
+ .buttons{
+	background-color: white;
+	width: 250px;
+	height: 50px;
+	margin-left: 40px;
+	font-size: 16px;
+	font-weight: bold;
+	color:gray;
+ }
+ 
+ .buttons:hover{
+	background-color: #E0004D;
+	color: white;
+ }
