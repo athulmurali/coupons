@@ -55,11 +55,12 @@ import Config from '../../config/config';
 		let userName = "";
 		this.startTimer();
 
-		if(this.state.count > Config.COUPONS_POPUP_TIMER){
-			buttonTrigger = this.buttonClick;
-			if(this.state.count > Config.COUPONS_LOGOUT_TIMER) {
+		if(this.state.count > Config.POPUP_TIMER){
+				buttonTrigger = this.buttonClick;
+		}
+
+		if(this.state.count > Config.LOGOUT_TIMER) {
 			this.handleScreenTap();
-			}
 		}
 
 		if (couponData.length != 0 && couponData[0]) {
