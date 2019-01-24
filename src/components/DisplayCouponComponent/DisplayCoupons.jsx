@@ -4,7 +4,7 @@ import "./DisplayCoupons.css";
 import Flippy, { FrontSide, BackSide } from "react-flippy";
 import Popup from "reactjs-popup";
 import ReactToPrint from "react-to-print";
-import Config from '../../config/config';
+import Config from "../../config/config";
 
 
  class Coupons extends React.Component {
@@ -17,10 +17,6 @@ import Config from '../../config/config';
 		};		
 	}
 	
-	handleScreenTap = () => {
-    this.props.history.push(`/`);
-	}
-
 	buttonClick = (el) => {
 		if(el) {
 		el.click();
@@ -30,12 +26,16 @@ import Config from '../../config/config';
 	componentWillUnmount () {
 		clearInterval(this.timer);
 	}
+
+	componentDidMount () {
+		this.startTimer();
+	}
 	tick () {
-		this.setState({count: (this.state.count + 1)})
+		this.setState({count: (this.state.count + 1)});
 	}
 	startTimer () {
-		clearInterval(this.timer)
-		this.timer = setInterval(this.tick.bind(this), 1000)
+		clearInterval(this.timer);
+		this.timer = setInterval(this.tick.bind(this), 1000);
 	}
 	timerReset () {
 		this.setState({count: 0});
@@ -45,6 +45,11 @@ import Config from '../../config/config';
 		this.setState({count: 0});
 	}
 
+	handleScreenTap = () => {
+			this.props.history.push(`/`);
+	}
+
+
 
 	render() {
 		let couponData = this.props.data;
@@ -53,15 +58,15 @@ import Config from '../../config/config';
 		let userCouponData = "";
 		let couponsLength = "";
 		let userName = "";
-		this.startTimer();
 
-		if(this.state.count > Config.POPUP_TIMER){
+		if(this.state.count > Config.POPUPTIMER){
 				buttonTrigger = this.buttonClick;
+				if(this.state.count > Config.LOGOUTTIMER) {
+					this.handleScreenTap();
+				}
 		}
 
-		if(this.state.count > Config.LOGOUT_TIMER) {
-			this.handleScreenTap();
-		}
+
 
 		if (couponData.length != 0 && couponData[0]) {
 			userCouponData = couponData[0];
@@ -119,13 +124,7 @@ import Config from '../../config/config';
           content={() => this.componentRef}
         />
 				</div>
-				<div className="AllCoupons">
-					<ul>
-						<li> <a href="#news" > New Coupons </a></li>
-						<li> <a className="active" href="#displayCoupons" > Loaded Coupons </a></li>
-					</ul>
-					<div className="LoadedCoupons" ref= {el => (this.componentRef = el)} >
-						<Popup trigger={<button ref={buttonTrigger}  className="button" ></button>} true modal>
+				<Popup trigger={<button ref={buttonTrigger}  className="button" ></button>} true modal>
 							{close => (
 								<div className="modal">
 									<h1 className="popupHeader"> Are you still there? </h1>
@@ -147,7 +146,13 @@ import Config from '../../config/config';
 									</div>
 								</div>
 							)}
-						</Popup> 
+						</Popup> 						
+				<div className="AllCoupons">
+					<ul>
+						<li> <a href="#news" > New Coupons </a></li>
+						<li> <a className="active" href="#displayCoupons" > Loaded Coupons </a></li>
+					</ul>
+					<div className="LoadedCoupons" ref= {el => (this.componentRef = el)} >
 						<h4 className="LoadedCouponCount"> Loaded Coupons ({couponsLength})  {this.state.count}</h4>
 						{userCoupons}        
 					</div>
