@@ -3,6 +3,7 @@ import Header from "../Header";
 import "./DisplayCoupons.css";
 import Flippy, { FrontSide, BackSide } from "react-flippy";
 import Popup from "reactjs-popup";
+import ReactToPrint from "react-to-print";
 
 
  class Coupons extends React.Component {
@@ -24,9 +25,9 @@ import Popup from "reactjs-popup";
 		el.click();
 		};
 	}
-
+	
 	componentWillUnmount () {
-		clearInterval(this.timer)
+		clearInterval(this.timer);
 	}
 	tick () {
 		this.setState({count: (this.state.count + 1)})
@@ -36,14 +37,26 @@ import Popup from "reactjs-popup";
 		this.timer = setInterval(this.tick.bind(this), 1000)
 	}
 	timerReset () {
-		this.setState({count: 0})
+		this.setState({count: 0});
+	}
+
+	newXyz = ()  => {
+		this.setState({count: 0});
+	}
+
+	print = () => {
+		window.print();
 	}
 
 	render() {
-
+		let couponData = this.props.data;
 		let buttonTrigger = "";
-
+		let userCoupons = [];
+		let userCouponData = "";
+		let couponsLength = "";
+		let userName = "";
 		this.startTimer();
+
 		if(this.state.count > 10){
 			buttonTrigger = this.buttonClick;
 			if(this.state.count > 20) {
@@ -51,21 +64,15 @@ import Popup from "reactjs-popup";
 			}
 		}
 
-		let userCoupons = [];
-		let userCouponData = "";
-		let couponsLength = "";
-		let userName = "";
-		let couponData = this.props.data;
-		console.log(couponData);
-		if (couponData.length > 1 && couponData !== undefined ) {
-			userCouponData = couponData[0].couponDetails;
+		if (couponData.length != 0 && couponData[0]) {
+			userCouponData = couponData[0];
 			couponsLength = userCouponData.length;
 			userName = userCouponData[0].userName;
 		}
 		const Image_coupon = require("../../assets/stopandshop.png");
 		for (var i = 0; i < couponsLength; i++) {
 			userCoupons.push(
-				<div className="Cards" key={i}>
+				<div className="Cards" key={i} onClick={this.newXyz}>
 				<Flippy flipOnHover={false} // default false
 					flipOnClick={true} // default false
 					flipDirection="horizontal" // horizontal or vertical
@@ -75,6 +82,14 @@ import Popup from "reactjs-popup";
 						height: "150px",
 						padding: "0",
 					}}>
+					<BackSide style={{
+						backgroundColor: "white",
+						color: "black",
+						width: "171px",
+						height: "264px",
+					}} >
+            Category {i} <br /> Aisle {i}
+					</BackSide>
 					<FrontSide style={{
 						width: "171px",
 						height: "264px"
@@ -85,14 +100,7 @@ import Popup from "reactjs-popup";
 						<h6> Exp: {userCouponData[i].expDate.slice(0,10)} </h6>
 						{/* <h6 className="viewMore"> Tap to View more </h6> */}
 					</FrontSide>
-					<BackSide style={{
-						backgroundColor: "white",
-						color: "black",
-						width: "171px",
-						height: "264px",
-					}} >
-            Category {i} <br /> Aisle {i}
-					</BackSide>
+
 				</Flippy>
 			</div>);
 	};	
@@ -102,20 +110,25 @@ import Popup from "reactjs-popup";
 
 		return (
 			<div>
-				<div className="WelcomeUser_Logout">
+				<div className="WelcomeUser_Logout" >
 					<h2 className="userName"> Welcome {userName}! </h2>
 					<button className="logoutButton" onClick ={this.handleScreenTap}> Exit </button>
 				</div>
 				<Header />
 				<div className="printDiv">
-					<button className="printButton"> PRINT </button>
+					{/* <button className="printButton" onClick={this.print}> PRINT </button> */}
+					<ReactToPrint
+				
+          trigger={() => <button 	className="printButton">PRINT</button>}
+          content={() => this.componentRef}
+        />
 				</div>
 				<div className="AllCoupons">
 					<ul>
 						<li> < a  > New Coupons </a></li >
 						<li> < a className="active"  > Loaded Coupons </a></li >
 					</ul>
-					<div className="LoadedCoupons" >
+					<div className="LoadedCoupons" ref= {el => (this.componentRef = el)} >
 						<Popup trigger={<button ref={buttonTrigger}  className="button" ></button>} true modal>
 							{close => (
 								<div className="modal">

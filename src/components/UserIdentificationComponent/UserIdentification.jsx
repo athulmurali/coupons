@@ -15,8 +15,12 @@ class UserIdentification extends Component{
         
 		}
 
-		succesfullIdentification = (booleanDataFromDialPad,phoneNumber) => {
-			booleanDataFromDialPad ? this.props.history.push(`/DisplayCoupons`):alert('new user');
+		succesfullIdentification = (booleanDataFromDialPad,phoneNumber,couponsDetails) => {
+			booleanDataFromDialPad ? this.props.history.push({
+				pathname : `/DisplayCoupons`,
+				state: couponsDetails
+			}
+				):alert('new user');
 		};
 
     render(){

@@ -125,7 +125,6 @@ class DialPad extends Component {
 						</ul>
 					</div>
 					<div className="switchNoCard">No card, no problem</div>
-					<h1>{this.state.count}</h1>
 			</div>
 		);
 	};
