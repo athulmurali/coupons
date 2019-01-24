@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import API from '../../utils/API';
 import './DialPad.css';
+import Config from '../../config/config';
 
 class DialPad extends Component {
 	constructor(props){
@@ -93,12 +94,14 @@ class DialPad extends Component {
 		this.props.history.push(`/`);
 	};
 
+
 	render(){
 		this.startTimer();
-		if(this.state.count > 10){
+		if(this.state.count > Config.INACTIVE_USER_IDENTIFICATION){
 			this.state.count = 0;
 			this.handleScreenTap();
 		}
+		debugger;
 		return(
 			<div className="messsgeDisplay">
 					<h3 className="statusMessage"> {this.state.defaultMessage} </h3>

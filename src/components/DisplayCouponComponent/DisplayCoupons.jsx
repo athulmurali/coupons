@@ -4,6 +4,7 @@ import "./DisplayCoupons.css";
 import Flippy, { FrontSide, BackSide } from "react-flippy";
 import Popup from "reactjs-popup";
 import ReactToPrint from "react-to-print";
+import Config from '../../config/config';
 
 
  class Coupons extends React.Component {
@@ -54,9 +55,9 @@ import ReactToPrint from "react-to-print";
 		let userName = "";
 		this.startTimer();
 
-		if(this.state.count > 10){
+		if(this.state.count > Config.COUPONS_POPUP_TIMER){
 			buttonTrigger = this.buttonClick;
-			if(this.state.count > 20) {
+			if(this.state.count > Config.COUPONS_LOGOUT_TIMER) {
 			this.handleScreenTap();
 			}
 		}

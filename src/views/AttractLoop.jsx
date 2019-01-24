@@ -4,7 +4,7 @@ import './AttractLoop.css';
 import { Slide } from 'react-slideshow-image';
 import ScanBarcode from '../components/ScanBarcode/ScanBarcode';
 import Header from '../components/Header';
-import slideDuration from '../config/config';
+import Config from '../config/config';
 
 
 class AttractLoop extends React.Component {
@@ -25,7 +25,7 @@ class AttractLoop extends React.Component {
     ];
     
     const slide_properties = {
-      duration: slideDuration.duration,
+      duration: Config.ATTRACT_LOOP_SLIDE_DURATION,
       transitionDuration: 500,
       infinite: true,
       indicators: false,
