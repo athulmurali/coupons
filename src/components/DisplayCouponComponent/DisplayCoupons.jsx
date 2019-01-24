@@ -44,9 +44,6 @@ import ReactToPrint from "react-to-print";
 		this.setState({count: 0});
 	}
 
-	print = () => {
-		window.print();
-	}
 
 	render() {
 		let couponData = this.props.data;
@@ -104,9 +101,6 @@ import ReactToPrint from "react-to-print";
 				</Flippy>
 			</div>);
 	};	
-
-
-
 
 		return (
 			<div>

@@ -15,10 +15,6 @@ class DialPad extends Component {
 		 
 	}
 
-
-	
-
-	
 	deleteTheLastDigit = () => {
 		const prev = this.state.phoneNumber
 		this.setState({ phoneNumber: prev.slice(0,-1) })
@@ -99,7 +95,7 @@ class DialPad extends Component {
 
 	render(){
 		this.startTimer();
-		if(this.state.count > 5){
+		if(this.state.count > 10){
 			this.state.count = 0;
 			this.handleScreenTap();
 		}
