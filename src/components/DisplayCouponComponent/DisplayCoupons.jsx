@@ -5,7 +5,7 @@ import Flippy, { FrontSide, BackSide } from "react-flippy";
 import Popup from "reactjs-popup";
 import ReactToPrint from "react-to-print";
 import Config from "../../config/config";
-
+import UserAvatar from "react-user-avatar";
 
  class Coupons extends React.Component {
 
@@ -14,6 +14,10 @@ import Config from "../../config/config";
 		this.state = {
 			couponDetails : [],
 			count: 0,
+			hideLoadedCoupons: true,
+			hideNewCoupons: false,
+			activeNewCoupons: "active",
+			activeLoadedCoupons: "inactive",
 		};		
 	}
 	
@@ -49,7 +53,21 @@ import Config from "../../config/config";
 			this.props.history.push(`/`);
 	}
 
+	NewCoupons = () => {
+		this.setState({count: 0});
+		this.state.hideNewCoupons = false;
+		this.state.hideLoadedCoupons = true;
+		this.state.activeNewCoupons = "active";
+		this.state.activeLoadedCoupons = "inactive";
+	}
 
+	LoadedCoupons = () => {
+		this.setState({count: 0});
+		this.state.hideNewCoupons = true;
+		this.state.hideLoadedCoupons = false;
+		this.state.activeNewCoupons = "inactive";
+		this.state.activeLoadedCoupons = "active";
+	}
 
 	render() {
 		let couponData = this.props.data;
@@ -58,7 +76,7 @@ import Config from "../../config/config";
 		let userCouponData = "";
 		let couponsLength = "";
 		let userName = "";
-
+		let avatar = "";
 		if(this.state.count > Config.POPUPTIMER){
 				buttonTrigger = this.buttonClick;
 				if(this.state.count > Config.LOGOUTTIMER) {
@@ -67,11 +85,13 @@ import Config from "../../config/config";
 		}
 
 
-
 		if (couponData.length != 0 && couponData[0]) {
 			userCouponData = couponData[0];
 			couponsLength = userCouponData.length;
 			userName = userCouponData[0].userName;
+			userName.toString();
+			avatar = (<UserAvatar size="70" name={userName} color="#E0004D"></UserAvatar>)
+
 		}
 		const Image_coupon = require("../../assets/stopandshop.png");
 		for (var i = 0; i < couponsLength; i++) {
@@ -92,7 +112,7 @@ import Config from "../../config/config";
 						width: "171px",
 						height: "264px",
 					}} >
-            Category {i} <br /> Aisle {i}
+            {/* Category {i} <br /> Aisle {i} */}
 					</BackSide>
 					<FrontSide style={{
 						width: "171px",
@@ -113,14 +133,13 @@ import Config from "../../config/config";
 			<div>
 				<div className="WelcomeUser_Logout" >
 					<h2 className="userName"> Welcome {userName}! </h2>
-					<button className="logoutButton" onClick ={this.handleScreenTap}> Exit </button>
+					{avatar}
+					<button className="logoutButton" onClick ={this.handleScreenTap} > Exit </button>
 				</div>
 				<Header/>
 				<div className="printDiv">
-					{/* <button className="printButton" onClick={this.print}> PRINT </button> */}
 					<ReactToPrint
-				
-          trigger={() => <button 	className="printButton">PRINT</button>}
+          trigger={() => <button 	className="printButton" hidden={this.state.hideLoadedCoupons}>PRINT</button>}
           content={() => this.componentRef}
         />
 				</div>
@@ -129,8 +148,8 @@ import Config from "../../config/config";
 								<div className="modal">
 									<h1 className="popupHeader"> Are you still there? </h1>
 									<h4 className="popupMessage">Your session is about to expire</h4>
-									<div class="bar">
-										<div class="in"></div>
+									<div className="bar">
+										<div className="in"></div>
 									</div> 
 									<div className="actions">
 										<button
@@ -149,10 +168,14 @@ import Config from "../../config/config";
 						</Popup> 						
 				<div className="AllCoupons">
 					<ul>
-						<li> <a href="#news" > New Coupons </a></li>
-						<li> <a className="active" href="#displayCoupons" > Loaded Coupons </a></li>
+						<li> <a  className={this.state.activeNewCoupons} onClick={this.NewCoupons} > New Coupons </a></li>
+						<li> <a  className={this.state.activeLoadedCoupons} onClick={this.LoadedCoupons}> Loaded Coupons </a></li>
 					</ul>
-					<div className="LoadedCoupons" ref= {el => (this.componentRef = el)} >
+					<div className="LoadedCoupons"  hidden={this.state.hideNewCoupons}   >
+						<h4 className="LoadedCouponCount"> New Coupons ({couponsLength})  {this.state.count}</h4>
+						{userCoupons}        
+					</div>
+					<div className="LoadedCoupons"  hidden={this.state.hideLoadedCoupons} ref= {el => (this.componentRef = el)} >
 						<h4 className="LoadedCouponCount"> Loaded Coupons ({couponsLength})  {this.state.count}</h4>
 						{userCoupons}        
 					</div>
