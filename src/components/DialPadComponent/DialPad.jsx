@@ -107,7 +107,6 @@ class DialPad extends Component {
 			this.state.count = 0;
 			this.handleScreenTap();
 		}
-		debugger;
 		return(
 			<div className="messsgeDisplay">
 					<h3 className="statusMessage"> {this.state.defaultMessage} </h3>
