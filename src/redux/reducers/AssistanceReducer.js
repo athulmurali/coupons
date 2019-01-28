@@ -3,6 +3,7 @@
 // Notes:
 // To be made sure that the api response : _id or id
 
+export const TOGGLE_POP_UP = "TOGGLE_POP_UP"
 const initialState = {
     // The index of the current selected property
     // if an user is currently in the third property , then value should be 2 (base 0)
@@ -16,7 +17,7 @@ const initialState = {
 const AssistanceReducer = (state = initialState, action) => {
     switch (action.type) {
 
-        case 'TOGGLE_POP_UP' : return {...state, isPopUpOpen: !state.isPopUpOpen}
+        case TOGGLE_POP_UP : return {...state, isPopUpOpen: !state.isPopUpOpen}
 
         default :
             return state
