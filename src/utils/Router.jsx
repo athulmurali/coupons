@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import AttractLoopView from  '../views/AttractLoopView';
-import Config from '../config/config';
 import UserIdentificationView from '../views/UserIdentificationView';
 import DisplayCouponsView from '../views/DisplayCouponsView';
 import PropTypes from 'prop-types';
-import AssistancePopUpComponent from "../components/AssitancePopUpComponent/AssistancePopUpComponent";
 
 class Router extends Component {
   constructor(props) {
@@ -33,7 +31,6 @@ class Router extends Component {
             <Route exact path="/" history={this.props.history} component={AttractLoopView} />
             <Route exact path="/userIdentification" render={props => <UserIdentificationView history={this.props.history} overtime={this.state.overtime} {...props} />} />
             <Route exact path="/DisplayCoupons" render={props => <DisplayCouponsView history={this.props.history}  overtime={this.state.overtime}  {...props} />} />
-            <Route exact path="/temp" component={AssistancePopUpComponent} />} />
           </Switch>
         </div>
       </HashRouter>
