@@ -5,7 +5,6 @@ import Flippy, { FrontSide, BackSide } from "react-flippy";
 import Popup from "reactjs-popup";
 import ReactToPrint from "react-to-print";
 import Config from "../../config/config";
-import UserAvatar from "react-user-avatar";
 
  class Coupons extends React.Component {
 
@@ -76,7 +75,6 @@ import UserAvatar from "react-user-avatar";
 		let userCouponData = "";
 		let couponsLength = "";
 		let userName = "";
-		let avatar = "";
 		if(this.state.count > Config.POPUPTIMER){
 				buttonTrigger = this.buttonClick;
 				if(this.state.count > Config.LOGOUTTIMER) {
@@ -90,7 +88,6 @@ import UserAvatar from "react-user-avatar";
 			couponsLength = userCouponData.length;
 			userName = userCouponData[0].userName;
 			userName.toString();
-			avatar = (<UserAvatar size="70" name={userName} color="#E0004D"></UserAvatar>)
 
 		}
 		const Image_coupon = require("../../assets/stopandshop.png");
@@ -133,7 +130,6 @@ import UserAvatar from "react-user-avatar";
 			<div>
 				<div className="WelcomeUser_Logout" >
 					<h2 className="userName"> Welcome {userName}! </h2>
-					{avatar}
 					<button className="logoutButton" onClick ={this.handleScreenTap} > Exit </button>
 				</div>
 				<Header/>

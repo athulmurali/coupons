@@ -13,8 +13,8 @@ class DialPad extends Component {
 			count: 0,
 			cardNumber: false,
 			mouseHover: false,
-			phoneButton: "active",
-			cardButton: "inactive",
+			phoneButton: "act",
+			cardButton: "inact",
 		};
 		this.couponsDetails = [];
 		let Image_card;
@@ -127,8 +127,8 @@ else{
 
 	handlePhoneClick = () => {
 		this.setState({cardNumber: false,
-			 phoneButton : "active",
-			 cardButton : "inactive",
+			 phoneButton : "act",
+			 cardButton : "inact",
 			defaultMessage: 'Enter the Phone number',
 			phoneNumber: '',
 		});
@@ -139,8 +139,8 @@ else{
 	
 	handleCardClick = () => {
 		this.setState({cardNumber: true,
-			cardButton : "active",
-			phoneButton : "inactive",
+			cardButton : "act",
+			phoneButton : "inact",
 			defaultMessage: 'Enter the Card number',
 			phoneNumber: '',
 		});
