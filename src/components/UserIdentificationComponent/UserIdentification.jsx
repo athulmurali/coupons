@@ -11,8 +11,7 @@ class UserIdentification extends Component{
 		this.state = {
 			phoneNumber: '',
 			defaultMessage:'Enter the Phone number associated with the account',
-      };
-        
+      };        
 		}
 
 		succesfullIdentification = (booleanDataFromDialPad,phoneNumber,couponsDetails) => {
