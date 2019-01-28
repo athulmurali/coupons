@@ -76,9 +76,9 @@
  }
 
  .logoutButton {
-	width: 100px;
-	height: 40px;
-	margin: 20px 5px 10px 20px;
+	width: 150px;
+	height: 45px;
+	margin: 15px 5px 10px 20px;
 	font-size: 20px;
 	font-weight: bold;
 	color: grey;
@@ -117,8 +117,22 @@
 	display: none;
 }
 
+.logOutMessage1{
+	text-align: center;
+	color: gray;
+}
+.logOutMessage2{
+	text-align: center;
+	color: gray;
+	font-weight: normal;
+}
 .modal {
 	padding: 50px;
+ }
+
+ .logOutImage{
+	 display: flex;
+	 margin: auto;
  }
 
  .popupHeader{
