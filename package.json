@@ -6,7 +6,6 @@
     "axios": "^0.18.0",
     "babel-eslint": "^9.0.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
-    "font-awesome": "^4.7.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-flippy": "^0.1.2",
