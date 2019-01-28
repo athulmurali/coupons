@@ -95,7 +95,7 @@ import Config from "../../config/config";
 		}
 
 		if(this.state.logOutReload) {
-			if (this.state.count > 10) {
+			if (this.state.count > 3) {
 				this.handleScreenTap()
 			}
 		}
