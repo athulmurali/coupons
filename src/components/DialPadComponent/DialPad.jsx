@@ -21,23 +21,29 @@ class DialPad extends Component {
 		let Image_phone;
 		this.Image_card = require('../../assets/icon-card-gray.svg');
 		this.Image_phone = require('../../assets/icon-phone-white.svg');
+		let extractNumberFromFormat = "";
 	}
 
 	deleteTheLastDigit = () => {
 		let prev = this.state.phoneNumber.slice(0,-1)
-		if(prev.length === 5){
-				prev += ' '
+		if(prev.length === 6){
+				prev = this.state.phoneNumber.slice(0,-1)
 		}
-		else if(prev.length === 8){
-				prev += ' '
+		else if(prev.length === 9){
+			prev = this.state.phoneNumber.slice(0,-1)
 		}
 		this.setState({ phoneNumber: prev })
 };
 
 	searchForThePhoneNumberInDatabase = async () => {
 		try{	
+			if(this.state.cardNumber === false){
 			const extractNumberFromFormat = ( this.state.phoneNumber.substring(1,4) + this.state.phoneNumber.substring(6,9) + this.state.phoneNumber.substring(10) );
-			const response = await API.getUserMobileNumber(extractNumberFromFormat);
+			}
+			else{
+				this.extractNumberFromFormat = this.state.phoneNumber;
+			}
+			const response = await API.getUserMobileNumber(this.extractNumberFromFormat);
 			
 			this.couponsDetails = response.data.response;
 			this.props.identificationfromDiaPad(true,this.state.phoneNumber,this.couponsDetails);
@@ -55,9 +61,17 @@ class DialPad extends Component {
 	};
 
 	checkPhoneNumber = () => {
-		const extractNumberFromFormat = ( this.state.phoneNumber.substring(1,4) + this.state.phoneNumber.substring(6,9) + this.state.phoneNumber.substring(10) );
-		this.searchForThePhoneNumberInDatabase(extractNumberFromFormat);
-		extractNumberFromFormat.length === 10 && this.state.phoneNumber ? this.searchForThePhoneNumberInDatabase() : this.setErrorMessage();
+		
+		if(this.state.cardNumber === false){
+			this.extractNumberFromFormat = ( this.state.phoneNumber.substring(1,4) + this.state.phoneNumber.substring(6,9) + this.state.phoneNumber.substring(10) );
+			console.log(this.extractNumberFromFormat);
+		}
+		else{
+			this.extractNumberFromFormat = this.state.phoneNumber;
+			console.log(this.extractNumberFromFormat);
+		}
+		this.searchForThePhoneNumberInDatabase(this.extractNumberFromFormat);
+		this.extractNumberFromFormat.length === 10 && this.state.phoneNumber ? this.searchForThePhoneNumberInDatabase() : this.setErrorMessage();
 		
 	};
 
