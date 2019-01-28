@@ -8,6 +8,7 @@ import Config from '../config/config';
 
 
 class AttractLoop extends React.Component {
+  
   handleScreenTap = () => {
     this.props.history.push(`/userIdentification`);
   };
@@ -36,15 +37,15 @@ class AttractLoop extends React.Component {
       <div className="AttractLoop" onClick={this.handleScreenTap}>
         <Header />
         <Slide {...slide_properties} className="couponScreenBackground">
-          <div className="each-slide">
+          <div className="each_slide">
             <div className="couponImageCover" style={{ 'backgroundImage': `url(${slideImages[0]})` }}>
             </div>
           </div>
-          <div className="each-slide">
+          <div className="each_slide">
             <div className="couponImageCover" style={{ 'backgroundImage': `url(${slideImages[1]})` }}>
             </div>
           </div>
-          <div className="each-slide">
+          <div className="each_slide">
             <div className="couponImageCover" style={{ 'backgroundImage': `url(${slideImages[2]})` }}>
             </div>
           </div>

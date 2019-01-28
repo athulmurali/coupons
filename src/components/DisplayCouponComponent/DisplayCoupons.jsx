@@ -5,7 +5,6 @@ import Flippy, { FrontSide, BackSide } from "react-flippy";
 import Popup from "reactjs-popup";
 import ReactToPrint from "react-to-print";
 import Config from "../../config/config";
-import UserAvatar from "react-user-avatar";
 
  class Coupons extends React.Component {
 
@@ -18,6 +17,8 @@ import UserAvatar from "react-user-avatar";
 			hideNewCoupons: false,
 			activeNewCoupons: "active",
 			activeLoadedCoupons: "inactive",
+			logOutTrigger: false,
+			logOutReload: false,
 		};		
 	}
 	
@@ -53,6 +54,7 @@ import UserAvatar from "react-user-avatar";
 			this.props.history.push(`/`);
 	}
 
+
 	NewCoupons = () => {
 		this.setState({count: 0});
 		this.state.hideNewCoupons = false;
@@ -72,11 +74,11 @@ import UserAvatar from "react-user-avatar";
 	render() {
 		let couponData = this.props.data;
 		let buttonTrigger = "";
+		let logOutPopUpTrigger = "";
 		let userCoupons = [];
 		let userCouponData = "";
 		let couponsLength = "";
 		let userName = "";
-		let avatar = "";
 		if(this.state.count > Config.POPUPTIMER){
 				buttonTrigger = this.buttonClick;
 				if(this.state.count > Config.LOGOUTTIMER) {
@@ -84,16 +86,29 @@ import UserAvatar from "react-user-avatar";
 				}
 		}
 
+		if(this.state.logOutTrigger) {
+			logOutPopUpTrigger = this.buttonClick;
+			this.setState({logOutTrigger: false});
+			this.setState({count:0});
+			this.setState({logOutReload: true});
+			
+		}
+
+		if(this.state.logOutReload) {
+			if (this.state.count > 3) {
+				this.handleScreenTap()
+			}
+		}
 
 		if (couponData.length != 0 && couponData[0]) {
 			userCouponData = couponData[0];
 			couponsLength = userCouponData.length;
 			userName = userCouponData[0].userName;
 			userName.toString();
-			avatar = (<UserAvatar size="70" name={userName} color="#E0004D"></UserAvatar>)
-
 		}
 		const Image_coupon = require("../../assets/stopandshop.png");
+		const LogOut_Success = require("../../assets/success.svg");
+
 		for (var i = 0; i < couponsLength; i++) {
 			userCoupons.push(
 				<div className="Cards" key={i} onClick={this.newXyz}>
@@ -133,8 +148,7 @@ import UserAvatar from "react-user-avatar";
 			<div>
 				<div className="WelcomeUser_Logout" >
 					<h2 className="userName"> Welcome {userName}! </h2>
-					{avatar}
-					<button className="logoutButton" onClick ={this.handleScreenTap} > Exit </button>
+					<button className="logoutButton" ref = {logOutPopUpTrigger} onClick={() => this.setState({logOutTrigger: true})} > Log Out </button>
 				</div>
 				<Header/>
 				<div className="printDiv">
@@ -143,7 +157,18 @@ import UserAvatar from "react-user-avatar";
           content={() => this.componentRef}
         />
 				</div>
-				<Popup trigger={<button ref={buttonTrigger}  className="button" ></button>} true modal>
+
+				<Popup trigger={<button ref = {logOutPopUpTrigger}  className="button" ></button>} true modal>
+							{close => (
+								<div className="modal">
+									<img className="logOutImage" src={LogOut_Success}></img>
+									<h1 className="logOutMessage1"> Enjoy your savings!</h1>
+									<h4 className="logOutMessage2">You have been successfully logged out. <br/> See you soon!</h4>
+								</div>
+							)}
+						</Popup> 		
+
+				<Popup trigger={<button ref = {buttonTrigger}  className="button" ></button>} true modal>
 							{close => (
 								<div className="modal">
 									<h1 className="popupHeader"> Are you still there? </h1>
@@ -154,8 +179,8 @@ import UserAvatar from "react-user-avatar";
 									<div className="actions">
 										<button
 											className="buttons"
-											onClick={this.handleScreenTap}>
-                    Logout
+											onClick={() => {close(); this.setState({logOutTrigger: true})}} > 
+											          Logout
 										</button>
 										<button
 											className="buttons"
