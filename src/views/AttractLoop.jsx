@@ -8,6 +8,7 @@ import Config from '../config/config';
 
 
 class AttractLoop extends React.Component {
+  
   handleScreenTap = () => {
     this.props.history.push(`/userIdentification`);
   };
