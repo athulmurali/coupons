@@ -26,7 +26,7 @@ const constants = {
 	TOP_RIGHT_CORNER: "top_right",
 	BOTTOM_LEFT_CORNER: "bottom_left",
 	BOTTOM_RIGHT_CORNER: "bottom_right",
-	INACTIVE_USER_IDENTIFICATION: 15,   // in seconds
+	INACTIVE_USER_IDENTIFICATION: 35,   // in seconds
 	POPUPTIMER: 10,						// in seconds
 	LOGOUTTIMER: 20,						// in seconds
 	ATTRACT_LOOP_SLIDE_DURATION: 3000,  // in milli-seconds
