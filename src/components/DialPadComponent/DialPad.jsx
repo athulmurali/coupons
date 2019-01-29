@@ -38,10 +38,11 @@ class DialPad extends Component {
 	searchForThePhoneNumberInDatabase = async () => {
 		try{	
 			if(this.state.cardNumber === false){
-			const extractNumberFromFormat = ( this.state.phoneNumber.substring(1,4) + this.state.phoneNumber.substring(6,9) + this.state.phoneNumber.substring(10) );
+			this.extractNumberFromFormat = ( this.state.phoneNumber.substring(1,4) + this.state.phoneNumber.substring(6,9) + this.state.phoneNumber.substring(10) );
 			}
 			else{
-				this.extractNumberFromFormat = this.state.phoneNumber;
+
+				this.extractNumberFromFormat = this.state.phoneNumber.slice(0,-1);
 			}
 			const response = await API.getUserMobileNumber(this.extractNumberFromFormat);
 			
