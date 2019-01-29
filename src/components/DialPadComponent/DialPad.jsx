@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import API from '../../utils/API';
 import './DialPad.css';
 import Config from '../../config/config';
+import AssistancePopUpComponent from "../AssitancePopUpComponent/AssistancePopUpComponent";
 
 class DialPad extends Component {
 	constructor(props){
@@ -215,10 +216,10 @@ else{
 							<li className="switch" onClick={this.checkPhoneNumber}>Sign in</li> 
 						</ul>
 					</div>
-					<div className="switchNoCard">No card, no problem</div>
+					<AssistancePopUpComponent/>
 			</div>
 		);
 	};
 }
 
-export default DialPad;
+export default  DialPad
