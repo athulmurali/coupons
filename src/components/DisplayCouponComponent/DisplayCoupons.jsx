@@ -144,6 +144,40 @@ import Config from "../../config/config";
 			</div>);
 	};	
 
+
+	let popUpLogout = (<Popup trigger={<button ref = {logOutPopUpTrigger}  className="button" ></button>} true modal>
+					{close => (
+						<div className="modal">
+							<img className="logOutImage" src={LogOut_Success}></img>
+							<h1 className="logOutMessage1"> Enjoy your savings!</h1>
+							<h4 className="logOutMessage2">You have been successfully logged out. <br/> See you soon!</h4>
+						</div>)}
+				</Popup> );
+
+	let sessionEndPopUp = (<Popup trigger={<button ref = {buttonTrigger}  className="button" ></button>} true modal>
+					{close => (
+						<div className="modal">
+							<h1 className="popupHeader"> Are you still there? </h1>
+							<h4 className="popupMessage">Your session is about to expire</h4>
+							<div className="bar">
+								<div className="in"></div>
+							</div> 
+							<div className="actions">
+								<button
+									className="buttons"
+									onClick={() => {close(); this.setState({logOutTrigger: true})}} > 
+														Logout
+								</button>
+								<button
+									className="buttons"
+									onClick={() => {this.timerReset(); close();}}>
+								I'm here
+								</button>
+							</div>
+						</div>
+					)}
+				</Popup> 	);
+
 		return (
 			<div>
 				<div className="WelcomeUser_Logout" >
@@ -156,46 +190,14 @@ import Config from "../../config/config";
           trigger={() => <button 	className="printButton" hidden={this.state.hideLoadedCoupons}>PRINT</button>}
           content={() => this.componentRef}
         />
-				</div>
-
-				<Popup trigger={<button ref = {logOutPopUpTrigger}  className="button" ></button>} true modal>
-							{close => (
-								<div className="modal">
-									<img className="logOutImage" src={LogOut_Success}></img>
-									<h1 className="logOutMessage1"> Enjoy your savings!</h1>
-									<h4 className="logOutMessage2">You have been successfully logged out. <br/> See you soon!</h4>
-								</div>
-							)}
-						</Popup> 		
-
-				<Popup trigger={<button ref = {buttonTrigger}  className="button" ></button>} true modal>
-							{close => (
-								<div className="modal">
-									<h1 className="popupHeader"> Are you still there? </h1>
-									<h4 className="popupMessage">Your session is about to expire</h4>
-									<div className="bar">
-										<div className="in"></div>
-									</div> 
-									<div className="actions">
-										<button
-											className="buttons"
-											onClick={() => {close(); this.setState({logOutTrigger: true})}} > 
-											          Logout
-										</button>
-										<button
-											className="buttons"
-											onClick={() => {this.timerReset(); close();}}>
-                    I'm here
-										</button>
-									</div>
-								</div>
-							)}
-						</Popup> 						
+				</div>					
 				<div className="AllCoupons">
 					<ul>
 						<li> <a  className={this.state.activeNewCoupons} onClick={this.NewCoupons} > New Coupons </a></li>
 						<li> <a  className={this.state.activeLoadedCoupons} onClick={this.LoadedCoupons}> Loaded Coupons </a></li>
 					</ul>
+					{popUpLogout}
+					{sessionEndPopUp}
 					<div className="LoadedCoupons"  hidden={this.state.hideNewCoupons}   >
 						<h4 className="LoadedCouponCount"> New Coupons ({couponsLength})  {this.state.count}</h4>
 						{userCoupons}        
