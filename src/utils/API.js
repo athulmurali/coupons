@@ -9,7 +9,7 @@ const getMap = (storeNo = Config.storeNumber) => {
 	return axios.get(url, { timeout: Config.timeoutLength });
 };
 const getUserMobileNumber = (barcodeNumber) => {
-	const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/customer/fetchCustomerDetails/`+barcodeNumber;
+	const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/customer/fetchCustomer/`+barcodeNumber;
 	
 	return axios.get(url);
 };

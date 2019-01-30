@@ -18,11 +18,8 @@ class DialPad extends Component {
 			cardButton: "inact",
 		};
 		this.couponsDetails = [];
-		let Image_card;
-		let Image_phone;
 		this.Image_card = require('../../assets/icon-card-gray.svg');
 		this.Image_phone = require('../../assets/icon-phone-white.svg');
-		let extractNumberFromFormat = "";
 	}
 
 	deleteTheLastDigit = () => {
@@ -42,9 +39,10 @@ class DialPad extends Component {
 			this.extractNumberFromFormat = ( this.state.phoneNumber.substring(1,4) + this.state.phoneNumber.substring(6,9) + this.state.phoneNumber.substring(10) );
 			}
 			else{
-
+				
 				this.extractNumberFromFormat = this.state.phoneNumber.slice(0,-1);
 			}
+			console.log(this.extractNumberFromFormat);
 			const response = await API.getUserMobileNumber(this.extractNumberFromFormat);
 			
 			this.couponsDetails = response.data.response;
@@ -69,11 +67,11 @@ class DialPad extends Component {
 			console.log(this.extractNumberFromFormat);
 		}
 		else{
-			this.extractNumberFromFormat = this.state.phoneNumber;
-			console.log(this.extractNumberFromFormat);
+			this.extractNumberFromFormat = this.state.phoneNumber.slice(0,-1);
 		}
-		this.searchForThePhoneNumberInDatabase(this.extractNumberFromFormat);
-		this.extractNumberFromFormat.length === 10 && this.state.phoneNumber ? this.searchForThePhoneNumberInDatabase() : this.setErrorMessage();
+	//	this.searchForThePhoneNumberInDatabase(this.extractNumberFromFormat);
+		
+		(this.extractNumberFromFormat.length === 10 || this.extractNumberFromFormat.length === 12) && this.state.phoneNumber ? this.searchForThePhoneNumberInDatabase() : this.setErrorMessage();
 		
 	};
 
@@ -110,6 +108,7 @@ class DialPad extends Component {
 }
 else{
 	if(this.state.phoneNumber.length < 13){
+	
 	const clickedValue = e.target.innerText.trim() ;
 	let prev = this.state.phoneNumber;
 		let disableInputArea = false;
@@ -168,12 +167,6 @@ else{
 
 	render(){
 
-		
-
-	
-		
-		
-	
 		const slideImages = [
 			this.Image_card,
 			this.Image_phone
@@ -197,8 +190,9 @@ else{
 						</button>
 					</div>
 					<input className= "inputText" id="test-input" maxLength= {12}  defaultValue={ this.state.phoneNumber} />
-					<div>
+					<div className="status-block">
 						<h3 className="statusMessage"> {this.state.defaultMessage} </h3>
+						<h3 className="statusMessage">associated with your account</h3>
 					</div>
 					<div id="container">
 						<ul id="keyboard"  >   

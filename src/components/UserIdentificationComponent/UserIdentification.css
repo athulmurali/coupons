@@ -51,7 +51,13 @@
 }
 .statusMessage{
     color:black;
-    font-weight: normal;
+	font-weight: normal;
+	margin-bottom: 0em;
+	margin-top: 0em;
+}
+.status-block{
+	margin-block-start: 1em;
+	
 }
 #keyboard {
 	margin: 0;
