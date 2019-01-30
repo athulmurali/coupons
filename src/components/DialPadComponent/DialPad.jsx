@@ -3,26 +3,40 @@ import API from '../../utils/API';
 import './DialPad.css';
 import Config from '../../config/config';
 
+import {
+	MesssgeDisplay,
+	StatusMessage,
+	InputText,
+} from './styled';
+import DialPadButtons from '../../views/DialPadButtons';
 class DialPad extends Component {
 	constructor(props){
 		super(props);
+		const isPortrait = window.matchMedia('(orientation: portrait)').matches;
 		this.state = {
 			phoneNumber: '',
 			disableTextArea: false,
 			defaultMessage: 'Enter the Phone number associated with the account',
 			count: 0,
+			isPortrait,
 		};
+		window.addEventListener('orientationchange', this.orientationChange);
 		this.couponsDetails = [];
-		 
+		this. inputForDialPad = React.createRef();
 	}
-
+	orientationChange = () =>{
+		this.setState({
+      isPortrait: !window.matchMedia('(orientation: portrait)').matches,
+    });
+	}
 	deleteTheLastDigit = () => {
 		let prev = this.state.phoneNumber.slice(0,-1)
-		if(prev.length === 5){
-				prev += ' '
+		console.log(prev);
+		if(prev.length === 6){
+				prev = this.state.phoneNumber.slice(0,-1)
 		}
-		else if(prev.length === 8){
-				prev += ' '
+		else if(prev.length === 10){
+				prev = this.state.phoneNumber.slice(0,-1)
 		}
 		this.setState({ phoneNumber: prev })
 };
@@ -31,8 +45,9 @@ class DialPad extends Component {
 		try{	
 			const extractNumberFromFormat = ( this.state.phoneNumber.substring(1,4) + this.state.phoneNumber.substring(6,9) + this.state.phoneNumber.substring(10) );
 			const response = await API.getUserMobileNumber(extractNumberFromFormat);
-			
+			alert(response);
 			this.couponsDetails = response.data.response;
+			alert(this.couponsDetails);
 			this.props.identificationfromDiaPad(true,this.state.phoneNumber,this.couponsDetails);
 			
 		} catch (error){
@@ -50,12 +65,14 @@ class DialPad extends Component {
 	checkPhoneNumber = () => {
 		const extractNumberFromFormat = ( this.state.phoneNumber.substring(1,4) + this.state.phoneNumber.substring(6,9) + this.state.phoneNumber.substring(10) );
 		this.searchForThePhoneNumberInDatabase(extractNumberFromFormat);
+		alert(extractNumberFromFormat)
 		extractNumberFromFormat.length === 10 && this.state.phoneNumber ? this.searchForThePhoneNumberInDatabase() : this.setErrorMessage();
 		
 	};
 
 	handleTheKeyClicks = e => {
 		this.setState({count: 0})
+		console.log(this.state.phoneNumber.length);
 		if(this.state.phoneNumber.length < 14){
 		const clickedValue = e.target.innerText.trim() ;
 		let disableInputArea = false;
@@ -107,30 +124,14 @@ class DialPad extends Component {
 			this.state.count = 0;
 			this.handleScreenTap();
 		}
-		debugger;
+		
 		return(
-			<div className="messsgeDisplay">
-					<h3 className="statusMessage"> {this.state.defaultMessage} </h3>
-					<input className= "inputText" id="test-input" maxLength= {12}  defaultValue={ this.state.phoneNumber} />
-					<div id="container">
-						<ul id="keyboard"  >   
-							<li className="letter" onClick={this.handleTheKeyClicks}>1</li>  
-							<li className="letter" onClick={this.handleTheKeyClicks}>2</li>  
-							<li className="letter" onClick={this.handleTheKeyClicks}>3</li>  
-							<li className="letter clearl" onClick={this.handleTheKeyClicks}>4</li>  
-							<li className="letter" onClick={this.handleTheKeyClicks}>5</li>  
-							<li className="letter" onClick={this.handleTheKeyClicks}>6</li> 
-							<li className="letter clearl" onClick={this.handleTheKeyClicks}>7</li>  
-							<li className="letter " onClick={this.handleTheKeyClicks}>8</li>  
-							<li className="letter" onClick={this.handleTheKeyClicks}>9</li> 
-							<li className="letter clearl"></li>
-							<li className="letter" onClick={this.handleTheKeyClicks}>0</li>
-							<li className="letter" onClick= {this.deleteTheLastDigit}>&lt;</li>    
-							<li className="switch" onClick={this.checkPhoneNumber}>Submit</li> 
-						</ul>
-					</div>
+			<MesssgeDisplay>
+					<StatusMessage> {this.state.defaultMessage} </StatusMessage>
+					<InputText maxLength={Config.maxLenghtOfTextBoxInUserIdentification} defaultValue={this.state.phoneNumber} ref={this.inputForDialPad}></InputText>
+					<DialPadButtons handleTheKeyClicks={this.handleTheKeyClicks} deleteTheLastDigit={this.deleteTheLastDigit} checkPhoneNumber={this.checkPhoneNumber}></DialPadButtons>
 					<div className="switchNoCard">No card, no problem</div>
-			</div>
+				</MesssgeDisplay>
 		);
 	};
 }

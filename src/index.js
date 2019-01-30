@@ -1,16 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
 
-import { App } from './utils/App';
-import * as serviceWorker from './serviceWorker';
-import Router from './utils/Router';
+import { App } from "./utils/App";
+import * as serviceWorker from "./serviceWorker";
+import Router from "./utils/Router";
+import Scanner from "./components/CameraScannerComponent/Scanner";
+import CameraScanner from "./components/CameraScannerComponent/CameraScanner";
 
 ReactDOM.render(
-    <App>
-        <Router/>
-    </App>,
-     document.getElementById('root'));
+	<App>
+		
+		<Router/>,
+				
+	</App>,
+	document.getElementById("root"));
 
 
 // If you want your app to work offline and load faster, you can change

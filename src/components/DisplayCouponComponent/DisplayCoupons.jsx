@@ -12,11 +12,19 @@ import Config from '../../config/config';
 	constructor(props){
 		super(props);
 		this.state = {
-			couponDetails : [],
+			
 			count: 0,
-		};		
+		};
+		this.couponDetails = [];
 	}
-	
+	componentDidMount = () => {
+		if( !sessionStorage.getItem('token') ){
+			this.props.history.push(
+				`/`
+				);
+		}
+		
+	}
 	handleScreenTap = () => {
     this.props.history.push(`/`);
 	}
@@ -47,6 +55,7 @@ import Config from '../../config/config';
 
 
 	render() {
+		
 		let couponData = this.props.data;
 		let buttonTrigger = "";
 		let userCoupons = [];
@@ -63,7 +72,7 @@ import Config from '../../config/config';
 			this.handleScreenTap();
 		}
 
-		if (couponData.length != 0 && couponData[0]) {
+		if (couponData.length !== 0 && couponData[0]) {
 			userCouponData = couponData[0];
 			couponsLength = userCouponData.length;
 			userName = userCouponData[0].userName;

@@ -3,18 +3,18 @@ import PropTypes from "prop-types";
 import UserIdentification from "../components/UserIdentificationComponent/UserIdentification";
 import ScanBarcode from "../components/ScanBarcode/ScanBarcode";
 import Config from "../config/config";
+import CameraScanner from "../components/CameraScannerComponent/CameraScanner";
 
 
 class UserIdentificationView extends Component{
-	constructor(props){
-		super(props);
-	}  
+	
 	render(){
 		Config.loggedIn = false;
 		return(
 			<div>
 				<UserIdentification history={this.props.history}></UserIdentification>
-				<ScanBarcode/>
+				<ScanBarcode history= {this.props.history}/>
+				<CameraScanner history={this.props.history}></CameraScanner>
 			</div>
 		);
 	}

@@ -5,6 +5,7 @@ import Config from '../config/config';
 import UserIdentificationView from '../views/UserIdentificationView';
 import DisplayCouponsView from '../views/DisplayCouponsView';
 import PropTypes from 'prop-types';
+import CameraScanner from '../components/CameraScannerComponent/CameraScanner';
 
 class Router extends Component {
   constructor(props) {
@@ -18,22 +19,13 @@ class Router extends Component {
   }
 
   componentWillMount() {
-    sessionStorage.setItem('Phone-Number', '');
+		sessionStorage.setItem('Phone-Number', '');
+		sessionStorage.setItem('token',false);
   }
 
   handleUserInteract = () => {
 
-    clearTimeout(this.timer);
-    const attractLoopUrl = "http://"+Config.client.host + ":" + Config.client.port+ "/";
-    // const userIdentificationUrl = attractLoopUrl + "#/userIdentification";
-		const logoutTimeout = Config.INACTIVE_USER_IDENTIFICATION;
-
-		if (Config.loggedIn === false){
-			this.timer = setTimeout(function() {window.location.href = attractLoopUrl },logoutTimeout);
-		}
-		else {
-			// console.log("User Logged In")
-		}
+    
 	};
 	
 	LoggedInTimeout = () => {
@@ -54,7 +46,8 @@ class Router extends Component {
             <Route exact path="/" history={this.props.history} component={AttractLoopView} />
             <Route exact path="/userIdentification" render={props => <UserIdentificationView history={this.props.history} overtime={this.state.overtime} {...props} />} />
             <Route exact path="/DisplayCoupons" render={props => <DisplayCouponsView history={this.props.history}  overtime={this.state.overtime}  {...props} />} />
-          </Switch>
+						<Route exact path="/ScanImage" render={props => <CameraScanner history={this.props.history}  overtime={this.state.overtime}  {...props} />} />
+						</Switch>
         </div>
       </HashRouter>
     );
