@@ -9,7 +9,8 @@ const getMap = (storeNo = Config.storeNumber) => {
 	return axios.get(url, { timeout: Config.timeoutLength });
 };
 const getUserMobileNumber = (mobileNumber) => {
-	const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/customer/fetchCustomer/`+mobileNumber;
+	
+	const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/customer/fetch/`+mobileNumber;
 	
 	return axios.get(url);
 };
