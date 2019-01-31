@@ -6,29 +6,29 @@ import PopUpWindow from "./PopUpWindow";
 
 class AssistancePopUpComponent extends React.Component {
 
-    constructor(props) {
-        super(props);
+	constructor(props) {
+		super(props);
 
-    }
+	}
 
-    render() {
-        return <Popup contentStyle={{minWidth: '600px',textAlign :'left'}}
-                      trigger={<div className="switchNoCard" style={{cursor: 'pointer'}}>No card, no problem</div>}
-                      modal
-                      open={!!this.props.isPopUpOpen}>
+	render() {
+		return <Popup contentStyle={{minWidth: "600px",textAlign :"left"}}
+			trigger={<span className="switchNoCard" >No card, no problem</span>}
+			modal
+			open={!!this.props.isPopUpOpen}>
 
-            <PopUpWindow/>
+			<PopUpWindow/>
 
-        </Popup>
-    };
+		</Popup>;
+	};
 }
 
 
 export const mapStateToProps=(state)=>(
-    {
-        isPopUpOpen : state.AssistanceReducer.isPopUpOpen
-    }
-)
+	{
+		isPopUpOpen : state.AssistanceReducer.isPopUpOpen
+	}
+);
 
 
 

@@ -19,6 +19,8 @@ import Config from "../../config/config";
 			activeLoadedCoupons: "inactive",
 			logOutTrigger: false,
 			logOutReload: false,
+			searchedCouponName: "",
+			barName:  "Search By Coupon Name"
 		};		
 	}
 	
@@ -27,10 +29,11 @@ import Config from "../../config/config";
 		el.click();
 		};
 	}
-	
+
 	componentWillUnmount () {
 		clearInterval(this.timer);
 	}
+
 
 	componentDidMount () {
 		this.startTimer();
@@ -55,6 +58,8 @@ import Config from "../../config/config";
 	}
 
 
+
+
 	NewCoupons = () => {
 		this.setState({count: 0});
 		this.state.hideNewCoupons = false;
@@ -71,21 +76,35 @@ import Config from "../../config/config";
 		this.state.activeLoadedCoupons = "active";
 	}
 
+	inputChange = (e) => {
+		this.setState({count: 0});
+		this.state.searchedCouponName = e.target.value;
+
+	}
+
+	clearInput = (e) => {
+		e.target.value = "";
+		this.state.searchedCouponName = e.target.value ;
+	}
+
+
 	render() {
 		let couponData = this.props.data;
+		debugger;
 		let buttonTrigger = "";
 		let logOutPopUpTrigger = "";
 		let userCoupons = [];
 		let userCouponData = "";
 		let couponsLength = "";
 		let userName = "";
+		let searchedCoupons = "";
+		let searchedCoupon = this.state.searchedCouponName;
 		if(this.state.count > Config.POPUPTIMER){
 				buttonTrigger = this.buttonClick;
 				if(this.state.count > Config.LOGOUTTIMER) {
 					this.handleScreenTap();
 				}
 		}
-
 		if(this.state.logOutTrigger) {
 			logOutPopUpTrigger = this.buttonClick;
 			this.setState({logOutTrigger: false});
@@ -100,11 +119,18 @@ import Config from "../../config/config";
 			}
 		}
 
-		if (couponData.length != 0 && couponData[0]) {
-			userCouponData = couponData[0];
+		if (couponData[0]) {
+			userCouponData = couponData[0][1];
 			couponsLength = userCouponData.length;
-			userName = userCouponData[0].userName;
+			userName = couponData[0][0].FirstName;
 			userName.toString();
+			searchedCoupons = userCouponData;
+			if(searchedCoupons.length > 0) {
+				searchedCoupons = searchedCoupons.filter(function(item){
+					return item.Name.toLowerCase().includes(searchedCoupon.toLowerCase());
+			 });
+				couponsLength = searchedCoupons.length;
+			}
 		}
 		const Image_coupon = require("../../assets/stopandshop.png");
 		const LogOut_Success = require("../../assets/success.svg");
@@ -134,9 +160,9 @@ import Config from "../../config/config";
 						height: "264px"
 					}}>
 						<img src={Image_coupon} width="103px" height="103px" alt="image_image" /> <br />
-						<h5> {userCouponData[i].couponName}</h5>
-						<h6> {userCouponData[i].couponDescription}</h6>
-						<h6> Exp: {userCouponData[i].expDate.slice(0,10)} </h6>
+						<h5> {searchedCoupons[i].Name}</h5>
+						<h6 className="couponDescription"> {searchedCoupons[i].Description}</h6>
+						<h6> Exp: {searchedCoupons[i].EndDate.slice(0,10)} </h6>
 						{/* <h6 className="viewMore"> Tap to View more </h6> */}
 					</FrontSide>
 
@@ -144,8 +170,42 @@ import Config from "../../config/config";
 			</div>);
 	};	
 
+
+	let popUpLogout = (<Popup trigger={<button ref = {logOutPopUpTrigger}  className="button" ></button>} true modal>
+					{close => (
+						<div className="modal">
+							<img className="logOutImage" src={LogOut_Success}></img>
+							<h1 className="logOutMessage1"> Enjoy your savings!</h1>
+							<h4 className="logOutMessage2">You have been successfully logged out. <br/> See you soon!</h4>
+						</div>)}
+				</Popup> );
+
+	let sessionEndPopUp = (<Popup trigger={<button ref = {buttonTrigger}  className="button" ></button>} true modal>
+					{close => (
+						<div className="modal">
+							<h1 className="popupHeader"> Are you still there? </h1>
+							<h4 className="popupMessage">Your session is about to expire</h4>
+							<div className="bar">
+								<div className="in"></div>
+							</div> 
+							<div className="actions">
+								<button
+									className="buttons"
+									onClick={() => {close(); this.setState({logOutTrigger: true})}} > 
+														Logout
+								</button>
+								<button
+									className="buttons"
+									onClick={() => {this.timerReset(); close();}}>
+								I'm here
+								</button>
+							</div>
+						</div>
+					)}
+				</Popup> 	);
+
 		return (
-			<div>
+			<div >
 				<div className="WelcomeUser_Logout" >
 					<h2 className="userName"> Welcome {userName}! </h2>
 					<button className="logoutButton" ref = {logOutPopUpTrigger} onClick={() => this.setState({logOutTrigger: true})} > Log Out </button>
@@ -156,48 +216,19 @@ import Config from "../../config/config";
           trigger={() => <button 	className="printButton" hidden={this.state.hideLoadedCoupons}>PRINT</button>}
           content={() => this.componentRef}
         />
-				</div>
-
-				<Popup trigger={<button ref = {logOutPopUpTrigger}  className="button" ></button>} true modal>
-							{close => (
-								<div className="modal">
-									<img className="logOutImage" src={LogOut_Success}></img>
-									<h1 className="logOutMessage1"> Enjoy your savings!</h1>
-									<h4 className="logOutMessage2">You have been successfully logged out. <br/> See you soon!</h4>
-								</div>
-							)}
-						</Popup> 		
-
-				<Popup trigger={<button ref = {buttonTrigger}  className="button" ></button>} true modal>
-							{close => (
-								<div className="modal">
-									<h1 className="popupHeader"> Are you still there? </h1>
-									<h4 className="popupMessage">Your session is about to expire</h4>
-									<div className="bar">
-										<div className="in"></div>
-									</div> 
-									<div className="actions">
-										<button
-											className="buttons"
-											onClick={() => {close(); this.setState({logOutTrigger: true})}} > 
-											          Logout
-										</button>
-										<button
-											className="buttons"
-											onClick={() => {this.timerReset(); close();}}>
-                    I'm here
-										</button>
-									</div>
-								</div>
-							)}
-						</Popup> 						
+				</div>					
 				<div className="AllCoupons">
 					<ul>
 						<li> <a  className={this.state.activeNewCoupons} onClick={this.NewCoupons} > New Coupons </a></li>
 						<li> <a  className={this.state.activeLoadedCoupons} onClick={this.LoadedCoupons}> Loaded Coupons </a></li>
 					</ul>
+					{popUpLogout}
+					{sessionEndPopUp}
 					<div className="LoadedCoupons"  hidden={this.state.hideNewCoupons}   >
+						<div className="CouponSearch">
+						<input type="text" className = "SearchBar" defaultValue={this.state.barName} onClick={this.clearInput} onChange ={this.inputChange} />
 						<h4 className="LoadedCouponCount"> New Coupons ({couponsLength})  {this.state.count}</h4>
+						</div>
 						{userCoupons}        
 					</div>
 					<div className="LoadedCoupons"  hidden={this.state.hideLoadedCoupons} ref= {el => (this.componentRef = el)} >
