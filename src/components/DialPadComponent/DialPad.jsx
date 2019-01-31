@@ -43,12 +43,19 @@ class DialPad extends Component {
 				this.extractNumberFromFormat = this.state.phoneNumber.slice(0,-1);
 			}
 			console.log(this.extractNumberFromFormat);
-			const response = await API.getUserMobileNumber(this.extractNumberFromFormat);
-			
-			this.couponsDetails = response.data.response;
+			const response = await API.getUserDetails(this.extractNumberFromFormat);
+			 
+			this.couponsDetails .push(response.data.response.response.Customer[0]);
+			console.log(response.data.response.response.Customer[0].ID[0].attributes.Value)
+			console.log(response.data.response.response.Customer[0].FirstName)
+			//console.log(this.couponsDetails.response.Customer);
+			const couponsDetails = await API.getUserCoupons(response.data.response.response.Customer[0].ID[0].attributes.Value);
+			console.log(couponsDetails.data.response);
+			this.couponsDetails.push(couponsDetails.data.response);
 			this.props.identificationfromDiaPad(true,this.state.phoneNumber,this.couponsDetails);
 			
 		} catch (error){
+			
 			this.setErrorMessage();
 		}
 		

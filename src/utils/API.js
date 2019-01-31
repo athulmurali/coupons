@@ -8,15 +8,22 @@ const getMap = (storeNo = Config.storeNumber) => {
   const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/customer/fetchCustomer/`;
 	return axios.get(url, { timeout: Config.timeoutLength });
 };
-const getUserMobileNumber = (barcodeNumber) => {
-	const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/customer/fetchCustomer/`+barcodeNumber;
+const getUserDetails = (barcodeNumber) => {
+	const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/customer/fetch/`+barcodeNumber;
+	
+	return axios.get(url);
+};
+const getUserCoupons = (barcodeNumber) => {
+	const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/customer/fetchBarcode/`+barcodeNumber;
 	
 	return axios.get(url);
 };
 
+
 const API = {
 	getMap,
-	getUserMobileNumber,
+	getUserDetails,
+	getUserCoupons,
 };
 
 export default API;

@@ -5,6 +5,8 @@ import Flippy, { FrontSide, BackSide } from "react-flippy";
 import Popup from "reactjs-popup";
 import ReactToPrint from "react-to-print";
 import Config from "../../config/config";
+import Dropdown from 'react-dropdown'
+import 'react-dropdown/style.css'
 
  class Coupons extends React.Component {
 
@@ -19,7 +21,9 @@ import Config from "../../config/config";
 			activeLoadedCoupons: "inactive",
 			logOutTrigger: false,
 			logOutReload: false,
-		};		
+			filter_arrow: false
+		};	
+		this.Image_up = require('../../assets/arrow-down-sign-to-navigate.svg');	
 	}
 	
 	buttonClick = (el) => {
@@ -29,6 +33,7 @@ import Config from "../../config/config";
 	}
 	
 	componentWillUnmount () {
+		alert(this.props.data);
 		clearInterval(this.timer);
 	}
 
@@ -69,6 +74,19 @@ import Config from "../../config/config";
 		this.state.hideLoadedCoupons = false;
 		this.state.activeNewCoupons = "inactive";
 		this.state.activeLoadedCoupons = "active";
+	}
+
+	Filter = () => {
+		if(this.state.filter_arrow === false){
+		this.setState({filter_arrow : true});
+		this.Image_up = require('../../assets/up-arrow.svg');
+		}
+		else{
+			this.setState({filter_arrow : false});
+		this.Image_up = require('../../assets/arrow-down-sign-to-navigate.svg');
+		}
+		
+		console.log(this.state.filter_arrow);
 	}
 
 	render() {
@@ -142,8 +160,15 @@ import Config from "../../config/config";
 
 				</Flippy>
 			</div>);
-	};	
+	};
+	// const options = [
+	// 	{ value: 'one', label: 'One' },
+	// 	{ value: 'two', label: 'Two', arrowClassName:'myArrowClassName'}];	
+	// 	const defaultOption = options[0]
 
+	const slideArrow = [
+		this.Image_up
+	];
 		return (
 			<div>
 				<div className="WelcomeUser_Logout" >
@@ -195,6 +220,22 @@ import Config from "../../config/config";
 					<ul>
 						<li> <a  className={this.state.activeNewCoupons} onClick={this.NewCoupons} > New Coupons </a></li>
 						<li> <a  className={this.state.activeLoadedCoupons} onClick={this.LoadedCoupons}> Loaded Coupons </a></li>
+						{/* <div>
+						<Dropdown options={options} onChange={this._onSelect} value={defaultOption} placeholder="Select an option" />
+						</div> */}
+						<div className="filter_sort">
+							<span >Sort</span>
+							<img className="image_arrow" src={slideArrow[0]}  onClick={this.Filter}/>
+						</div>
+						<div className="filter_sort" hidden= {!this.state.filter_arrow}>
+							Jay
+						</div>
+						<div className="filter_sort" hidden= {!this.state.filter_arrow}>
+							Feroz
+						</div>
+						<div className="filter_sort">
+							Filter
+						</div>
 					</ul>
 					<div className="LoadedCoupons"  hidden={this.state.hideNewCoupons}   >
 						<h4 className="LoadedCouponCount"> New Coupons ({couponsLength})  {this.state.count}</h4>
