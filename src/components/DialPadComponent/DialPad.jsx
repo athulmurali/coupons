@@ -18,11 +18,8 @@ class DialPad extends Component {
 			cardButton: "inact",
 		};
 		this.couponsDetails = [];
-		let Image_card;
-		let Image_phone;
 		this.Image_card = require('../../assets/icon-card-gray.svg');
 		this.Image_phone = require('../../assets/icon-phone-white.svg');
-		let extractNumberFromFormat = "";
 	}
 
 	deleteTheLastDigit = () => {
@@ -39,16 +36,26 @@ class DialPad extends Component {
 	searchForThePhoneNumberInDatabase = async () => {
 		try{	
 			if(this.state.cardNumber === false){
-			const extractNumberFromFormat = ( this.state.phoneNumber.substring(1,4) + this.state.phoneNumber.substring(6,9) + this.state.phoneNumber.substring(10) );
+			this.extractNumberFromFormat = ( this.state.phoneNumber.substring(1,4) + this.state.phoneNumber.substring(6,9) + this.state.phoneNumber.substring(10) );
 			}
 			else{
-				this.extractNumberFromFormat = this.state.phoneNumber;
+				
+				this.extractNumberFromFormat = this.state.phoneNumber.slice(0,-1);
 			}
-			const response = await API.getUserMobileNumber(this.extractNumberFromFormat);
-			this.couponsDetails = response.data.response;
+			console.log(this.extractNumberFromFormat);
+			const response = await API.getUserDetails(this.extractNumberFromFormat);
+			 
+			this.couponsDetails .push(response.data.response.response.Customer[0]);
+			console.log(response.data.response.response.Customer[0].ID[0].attributes.Value)
+			console.log(response.data.response.response.Customer[0].FirstName)
+			//console.log(this.couponsDetails.response.Customer);
+			const couponsDetails = await API.getUserCoupons(response.data.response.response.Customer[0].ID[0].attributes.Value);
+			console.log(couponsDetails.data.response);
+			this.couponsDetails.push(couponsDetails.data.response);
 			this.props.identificationfromDiaPad(true,this.state.phoneNumber,this.couponsDetails);
 			
 		} catch (error){
+			
 			this.setErrorMessage();
 		}
 		
@@ -67,11 +74,11 @@ class DialPad extends Component {
 			console.log(this.extractNumberFromFormat);
 		}
 		else{
-			this.extractNumberFromFormat = this.state.phoneNumber;
-			console.log(this.extractNumberFromFormat);
+			this.extractNumberFromFormat = this.state.phoneNumber.slice(0,-1);
 		}
-		this.searchForThePhoneNumberInDatabase(this.extractNumberFromFormat);
-		this.extractNumberFromFormat.length === 10 && this.state.phoneNumber ? this.searchForThePhoneNumberInDatabase() : this.setErrorMessage();
+	//	this.searchForThePhoneNumberInDatabase(this.extractNumberFromFormat);
+		
+		(this.extractNumberFromFormat.length === 10 || this.extractNumberFromFormat.length === 12) && this.state.phoneNumber ? this.searchForThePhoneNumberInDatabase() : this.setErrorMessage();
 		
 	};
 
@@ -108,6 +115,7 @@ class DialPad extends Component {
 }
 else{
 	if(this.state.phoneNumber.length < 13){
+	
 	const clickedValue = e.target.innerText.trim() ;
 	let prev = this.state.phoneNumber;
 		let disableInputArea = false;
@@ -141,7 +149,6 @@ else{
 
 	handlePhoneClick = () => {
 		this.setState({cardNumber: false,
-			 count: 0,
 			 phoneButton : "act",
 			 cardButton : "inact",
 			defaultMessage: 'Enter the Phone number',
@@ -154,7 +161,6 @@ else{
 	
 	handleCardClick = () => {
 		this.setState({cardNumber: true,
-			count: 0,
 			cardButton : "act",
 			phoneButton : "inact",
 			defaultMessage: 'Enter the Card number',
@@ -167,12 +173,11 @@ else{
 	
 
 	render(){
-		
+
 		const slideImages = [
 			this.Image_card,
 			this.Image_phone
 		];
-
 
 		this.startTimer();
 		if(this.state.count > Config.INACTIVE_USER_IDENTIFICATION){
@@ -192,23 +197,24 @@ else{
 						</button>
 					</div>
 					<input className= "inputText" id="test-input" maxLength= {12}  defaultValue={ this.state.phoneNumber} />
-					<div>
+					<div className="status-block">
 						<h3 className="statusMessage"> {this.state.defaultMessage} </h3>
+						<h3 className="statusMessage">associated with your account</h3>
 					</div>
 					<div id="container">
 						<ul id="keyboard"  >   
-							<li onClick={this.handleTheKeyClicks}>1</li>  
-							<li onClick={this.handleTheKeyClicks}>2</li>  
-							<li onClick={this.handleTheKeyClicks}>3</li>  
-							<li onClick={this.handleTheKeyClicks}>4</li>  
-					   	<li onClick={this.handleTheKeyClicks}>5</li>  
-							<li onClick={this.handleTheKeyClicks}>6</li> 
-							<li onClick={this.handleTheKeyClicks}>7</li>  
-							<li onClick={this.handleTheKeyClicks}>8</li>  
-							<li onClick={this.handleTheKeyClicks}>9</li> 
-							<li></li>
-							<li onClick={this.handleTheKeyClicks}>0</li>
-							<li onClick= {this.deleteTheLastDigit}>&lt;</li>    
+							<li className="letter" onClick={this.handleTheKeyClicks}>1</li>  
+							<li className="letter" onClick={this.handleTheKeyClicks}>2</li>  
+							<li className="letter" onClick={this.handleTheKeyClicks}>3</li>  
+							<li className="letter clearl" onClick={this.handleTheKeyClicks}>4</li>  
+							<li className="letter" onClick={this.handleTheKeyClicks}>5</li>  
+							<li className="letter" onClick={this.handleTheKeyClicks}>6</li> 
+							<li className="letter clearl" onClick={this.handleTheKeyClicks}>7</li>  
+							<li className="letter " onClick={this.handleTheKeyClicks}>8</li>  
+							<li className="letter" onClick={this.handleTheKeyClicks}>9</li> 
+							<li className="letter clearl"></li>
+							<li className="letter" onClick={this.handleTheKeyClicks}>0</li>
+							<li className="letter" onClick= {this.deleteTheLastDigit}>&lt;</li>    
 							<li className="switch" onClick={this.checkPhoneNumber}>Sign in</li> 
 						</ul>
 					</div>

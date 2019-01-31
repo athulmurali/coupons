@@ -90,6 +90,7 @@ import Config from "../../config/config";
 
 	render() {
 		let couponData = this.props.data;
+		debugger;
 		let buttonTrigger = "";
 		let logOutPopUpTrigger = "";
 		let userCoupons = [];
@@ -119,10 +120,10 @@ import Config from "../../config/config";
 		}
 
 		if (couponData[0]) {
-			userCouponData = couponData[0];
+			userCouponData = couponData[0][1];
 			couponsLength = userCouponData.length;
-			// userName = userCouponData[0].userName;
-			// userName.toString();
+			userName = couponData[0][0].FirstName;
+			userName.toString();
 			searchedCoupons = userCouponData;
 			if(searchedCoupons.length > 0) {
 				searchedCoupons = searchedCoupons.filter(function(item){
@@ -206,7 +207,7 @@ import Config from "../../config/config";
 		return (
 			<div >
 				<div className="WelcomeUser_Logout" >
-					<h2 className="userName"> Welcome "{userName}!" </h2>
+					<h2 className="userName"> Welcome {userName}! </h2>
 					<button className="logoutButton" ref = {logOutPopUpTrigger} onClick={() => this.setState({logOutTrigger: true})} > Log Out </button>
 				</div>
 				<Header/>
