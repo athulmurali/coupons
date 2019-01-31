@@ -45,7 +45,6 @@ class DialPad extends Component {
 				this.extractNumberFromFormat = this.state.phoneNumber;
 			}
 			const response = await API.getUserMobileNumber(this.extractNumberFromFormat);
-			
 			this.couponsDetails = response.data.response;
 			this.props.identificationfromDiaPad(true,this.state.phoneNumber,this.couponsDetails);
 			
@@ -142,6 +141,7 @@ else{
 
 	handlePhoneClick = () => {
 		this.setState({cardNumber: false,
+			 count: 0,
 			 phoneButton : "act",
 			 cardButton : "inact",
 			defaultMessage: 'Enter the Phone number',
@@ -154,6 +154,7 @@ else{
 	
 	handleCardClick = () => {
 		this.setState({cardNumber: true,
+			count: 0,
 			cardButton : "act",
 			phoneButton : "inact",
 			defaultMessage: 'Enter the Card number',
@@ -166,17 +167,12 @@ else{
 	
 
 	render(){
-
 		
-
-	
-		
-		
-	
 		const slideImages = [
 			this.Image_card,
 			this.Image_phone
 		];
+
 
 		this.startTimer();
 		if(this.state.count > Config.INACTIVE_USER_IDENTIFICATION){
@@ -201,18 +197,18 @@ else{
 					</div>
 					<div id="container">
 						<ul id="keyboard"  >   
-							<li className="letter" onClick={this.handleTheKeyClicks}>1</li>  
-							<li className="letter" onClick={this.handleTheKeyClicks}>2</li>  
-							<li className="letter" onClick={this.handleTheKeyClicks}>3</li>  
-							<li className="letter clearl" onClick={this.handleTheKeyClicks}>4</li>  
-							<li className="letter" onClick={this.handleTheKeyClicks}>5</li>  
-							<li className="letter" onClick={this.handleTheKeyClicks}>6</li> 
-							<li className="letter clearl" onClick={this.handleTheKeyClicks}>7</li>  
-							<li className="letter " onClick={this.handleTheKeyClicks}>8</li>  
-							<li className="letter" onClick={this.handleTheKeyClicks}>9</li> 
-							<li className="letter clearl"></li>
-							<li className="letter" onClick={this.handleTheKeyClicks}>0</li>
-							<li className="letter" onClick= {this.deleteTheLastDigit}>&lt;</li>    
+							<li onClick={this.handleTheKeyClicks}>1</li>  
+							<li onClick={this.handleTheKeyClicks}>2</li>  
+							<li onClick={this.handleTheKeyClicks}>3</li>  
+							<li onClick={this.handleTheKeyClicks}>4</li>  
+					   	<li onClick={this.handleTheKeyClicks}>5</li>  
+							<li onClick={this.handleTheKeyClicks}>6</li> 
+							<li onClick={this.handleTheKeyClicks}>7</li>  
+							<li onClick={this.handleTheKeyClicks}>8</li>  
+							<li onClick={this.handleTheKeyClicks}>9</li> 
+							<li></li>
+							<li onClick={this.handleTheKeyClicks}>0</li>
+							<li onClick= {this.deleteTheLastDigit}>&lt;</li>    
 							<li className="switch" onClick={this.checkPhoneNumber}>Sign in</li> 
 						</ul>
 					</div>
