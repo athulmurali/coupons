@@ -66,8 +66,7 @@ class AttractLoop extends Component {
         <Slide {...slide_properties} className="couponScreenBackground">
           <div className="each-slide">
             <div className="couponImageCover" style={{ 'backgroundImage': `url(${slideImages[0]})` }}>
-						</div>
-						
+          </div>
           </div>
           <div className="each-slide">
             <div className="couponImageCover" style={{ 'backgroundImage': `url(${slideImages[1]})` }}>
@@ -75,7 +74,7 @@ class AttractLoop extends Component {
           </div>
           <div className="each-slide">
             <div className="couponImageCover" style={{ 'backgroundImage': `url(${slideImages[2]})` }}>
-            </div>
+          </div>
           </div>
         </Slide>
         <div id="one" className="screen">

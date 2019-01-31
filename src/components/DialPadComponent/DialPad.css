@@ -3,6 +3,39 @@
 	text-align: center;
 }
 
+.act{
+	width: 200px;
+	height: 55px;
+	margin-block-end: 1em;
+	background-color: #63666A;
+	text-align: center;
+	font-size: large;
+	border: 1px solid lightgrey;
+	color: white;
+}
+.act:focus{
+	outline: 0em;
+}
+
+.inact {
+	width: 200px;
+	height: 55px;
+	margin-block-end: 1em;
+	background-color: white;
+	text-align: center;
+	font-size: large;
+	border: 1px solid lightgrey;
+	color: #63666A;
+}
+.inact:focus{
+	outline: 0em;
+}
+
+.image-width{
+	margin-bottom: 0px;
+	margin-right: 8px;
+}
+
 .inputText {
 	width: 400px;
 	height: 50px;
@@ -12,15 +45,16 @@
  border: 1px solid lightgrey;
 }
 
+.statusMessage{
+	color:black;
+	font-weight: normal;
+}
+
 #container {
 	margin: 20px auto;
 	width: 760px;
 	display: flex;
 	justify-content: center;
-}
-.statusMessage{
-    color:black;
-    font-weight: normal;
 }
 #keyboard {
 	margin: 0;
@@ -37,65 +71,12 @@
 	font-size: 24px;
 	line-height: 60px;
 	text-align: center;
-	border-radius: 5px;
-}
-
-.capslock,
-.tab,
-.left-shift,
-.clearl,
-.switch {
-	clear: left;
-}
-
-#keyboard .tab,
-#keyboard .delete {
-	width: 70px;
-}
-
-#keyboard .capslock {
-	width: 80px;
-}
-
-#keyboard .return {
-	width: 90px;
-}
-
-#keyboard .left-shift {
-	width: 70px;
 }
 
 #keyboard .switch {
 	width: 193px;
 	background-color: #E0004D;
 	color: white;
-}
-
-#keyboard .rightright-shift {
-	width: 109px;
-}
-
-.lastitem {
-	margin-right: 0;
-}
-
-.uppercase {
-	text-transform: uppercase;
-}
-
-#keyboard .space {
-	float: left;
-	width: 556px;
-}
-
-#keyboard .switch,
-#keyboard .space,
-#keyboard .return {
-	font-size: 16px;
-}
-
-.on {
-	display: none;
 }
 
 #keyboard li:hover {
@@ -113,4 +94,9 @@
 	text-decoration: underline;
 	text-underline-position: under;
 	padding-left: 15px;
+	cursor: 'pointer';
+	outline: 0
+}
+.switchNoCard:focus{
+	outline: none;
 }

@@ -95,11 +95,17 @@ class CameraScanner extends Component{
 	_scan() {
 		this.setState({scanning: !this.state.scanning});
 	}
-	_searchUserInDatabase = async  () => {
+	_searchUserInDatabase = async  (searchBarcode) => {
 		try{	
+			alert(searchBarcode.slice(0,-1));
+			let responeData = [];
+			const userDetails = await API.getUserDetails(searchBarcode.slice(0,-1));
+			console.log(userDetails);
+			responeData.push(userDetails);
+			const response = await API.getUserCoupons(searchBarcode.slice(0,-1));
+			console.log(response)
 			
-			const response = await API.getUserMobileNumber("5856789999");
-			const responeData = response.data.response;
+			responeData.push(response.data.response)
 			sessionStorage.setItem('token',true);
 			this.props.history.push({
 				pathname : `/DisplayCoupons`,
@@ -120,7 +126,7 @@ class CameraScanner extends Component{
 		if(result.codeResult.code && this.state.results.length <10){
 			try
 			{
-				this._searchUserInDatabase();
+				this._searchUserInDatabase(result.codeResult.code);
 				
 			}
 			catch(error){

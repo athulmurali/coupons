@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import AttractLoopView from  '../views/AttractLoopView';
-import Config from '../config/config';
 import UserIdentificationView from '../views/UserIdentificationView';
 import DisplayCouponsView from '../views/DisplayCouponsView';
 import PropTypes from 'prop-types';

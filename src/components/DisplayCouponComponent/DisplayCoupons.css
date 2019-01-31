@@ -1,62 +1,43 @@
-.AllCoupons{
-	margin-top: 0;
-	display: flex;
-	width: 100%;
-	height: 100%vh;
- }
- 
- .WelcomeUser_Logout{
-	display: flex;
-	justify-content: flex-end;
-	margin-right: 20px;
-	margin-bottom: 0;
- }
- 
- .logoutButton {
-	width: 100px;
+.image_arrow{
+float: right;
+width: 17px;
+height: 17px;
+margin-right: 15px;
+}
+
+.filter_sort{
+	color: #000;
+	text-decoration: none;
 	height: 40px;
-	margin: 5px 5px 10px 20px;
-	font-size: 20px;
 	font-weight: bold;
-	color: grey;
- }
+	padding: 20px 10px 5px 15px;
+	cursor: pointer;
+}
 
- .printDiv{
-	display: flex;
-	justify-content: flex-end;
-	margin-right: 20px;
-	margin-bottom: 0;
- }
-
- .printButton{
-	font-size: 20px;
-	font-weight: bold;
-	color: #E0004D;
-	border: none;
-	margin-bottom: 0;
+.Cards{
+	display: inline-flex;
+	margin-right: 14px;
+	text-align: center;
+	margin-top: 10px;
+	height: 264px;
+	width: 171px;
+	background-color: white;
+	align-items: flex-start;
+	cursor: pointer;
+	word-wrap: normal;
  }
  
- .printButton:hover{
-	border: 0;
+ .viewMore{
+	text-decoration: underline;
  }
-
- .userName{
-	font-style: italic;
-	color: grey;
-	margin-top: 10px;
+ 
+ .couponDescription{
+	word-break: break-word;
+}
+ span{
+	color: black;
  }
-
- ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	width: 100%;
-	max-width: 230px;
-	background-color: white;
-	height: 100%vh;
-	border: 2px solid lightgrey;
- }
-
+ 
  h4, h5 {
 	padding: 0;
 	margin: 5px;
@@ -75,63 +56,108 @@
 	color: grey;
  }
 
- .LoadedCouponCount {
-	padding: 0;
-	margin: 5px;
-	text-align: left;
-	color: grey;
-	font-weight: normal;
+ .CouponSearch{
+	 width: 100%;
+	 display: inline-flex;
  }
- 
- li a {
+
+ .SearchBar{
+	 width: 80%;
+	 padding: 10px;
+	 font-size: 18px;
+	 background-color: lightgray;
+	 border: none;
+ }
+
+.WelcomeUser_Logout{
 	display: flex;
-	color: #000;
-	text-decoration: none;
-	height: 40px;
-	font-weight: bold;
-	padding: 20px 10px 5px 15px;
- }
- 
- li a.active {
-	background-color: #E0004D;
-	color: white;
- }
- 
- li a:hover:not(.active) {
-	background-color: #E0004D;
-	color: white;
+	justify-content: flex-end;
+	margin-right: 20px;
+	margin-bottom: 0;
  }
 
- .LoadedCoupons{
+ .userName{
+	font-style: italic;
 	color: grey;
-	padding: 10px 20px 10px 50px;
-	background-color: #EEF0F3;
-	border-top: 2px solid lightgrey;
-	height: -webkit-fill-available;
-	width: -webkit-fill-available;
+	margin-top: 25px;
+	margin-right: 10px;
  }
 
- .Cards{
-	display: inline-flex;
-	margin-right: 14px;
-	text-align: center;
-	margin-top: 10px;
-	height: 264px;
-	width: 171px;
-	background-color: white;
-	align-items: flex-start;
+ .logoutButton {
+	width: 150px;
+	height: 45px;
+	margin: 15px 5px 10px 20px;
+	font-size: 20px;
+	font-weight: bold;
+	color: grey;
+ }
+
+ .logoutButton:hover {
+	 background-color: #E0004D;
+	 cursor: pointer;
+	 color: white;
+ }
+
+ .printDiv{
+	display: flex;
+	justify-content: flex-end;
+	margin-right: 20px;
+	margin-bottom: 0;
+ }
+
+ .printButton{
+	font-size: 20px;
+	font-weight: bold;
+	color: #E0004D;
+	border: none;
+	margin-bottom: 0;
+ }
+
+ .printButton:hover{
+	border: 0;
 	cursor: pointer;
-	word-wrap: normal;
+	background-color: #E0004D;
+	color: white;
+	text-align: center;
  }
- 
- .viewMore{
-	text-decoration: underline;
+
+ .button {
+	display: none;
+}
+
+.logOutMessage1{
+	text-align: center;
+	color: gray;
+}
+.logOutMessage2{
+	text-align: center;
+	color: gray;
+	font-weight: normal;
+}
+.modal {
+	padding: 50px;
  }
- 
- span{
-	color: black;
+
+ .logOutImage{
+	 display: flex;
+	 margin: auto;
  }
- 
+
+ .popupHeader{
+	font-family: sans-serif;
+	color:grey;
+	margin: 0;
+	margin-bottom: 10px;
+ }
+
+ .popupMessage{
+	font-family: sans-serif;
+	color:grey;
+	margin: 0;
+	margin-bottom: 10px;
+	padding-left: 3px;
+ }
+
  .bar {
 	border: 1px solid red;
 	height: 2px;
@@ -152,33 +178,11 @@
 		width: 0%;
 	}
  }
- 
- .modal {
-	padding: 50px;
- }
 
- .button {
-	 display: none;
- }
- 
  .actions{
 	margin: auto;
 	text-align: center;
 	margin-top: 20px;
- }
- .popupHeader{
-	font-family: sans-serif;
-	color:grey;
-	margin: 0;
-	margin-bottom: 10px;
- }
-
- .popupMessage{
-	font-family: sans-serif;
-	color:grey;
-	margin: 0;
-	margin-bottom: 10px;
-	padding-left: 3px;
  }
 
  .buttons{
@@ -190,8 +194,73 @@
 	font-weight: bold;
 	color:gray;
  }
- 
+
  .buttons:hover{
 	background-color: #E0004D;
 	color: white;
  }
+
+
+.AllCoupons{
+	margin-top: 0;
+	display: flex;
+	width: 100%;
+	height: 100%vh;
+ }
+ 
+ ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	max-width: 230px;
+	background-color: white;
+	height: 100%vh;
+	border: 2px solid lightgrey;
+ }
+
+ li a {
+	display: flex;
+	color: #000;
+	text-decoration: none;
+	height: 40px;
+	font-weight: bold;
+	padding: 20px 10px 5px 15px;
+	cursor: pointer;
+
+ }
+ 
+ li a.active {
+	background-color: #E0004D;
+	color: white;
+ }
+
+
+ li a:hover:not(.active) {
+	background-color: #E0004D;
+	color: white;
+ }
+
+ .LoadedCoupons{
+	color: grey;
+	padding: 10px 20px 10px 50px;
+	background-color: #EEF0F3;
+	border-top: 2px solid lightgrey;
+	height: -webkit-fill-available;
+	height: 100%;
+	min-height: 870px;
+	width: -webkit-fill-available;
+ }
+
+ .LoadedCouponCount {
+	padding: 0;
+	margin: 5px;
+	text-align: left;
+	color: grey;
+	font-weight: normal;
+	margin-top: 12px;
+	margin-left: 20px;
+ }
+
+
+

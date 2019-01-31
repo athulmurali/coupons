@@ -3,11 +3,6 @@
     position: absolute;
 }
 
-.barcodeImage{
-    height: 100px;
-    alt: "Barcode";
-}
-
 @media screen and (min-width: 1700px) {
     .scanBarcode{
       right: 350px;
@@ -15,3 +10,9 @@
       text-align: center;
     }
 }
+
+.barcodeImage{
+    height: 100px;
+    alt: "Barcode";
+}
+

@@ -1,11 +1,7 @@
 import React, { Component } from "react";
 import "./ScanBarcode.css";
 
-class ScanBarcode extends Component {
-	constructor(props){
-		super(props);
-	}
-	
+class ScanBarcode extends React.Component {
 	render(){
 		const Barcode_Image = require("../../assets/Barcode.png");
 		return(
