@@ -100,8 +100,9 @@ class CameraScanner extends Component{
 			alert(searchBarcode.slice(0,-1));
 			let responeData = [];
 			const userDetails = await API.getUserDetails(searchBarcode.slice(0,-1));
-			console.log(userDetails);
-			responeData.push(userDetails);
+			console.log("userdetails")
+			console.log(userDetails.data.response.response.Customer[0]);
+			responeData.push(userDetails.data.response.response.Customer[0]);
 			const response = await API.getUserCoupons(searchBarcode.slice(0,-1));
 			console.log(response)
 			

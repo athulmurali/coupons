@@ -17,15 +17,15 @@ class UserIdentification extends Component{
 			sessionStorage.setItem('token',true);
 		}
 		succesfullIdentification = (booleanDataFromDialPad,phoneNumber,couponsDetails) => {
-			console.log(couponsDetails)
-			booleanDataFromDialPad ? (
+			alert(couponsDetails)
+			booleanDataFromDialPad ? 
 				this.props.history.push({
 				pathname : `/DisplayCoupons`,
 				state: couponsDetails
 				}
 
 			)
-				) : (
+				 : (
 				alert('new user')
 				);
 		};
