@@ -90,7 +90,6 @@ import Config from "../../config/config";
 
 	render() {
 		let couponData = this.props.data;
-		debugger;
 		let buttonTrigger = "";
 		let logOutPopUpTrigger = "";
 		let userCoupons = [];
@@ -219,22 +218,21 @@ import Config from "../../config/config";
 				</div>					
 				<div className="AllCoupons">
 					<ul>
-						<li> <a  className={this.state.activeNewCoupons} onClick={this.NewCoupons} > New Coupons </a></li>
-						<li> <a  className={this.state.activeLoadedCoupons} onClick={this.LoadedCoupons}> Loaded Coupons </a></li>
+						<li> <a  className={this.state.activeNewCoupons} onClick={this.NewCoupons} > Available Coupons </a></li>
+						{/* <li> <a  className={this.state.activeLoadedCoupons} onClick={this.LoadedCoupons}> Loaded Coupons </a></li> */}
 					</ul>
 					{popUpLogout}
 					{sessionEndPopUp}
 					<div className="LoadedCoupons"  hidden={this.state.hideNewCoupons}   >
 						<div className="CouponSearch">
 						<input type="text" className = "SearchBar" defaultValue={this.state.barName} onClick={this.clearInput} onChange ={this.inputChange} />
-						<h4 className="LoadedCouponCount"> New Coupons ({couponsLength})  {this.state.count}</h4>
+						<h4 className="LoadedCouponCount"> New Coupons ({couponsLength})</h4>
 						</div>
 						{userCoupons}        
 					</div>
-					<div className="LoadedCoupons"  hidden={this.state.hideLoadedCoupons} ref= {el => (this.componentRef = el)} >
-						<h4 className="LoadedCouponCount"> Loaded Coupons ({couponsLength})  {this.state.count}</h4>
-						{userCoupons}        
-					</div>
+					{/* <div className="LoadedCoupons"  hidden={this.state.hideLoadedCoupons} ref= {el => (this.componentRef = el)} >
+						<h4 className="LoadedCouponCount"> Loaded Coupons ({couponsLength})</h4>
+					</div> */}
 				</div> 
 			</div>
 		);

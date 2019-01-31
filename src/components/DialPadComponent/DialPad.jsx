@@ -148,6 +148,7 @@ else{
 	};
 
 	handlePhoneClick = () => {
+		this.state.count = 0;
 		this.setState({cardNumber: false,
 			 phoneButton : "act",
 			 cardButton : "inact",
@@ -160,6 +161,7 @@ else{
 	};
 	
 	handleCardClick = () => {
+		this.state.count = 0;
 		this.setState({cardNumber: true,
 			cardButton : "act",
 			phoneButton : "inact",
