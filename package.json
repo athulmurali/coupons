@@ -5,8 +5,11 @@
   "dependencies": {
     "axios": "^0.18.0",
     "babel-eslint": "^9.0.0",
+    "barcode-reader": "^1.6.1",
+    "quagga": "^0.12.1",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "react": "^16.7.0",
+    "react-barcode-reader": "0.0.1",
     "react-dom": "^16.7.0",
     "react-dropdown": "^1.6.4",
     "react-flippy": "^0.1.2",
