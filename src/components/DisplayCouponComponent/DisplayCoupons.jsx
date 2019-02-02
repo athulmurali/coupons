@@ -18,7 +18,6 @@ import Config from "../../config/config";
             logOutTrigger: false,
             logOutReload: false,
             searchedCouponName: "",
-            barName:  "Search By Coupon Name"
         };      
     }
     
@@ -26,9 +25,6 @@ import Config from "../../config/config";
         if(el) {
         el.click();
         };
-    }
-    componentWillUnmount () {
-        clearInterval(this.timer);
     }
     componentDidMount () {
         this.startTimer();
@@ -44,7 +40,7 @@ import Config from "../../config/config";
         this.setState({count: 0});
     }
     newXyz = ()  => {
-        this.setState({count: 0});
+        this.setState({count: 0});  
     }
     handleScreenTap = () => {
             this.props.history.push(`/`);
@@ -71,10 +67,9 @@ import Config from "../../config/config";
         e.target.value = "";
         this.state.searchedCouponName = e.target.value ;
     }
+
     render() {
-			console.log(this.props.data)
-        let couponData = this.props.data;
-        
+        let couponData = this.props.data;        
         let buttonTrigger = "";
         let logOutPopUpTrigger = "";
         let userCoupons = [];
@@ -116,6 +111,7 @@ import Config from "../../config/config";
         }
         const Image_coupon = require("../../assets/stopandshop.png");
         const LogOut_Success = require("../../assets/success.svg");
+        const Search_Icon = require("../../assets/new-filter-search.png");
         for (var i = 0; i < couponsLength; i++) {
             userCoupons.push(
                 <div className="Cards" key={i} onClick={this.newXyz}>
@@ -195,15 +191,18 @@ import Config from "../../config/config";
                 </div>                    
                 <div className="AllCoupons">
                     <ul>
-                        <li> <a  className={this.state.activeNewCoupons} onClick={this.NewCoupons} > Available Coupons({couponsLength}) </a></li>
+                        <li> <a  className={this.state.activeNewCoupons} onClick={this.NewCoupons} > New Coupons </a></li>
                         {/* <li> <a  className={this.state.activeLoadedCoupons} onClick={this.LoadedCoupons}> Loaded Coupons </a></li> */}
                     </ul>
                     {popUpLogout}
                     {sessionEndPopUp}
                     <div className="LoadedCoupons"  hidden={this.state.hideNewCoupons}   >
                         <div className="CouponSearch">
-                        <input type="text" className = "SearchBar" defaultValue={this.state.barName} onClick={this.clearInput} onChange ={this.inputChange} />
-                        {/* <h4 className="LoadedCouponCount"> New Coupons ({couponsLength}) </h4> */}
+                        <div className="SearchBarImage">
+                            <img className="SearchImage" src={Search_Icon} />
+                            <input type="text" className = "SearchBar" placeholder="Search" onClick={this.clearInput} onChange ={this.inputChange} />
+                        </div>
+                        <h4 className="LoadedCouponCount"> Available Coupons ({couponsLength}) </h4>
                         </div>
                         {userCoupons}        
                     </div>
