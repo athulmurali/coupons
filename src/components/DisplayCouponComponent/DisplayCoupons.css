@@ -110,7 +110,7 @@
  .logoutButton {
 	width: 150px;
 	height: 45px;
-	margin: 18px 5px 10px 20px;
+	margin: 18px 5px 10px 10px;
 	font-size: 20px;
 	font-weight: bold;
 	color: grey;
@@ -276,6 +276,7 @@
 	min-height: 870px;
 	width: -webkit-fill-available;
 	padding-left: 18px;
+	padding-bottom: 230px;
  }
 
  .LoadedCouponCount {

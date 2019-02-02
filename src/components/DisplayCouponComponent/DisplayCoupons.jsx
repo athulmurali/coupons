@@ -36,12 +36,15 @@ import Config from "../../config/config";
         clearInterval(this.timer);
         this.timer = setInterval(this.tick.bind(this), 1000);
     }
-    timerReset () {
-        this.setState({count: 0});
+    
+    timerReset = () => {
+        this.state.count = 0;
     }
-    newXyz = ()  => {
-        this.setState({count: 0});  
-    }
+
+    // newXyz = ()  => {
+    //     this.setState({count: 0});  
+    // }
+
     handleScreenTap = () => {
             this.props.history.push(`/`);
     }
@@ -62,10 +65,6 @@ import Config from "../../config/config";
     inputChange = (e) => {
         this.setState({count: 0});
         this.state.searchedCouponName = e.target.value;
-    }
-    clearInput = (e) => {
-        e.target.value = "";
-        this.state.searchedCouponName = e.target.value ;
     }
 
     render() {
@@ -114,7 +113,7 @@ import Config from "../../config/config";
         const Search_Icon = require("../../assets/new-filter-search.png");
         for (var i = 0; i < couponsLength; i++) {
             userCoupons.push(
-                <div className="Cards" key={i} onClick={this.newXyz}>
+                <div className="Cards" key={i} onClick={this.timerReset}>
                 <Flippy flipOnHover={false} // default false
                     flipOnClick={true} // default false
                     flipDirection="horizontal" // horizontal or vertical
@@ -200,9 +199,9 @@ import Config from "../../config/config";
                         <div className="CouponSearch">
                         <div className="SearchBarImage">
                             <img className="SearchImage" src={Search_Icon} />
-                            <input type="text" className = "SearchBar" placeholder="Search" onClick={this.clearInput} onChange ={this.inputChange} />
+                            <input type="text" className = "SearchBar" placeholder="Search"  onChange ={this.inputChange} onClick={this.timerReset}/>
                         </div>
-                        <h4 className="LoadedCouponCount"> Available Coupons ({couponsLength}) </h4>
+                        <h4 className="LoadedCouponCount"> Available Coupons ({couponsLength})</h4>
                         </div>
                         {userCoupons}        
                     </div>
