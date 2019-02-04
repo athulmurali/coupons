@@ -5,6 +5,7 @@ import Flippy, { FrontSide, BackSide } from "react-flippy";
 import Popup from "reactjs-popup";
 import ReactToPrint from "react-to-print";
 import Config from "../../config/config";
+
  class Coupons extends React.Component {
     constructor(props){
         super(props);
@@ -36,15 +37,12 @@ import Config from "../../config/config";
         clearInterval(this.timer);
         this.timer = setInterval(this.tick.bind(this), 1000);
     }
-    
-    timerReset = () => {
+    timerReset = () =>{
         this.state.count = 0;
     }
-
     // newXyz = ()  => {
     //     this.setState({count: 0});  
     // }
-
     handleScreenTap = () => {
             this.props.history.push(`/`);
     }
@@ -201,7 +199,7 @@ import Config from "../../config/config";
                             <img className="SearchImage" src={Search_Icon} />
                             <input type="text" className = "SearchBar" placeholder="Search"  onChange ={this.inputChange} onClick={this.timerReset}/>
                         </div>
-                        <h4 className="LoadedCouponCount"> Available Coupons ({couponsLength})</h4>
+                        <h4 className="LoadedCouponCount"> Available Coupons ({couponsLength}) </h4>
                         </div>
                         {userCoupons}        
                     </div>
