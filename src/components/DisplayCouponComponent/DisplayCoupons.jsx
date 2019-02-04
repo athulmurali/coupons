@@ -114,7 +114,9 @@ import Config from "../../config/config";
                     return item.Name.toLowerCase().includes(searchedCoupon.toLowerCase());
              });
                 couponsLength = searchedCoupons.length;
-            }
+						}
+						
+						
         }
         const Image_coupon = require("../../assets/stopandshop.png");
         const LogOut_Success = require("../../assets/success.svg");
