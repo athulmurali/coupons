@@ -20,8 +20,15 @@ import Config from "../../config/config";
 			logOutTrigger: false,
 			logOutReload: false,
 			searchedCouponName: "",
-			barName:  "Search By Coupon Name"
+			barName:  "Search By Coupon Name",
+			filter_arrow: false,
+			sort_arrow: false
+			
 		};		
+		this.Image_up = require('../../assets/new-filter-arrow-down.svg');
+		this.Sort_up = require('../../assets/new-filter-arrow-down.svg');
+		let sort_category = ["Redeem By Date"	,"Value(Low to High)	","Value(High to Low)"	," Brand"	, "Recommended"];
+		let filter_category = [];
 	}
 	
 	buttonClick = (el) => {
@@ -75,6 +82,29 @@ import Config from "../../config/config";
 		this.state.activeNewCoupons = "inactive";
 		this.state.activeLoadedCoupons = "active";
 	}
+	Filter = () => {
+		if(this.state.filter_arrow === false){
+		this.setState({filter_arrow : true});
+		this.Image_up = require('../../assets/new-filter-arrow-up.svg');
+		}
+		else{
+			this.setState({filter_arrow : false});
+		this.Image_up = require('../../assets/new-filter-arrow-down.svg');
+		}
+		
+		console.log(this.state.filter_arrow);
+	}
+	Sort = () => {
+		if(this.state.sort_arrow === false){
+		this.setState({sort_arrow : true});
+		this.Sort_up = require('../../assets/new-filter-arrow-up.svg');
+		}
+		else{
+			this.setState({sort_arrow : false});
+		this.Sort_up = require('../../assets/new-filter-arrow-down.svg');
+		}
+	}
+
 
 	inputChange = (e) => {
 		this.setState({count: 0});
@@ -86,11 +116,33 @@ import Config from "../../config/config";
 		e.target.value = "";
 		this.state.searchedCouponName = e.target.value ;
 	}
+	Sorting_Category = () => {
+		const sort_category = ["Redeem By Date"	,"Value(Low to High)	","Value(High to Low)"	," Brand"];
+		return(
+			sort_category.map( cate => <div className="filter_inside" hidden= {!this.state.sort_arrow}>
+			<input name="_filter" type="checkbox"/>
+			<label>
+				  {cate}
+			</label>
+		</div>)
+		)
+	 }
+	 Filter_Category = () => {
+		const filter_category = ["Baby & Childcare"	,"Bakeray","Beverages"	,"Condiments & Sauces","Dairy","Deli","Ethnic Products","Frozen Food","General Merchandise"];
+		return(
+			filter_category.map( fill => <div className="filter_inside" hidden= {!this.state.filter_arrow}>
+			<input name="_filter" type="checkbox"/>
+			<label>
+				  {fill}
+			</label>
+		</div>)
+		)
+	 }
+	 
 
 
 	render() {
 		let couponData = this.props.data;
-		debugger;
 		let buttonTrigger = "";
 		let logOutPopUpTrigger = "";
 		let userCoupons = [];
@@ -134,6 +186,13 @@ import Config from "../../config/config";
 		}
 		const Image_coupon = require("../../assets/stopandshop.png");
 		const LogOut_Success = require("../../assets/success.svg");
+		const slideArrow = [
+			this.Image_up
+		];
+		const slideArrow_Sort = [
+			this.Sort_up
+		];
+	
 
 		for (var i = 0; i < couponsLength; i++) {
 			userCoupons.push(
@@ -203,6 +262,7 @@ import Config from "../../config/config";
 						</div>
 					)}
 				</Popup> 	);
+			
 
 		return (
 			<div >
@@ -216,11 +276,117 @@ import Config from "../../config/config";
           trigger={() => <button 	className="printButton" hidden={this.state.hideLoadedCoupons}>PRINT</button>}
           content={() => this.componentRef}
         />
-				</div>					
+				</div>	
+				
 				<div className="AllCoupons">
 					<ul>
 						<li> <a  className={this.state.activeNewCoupons} onClick={this.NewCoupons} > New Coupons </a></li>
 						<li> <a  className={this.state.activeLoadedCoupons} onClick={this.LoadedCoupons}> Loaded Coupons </a></li>
+						<div className="filter_sort">
+							Sort
+							<img className="image_arrow" src={slideArrow_Sort[0]}  onClick={this.Sort}/>
+							<div className="filter_sort_list" hidden= {this.state.sort_arrow} >By Recommended</div>
+						</div>
+						{/* <div className="filter_inside" hidden= {!this.state.sort_arrow}>
+							<input name="_filter" type="checkbox"/>
+						 	<label>
+		  						Redeem By Date
+        					</label>
+						</div> */}
+						{ this.Sorting_Category() }
+						{/* <div className="filter_inside" hidden= {!this.state.sort_arrow}>
+							<input name="_filter" type="checkbox"/>
+							<label>
+								Value(Low to High)
+        					</label>
+						</div>
+						<div className="filter_inside" hidden= {!this.state.sort_arrow}>
+							<input name="_filter" type="checkbox"/>
+							<label>
+		  						Value(High to Low)
+        					</label>
+						</div>
+						<div className="filter_inside" hidden= {!this.state.sort_arrow}>
+							<input name="_filter" type="checkbox"/>
+							<label>
+		  						Brand
+        					</label>
+						</div> */}
+						<div className="filter_inside" hidden= {!this.state.sort_arrow}>
+							<input name="_filter" type="checkbox" defaultChecked/>
+							<label>
+		  						Recommended
+        					</label>
+						</div>
+						<div className="filter_sort">
+							Filter
+							<img className="image_arrow" src={slideArrow[0]}  onClick={this.Filter}/>
+							<div className="filter_sort_list" hidden= {this.state.filter_arrow} >No filter added</div>
+						</div>
+						{ this.Filter_Category() }
+
+						{/* <div className="filter_inside" hidden= {!this.state.filter_arrow}>
+							<input name="_filter" type="checkbox"/>
+							<label>
+		  						Baby & Childcare
+        					</label>
+						</div>
+						<div className="filter_inside" hidden= {!this.state.filter_arrow}>
+						<input name="_filter" type="checkbox"/>
+							<label>
+		  						Bakeray
+        					</label>
+						</div>
+						<div className="filter_inside" hidden= {!this.state.filter_arrow}>
+						<input name="_filter" type="checkbox"/>
+							<label>
+		  						Beverages
+        					</label>
+						</div>
+						<div className="filter_inside" hidden= {!this.state.filter_arrow}>
+						<input name="_filter" type="checkbox"/>
+							<label>
+		  						Breakfast
+        					</label>
+						</div>
+						<div className="filter_inside" hidden= {!this.state.filter_arrow}>
+						<input name="_filter" type="checkbox"/>
+							<label>
+		  						Condiments & Sauces
+        					</label>
+						</div>
+						<div className="filter_inside" hidden= {!this.state.filter_arrow}>
+						<input name="_filter" type="checkbox"/>
+							<label>
+		  						Dairy
+        					</label>
+						</div>
+						<div className="filter_inside" hidden= {!this.state.filter_arrow}>
+						<input name="_filter" type="checkbox"/>
+							<label>
+		  						Deli
+        					</label>
+						</div>
+						<div className="filter_inside" hidden= {!this.state.filter_arrow}>
+						<input name="_filter" type="checkbox"/>
+							<label>
+		  						Ethnic Products
+        					</label>
+						</div>
+						<div className="filter_inside" hidden= {!this.state.filter_arrow}>
+						<input name="_filter" type="checkbox"/>
+							<label>
+		  						Frozen Food
+        					</label>
+						</div>
+						<div className="filter_inside" hidden= {!this.state.filter_arrow}>
+						<input name="_filter" type="checkbox"/>
+							<label>
+		  						General Merchandise
+        					</label>
+						</div> */}
+						
+
 					</ul>
 					{popUpLogout}
 					{sessionEndPopUp}
