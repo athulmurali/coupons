@@ -31,7 +31,9 @@ import Config from "../../config/config";
         clearInterval(this.timer);
     }
     componentDidMount () {
-        this.startTimer();
+			
+			this.startTimer();
+				
     }
     tick () {
         this.setState({count: (this.state.count + 1)});

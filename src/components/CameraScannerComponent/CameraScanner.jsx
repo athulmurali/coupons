@@ -18,7 +18,15 @@ class CameraScanner extends Component{
 		this._onDetected= this._onDetected.bind(this);
 		this._searchUserInDatabase = this._searchUserInDatabase.bind(this);
 	}
-
+	componentWillUnmount = () => {
+		this.setState(
+			{
+				scanning:false,
+				couponDetails: [],
+				results:[],
+			}
+		);
+	}
 	_renderScanButtonAndResults() {
 		if (this.state.scanning) { return null; }
 		return (
@@ -57,6 +65,9 @@ class CameraScanner extends Component{
 			>{text}
 			</button>
 		);
+	}
+	componentDidMount = () =>{
+		this.setState({scanning:true});
 	}
 
 	_renderResults() {
@@ -97,7 +108,7 @@ class CameraScanner extends Component{
 	}
 	_searchUserInDatabase = async  (searchBarcode) => {
 		try{	
-			alert(searchBarcode.slice(0,-1));
+			
 			let responeData = [];
 			const userDetails = await API.getUserDetails(searchBarcode.slice(0,-1));
 			console.log("userdetails")
@@ -123,11 +134,13 @@ class CameraScanner extends Component{
 	}
 	_onDetected(result) {
 		
-		
-		if(result.codeResult.code && this.state.results.length <10){
+		alert();
+		if(result.codeResult.code && this.state.scanning){
 			try
 			{
+				this.setState({scanning:false});
 				this._searchUserInDatabase(result.codeResult.code);
+				
 				
 			}
 			catch(error){

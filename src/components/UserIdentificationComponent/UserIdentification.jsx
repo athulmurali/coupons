@@ -17,7 +17,7 @@ class UserIdentification extends Component{
 			sessionStorage.setItem('token',true);
 		}
 		succesfullIdentification = (booleanDataFromDialPad,phoneNumber,couponsDetails) => {
-			alert(couponsDetails)
+			
 			booleanDataFromDialPad ? 
 				this.props.history.push({
 				pathname : `/DisplayCoupons`,
