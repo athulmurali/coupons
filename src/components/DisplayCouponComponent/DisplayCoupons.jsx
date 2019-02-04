@@ -5,8 +5,8 @@ import Flippy, { FrontSide, BackSide } from "react-flippy";
 import Popup from "reactjs-popup";
 import ReactToPrint from "react-to-print";
 import Config from "../../config/config";
-
  class Coupons extends React.Component {
+
 
 	constructor(props){
 		super(props);
@@ -119,7 +119,7 @@ import Config from "../../config/config";
 	Sorting_Category = () => {
 		const sort_category = ["Redeem By Date"	,"Value(Low to High)	","Value(High to Low)"	," Brand"];
 		return(
-			sort_category.map( cate => <div className="filter_inside" hidden= {!this.state.sort_arrow}>
+			sort_category.map( cate => <div key={cate} className="filter_inside" hidden= {!this.state.sort_arrow}>
 			<input name="_filter" type="checkbox"/>
 			<label>
 				  {cate}
@@ -127,10 +127,11 @@ import Config from "../../config/config";
 		</div>)
 		)
 	 }
+
 	 Filter_Category = () => {
 		const filter_category = ["Baby & Childcare"	,"Bakeray","Beverages"	,"Condiments & Sauces","Dairy","Deli","Ethnic Products","Frozen Food","General Merchandise"];
 		return(
-			filter_category.map( fill => <div className="filter_inside" hidden= {!this.state.filter_arrow}>
+			filter_category.map( fill => <div  key={fill} className="filter_inside" hidden= {!this.state.filter_arrow}>
 			<input name="_filter" type="checkbox"/>
 			<label>
 				  {fill}
@@ -287,31 +288,7 @@ import Config from "../../config/config";
 							<img className="image_arrow" src={slideArrow_Sort[0]}  onClick={this.Sort}/>
 							<div className="filter_sort_list" hidden= {this.state.sort_arrow} >By Recommended</div>
 						</div>
-						{/* <div className="filter_inside" hidden= {!this.state.sort_arrow}>
-							<input name="_filter" type="checkbox"/>
-						 	<label>
-		  						Redeem By Date
-        					</label>
-						</div> */}
 						{ this.Sorting_Category() }
-						{/* <div className="filter_inside" hidden= {!this.state.sort_arrow}>
-							<input name="_filter" type="checkbox"/>
-							<label>
-								Value(Low to High)
-        					</label>
-						</div>
-						<div className="filter_inside" hidden= {!this.state.sort_arrow}>
-							<input name="_filter" type="checkbox"/>
-							<label>
-		  						Value(High to Low)
-        					</label>
-						</div>
-						<div className="filter_inside" hidden= {!this.state.sort_arrow}>
-							<input name="_filter" type="checkbox"/>
-							<label>
-		  						Brand
-        					</label>
-						</div> */}
 						<div className="filter_inside" hidden= {!this.state.sort_arrow}>
 							<input name="_filter" type="checkbox" defaultChecked/>
 							<label>
@@ -324,69 +301,6 @@ import Config from "../../config/config";
 							<div className="filter_sort_list" hidden= {this.state.filter_arrow} >No filter added</div>
 						</div>
 						{ this.Filter_Category() }
-
-						{/* <div className="filter_inside" hidden= {!this.state.filter_arrow}>
-							<input name="_filter" type="checkbox"/>
-							<label>
-		  						Baby & Childcare
-        					</label>
-						</div>
-						<div className="filter_inside" hidden= {!this.state.filter_arrow}>
-						<input name="_filter" type="checkbox"/>
-							<label>
-		  						Bakeray
-        					</label>
-						</div>
-						<div className="filter_inside" hidden= {!this.state.filter_arrow}>
-						<input name="_filter" type="checkbox"/>
-							<label>
-		  						Beverages
-        					</label>
-						</div>
-						<div className="filter_inside" hidden= {!this.state.filter_arrow}>
-						<input name="_filter" type="checkbox"/>
-							<label>
-		  						Breakfast
-        					</label>
-						</div>
-						<div className="filter_inside" hidden= {!this.state.filter_arrow}>
-						<input name="_filter" type="checkbox"/>
-							<label>
-		  						Condiments & Sauces
-        					</label>
-						</div>
-						<div className="filter_inside" hidden= {!this.state.filter_arrow}>
-						<input name="_filter" type="checkbox"/>
-							<label>
-		  						Dairy
-        					</label>
-						</div>
-						<div className="filter_inside" hidden= {!this.state.filter_arrow}>
-						<input name="_filter" type="checkbox"/>
-							<label>
-		  						Deli
-        					</label>
-						</div>
-						<div className="filter_inside" hidden= {!this.state.filter_arrow}>
-						<input name="_filter" type="checkbox"/>
-							<label>
-		  						Ethnic Products
-        					</label>
-						</div>
-						<div className="filter_inside" hidden= {!this.state.filter_arrow}>
-						<input name="_filter" type="checkbox"/>
-							<label>
-		  						Frozen Food
-        					</label>
-						</div>
-						<div className="filter_inside" hidden= {!this.state.filter_arrow}>
-						<input name="_filter" type="checkbox"/>
-							<label>
-		  						General Merchandise
-        					</label>
-						</div> */}
-						
-
 					</ul>
 					{popUpLogout}
 					{sessionEndPopUp}

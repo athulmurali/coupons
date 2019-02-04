@@ -13,13 +13,21 @@ class UserIdentification extends Component{
 			defaultMessage:'Enter the Phone number associated with the account',
       };        
 		}
-
+		componentDidMount = () => {
+			sessionStorage.setItem('token',true);
+		}
 		succesfullIdentification = (booleanDataFromDialPad,phoneNumber,couponsDetails) => {
-			booleanDataFromDialPad ? this.props.history.push({
+			
+			booleanDataFromDialPad ? 
+				this.props.history.push({
 				pathname : `/DisplayCoupons`,
 				state: couponsDetails
-			}
-				):alert('new user');
+				}
+
+			)
+				 : (
+				alert('new user')
+				);
 		};
 
     render(){

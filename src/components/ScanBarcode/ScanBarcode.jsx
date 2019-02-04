@@ -7,9 +7,11 @@ class ScanBarcode extends React.Component {
 		return(
 			<div className="scanBarcode">
 				<h3> Scan card to start </h3>
-				<img src={Barcode_Image} className="barcodeImage" alt="Scan barcode"/>
+				<img src={Barcode_Image} className="barcodeImage" alt="Scan barcode" />
 			</div>
 		);
 	}
 }
 export default ScanBarcode;
+
+

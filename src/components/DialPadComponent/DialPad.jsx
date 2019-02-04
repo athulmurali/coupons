@@ -4,9 +4,16 @@ import './DialPad.css';
 import Config from '../../config/config';
 import AssistancePopUpComponent from "../AssitancePopUpComponent/AssistancePopUpComponent";
 
+import {
+	MesssgeDisplay,
+	StatusMessage,
+	InputText,
+} from './styled';
+import DialPadButtons from '../../views/DialPadButtons';
 class DialPad extends Component {
 	constructor(props){
 		super(props);
+		const isPortrait = window.matchMedia('(orientation: portrait)').matches;
 		this.state = {
 			phoneNumber: '',
 			disableTextArea: false,
@@ -17,11 +24,11 @@ class DialPad extends Component {
 			phoneButton: "act",
 			cardButton: "inact",
 		};
+		window.addEventListener('orientationchange', this.orientationChange);
 		this.couponsDetails = [];
 		this.Image_card = require('../../assets/icon-card-gray.svg');
 		this.Image_phone = require('../../assets/icon-phone-white.svg');
 	}
-
 	deleteTheLastDigit = () => {
 		let prev = this.state.phoneNumber.slice(0,-1)
 		if(prev.length === 6){
