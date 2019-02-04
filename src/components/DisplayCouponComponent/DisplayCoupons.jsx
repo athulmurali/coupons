@@ -5,6 +5,7 @@ import Flippy, { FrontSide, BackSide } from "react-flippy";
 import Popup from "reactjs-popup";
 import ReactToPrint from "react-to-print";
 import Config from "../../config/config";
+
  class Coupons extends React.Component {
 
 
@@ -52,7 +53,7 @@ import Config from "../../config/config";
 		clearInterval(this.timer);
 		this.timer = setInterval(this.tick.bind(this), 1000);
 	}
-	timerReset () {
+	timerReset = () => {
 		this.setState({count: 0});
 	}
 
@@ -187,6 +188,7 @@ import Config from "../../config/config";
 		}
 		const Image_coupon = require("../../assets/stopandshop.png");
 		const LogOut_Success = require("../../assets/success.svg");
+		const Search_Icon = require("../../assets/new-filter-search.png");
 		const slideArrow = [
 			this.Image_up
 		];
@@ -282,7 +284,7 @@ import Config from "../../config/config";
 				<div className="AllCoupons">
 					<ul>
 						<li> <a  className={this.state.activeNewCoupons} onClick={this.NewCoupons} > New Coupons </a></li>
-						<li> <a  className={this.state.activeLoadedCoupons} onClick={this.LoadedCoupons}> Loaded Coupons </a></li>
+						{/* <li> <a  className={this.state.activeLoadedCoupons} onClick={this.LoadedCoupons}> Loaded Coupons </a></li> */}
 						<div className="filter_sort">
 							Sort
 							<img className="image_arrow" src={slideArrow_Sort[0]}  onClick={this.Sort}/>
@@ -306,13 +308,16 @@ import Config from "../../config/config";
 					{sessionEndPopUp}
 					<div className="LoadedCoupons"  hidden={this.state.hideNewCoupons}   >
 						<div className="CouponSearch">
-						<input type="text" className = "SearchBar" defaultValue={this.state.barName} onClick={this.clearInput} onChange ={this.inputChange} />
-						<h4 className="LoadedCouponCount"> New Coupons ({couponsLength})  {this.state.count}</h4>
+						<div className="SearchBarImage">
+                            <img className="SearchImage" src={Search_Icon} />
+                            <input type="text" className = "SearchBar" placeholder="Search"  onChange ={this.inputChange} onClick={this.timerReset}/>
+                        </div> 
+						<h4 className="LoadedCouponCount"> Available Coupons ({couponsLength}) </h4>
 						</div>
 						{userCoupons}        
 					</div>
 					<div className="LoadedCoupons"  hidden={this.state.hideLoadedCoupons} ref= {el => (this.componentRef = el)} >
-						<h4 className="LoadedCouponCount"> Loaded Coupons ({couponsLength})  {this.state.count}</h4>
+						<h4 className="LoadedCouponCount"> Loaded Coupons ({couponsLength}) </h4>
 						{userCoupons}        
 					</div>
 				</div> 
