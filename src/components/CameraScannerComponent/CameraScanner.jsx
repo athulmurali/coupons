@@ -134,7 +134,7 @@ class CameraScanner extends Component{
 	}
 	_onDetected(result) {
 		
-		alert();
+		// alert();
 		if(result.codeResult.code && this.state.scanning){
 			try
 			{
