@@ -28,7 +28,9 @@ import Config from "../../config/config";
         };
     }
     componentDidMount () {
-        this.startTimer();
+			
+			this.startTimer();
+				
     }
     tick () {
         this.setState({count: (this.state.count + 1)});
