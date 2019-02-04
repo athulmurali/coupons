@@ -23,7 +23,8 @@ import Config from "../../config/config";
 			searchedCouponName: "",
 			barName:  "Search By Coupon Name",
 			filter_arrow: false,
-			sort_arrow: false
+			sort_arrow: false,
+			array_filter : []
 			
 		};		
 		this.Image_up = require('../../assets/new-filter-arrow-down.svg');
@@ -133,12 +134,17 @@ import Config from "../../config/config";
 		const filter_category = ["Baby & Childcare"	,"Bakeray","Beverages"	,"Condiments & Sauces","Dairy","Deli","Ethnic Products","Frozen Food","General Merchandise"];
 		return(
 			filter_category.map( fill => <div  key={fill} className="filter_inside" hidden= {!this.state.filter_arrow}>
-			<input name="_filter" type="checkbox"/>
+			<input name="_filter" type="checkbox" onClick={() => this.filtering(fill)}/>
 			<label>
 				  {fill}
 			</label>
 		</div>)
 		)
+	 }
+	 filtering = (e) => {
+		
+		this.state.array_filter.push(e);
+		
 	 }
 	 
 
@@ -185,6 +191,12 @@ import Config from "../../config/config";
 			 });
 				couponsLength = searchedCoupons.length;
 			}
+		}
+		if(this.state.array_filter.length > 0){
+			// userCoupons.filter(function(filterMatch){
+			// 	return filterMatch.
+			// }) 
+			console.log(userCoupons);
 		}
 		const Image_coupon = require("../../assets/stopandshop.png");
 		const LogOut_Success = require("../../assets/success.svg");
