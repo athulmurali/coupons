@@ -5,6 +5,7 @@ import Flippy, { FrontSide, BackSide } from "react-flippy";
 import Popup from "reactjs-popup";
 import ReactToPrint from "react-to-print";
 import Config from "../../config/config";
+
  class Coupons extends React.Component {
     constructor(props){
         super(props);
@@ -18,7 +19,6 @@ import Config from "../../config/config";
             logOutTrigger: false,
             logOutReload: false,
             searchedCouponName: "",
-            barName:  "Search By Coupon Name"
         };      
     }
     
@@ -26,9 +26,6 @@ import Config from "../../config/config";
         if(el) {
         el.click();
         };
-    }
-    componentWillUnmount () {
-        clearInterval(this.timer);
     }
     componentDidMount () {
 			
@@ -42,12 +39,12 @@ import Config from "../../config/config";
         clearInterval(this.timer);
         this.timer = setInterval(this.tick.bind(this), 1000);
     }
-    timerReset () {
-        this.setState({count: 0});
+    timerReset = () =>{
+        this.state.count = 0;
     }
-    newXyz = ()  => {
-        this.setState({count: 0});
-    }
+    // newXyz = ()  => {
+    //     this.setState({count: 0});  
+    // }
     handleScreenTap = () => {
             this.props.history.push(`/`);
     }
@@ -69,14 +66,9 @@ import Config from "../../config/config";
         this.setState({count: 0});
         this.state.searchedCouponName = e.target.value;
     }
-    clearInput = (e) => {
-        e.target.value = "";
-        this.state.searchedCouponName = e.target.value ;
-    }
+
     render() {
-			console.log(this.props.data)
-        let couponData = this.props.data;
-        
+        let couponData = this.props.data;        
         let buttonTrigger = "";
         let logOutPopUpTrigger = "";
         let userCoupons = [];
@@ -118,9 +110,10 @@ import Config from "../../config/config";
         }
         const Image_coupon = require("../../assets/stopandshop.png");
         const LogOut_Success = require("../../assets/success.svg");
+        const Search_Icon = require("../../assets/new-filter-search.png");
         for (var i = 0; i < couponsLength; i++) {
             userCoupons.push(
-                <div className="Cards" key={i} onClick={this.newXyz}>
+                <div className="Cards" key={i} onClick={this.timerReset}>
                 <Flippy flipOnHover={false} // default false
                     flipOnClick={true} // default false
                     flipDirection="horizontal" // horizontal or vertical
@@ -191,26 +184,29 @@ import Config from "../../config/config";
                 <Header/>
                 <div className="printDiv">
                     <ReactToPrint
-          trigger={() => <button  className="printButton" hidden={this.state.hideLoadedCoupons}>PRINT</button>}
-          content={() => this.componentRef}
-        />
+											trigger={() => <button  className="printButton" hidden={this.state.hideLoadedCoupons}>PRINT</button>}
+											content={() => this.componentRef}
+										/>
                 </div>                    
                 <div className="AllCoupons">
                     <ul>
                         <li> <a  className={this.state.activeNewCoupons} onClick={this.NewCoupons} > New Coupons </a></li>
-                        <li> <a  className={this.state.activeLoadedCoupons} onClick={this.LoadedCoupons}> Loaded Coupons </a></li>
+                        {/* <li> <a  className={this.state.activeLoadedCoupons} onClick={this.LoadedCoupons}> Loaded Coupons </a></li> */}
                     </ul>
                     {popUpLogout}
                     {sessionEndPopUp}
                     <div className="LoadedCoupons"  hidden={this.state.hideNewCoupons}   >
                         <div className="CouponSearch">
-                        <input type="text" className = "SearchBar" defaultValue={this.state.barName} onClick={this.clearInput} onChange ={this.inputChange} />
-                        <h4 className="LoadedCouponCount"> New Coupons ({couponsLength})  {this.state.count}</h4>
+                        <div className="SearchBarImage">
+                            <img className="SearchImage" src={Search_Icon} />
+                            <input type="text" className = "SearchBar" placeholder="Search"  onChange ={this.inputChange} onClick={this.timerReset}/>
+                        </div>
+                        <h4 className="LoadedCouponCount"> Available Coupons ({couponsLength}) </h4>
                         </div>
                         {userCoupons}        
                     </div>
                     <div className="LoadedCoupons"  hidden={this.state.hideLoadedCoupons} ref= {el => (this.componentRef = el)} >
-                        <h4 className="LoadedCouponCount"> Loaded Coupons ({couponsLength})  {this.state.count}</h4>
+                        <h4 className="LoadedCouponCount"> Loaded Coupons ({couponsLength}) </h4>
                         {userCoupons}        
                     </div>
                 </div> 
