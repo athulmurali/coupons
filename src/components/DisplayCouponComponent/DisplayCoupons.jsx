@@ -11,7 +11,7 @@ import Config from "../../config/config";
     constructor(props){
         super(props);
         this.state = {
-            couponDetails : this.props.data,
+            couponDetails : [],
             count: 0,
             hideLoadedCoupons: true,
             hideNewCoupons: false,
@@ -69,8 +69,6 @@ import Config from "../../config/config";
     }
 
     render() {
-
-        console.log("this value is retrieved from store" +this.props.data  );
         let couponData = this.props.data;        
         let buttonTrigger = "";
         let logOutPopUpTrigger = "";
