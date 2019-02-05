@@ -3,6 +3,9 @@ import Result from "./Result";
 import Scanner from "./Scanner";
 import API from "../../utils/API";
 import PropTypes from "prop-types";
+import {ROUTE_DISPLAY_COUPONS} from "../../utils/RouteConstants";
+import {connect} from "react-redux";
+import {updateCoupons} from "../../redux/actions/UserIdentification";
 
 class CameraScanner extends Component{
 	constructor(props) {
@@ -111,18 +114,20 @@ class CameraScanner extends Component{
 			
 			let responeData = [];
 			const userDetails = await API.getUserDetails(searchBarcode.slice(0,-1));
+			alert(userDetails)
 			console.log("userdetails")
 			console.log(userDetails.data.response.response.Customer[0]);
 			responeData.push(userDetails.data.response.response.Customer[0]);
 			const response = await API.getUserCoupons(searchBarcode.slice(0,-1));
-			console.log(response)
-			
+
 			responeData.push(response.data.response)
+			console.log(responeData)
+
 			sessionStorage.setItem('token',true);
-			this.props.history.push({
-				pathname : `/DisplayCoupons`,
-				state: responeData,
-			});
+
+			this.props.updateCoupons({couponDetails : responeData})
+
+			this.props.history.push({pathname : ROUTE_DISPLAY_COUPONS});
 		} catch (error){
 			this.setState(
 				{
@@ -134,12 +139,12 @@ class CameraScanner extends Component{
 	}
 	_onDetected(result) {
 		
-		alert(result);
 		if(result.codeResult.code && this.state.scanning){
 			try
 			{
 				this.setState({scanning:false});
 				this._searchUserInDatabase(result.codeResult.code);
+				alert(result.codeResult.code)
 				
 				
 			}
@@ -150,9 +155,22 @@ class CameraScanner extends Component{
 	}
 }
 
-export default CameraScanner;
+
 CameraScanner.propTypes = {
 	history: PropTypes.shape({
 		push: PropTypes.func,
 	}).isRequired,
 };
+
+
+const mapStateToProps=()=>{
+	return {}
+}
+const mapDispatchToProps=(dispatch)=>{
+	return {
+		updateCoupons:( couponDetails)=>updateCoupons(dispatch,couponDetails )
+
+	}
+}
+
+export default  connect(mapStateToProps	,mapDispatchToProps) (CameraScanner)
