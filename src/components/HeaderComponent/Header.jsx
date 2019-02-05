@@ -1,6 +1,6 @@
 import React from "react";
 import "./Header.css";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 const AttractHeader = styled.div`
 	display: flex;

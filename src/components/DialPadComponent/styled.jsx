@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const MesssgeDisplay = styled.div`
 	margin-top: 70px;

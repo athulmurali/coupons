@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import './AttractLoop.css';
-import { Slide } from 'react-slideshow-image';
+import {Slide} from 'react-slideshow-image';
 import ScanBarcode from '../ScanBarcode/ScanBarcode';
 import Header from '../HeaderComponent/Header';
 import Config from '../../config/config';
 import CameraScanner from '../../components/CameraScannerComponent/CameraScanner';
+import {ROUTE_USER_IDENTIFICATION} from "../../utils/RouteConstants";
+import {connect} from "react-redux";
+import {reset_all_redux} from "../../redux/actions/Common";
 
 
 class AttractLoop extends Component {
@@ -32,11 +35,14 @@ class AttractLoop extends Component {
     });
 	}
   handleScreenTap = () => {
-    this.props.history.push(`/userIdentification`);
+    this.props.history.push(ROUTE_USER_IDENTIFICATION);
 	};
-	
+	componentWillMount() {
+        this.props.reset_all_redux()
+    }
 
-  render() {
+
+    render() {
 		
     const Image_coupon1 = require('../../assets/coupons-attract-Images-03.png');
     const Image_coupon2 = require('../../assets/coupons-attract-Images-04.png');
@@ -88,10 +94,18 @@ class AttractLoop extends Component {
     );
   }
 }
-export default AttractLoop;
+
+const mapDispatchToProps =(dispatch)=>{
+
+    return {
+        reset_all_redux:()=>reset_all_redux(dispatch)
+    }
+
+}
 
 AttractLoop.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
 };
+export default connect(null,mapDispatchToProps)(AttractLoop) ;
