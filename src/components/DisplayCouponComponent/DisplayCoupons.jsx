@@ -168,10 +168,13 @@ class Coupons extends React.Component {
 		}
 		if(this.state.logOutTrigger) {
 			logOutPopUpTrigger = this.buttonClick;
-			this.setState({logOutTrigger: false});
-			this.setState({count:0});
-			this.setState({logOutReload: true});
-			
+			this.setState({logOutTrigger: false},
+				()=>{
+					this.setState({count:0},
+						()=>{
+							this.setState({logOutReload: true});
+						});
+				});
 		}
 
 		if(this.state.logOutReload) {
@@ -180,7 +183,7 @@ class Coupons extends React.Component {
 			}
 		}
 
-		if (!!couponData) {
+		if (couponData.length > 0) {
 
 			console.log(couponData)
 			userCouponData = couponData[1];
