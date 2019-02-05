@@ -7,7 +7,6 @@ import * as serviceWorker from "./serviceWorker";
 import Router from "./utils/Router";
 
 
-
 import {Provider} from "react-redux";
 import {applyMiddleware, createStore} from "redux";
 import promise from "redux-promise-middleware";

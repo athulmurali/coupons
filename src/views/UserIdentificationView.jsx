@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import PropTypes from "prop-types";
 import UserIdentification from "../components/UserIdentificationComponent/UserIdentification";
 import ScanBarcode from "../components/ScanBarcode/ScanBarcode";

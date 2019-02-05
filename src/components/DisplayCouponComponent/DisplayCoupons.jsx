@@ -1,13 +1,13 @@
 import React from "react";
 import Header from "../HeaderComponent/Header";
 import "./DisplayCoupons.css";
-import Flippy, { FrontSide, BackSide } from "react-flippy";
+import Flippy, {BackSide, FrontSide} from "react-flippy";
 import Popup from "reactjs-popup";
 import ReactToPrint from "react-to-print";
 import Config from "../../config/config";
 import {connect} from "react-redux";
 
- class Coupons extends React.Component {
+class Coupons extends React.Component {
 
 
 	constructor(props){

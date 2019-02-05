@@ -1,4 +1,4 @@
-import React,{Component} from "react";
+import React, {Component} from "react";
 import Result from "./Result";
 import Scanner from "./Scanner";
 import API from "../../utils/API";

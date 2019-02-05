@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import './AttractLoop.css';
-import { Slide } from 'react-slideshow-image';
+import {Slide} from 'react-slideshow-image';
 import ScanBarcode from '../components/ScanBarcode/ScanBarcode';
 import Header from '../components/Header';
 import Config from '../config/config';
