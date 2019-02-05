@@ -22,25 +22,17 @@ class Router extends Component {
 		sessionStorage.setItem("token",false);
 	}
 
-  
 
 	render() {
 
 		return (
-			<HashRouter >
-				<div
-					onClick={this.handleUserInteract}
-					onKeyDown={this.handleUserInteract}
-					onScroll={this.handleUserInteract}
-					role="button"
-				>       
-					<Switch>
-						<Route exact path="/" history={this.props.history} component={AttractLoopView} />
-						<Route exact path="/userIdentification" render={props => <UserIdentificationView history={this.props.history} overtime={this.state.overtime} {...props} />} />
-						<Route exact path="/DisplayCoupons" render={props => <DisplayCouponsView history={this.props.history}  overtime={this.state.overtime}  {...props} />} />
-						<Route exact path="/ScanImage" render={props => <CameraScanner history={this.props.history}  overtime={this.state.overtime}  {...props} />} />
-					</Switch>
-				</div>
+			<HashRouter >     
+				<Switch>
+					<Route exact path="/" history={this.props.history} component={AttractLoopView} />
+					<Route exact path="/userIdentification" render={props => <UserIdentificationView history={this.props.history} overtime={this.state.overtime} {...props} />} />
+					<Route exact path="/DisplayCoupons" render={props => <DisplayCouponsView history={this.props.history}  overtime={this.state.overtime}  {...props} />} />
+					<Route exact path="/ScanImage" render={props => <CameraScanner history={this.props.history}  overtime={this.state.overtime}  {...props} />} />
+				</Switch>
 			</HashRouter>
 		);
 	}

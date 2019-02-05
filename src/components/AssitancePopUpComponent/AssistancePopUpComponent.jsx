@@ -26,7 +26,7 @@ class AssistancePopUpComponent extends React.Component {
 
 export const mapStateToProps=(state)=>(
 	{
-		isPopUpOpen : state.AssistanceReducer.isPopUpOpen
+		// isPopUpOpen : state.AssistanceReducer.isPopUpOpen
 	}
 );
 

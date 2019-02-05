@@ -6,11 +6,12 @@ import Popup from "reactjs-popup";
 import ReactToPrint from "react-to-print";
 import Config from "../../config/config";
 
+
  class Coupons extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            couponDetails : [],
+            couponDetails : this.props.data,
             count: 0,
             hideLoadedCoupons: true,
             hideNewCoupons: false,
@@ -68,6 +69,8 @@ import Config from "../../config/config";
     }
 
     render() {
+
+        console.log("this value is retrieved from store" +this.props.data  );
         let couponData = this.props.data;        
         let buttonTrigger = "";
         let logOutPopUpTrigger = "";

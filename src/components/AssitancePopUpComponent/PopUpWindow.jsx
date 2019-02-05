@@ -4,13 +4,15 @@ import React from 'react'
 import {connect} from "react-redux";
 import {mapStateToProps} from "./AssistancePopUpComponent";
 
-import close_button_img from '../../assets/Close-X-2.svg'
-import dummy_img from '../../assets/no-account-np-image.png'
+import close_button_img from '../../assets/Close-X-2.svg';
+import dummy_img from '../../assets/no-account-np-image.png';
 import {TOGGLE_POP_UP} from "../../redux/reducers/AssistanceReducer";
+
 
 const main_header_text = "Want to get exclusive coupons on what you already buy?"
 const para1_text1 = "Unlock more savings with your online account."
 const para1_tex2 = "Instant access to hundreds of coupons and fuel savings!"
+const no_Image_No_Problem = require("../../assets/no-account-npImage.png");
 
 
 const TEXT_POP_UP_STYLE = {maxWidth: '800px'}
@@ -55,7 +57,7 @@ class  PopUpWindow extends React.Component{
                         <span className="popupMessage" style={PARA_TEXT_STYLE}>{para2_text_1}</span><br/>
                         <span className="popupMessage" style={PARA_TEXT_STYLE}>{para2_text_2}</span>
                     </div>
-                    <img src={dummy_img} style={IMG_STYLE}/>
+                    <img src={no_Image_No_Problem} style={IMG_STYLE}/>
 
                 </div>
             </div>

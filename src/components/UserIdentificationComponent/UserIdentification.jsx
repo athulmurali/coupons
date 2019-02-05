@@ -20,7 +20,6 @@ class UserIdentification extends Component{
 			booleanDataFromDialPad ? 
 				this.props.history.push({
 				pathname : `/DisplayCoupons`,
-				state: couponsDetails
 				}
 			)
 				 : (

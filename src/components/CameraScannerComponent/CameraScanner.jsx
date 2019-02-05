@@ -43,7 +43,15 @@ class CameraScanner extends Component{
 			</div>
 		);
 	}
-
+	componentWillUnmount(){
+		this.setState(
+			{
+				scanning:false,
+				couponDetails:[],
+				results:[],
+			}
+		)
+	}
 	_renderScanButton() {
 		const text = this.state.scanning ? "STOP" : "SCAN";
 		const styles = {
@@ -134,7 +142,7 @@ class CameraScanner extends Component{
 	}
 	_onDetected(result) {
 		
-		// alert();
+		
 		if(result.codeResult.code && this.state.scanning){
 			try
 			{
