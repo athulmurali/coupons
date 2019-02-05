@@ -1,11 +1,9 @@
-
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import './UserIdentification.css';
 import Header from '../../components/HeaderComponent/Header';
 import DialPad from '../DialPadComponent/DialPad';
 import connect from "react-redux/es/connect/connect";
-import {UPDATE_COUPON_DETAILS} from "../../redux/reducers/UserIdentification";
 
 class UserIdentification extends Component{
 	constructor(props){
@@ -19,29 +17,11 @@ class UserIdentification extends Component{
 			sessionStorage.setItem('token',true);
 		}
 
-		 test=(couponsDetails)=>{
-			this.props.history.push({
-				pathname : `/DisplayCoupons`,
-
-				state: couponsDetails
-			}
-		)
-
-
-}
-		succesfullIdentification = (booleanDataFromDialPad,phoneNumber,couponsDetails) => {
-			booleanDataFromDialPad ?test(couponsDetails)
-				: (
-					alert('new user')
-				);
-
-		};
-
     render(){
 			return(
 				<div>
 					<Header history={this.props.history}/>
-						<DialPad history={this.props.history} identificationfromDiaPad = {this.succesfullIdentification}/>                  
+						<DialPad history={this.props.history}/>
         </div>
       );
   };
@@ -59,14 +39,6 @@ const mapStateToProps=(state)=>{
 	}
 }
 
-const mapDispatchToProps=(dispatch)=>{
-	return {
-		updateCoupons : (couponDetails)=>dispatch({
-			type : UPDATE_COUPON_DETAILS,
-			payload : { ...couponDetails }
-		})
-	}
 
-}
 
-export default connect (mapStateToProps,mapDispatchToProps)(UserIdentification)
+export default connect (mapStateToProps,null)(UserIdentification)

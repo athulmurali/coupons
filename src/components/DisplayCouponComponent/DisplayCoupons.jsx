@@ -5,6 +5,7 @@ import Flippy, { FrontSide, BackSide } from "react-flippy";
 import Popup from "reactjs-popup";
 import ReactToPrint from "react-to-print";
 import Config from "../../config/config";
+import {connect} from "react-redux";
 
  class Coupons extends React.Component {
 
@@ -146,7 +147,7 @@ import Config from "../../config/config";
 		this.state.array_filter.push(e);
 		
 	 }
-	 
+
 
 
 	render() {
@@ -179,19 +180,22 @@ import Config from "../../config/config";
 			}
 		}
 
-		if (couponData[0]) {
-			userCouponData = couponData[0][1];
+		if (!!couponData) {
+
+			console.log(couponData)
+			userCouponData = couponData[1];
 			couponsLength = userCouponData.length;
-			userName = couponData[0][0].FirstName;
-			userName.toString();
+			userName = couponData[0].FirstName;
 			searchedCoupons = userCouponData;
 			if(searchedCoupons.length > 0) {
 				searchedCoupons = searchedCoupons.filter(function(item){
 					return item.Name.toLowerCase().includes(searchedCoupon.toLowerCase());
-			 });
+				});
 				couponsLength = searchedCoupons.length;
 			}
 		}
+
+
 		if(this.state.array_filter.length > 0){
 			// userCoupons.filter(function(filterMatch){
 			// 	return filterMatch.
@@ -337,5 +341,11 @@ import Config from "../../config/config";
 		);
 	}
 }
+
+const mapStateToProps=(state)=>{
+ 	return {
+ 		data : state.UserIdentification.couponDetails
+	}
+}
   
-export default Coupons;
+export default connect(mapStateToProps,null)(Coupons);

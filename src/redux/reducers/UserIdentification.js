@@ -1,16 +1,19 @@
 export const UPDATE_COUPON_DETAILS  = "UPDATE_COUPON_DETAILS"
 
 const initialState = {
-    couponDetails : null
+    couponDetails : []
 }
+
+
 
 
  const UserIdentification = (state = initialState, action)=>{
 
-    switch (action.type) {
+
+     switch (action.type) {
 
         case 'UPDATE_COUPON_DETAILS' :  return {
-            ...state, ...action.payload
+            ...state,couponDetails :action.payload.couponDetails
         }
 
         default : return state

@@ -6,6 +6,7 @@ import ScanBarcode from '../ScanBarcode/ScanBarcode';
 import Header from '../HeaderComponent/Header';
 import Config from '../../config/config';
 import CameraScanner from '../../components/CameraScannerComponent/CameraScanner';
+import {ROUTE_USER_IDENTIFICATION} from "../../utils/RouteConstants";
 
 
 class AttractLoop extends Component {
@@ -32,7 +33,7 @@ class AttractLoop extends Component {
     });
 	}
   handleScreenTap = () => {
-    this.props.history.push(`/userIdentification`);
+    this.props.history.push(ROUTE_USER_IDENTIFICATION);
 	};
 	
 

@@ -5,12 +5,13 @@ import { Slide } from 'react-slideshow-image';
 import ScanBarcode from '../components/ScanBarcode/ScanBarcode';
 import Header from '../components/Header';
 import Config from '../config/config';
+import {ROUTE_USER_IDENTIFICATION} from "../utils/RouteConstants";
 
 
 class AttractLoop extends React.Component {
   
   handleScreenTap = () => {
-    this.props.history.push(`/userIdentification`);
+    this.props.history.push(ROUTE_USER_IDENTIFICATION);
   };
 
   render() {
