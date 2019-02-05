@@ -114,7 +114,7 @@ class CameraScanner extends Component{
 			
 			let responeData = [];
 			const userDetails = await API.getUserDetails(searchBarcode.slice(0,-1));
-			alert(userDetails)
+			// alert(userDetails)
 			console.log("userdetails")
 			console.log(userDetails.data.response.response.Customer[0]);
 			responeData.push(userDetails.data.response.response.Customer[0]);
@@ -144,7 +144,7 @@ class CameraScanner extends Component{
 			{
 				this.setState({scanning:false});
 				this._searchUserInDatabase(result.codeResult.code);
-				alert(result.codeResult.code)
+				// alert(result.codeResult.code)
 				
 				
 			}

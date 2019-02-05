@@ -93,7 +93,7 @@ class DialPad extends Component {
 		const clickedValue = e.target.innerText.trim() ;
 		let disableInputArea = false;
 		if( !clickedValue ){
-			alert("Passed nothing");
+			// alert("Passed nothing");
 		}
 		
 		else {
@@ -123,7 +123,7 @@ else{
 	let prev = this.state.phoneNumber;
 		let disableInputArea = false;
 		if( !clickedValue ){
-			alert("Passed nothing");
+			// alert("Passed nothing");
 		}
 		else{
 			this.setState({
