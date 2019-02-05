@@ -12,8 +12,8 @@ const initialState = {
 
      switch (action.type) {
 
-        case 'UPDATE_COUPON_DETAILS' :  return {
-            ...state,couponDetails :action.payload.couponDetails
+         case 'UPDATE_COUPON_DETAILS' :  return {
+            ...state,...action.payload
         }
 
         default : return state

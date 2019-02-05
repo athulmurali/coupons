@@ -4,8 +4,8 @@ import './DialPad.css';
 import Config from '../../config/config';
 import AssistancePopUpComponent from "../AssitancePopUpComponent/AssistancePopUpComponent";
 import {connect} from "react-redux";
-import {UPDATE_COUPON_DETAILS} from "../../redux/reducers/UserIdentification";
 import {ROUTE_DISPLAY_COUPONS} from "../../utils/RouteConstants";
+import {updateCoupons} from "../../redux/actions/UserIdentification";
 
 class DialPad extends Component {
 	constructor(props){
@@ -54,14 +54,9 @@ class DialPad extends Component {
 			const couponsDetails = await API.getUserCoupons(barCodeNumber);
 			const couponDetailsArray  = couponsDetails.data.response
 
-			console.log(couponDetailsArray);
-
 			this.couponsDetails.push(couponDetailsArray);
-			this.props.updateCoupons(this.couponsDetails)
+			this.props.updateCoupons({'couponDetails' : this.couponsDetails})
 			this.props.history.push(ROUTE_DISPLAY_COUPONS)
-
-			this.props.identificationfromDiaPad(true,this.state.phoneNumber,this.couponsDetails);
-
 		} catch (error){
 			
 			this.setErrorMessage();
@@ -242,13 +237,11 @@ const mapStateToProps=(state)=>{
 }
 
 
-const mapDispatchToProps=(dispatch)=>{
-	return {
-		updateCoupons : (couponDetails)=>dispatch({
-			type : UPDATE_COUPON_DETAILS,
-			payload : {couponDetails : couponDetails}
-		})
-	}
+const mapDispatchToProps=(dispatch)=>(
+	{
+		updateCoupons :( couponDetails)=> updateCoupons(dispatch,  couponDetails )
 
-}
+	}
+)
+
 export default connect(mapStateToProps,mapDispatchToProps)( DialPad)
