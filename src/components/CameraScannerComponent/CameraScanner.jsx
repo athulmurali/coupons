@@ -3,6 +3,7 @@ import Result from "./Result";
 import Scanner from "./Scanner";
 import API from "../../utils/API";
 import PropTypes from "prop-types";
+import { BounceLoader } from "react-spinners";
 
 class CameraScanner extends Component{
 	constructor(props) {
@@ -13,10 +14,19 @@ class CameraScanner extends Component{
 			results: [
 				
 			],
-			
+			loading: true,
 		};
 		this._onDetected= this._onDetected.bind(this);
 		this._searchUserInDatabase = this._searchUserInDatabase.bind(this);
+	}
+	componentWillMount = () => {
+		this.setState(
+			{
+				scanning:false,
+				couponDetails: [],
+				results: [],
+			}
+		)
 	}
 	componentWillUnmount = () => {
 		this.setState(
@@ -118,6 +128,7 @@ class CameraScanner extends Component{
 			console.log(response)
 			
 			responeData.push(response.data.response)
+			
 			sessionStorage.setItem('token',true);
 			this.props.history.push({
 				pathname : `/DisplayCoupons`,
@@ -134,7 +145,7 @@ class CameraScanner extends Component{
 	}
 	_onDetected(result) {
 		
-		alert();
+		
 		if(result.codeResult.code && this.state.scanning){
 			try
 			{

@@ -203,7 +203,7 @@ else{
 							Card Number
 						</button>
 					</div>
-					<input className= "inputText" id="test-input" maxLength= {12}  defaultValue={ this.state.phoneNumber} />
+					<input className= "inputText" id="test-input" maxLength= {12}  defaultValue={ this.state.phoneNumber} placeholder="(---) --- ----" />
 					<div className="status-block">
 						<h3 className="statusMessage"> {this.state.defaultMessage} </h3>
 						<h3 className="statusMessage">associated with your account</h3>

@@ -5,6 +5,7 @@ import Flippy, { FrontSide, BackSide } from "react-flippy";
 import Popup from "reactjs-popup";
 import ReactToPrint from "react-to-print";
 import Config from "../../config/config";
+
  class Coupons extends React.Component {
     constructor(props){
         super(props);
@@ -116,7 +117,7 @@ import Config from "../../config/config";
                 couponsLength = searchedCoupons.length;
 						}
 						
-						
+
         }
         const Image_coupon = require("../../assets/stopandshop.png");
         const LogOut_Success = require("../../assets/success.svg");
