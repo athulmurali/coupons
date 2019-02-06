@@ -12,6 +12,7 @@ import Config from "../../config/config";
 	constructor(props){
 		super(props);
 		this.state = {
+			checkedChange:true,
 			couponDetails : [],
 			count: 0,
 			hideLoadedCoupons: true,
@@ -24,18 +25,19 @@ import Config from "../../config/config";
 			barName:  "Search By Coupon Name",
 			filter_arrow: false,
 			sort_arrow: false,
-			array_filter : []
+			array_filter : [],
 			
-		};		
+		};
+		this.userCouponData = [];
 		this.Image_up = require('../../assets/new-filter-arrow-down.svg');
 		this.Sort_up = require('../../assets/new-filter-arrow-down.svg');
-		let sort_category = ["Redeem By Date"	,"Value(Low to High)	","Value(High to Low)"	," Brand"	, "Recommended"];
-		let filter_category = [];
 	}
-	
+	handleChecked = () => {
+		this.setState({checkedChange:!this.state.checkedChange});
+	}
 	buttonClick = (el) => {
 		if(el) {
-		el.click();
+			el.click();
 		};
 	}
 
@@ -63,7 +65,7 @@ import Config from "../../config/config";
 	}
 
 	handleScreenTap = () => {
-			this.props.history.push(`/`);
+		this.props.history.push(`/`);
 	}
 
 
@@ -86,24 +88,24 @@ import Config from "../../config/config";
 	}
 	Filter = () => {
 		if(this.state.filter_arrow === false){
-		this.setState({filter_arrow : true});
-		this.Image_up = require('../../assets/new-filter-arrow-up.svg');
+			this.setState({filter_arrow : true});
+			this.Image_up = require('../../assets/new-filter-arrow-up.svg');
 		}
 		else{
 			this.setState({filter_arrow : false});
-		this.Image_up = require('../../assets/new-filter-arrow-down.svg');
+			this.Image_up = require('../../assets/new-filter-arrow-down.svg');
 		}
 		
 		console.log(this.state.filter_arrow);
 	}
 	Sort = () => {
 		if(this.state.sort_arrow === false){
-		this.setState({sort_arrow : true});
-		this.Sort_up = require('../../assets/new-filter-arrow-up.svg');
+			this.setState({sort_arrow : true});
+			this.Sort_up = require('../../assets/new-filter-arrow-up.svg');
 		}
 		else{
 			this.setState({sort_arrow : false});
-		this.Sort_up = require('../../assets/new-filter-arrow-down.svg');
+			this.Sort_up = require('../../assets/new-filter-arrow-down.svg');
 		}
 	}
 
@@ -121,15 +123,35 @@ import Config from "../../config/config";
 	Sorting_Category = () => {
 		const sort_category = ["Redeem By Date"	,"Value(Low to High)	","Value(High to Low)"	," Brand"];
 		return(
-			sort_category.map( cate => <div key={cate} className="filter_inside" hidden= {!this.state.sort_arrow}>
-			<input name="_filter" type="checkbox"/>
+			sort_category.map( cate => <div key={cate} className="filter_inside"  hidden= {!this.state.sort_arrow} >
+			<input name="_filter" type="checkbox" onChange={this.handleChecked} onClick={() => this.sortin(cate)}/>
 			<label>
 				  {cate}
 			</label>
 		</div>)
 		)
 	 }
-
+	 sortin = (cat) => {
+	
+		if(cat == "Redeem By Date"){
+		 	if(this.state.checkedChange){
+				
+				let coupData = this.props.data.slice();
+				let userCouponDat = (coupData[0][1]).slice();
+				if(userCouponDat.length > 0){
+					let sorted_meetings = userCouponDat.sort((a,b) => {
+						return new Date(a.EndDate).getTime() - 
+							new Date(b.EndDate).getTime()
+					});
+				this.state.couponDetails = sorted_meetings;
+				}
+			 }
+			 else{
+				 this.state.couponDetails = this.props.data;
+			}
+		}
+		
+	}
 	 Filter_Category = () => {
 		const filter_category = ["Baby & Childcare"	,"Bakeray","Beverages"	,"Condiments & Sauces","Dairy","Deli","Ethnic Products","Frozen Food","General Merchandise"];
 		return(
@@ -142,13 +164,9 @@ import Config from "../../config/config";
 		)
 	 }
 	 filtering = (e) => {
-		
-		this.state.array_filter.push(e);
-		
+		this.state.array_filter.push(e);	
 	 }
 	 
-
-
 	render() {
 		let couponData = this.props.data;
 		let buttonTrigger = "";
@@ -181,6 +199,8 @@ import Config from "../../config/config";
 
 		if (couponData[0]) {
 			userCouponData = couponData[0][1];
+			
+			// console.log(userCouponData);
 			couponsLength = userCouponData.length;
 			userName = couponData[0][0].FirstName;
 			userName.toString();
@@ -277,6 +297,22 @@ import Config from "../../config/config";
 						</div>
 					)}
 				</Popup> 	);
+
+			// if(userCouponData.length > 0){
+			// 	let sorted_meetings = userCouponData.sort((a,b) => {
+			// 		return new Date(a.EndDate).getTime() - 
+			// 			new Date(b.EndDate).getTime()
+			// 	});
+			// 	console.log(sorted_meetings);
+			// }
+				
+
+				
+				// for(let i = 0;i< userCouponData.length;i++){
+				// 	console.log(userCouponData[i].EndDate);
+				// }
+				
+			
 			
 
 		return (

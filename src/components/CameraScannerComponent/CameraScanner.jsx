@@ -111,11 +111,11 @@ class CameraScanner extends Component{
 			
 			let responeData = [];
 			const userDetails = await API.getUserDetails(searchBarcode.slice(0,-1));
-			console.log("userdetails")
-			console.log(userDetails.data.response.response.Customer[0]);
+		//	console.log("userdetails")
+		//	console.log(userDetails.data.response.response.Customer[0]);
 			responeData.push(userDetails.data.response.response.Customer[0]);
 			const response = await API.getUserCoupons(searchBarcode.slice(0,-1));
-			console.log(response)
+		//	console.log(response)
 			
 			responeData.push(response.data.response)
 			sessionStorage.setItem('token',true);
@@ -134,7 +134,7 @@ class CameraScanner extends Component{
 	}
 	_onDetected(result) {
 		
-		alert(result);
+	//	alert();
 		if(result.codeResult.code && this.state.scanning){
 			try
 			{
