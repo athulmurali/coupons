@@ -1,19 +1,20 @@
 import React from "react";
 import Header from "../HeaderComponent/Header";
 import "./DisplayCoupons.css";
-import Flippy, { FrontSide, BackSide } from "react-flippy";
+import Flippy, {BackSide, FrontSide} from "react-flippy";
 import Popup from "reactjs-popup";
 import ReactToPrint from "react-to-print";
 import Config from "../../config/config";
+import {connect} from "react-redux";
 
- class Coupons extends React.Component {
+class Coupons extends React.Component {
 
 
 	constructor(props){
 		super(props);
 		this.state = {
 			checkedChange:true,
-			couponDetails : [],
+			couponDetails : this.props.data,
 			count: 0,
 			hideLoadedCoupons: true,
 			hideNewCoupons: false,
@@ -71,6 +72,7 @@ import Config from "../../config/config";
 
 
 
+
 	NewCoupons = () => {
 		this.setState({count: 0});
 		this.state.hideNewCoupons = false;
@@ -122,6 +124,7 @@ import Config from "../../config/config";
 	}
 	Sorting_Category = () => {
 		const sort_category = ["Redeem By Date"	,"Value(Low to High)	","Value(High to Low)"	," Brand"];
+		this.userCouponData = this.couponDetails;
 		return(
 			sort_category.map( cate => <div key={cate} className="filter_inside"  hidden= {!this.state.sort_arrow} >
 			<input name="_filter" type="checkbox" onChange={this.handleChecked} onClick={() => this.sortin(cate)}/>
@@ -132,18 +135,19 @@ import Config from "../../config/config";
 		)
 	 }
 	 sortin = (cat) => {
-	
-		if(cat == "Redeem By Date"){
+		if(cat === "Redeem By Date"){
 		 	if(this.state.checkedChange){
 				
-				let coupData = this.props.data.slice();
-				let userCouponDat = (coupData[0][1]).slice();
+				let coupData = (this.state.couponDetails).slice();
+				
+				let userCouponDat = (coupData[1]).slice();
 				if(userCouponDat.length > 0){
 					let sorted_meetings = userCouponDat.sort((a,b) => {
 						return new Date(a.EndDate).getTime() - 
 							new Date(b.EndDate).getTime()
 					});
-				this.state.couponDetails = sorted_meetings;
+				this.setState({couponDetails:sorted_meetings});
+				this.forceUpdate();
 				}
 			 }
 			 else{
@@ -168,7 +172,7 @@ import Config from "../../config/config";
 	 }
 	 
 	render() {
-		let couponData = this.props.data;
+		let couponData = this.state.couponDetails;
 		let buttonTrigger = "";
 		let logOutPopUpTrigger = "";
 		let userCoupons = [];
@@ -185,10 +189,13 @@ import Config from "../../config/config";
 		}
 		if(this.state.logOutTrigger) {
 			logOutPopUpTrigger = this.buttonClick;
-			this.setState({logOutTrigger: false});
-			this.setState({count:0});
-			this.setState({logOutReload: true});
-			
+			this.setState({logOutTrigger: false},
+				()=>{
+					this.setState({count:0},
+						()=>{
+							this.setState({logOutReload: true});
+						});
+				});
 		}
 
 		if(this.state.logOutReload) {
@@ -197,21 +204,22 @@ import Config from "../../config/config";
 			}
 		}
 
-		if (couponData[0]) {
-			userCouponData = couponData[0][1];
-			
-			// console.log(userCouponData);
+		if (couponData.length > 0) {
+
+	//		console.log(couponData)
+			userCouponData = couponData[1];
 			couponsLength = userCouponData.length;
-			userName = couponData[0][0].FirstName;
-			userName.toString();
+			userName = couponData[0].FirstName;
 			searchedCoupons = userCouponData;
 			if(searchedCoupons.length > 0) {
 				searchedCoupons = searchedCoupons.filter(function(item){
 					return item.Name.toLowerCase().includes(searchedCoupon.toLowerCase());
-			 });
+				});
 				couponsLength = searchedCoupons.length;
 			}
 		}
+
+
 		if(this.state.array_filter.length > 0){
 			// userCoupons.filter(function(filterMatch){
 			// 	return filterMatch.
@@ -373,5 +381,11 @@ import Config from "../../config/config";
 		);
 	}
 }
+
+const mapStateToProps=(state)=>{
+ 	return {
+ 		data : state.UserIdentification.couponDetails
+	}
+}
   
-export default Coupons;
+export default connect(mapStateToProps,null)(Coupons);
