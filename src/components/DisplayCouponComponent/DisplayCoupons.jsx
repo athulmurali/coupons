@@ -146,10 +146,8 @@ class Coupons extends React.Component {
 		
 		this.state.array_filter.push(e);
 		
-	 }
-
-
-
+     }
+     
 	render() {
 		let couponData = this.props.data;
 		let buttonTrigger = "";
@@ -185,7 +183,7 @@ class Coupons extends React.Component {
 
 		if (couponData.length > 0) {
 
-			console.log(couponData)
+			// console.log(couponData)
 			userCouponData = couponData[1];
 			couponsLength = userCouponData.length;
 			userName = couponData[0].FirstName;
@@ -234,8 +232,8 @@ class Coupons extends React.Component {
 						width: "171px",
 						height: "264px",
 					}} >
-            {/* Category {i} <br /> Aisle {i} */}
-					</BackSide>
+                    <h3 className="couponDescription">{searchedCoupons[i].Description}</h3>
+                    </BackSide>
 					<FrontSide style={{
 						width: "171px",
 						height: "264px"
@@ -244,7 +242,7 @@ class Coupons extends React.Component {
 						<h5> {searchedCoupons[i].Name}</h5>
 						<h6 className="couponDescription"> {searchedCoupons[i].Description}</h6>
 						<h6> Exp: {searchedCoupons[i].EndDate.slice(0,10)} </h6>
-						{/* <h6 className="viewMore"> Tap to View more </h6> */}
+						<h6 className="viewMore"> Tap to View more </h6>
 					</FrontSide>
 
 				</Flippy>
@@ -304,7 +302,7 @@ class Coupons extends React.Component {
 					<ul>
 						<li> <a  className={this.state.activeNewCoupons} onClick={this.NewCoupons} > New Coupons </a></li>
 						{/* <li> <a  className={this.state.activeLoadedCoupons} onClick={this.LoadedCoupons}> Loaded Coupons </a></li> */}
-						<div className="filter_sort">
+						{/* <div className="filter_sort">
 							Sort
 							<img className="image_arrow" src={slideArrow_Sort[0]}  onClick={this.Sort}/>
 							<div className="filter_sort_list" hidden= {this.state.sort_arrow} >By Recommended</div>
@@ -321,7 +319,7 @@ class Coupons extends React.Component {
 							<img className="image_arrow" src={slideArrow[0]}  onClick={this.Filter}/>
 							<div className="filter_sort_list" hidden= {this.state.filter_arrow} >No filter added</div>
 						</div>
-						{ this.Filter_Category() }
+						{ this.Filter_Category() } */}
 					</ul>
 					{popUpLogout}
 					{sessionEndPopUp}

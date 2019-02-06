@@ -12,7 +12,6 @@ class AttractLoopView extends Component{
 	// }  
 
 	render(){
-		console.log("props Loop   " + " " + this.props.rotating);
 		return(
 			<div onClick={() => this.props.rotateAction(false)}>
 				<AttractLoop history={this.props.history}></AttractLoop>
@@ -26,14 +25,7 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = dispatch => ({
 	rotateAction: (value) => { 
-		console.log("Value" + value);
-		dispatch(displayCouponsStateUpdate("rotating",value))}
+		dispatch(displayCouponsStateUpdate("rotating",value));}
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AttractLoopView);
-
-// AttractLoopView.propTypes = {
-// 	history: PropTypes.shape({
-// 		push: PropTypes.func,
-// 	}).isRequired,
-// };

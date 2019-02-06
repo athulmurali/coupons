@@ -27,7 +27,6 @@ class AttractLoop extends Component {
       ]
 		}
 		window.addEventListener('orientationchange', this.orientationChange);
-  
 	}
 	orientationChange = () =>{
 		this.setState({
@@ -62,9 +61,6 @@ class AttractLoop extends Component {
       arrows: false,
     }
 
-		Config.loggedIn = false;
-		
-		
     return (
       
       <div className="AttractLoop" onClick={this.handleScreenTap}>
