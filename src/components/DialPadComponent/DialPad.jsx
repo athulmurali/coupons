@@ -1,15 +1,12 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import API from '../../utils/API';
 import './DialPad.css';
 import Config from '../../config/config';
 import AssistancePopUpComponent from "../AssitancePopUpComponent/AssistancePopUpComponent";
+import {connect} from "react-redux";
+import {ROUTE_DISPLAY_COUPONS} from "../../utils/RouteConstants";
+import {updateCoupons} from "../../redux/actions/UserIdentification";
 
-import {
-	MesssgeDisplay,
-	StatusMessage,
-	InputText,
-} from './styled';
-import DialPadButtons from '../../views/DialPadButtons';
 class DialPad extends Component {
 	constructor(props){
 		super(props);
@@ -51,16 +48,15 @@ class DialPad extends Component {
 			}
 			console.log(this.extractNumberFromFormat);
 			const response = await API.getUserDetails(this.extractNumberFromFormat);
-			 
-			this.couponsDetails .push(response.data.response.response.Customer[0]);
-			console.log(response.data.response.response.Customer[0].ID[0].attributes.Value)
-			console.log(response.data.response.response.Customer[0].FirstName)
-			//console.log(this.couponsDetails.response.Customer);
-			const couponsDetails = await API.getUserCoupons(response.data.response.response.Customer[0].ID[0].attributes.Value);
-			console.log(couponsDetails.data.response);
-			this.couponsDetails.push(couponsDetails.data.response);
-			this.props.identificationfromDiaPad(true,this.state.phoneNumber,this.couponsDetails);
-			
+
+			this.couponsDetails.push(response.data.response.response.Customer[0]);
+			const barCodeNumber=  response.data.response.response.Customer[0].ID[0].attributes.Value
+			const couponsDetails = await API.getUserCoupons(barCodeNumber);
+			const couponDetailsArray  = couponsDetails.data.response
+
+			this.couponsDetails.push(couponDetailsArray);
+			this.props.updateCoupons({'couponDetails' : this.couponsDetails})
+			this.props.history.push(ROUTE_DISPLAY_COUPONS)
 		} catch (error){
 			
 			this.setErrorMessage();
@@ -97,7 +93,7 @@ class DialPad extends Component {
 		const clickedValue = e.target.innerText.trim() ;
 		let disableInputArea = false;
 		if( !clickedValue ){
-			alert("Passed nothing");
+			// alert("Passed nothing");
 		}
 		
 		else {
@@ -127,7 +123,7 @@ else{
 	let prev = this.state.phoneNumber;
 		let disableInputArea = false;
 		if( !clickedValue ){
-			alert("Passed nothing");
+			// alert("Passed nothing");
 		}
 		else{
 			this.setState({
@@ -233,4 +229,19 @@ else{
 	};
 }
 
-export default  DialPad
+
+const mapStateToProps=(state)=>{
+	return {
+		couponDetails : state.UserIdentification.couponsDetails
+	}
+}
+
+
+const mapDispatchToProps=(dispatch)=>(
+	{
+		updateCoupons :( couponDetails)=> updateCoupons(dispatch,  couponDetails )
+
+	}
+)
+
+export default connect(mapStateToProps,mapDispatchToProps)( DialPad)

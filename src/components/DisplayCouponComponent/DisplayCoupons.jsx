@@ -1,12 +1,13 @@
 import React from "react";
 import Header from "../HeaderComponent/Header";
 import "./DisplayCoupons.css";
-import Flippy, { FrontSide, BackSide } from "react-flippy";
+import Flippy, {BackSide, FrontSide} from "react-flippy";
 import Popup from "reactjs-popup";
 import ReactToPrint from "react-to-print";
 import Config from "../../config/config";
+import {connect} from "react-redux";
 
- class Coupons extends React.Component {
+class Coupons extends React.Component {
 
 
 	constructor(props){
@@ -145,10 +146,8 @@ import Config from "../../config/config";
 		
 		this.state.array_filter.push(e);
 		
-	 }
-	 
-
-
+     }
+     
 	render() {
 		let couponData = this.props.data;
 		let buttonTrigger = "";
@@ -167,10 +166,13 @@ import Config from "../../config/config";
 		}
 		if(this.state.logOutTrigger) {
 			logOutPopUpTrigger = this.buttonClick;
-			this.setState({logOutTrigger: false});
-			this.setState({count:0});
-			this.setState({logOutReload: true});
-			
+			this.setState({logOutTrigger: false},
+				()=>{
+					this.setState({count:0},
+						()=>{
+							this.setState({logOutReload: true});
+						});
+				});
 		}
 
 		if(this.state.logOutReload) {
@@ -179,19 +181,22 @@ import Config from "../../config/config";
 			}
 		}
 
-		if (couponData[0]) {
-			userCouponData = couponData[0][1];
+		if (couponData.length > 0) {
+
+			// console.log(couponData)
+			userCouponData = couponData[1];
 			couponsLength = userCouponData.length;
-			userName = couponData[0][0].FirstName;
-			userName.toString();
+			userName = couponData[0].FirstName;
 			searchedCoupons = userCouponData;
 			if(searchedCoupons.length > 0) {
 				searchedCoupons = searchedCoupons.filter(function(item){
 					return item.Name.toLowerCase().includes(searchedCoupon.toLowerCase());
-			 });
+				});
 				couponsLength = searchedCoupons.length;
 			}
 		}
+
+
 		if(this.state.array_filter.length > 0){
 			// userCoupons.filter(function(filterMatch){
 			// 	return filterMatch.
@@ -227,8 +232,8 @@ import Config from "../../config/config";
 						width: "171px",
 						height: "264px",
 					}} >
-            {/* Category {i} <br /> Aisle {i} */}
-					</BackSide>
+                    <h3 className="couponDescription">{searchedCoupons[i].Description}</h3>
+                    </BackSide>
 					<FrontSide style={{
 						width: "171px",
 						height: "264px"
@@ -237,7 +242,7 @@ import Config from "../../config/config";
 						<h5> {searchedCoupons[i].Name}</h5>
 						<h6 className="couponDescription"> {searchedCoupons[i].Description}</h6>
 						<h6> Exp: {searchedCoupons[i].EndDate.slice(0,10)} </h6>
-						{/* <h6 className="viewMore"> Tap to View more </h6> */}
+						<h6 className="viewMore"> Tap to View more </h6>
 					</FrontSide>
 
 				</Flippy>
@@ -297,7 +302,7 @@ import Config from "../../config/config";
 					<ul>
 						<li> <a  className={this.state.activeNewCoupons} onClick={this.NewCoupons} > New Coupons </a></li>
 						{/* <li> <a  className={this.state.activeLoadedCoupons} onClick={this.LoadedCoupons}> Loaded Coupons </a></li> */}
-						<div className="filter_sort">
+						{/* <div className="filter_sort">
 							Sort
 							<img className="image_arrow" src={slideArrow_Sort[0]}  onClick={this.Sort}/>
 							<div className="filter_sort_list" hidden= {this.state.sort_arrow} >By Recommended</div>
@@ -314,7 +319,7 @@ import Config from "../../config/config";
 							<img className="image_arrow" src={slideArrow[0]}  onClick={this.Filter}/>
 							<div className="filter_sort_list" hidden= {this.state.filter_arrow} >No filter added</div>
 						</div>
-						{ this.Filter_Category() }
+						{ this.Filter_Category() } */}
 					</ul>
 					{popUpLogout}
 					{sessionEndPopUp}
@@ -337,5 +342,11 @@ import Config from "../../config/config";
 		);
 	}
 }
+
+const mapStateToProps=(state)=>{
+ 	return {
+ 		data : state.UserIdentification.couponDetails
+	}
+}
   
-export default Coupons;
+export default connect(mapStateToProps,null)(Coupons);
