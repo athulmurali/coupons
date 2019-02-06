@@ -1,12 +1,13 @@
 import React from "react";
 import Header from "../HeaderComponent/Header";
 import "./DisplayCoupons.css";
-import Flippy, { FrontSide, BackSide } from "react-flippy";
+import Flippy, {BackSide, FrontSide} from "react-flippy";
 import Popup from "reactjs-popup";
 import ReactToPrint from "react-to-print";
 import Config from "../../config/config";
+import {connect} from "react-redux";
 
- class Coupons extends React.Component {
+class Coupons extends React.Component {
 
 
 	constructor(props){
@@ -146,7 +147,7 @@ import Config from "../../config/config";
 		this.state.array_filter.push(e);
 		
 	 }
-	 
+
 
 
 	render() {
@@ -167,10 +168,13 @@ import Config from "../../config/config";
 		}
 		if(this.state.logOutTrigger) {
 			logOutPopUpTrigger = this.buttonClick;
-			this.setState({logOutTrigger: false});
-			this.setState({count:0});
-			this.setState({logOutReload: true});
-			
+			this.setState({logOutTrigger: false},
+				()=>{
+					this.setState({count:0},
+						()=>{
+							this.setState({logOutReload: true});
+						});
+				});
 		}
 
 		if(this.state.logOutReload) {
@@ -179,19 +183,22 @@ import Config from "../../config/config";
 			}
 		}
 
-		if (couponData[0]) {
-			userCouponData = couponData[0][1];
+		if (couponData.length > 0) {
+
+			console.log(couponData)
+			userCouponData = couponData[1];
 			couponsLength = userCouponData.length;
-			userName = couponData[0][0].FirstName;
-			userName.toString();
+			userName = couponData[0].FirstName;
 			searchedCoupons = userCouponData;
 			if(searchedCoupons.length > 0) {
 				searchedCoupons = searchedCoupons.filter(function(item){
 					return item.Name.toLowerCase().includes(searchedCoupon.toLowerCase());
-			 });
+				});
 				couponsLength = searchedCoupons.length;
 			}
 		}
+
+
 		if(this.state.array_filter.length > 0){
 			// userCoupons.filter(function(filterMatch){
 			// 	return filterMatch.
@@ -337,5 +344,11 @@ import Config from "../../config/config";
 		);
 	}
 }
+
+const mapStateToProps=(state)=>{
+ 	return {
+ 		data : state.UserIdentification.couponDetails
+	}
+}
   
-export default Coupons;
+export default connect(mapStateToProps,null)(Coupons);

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Quagga from "quagga";
 
 class Scanner extends React.Component {

@@ -2,25 +2,23 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 
-import { App } from "./utils/App";
+import {App} from "./utils/App";
 import * as serviceWorker from "./serviceWorker";
 import Router from "./utils/Router";
-import Scanner from "./components/CameraScannerComponent/Scanner";
-import CameraScanner from "./components/CameraScannerComponent/CameraScanner";
 
 
-import {applyMiddleware, combineReducers, createStore} from "redux";
 import {Provider} from "react-redux";
-import logger from "redux-logger";
-import thunk from "redux-thunk";
+import {applyMiddleware, createStore} from "redux";
 import promise from "redux-promise-middleware";
-import AssistanceReducer from "./redux/reducers/AssistanceReducer";
+import thunk from "redux-thunk";
+import logger from "redux-logger";
+import combinedReducer from './redux/reducers'
 
-
-const combinedReducers = combineReducers({  AssistanceReducer});
 const middleware = applyMiddleware(  promise(), thunk ,logger);
 
-const store = createStore(combinedReducers,middleware);
+
+const store = createStore(combinedReducer,middleware);
+
 
 ReactDOM.render(
 	<Provider store={store}>
