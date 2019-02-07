@@ -69,18 +69,18 @@ class Coupons extends React.Component {
 
 	NewCoupons = () => {
 		this.setState({count : 0});
-		this.state.hideNewCoupons = false;
-		this.state.hideLoadedCoupons = true;
-		this.state.activeNewCoupons = "active";
-		this.state.activeLoadedCoupons = "inactive";
+		this.setState({hideNewCoupons : false});
+		this.setState({hideLoadedCoupons : true});
+		this.setState({activeNewCoupons : "active"});
+		this.setState({activeLoadedCoupons : "inactive"});
 	}
 
 	LoadedCoupons = () => {
 		this.setState({count : 0});
-		this.state.hideNewCoupons = true;
-		this.state.hideLoadedCoupons = false;
-		this.state.activeNewCoupons = "inactive";
-		this.state.activeLoadedCoupons = "active";
+		this.setState({hideNewCoupons : true});
+		this.setState({hideLoadedCoupons : false});
+		this.setState({activeNewCoupons : "inactive"});
+		this.setState({activeLoadedCoupons : "active"});
 	}
 	Filter = () => {
 		if(this.state.filter_arrow === false){
@@ -90,9 +90,7 @@ class Coupons extends React.Component {
 		else{
 			this.setState({filter_arrow : false});
 		this.Image_up = require('../../assets/new-filter-arrow-down.svg');
-		}
-		
-		console.log(this.state.filter_arrow);
+		}	
 	}
 	Sort = () => {
 		if(this.state.sort_arrow === false){
@@ -109,13 +107,13 @@ class Coupons extends React.Component {
 	inputChange = (e) => {
 		this.setState({count : 0});
 		this.props.displayCouponState({searchedCouponName : e.target.value})
-		this.state.searchedCouponName = e.target.value;
+		this.setState({searchedCouponName : e.target.value});
 
 	}
 
 	clearInput = (e) => {
 		e.target.value = "";
-		this.state.searchedCouponName = e.target.value ;
+		this.setState({searchedCouponName : e.target.value}) ;
 	}
 	Sorting_Category = () => {
 		const sort_category = ["Redeem By Date"	,"Value(Low to High)	","Value(High to Low)"	," Brand"];
