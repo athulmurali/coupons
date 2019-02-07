@@ -6,14 +6,14 @@ import Popup from "reactjs-popup";
 import ReactToPrint from "react-to-print";
 import Config from "../../config/config";
 import {connect} from "react-redux";
+import CouponCards from "../CouponCardComponent/CouponCards";
+import {updateCoupons} from "../../redux/actions/UserIdentification";
 
 class Coupons extends React.Component {
-
 
 	constructor(props){
 		super(props);
 		this.state = {
-			couponDetails : [],
 			count: 0,
 			hideLoadedCoupons: true,
 			hideNewCoupons: false,
@@ -26,7 +26,6 @@ class Coupons extends React.Component {
 			filter_arrow: false,
 			sort_arrow: false,
 			array_filter : []
-			
 		};		
 		this.Image_up = require('../../assets/new-filter-arrow-down.svg');
 		this.Sort_up = require('../../assets/new-filter-arrow-down.svg');
@@ -40,38 +39,40 @@ class Coupons extends React.Component {
 		};
 	}
 
+	componentDidUpdate () {
+		// <CouponCards />
+	}
+
 	componentWillUnmount () {
 		clearInterval(this.timer);
 	}
 
-
 	componentDidMount () {
 		this.startTimer();
+		this.tick();
 	}
+
 	tick () {
-		this.setState({count: (this.state.count + 1)});
+	  this.setState({count: (this.state.count + 1)});
 	}
 	startTimer () {
 		clearInterval(this.timer);
 		this.timer = setInterval(this.tick.bind(this), 1000);
 	}
-	timerReset = () => {
-		this.setState({count: 0});
+	timerReset = () =>  {
+		this.setState({count : 0});
 	}
 
 	newXyz = ()  => {
-		this.setState({count: 0});
-	}
+		this.setState({count : 0});
+		}
 
 	handleScreenTap = () => {
 			this.props.history.push(`/`);
 	}
 
-
-
-
 	NewCoupons = () => {
-		this.setState({count: 0});
+		this.setState({count : 0});
 		this.state.hideNewCoupons = false;
 		this.state.hideLoadedCoupons = true;
 		this.state.activeNewCoupons = "active";
@@ -79,7 +80,7 @@ class Coupons extends React.Component {
 	}
 
 	LoadedCoupons = () => {
-		this.setState({count: 0});
+		this.setState({count : 0});
 		this.state.hideNewCoupons = true;
 		this.state.hideLoadedCoupons = false;
 		this.state.activeNewCoupons = "inactive";
@@ -110,9 +111,9 @@ class Coupons extends React.Component {
 
 
 	inputChange = (e) => {
-		this.setState({count: 0});
+		this.setState({count : 0});
 		this.state.searchedCouponName = e.target.value;
-
+	
 	}
 
 	clearInput = (e) => {
@@ -149,26 +150,39 @@ class Coupons extends React.Component {
      }
      
 	render() {
+		if(this.props.data.length<1) {
+			return <div>No Data Obtained</div>
+		}
+
+
+
 		let couponData = this.props.data;
 		let buttonTrigger = "";
 		let logOutPopUpTrigger = "";
-		let userCoupons = [];
+		// let userCoupons = [];
 		let userCouponData = "";
 		let couponsLength = "";
 		let userName = "";
 		let searchedCoupons = "";
-		let searchedCoupon = this.state.searchedCouponName;
+    let searchedCoupon = this.state.searchedCouponName;
+			
+		if(couponData.length > 0) {
+			userName = couponData[0].FirstName;
+		}			
+
+
 		if(this.state.count > Config.POPUPTIMER){
 				buttonTrigger = this.buttonClick;
 				if(this.state.count > Config.LOGOUTTIMER) {
 					this.handleScreenTap();
 				}
-		}
+    }
+        
 		if(this.state.logOutTrigger) {
 			logOutPopUpTrigger = this.buttonClick;
 			this.setState({logOutTrigger: false},
 				()=>{
-					this.setState({count:0},
+					this.setState({count : 0},
 						()=>{
 							this.setState({logOutReload: true});
 						});
@@ -181,27 +195,28 @@ class Coupons extends React.Component {
 			}
 		}
 
+// Filtering Coupons By Name
 		if (couponData.length > 0) {
-
-			// console.log(couponData)
 			userCouponData = couponData[1];
 			couponsLength = userCouponData.length;
-			userName = couponData[0].FirstName;
 			searchedCoupons = userCouponData;
 			if(searchedCoupons.length > 0) {
+				couponsLength = searchedCoupons.length;
 				searchedCoupons = searchedCoupons.filter(function(item){
 					return item.Name.toLowerCase().includes(searchedCoupon.toLowerCase());
 				});
-				couponsLength = searchedCoupons.length;
 			}
 		}
 
+		if(searchedCoupon.length >0){
+			this.props.updateCoupons({'couponDetailsSearchedCopy': searchedCoupons})
+		}
 
 		if(this.state.array_filter.length > 0){
 			// userCoupons.filter(function(filterMatch){
 			// 	return filterMatch.
 			// }) 
-			console.log(userCoupons);
+			// console.log(userCoupons);
 		}
 		const Image_coupon = require("../../assets/stopandshop.png");
 		const LogOut_Success = require("../../assets/success.svg");
@@ -212,43 +227,6 @@ class Coupons extends React.Component {
 		const slideArrow_Sort = [
 			this.Sort_up
 		];
-	
-
-		for (var i = 0; i < couponsLength; i++) {
-			userCoupons.push(
-				<div className="Cards" key={i} onClick={this.newXyz}>
-				<Flippy flipOnHover={false} // default false
-					flipOnClick={true} // default false
-					flipDirection="horizontal" // horizontal or vertical
-					ref={(r) => this.flippy = r} // to use toggle method like this.flippy.toggle()
-					style={{
-						width: "170px",
-						height: "150px",
-						padding: "0",
-					}}>
-					<BackSide style={{
-						backgroundColor: "white",
-						color: "black",
-						width: "171px",
-						height: "264px",
-					}} >
-                    <h3 className="couponDescription">{searchedCoupons[i].Description}</h3>
-                    </BackSide>
-					<FrontSide style={{
-						width: "171px",
-						height: "264px"
-					}}>
-						<img src={Image_coupon} width="103px" height="103px" alt="image_image" /> <br />
-						<h5> {searchedCoupons[i].Name}</h5>
-						<h6 className="couponDescription"> {searchedCoupons[i].Description}</h6>
-						<h6> Exp: {searchedCoupons[i].EndDate.slice(0,10)} </h6>
-						<h6 className="viewMore"> Tap to View more </h6>
-					</FrontSide>
-
-				</Flippy>
-			</div>);
-	};	
-
 
 	let popUpLogout = (<Popup trigger={<button ref = {logOutPopUpTrigger}  className="button" ></button>} true modal>
 					{close => (
@@ -301,7 +279,7 @@ class Coupons extends React.Component {
 				<div className="AllCoupons">
 					<ul>
 						<li> <a  className={this.state.activeNewCoupons} onClick={this.NewCoupons} > New Coupons </a></li>
-						{/* <li> <a  className={this.state.activeLoadedCoupons} onClick={this.LoadedCoupons}> Loaded Coupons </a></li> */}
+						<li> <a  className={this.state.activeLoadedCoupons} onClick={this.LoadedCoupons}> Loaded Coupons </a></li>
 						{/* <div className="filter_sort">
 							Sort
 							<img className="image_arrow" src={slideArrow_Sort[0]}  onClick={this.Sort}/>
@@ -331,11 +309,13 @@ class Coupons extends React.Component {
                         </div> 
 						<h4 className="LoadedCouponCount"> Available Coupons ({couponsLength}) </h4>
 						</div>
-						{userCoupons}        
+						<div onClick={this.newXyz}>
+						<CouponCards  />
+						</div>
 					</div>
 					<div className="LoadedCoupons"  hidden={this.state.hideLoadedCoupons} ref= {el => (this.componentRef = el)} >
 						<h4 className="LoadedCouponCount"> Loaded Coupons ({couponsLength}) </h4>
-						{userCoupons}        
+						{/* {userCoupons}         */}
 					</div>
 				</div> 
 			</div>
@@ -345,8 +325,15 @@ class Coupons extends React.Component {
 
 const mapStateToProps=(state)=>{
  	return {
- 		data : state.UserIdentification.couponDetails
+		 data : state.UserIdentification.couponDetails,
 	}
 }
-  
-export default connect(mapStateToProps,null)(Coupons);
+
+const mapDispatchToprops = (dispatch) => (
+	{
+	// displayCouponState : (updatedValue) => displayCouponState(dispatch, updatedValue)
+	updateCoupons :( updatedValue)=> updateCoupons(dispatch,  updatedValue )
+
+}
+)
+export default connect(mapStateToProps,mapDispatchToprops)(Coupons);

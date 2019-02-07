@@ -15,7 +15,7 @@ class DialPad extends Component {
 			phoneNumber: '',
 			disableTextArea: false,
 			defaultMessage: 'Enter the Phone number',
-			count: 0,
+			count: this.props.count,
 			cardNumber: false,
 			mouseHover: false,
 			phoneButton: "act",
@@ -232,7 +232,7 @@ else{
 
 const mapStateToProps=(state)=>{
 	return {
-		couponDetails : state.UserIdentification.couponsDetails
+		couponDetails : state.UserIdentification.couponsDetails,
 	}
 }
 
