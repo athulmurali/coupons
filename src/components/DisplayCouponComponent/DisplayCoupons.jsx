@@ -22,7 +22,6 @@ class Coupons extends React.Component {
 			logOutTrigger: false,
 			logOutReload: false,
 			searchedCouponName: "",
-			barName:  "Search By Coupon Name",
 			filter_arrow: false,
 			sort_arrow: false,
 			array_filter : []
@@ -37,10 +36,6 @@ class Coupons extends React.Component {
 		if(el) {
 		el.click();
 		};
-	}
-
-	componentDidUpdate () {
-		// <CouponCards />
 	}
 
 	componentWillUnmount () {
