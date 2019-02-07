@@ -21,11 +21,12 @@ class CouponCards extends React.Component {
 
 		if(this.props.dataCopy.length > 0 ){
 			searchedCoupons = this.props.dataCopy;
-			debugger;
+		}
+		else{
+			searchedCoupons = this.props.data[1];
 		}
 
 		if(couponsLength > 0){
-			searchedCoupons = this.props.data[1];
 			for (var i = 0; i < couponsLength; i++) {
 				userCoupons.push(
 					<div className="Cards" key={i}>
