@@ -1,69 +1,60 @@
 import React from "react";
 import {connect} from "react-redux";
 import Flippy, {BackSide, FrontSide} from "react-flippy";
-import displayCouponState from "../../actions/displayCouponActions";
+
+import StopAndShopImg from "../../assets/stopandshop.png"
 
 
 class CouponCards extends React.Component {
-
-	constructor(props){
-		super();
-		this.state = {props};
-	}
-
+	//
+	// constructor(props){
+	// 	super(props);
+	// }
+	//
 
 
 	render() {
-		const Image_coupon = require("../../assets/stopandshop.png");
-		let userCoupons = [];
-		let couponsLength = this.props.data[1].length;
-		let searchedCoupons =[];
+
+		let coupons = this.props.data[1]
 
 		if(this.props.dataCopy.length > 0 ){
-			searchedCoupons = this.props.dataCopy;
-			debugger;
+			coupons = this.props.dataCopy;
 		}
 
-		if(couponsLength > 0){
-			searchedCoupons = this.props.data[1];
-			for (var i = 0; i < couponsLength; i++) {
-				userCoupons.push(
-					<div className="Cards" key={i}>
+		if(coupons.length > 0){
+
+			return coupons.map((coupon,i)=><div className="Cards" key={i}>
 						<Flippy flipOnHover={false} // default false
-							flipOnClick={true} // default false
-							flipDirection="horizontal" // horizontal or vertical
-							ref={(r) => this.flippy = r} // to use toggle method like this.flippy.toggle()
-							style={{
-								width: "170px",
-								height: "150px",
-								padding: "0",
-							}}>
+								flipOnClick={true} // default false
+								flipDirection="horizontal" // horizontal or vertical
+								ref={(r) => this.flippy = r} // to use toggle method like this.flippy.toggle()
+								style={{
+									width: "170px",
+									height: "150px",
+									padding: "0",
+								}}>
 							<BackSide style={{
 								backgroundColor: "white",
 								color: "black",
 								width: "171px",
 								height: "264px",
 							}} >
-								{/* <h3 className="couponDescription">{searchedCoupons[i].Description}</h3> */}
 							</BackSide>
 							<FrontSide style={{
 								width: "171px",
 								height: "264px"
 							}}>
-								<img src={Image_coupon} width="103px" height="103px" alt="image_image" /> <br />
-								<h5> {searchedCoupons[i].Name}</h5>
-								<h6 className="couponDescription"> {searchedCoupons[i].Description}</h6>
-								<h6> Exp: {searchedCoupons[i].EndDate.slice(0,10)} </h6>
+								<img src={StopAndShopImg} width="103px" height="103px" alt="image_image" /> <br />
+								<h5> {coupon.Name}</h5>
+								<h6 className="couponDescription"> {coupon.Description}</h6>
+								<h6> Exp: {coupon.EndDate.slice(0,10)} </h6>
 								<h6 className="viewMore"> Tap to View more </h6>
 							</FrontSide>
 						</Flippy>
-					</div>);
-			}	
+					</div>)
 		}
 
-		return(
-			<div>{userCoupons}</div>
-		);
+
 	}
 }
 

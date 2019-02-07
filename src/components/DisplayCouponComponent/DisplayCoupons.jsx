@@ -8,6 +8,7 @@ import Config from "../../config/config";
 import {connect} from "react-redux";
 import CouponCards from "../CouponCardComponent/CouponCards";
 import {updateCoupons} from "../../redux/actions/UserIdentification";
+import {displayCouponState} from "../../redux/actions/DisplayCouponAction";
 
 class Coupons extends React.Component {
 
@@ -48,7 +49,7 @@ class Coupons extends React.Component {
 	}
 
 	componentDidMount () {
-		this.startTimer();
+		// this.startTimer();
 		this.tick();
 	}
 
@@ -112,8 +113,9 @@ class Coupons extends React.Component {
 
 	inputChange = (e) => {
 		this.setState({count : 0});
+		this.props.displayCouponState({searchedCouponName : e.target.value})
 		this.state.searchedCouponName = e.target.value;
-	
+
 	}
 
 	clearInput = (e) => {
@@ -305,7 +307,9 @@ class Coupons extends React.Component {
 						<div className="CouponSearch">
 						<div className="SearchBarImage">
                             <img className="SearchImage" src={Search_Icon} />
-                            <input type="text" className = "SearchBar" placeholder="Search"  onChange ={this.inputChange} onClick={this.timerReset}/>
+                            <input type="text" className = "SearchBar" placeholder="Search"
+								   onChange ={this.inputChange}
+								   onClick={this.timerReset}/>
                         </div> 
 						<h4 className="LoadedCouponCount"> Available Coupons ({couponsLength}) </h4>
 						</div>
@@ -331,7 +335,7 @@ const mapStateToProps=(state)=>{
 
 const mapDispatchToprops = (dispatch) => (
 	{
-	// displayCouponState : (updatedValue) => displayCouponState(dispatch, updatedValue)
+	displayCouponState : (updatedValue) => displayCouponState(dispatch, updatedValue),
 	updateCoupons :( updatedValue)=> updateCoupons(dispatch,  updatedValue )
 
 }
