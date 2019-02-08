@@ -10,7 +10,6 @@ import {updateCoupons} from "../../redux/actions/UserIdentification";
 class DialPad extends Component {
 	constructor(props){
 		super(props);
-		const isPortrait = window.matchMedia('(orientation: portrait)').matches;
 		this.state = {
 			phoneNumber: '',
 			disableTextArea: false,

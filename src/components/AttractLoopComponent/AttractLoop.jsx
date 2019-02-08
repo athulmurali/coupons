@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import './AttractLoop.css';
 import {Slide} from 'react-slideshow-image';
 import ScanBarcode from '../ScanBarcode/ScanBarcode';
@@ -99,9 +98,4 @@ const mapDispatchToProps =(dispatch)=>{
 
 }
 
-AttractLoop.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func,
-  }).isRequired,
-};
 export default connect(null,mapDispatchToProps)(AttractLoop) ;

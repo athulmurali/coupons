@@ -1,19 +1,30 @@
 import React from "react";
 import {connect} from "react-redux";
 import Flippy, {BackSide, FrontSide} from "react-flippy";
-
 import StopAndShopImg from "../../assets/stopandshop.png";
+import {updateCoupons} from "../../redux/actions/UserIdentification";
 
 
 class CouponCards extends React.Component {
 	render() {
+
 		let coupons = this.props.data[1];
-		if(this.props.dataCopy.length > 0 ){
-			coupons = this.props.dataCopy;
+		let searchedCouponName = this.props.searchedCouponName;
+		let couponsLength =  coupons.length;
+		let searchedCoupons = this.props.searchedCoupons;
+		if(searchedCouponName !== "")  {
+			searchedCoupons = coupons.filter(function(couponName){
+				return couponName.Name.toLowerCase().includes(searchedCouponName.toLowerCase());
+			});
+			coupons = searchedCoupons;
+			couponsLength = searchedCoupons.length;
 		}
 
-		if(coupons.length > 0){
-
+		if(couponsLength === 0) {
+			return <div> No Coupons Found </div>;
+		}
+		
+		if(coupons.length > 0 ){
 			return coupons.map((coupon,i)=><div className="Cards" key={i}>
 				<Flippy flipOnHover={false} // default false
 					flipOnClick={true} // default false
@@ -44,23 +55,24 @@ class CouponCards extends React.Component {
 				</Flippy>
 			</div>);
 		}
-
-
 	}
+
 }
 
 
 const mapStateToProps=(state)=>{
 	return {
 		data : state.UserIdentification.couponDetails,
-		dataCopy: state.UserIdentification.couponDetailsSearchedCopy
+		dataCopy: state.UserIdentification.couponDetailsSearchedCopy,
+		searchedCouponName: state.DisplayCouponStateUpdate.searchedCouponName,
+		searchedCoupons : state.UserIdentification.searchedCoupons,
 	};
 };
 
-// const mapDispatchToProps = (dispatch) => ({
-// 	displayCouponState : (updatedValue) => displayCouponState(dispatch, updatedValue)
-// }
-// )
+const mapDispatchToProps = (dispatch) => ({
+	updateCoupons :( updatedValue)=> updateCoupons(dispatch,  updatedValue )
+}
+);
  
-export default connect(mapStateToProps,null)(CouponCards);
+export default connect(mapStateToProps,mapDispatchToProps)(CouponCards);
 

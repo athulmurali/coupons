@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import PropTypes from "prop-types";
 import AttractLoop from "../components/AttractLoopComponent/AttractLoop";
 
 // import BarcodeScanner from "../components/BarcodeScanner/BarcodeScanner";
@@ -13,8 +12,8 @@ class AttractLoopView extends Component{
 
 	render(){
 		return(
-			<div onClick={() => this.props.rotateAction(false)}>
-				<AttractLoop history={this.props.history}></AttractLoop>
+			<div>
+				<AttractLoop history={this.props.history} />
 			</div>
 		);
 	}
@@ -23,9 +22,8 @@ class AttractLoopView extends Component{
 const mapStateToProps = state => ({
 	...state
 });
-const mapDispatchToProps = dispatch => ({
-	rotateAction: (value) => { 
-		dispatch(displayCouponsStateUpdate("rotating",value));}
-});
+// const mapDispatchToProps = dispatch => ({
+	
+// });
 
-export default connect(mapStateToProps, mapDispatchToProps)(AttractLoopView);
+export default connect(mapStateToProps, null)(AttractLoopView);

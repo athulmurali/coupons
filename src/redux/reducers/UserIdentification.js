@@ -4,6 +4,7 @@ export const RESET = "RESET";
 
 const initialState = {
 	couponDetails : [],
+	searchedCoupons :[],
 	couponDetailsSearchedCopy :[],
 };
 

@@ -1,7 +1,6 @@
 import React from "react";
 import Header from "../HeaderComponent/Header";
 import "./DisplayCoupons.css";
-import Flippy, {BackSide, FrontSide} from "react-flippy";
 import Popup from "reactjs-popup";
 import ReactToPrint from "react-to-print";
 import Config from "../../config/config";
@@ -9,7 +8,7 @@ import {connect} from "react-redux";
 import CouponCards from "../CouponCardComponent/CouponCards";
 import {updateCoupons} from "../../redux/actions/UserIdentification";
 import {displayCouponState} from "../../redux/actions/DisplayCouponAction";
-
+import SearchCouponByName from "../SearchComponent/SearchCoupon";
 class Coupons extends React.Component {
 
 	constructor(props){
@@ -22,7 +21,6 @@ class Coupons extends React.Component {
 			activeLoadedCoupons: "inactive",
 			logOutTrigger: false,
 			logOutReload: false,
-			searchedCouponName: "",
 			filter_arrow: false,
 			sort_arrow: false,
 			array_filter : []
@@ -107,14 +105,8 @@ class Coupons extends React.Component {
 	inputChange = (e) => {
 		this.setState({count : 0});
 		this.props.displayCouponState({searchedCouponName : e.target.value})
-		this.setState({searchedCouponName : e.target.value});
-
 	}
 
-	clearInput = (e) => {
-		e.target.value = "";
-		this.setState({searchedCouponName : e.target.value}) ;
-	}
 	Sorting_Category = () => {
 		const sort_category = ["Redeem By Date"	,"Value(Low to High)	","Value(High to Low)"	," Brand"];
 		return(
@@ -145,21 +137,15 @@ class Coupons extends React.Component {
      }
      
 	render() {
+
 		if(this.props.data.length<1) {
 			return <div>No Data Obtained</div>
 		}
 
-
-
 		let couponData = this.props.data;
 		let buttonTrigger = "";
 		let logOutPopUpTrigger = "";
-		// let userCoupons = [];
-		let userCouponData = "";
-		let couponsLength = "";
 		let userName = "";
-		let searchedCoupons = "";
-    let searchedCoupon = this.state.searchedCouponName;
 			
 		if(couponData.length > 0) {
 			userName = couponData[0].FirstName;
@@ -190,30 +176,12 @@ class Coupons extends React.Component {
 			}
 		}
 
-// Filtering Coupons By Name
-		if (couponData.length > 0) {
-			userCouponData = couponData[1];
-			couponsLength = userCouponData.length;
-			searchedCoupons = userCouponData;
-			if(searchedCoupons.length > 0) {
-				couponsLength = searchedCoupons.length;
-				searchedCoupons = searchedCoupons.filter(function(item){
-					return item.Name.toLowerCase().includes(searchedCoupon.toLowerCase());
-				});
-			}
-		}
-
-		if(searchedCoupon.length >0){
-			this.props.updateCoupons({'couponDetailsSearchedCopy': searchedCoupons})
-		}
-
 		if(this.state.array_filter.length > 0){
 			// userCoupons.filter(function(filterMatch){
 			// 	return filterMatch.
 			// }) 
 			// console.log(userCoupons);
 		}
-		const Image_coupon = require("../../assets/stopandshop.png");
 		const LogOut_Success = require("../../assets/success.svg");
 		const Search_Icon = require("../../assets/new-filter-search.png");
 		const slideArrow = [
@@ -297,7 +265,7 @@ class Coupons extends React.Component {
 					{popUpLogout}
 					{sessionEndPopUp}
 					<div className="LoadedCoupons"  hidden={this.state.hideNewCoupons}   >
-						<div className="CouponSearch">
+						{/* <div className="CouponSearch">
 						<div className="SearchBarImage">
                             <img className="SearchImage" src={Search_Icon} />
                             <input type="text" className = "SearchBar" placeholder="Search"
@@ -305,15 +273,16 @@ class Coupons extends React.Component {
 								   onClick={this.timerReset}/>
                         </div> 
 						<h4 className="LoadedCouponCount"> Available Coupons ({couponsLength}) </h4>
-						</div>
+						</div> */}
+						<SearchCouponByName />
 						<div onClick={this.newXyz}>
 						<CouponCards  />
 						</div>
 					</div>
-					<div className="LoadedCoupons"  hidden={this.state.hideLoadedCoupons} ref= {el => (this.componentRef = el)} >
+					{/* <div className="LoadedCoupons"  hidden={this.state.hideLoadedCoupons} ref= {el => (this.componentRef = el)} >
 						<h4 className="LoadedCouponCount"> Loaded Coupons ({couponsLength}) </h4>
-						{/* {userCoupons}         */}
-					</div>
+						{userCoupons}        
+					</div> */}
 				</div> 
 			</div>
 		);
@@ -323,6 +292,7 @@ class Coupons extends React.Component {
 const mapStateToProps=(state)=>{
  	return {
 		 data : state.UserIdentification.couponDetails,
+		 searchedCouponName: state.DisplayCouponStateUpdate.searchedCouponName,
 	}
 }
 
