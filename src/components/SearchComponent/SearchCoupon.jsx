@@ -15,7 +15,7 @@ class SearchCouponByName extends React.Component {
 		return(
 			<div className="CouponSearch">
 				<div className="SearchBarImage">
-					<img className="SearchImage" src={Search_Icon} alt ="image not found" />
+					<img className="SearchImage" src={Search_Icon} alt ="Search icon not found" />
 					<input type="text" className = "SearchBar" placeholder="Search"
 						onChange ={this.inputChange}
 						// onClick={this.timerReset}
