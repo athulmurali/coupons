@@ -62,7 +62,7 @@ class AttractLoop extends Component {
 
     return (
       
-      <div className="AttractLoop" onClick={this.handleScreenTap}>
+      <div className="AttractLoop" onClick={this.handleScreenTap}  >
         <Header />
         <Slide {...slide_properties} className="couponScreenBackground">
           <div className="each-slide">

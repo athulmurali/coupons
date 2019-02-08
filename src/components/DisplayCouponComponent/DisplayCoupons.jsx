@@ -57,9 +57,6 @@ class Coupons extends React.Component {
 		this.setState({count : 0});
 	}
 
-	newXyz = ()  => {
-		this.setState({count : 0});
-		}
 
 	handleScreenTap = () => {
 			this.props.history.push(`/`);
@@ -101,11 +98,6 @@ class Coupons extends React.Component {
 		}
 	}
 
-
-	inputChange = (e) => {
-		this.setState({count : 0});
-		this.props.displayCouponState({searchedCouponName : e.target.value})
-	}
 
 	Sorting_Category = () => {
 		const sort_category = ["Redeem By Date"	,"Value(Low to High)	","Value(High to Low)"	," Brand"];
@@ -226,7 +218,7 @@ class Coupons extends React.Component {
 			
 
 		return (
-			<div >
+			<div>
 				<div className="WelcomeUser_Logout" >
 					<h2 className="userName"> Welcome {userName}! </h2>
 					<button className="logoutButton" ref = {logOutPopUpTrigger} onClick={() => this.setState({logOutTrigger: true})} > Log Out </button>
@@ -242,7 +234,8 @@ class Coupons extends React.Component {
 				<div className="AllCoupons">
 					<ul>
 						<li> <a  className={this.state.activeNewCoupons} onClick={this.NewCoupons} > New Coupons </a></li>
-						<li> <a  className={this.state.activeLoadedCoupons} onClick={this.LoadedCoupons}> Loaded Coupons </a></li>
+						{/* <li> <a  className={this.state.activeLoadedCoupons} onClick={this.LoadedCoupons}> Loaded Coupons </a></li> */}
+
 						{/* <div className="filter_sort">
 							Sort
 							<img className="image_arrow" src={slideArrow_Sort[0]}  onClick={this.Sort}/>
@@ -265,17 +258,8 @@ class Coupons extends React.Component {
 					{popUpLogout}
 					{sessionEndPopUp}
 					<div className="LoadedCoupons"  hidden={this.state.hideNewCoupons}   >
-						{/* <div className="CouponSearch">
-						<div className="SearchBarImage">
-                            <img className="SearchImage" src={Search_Icon} />
-                            <input type="text" className = "SearchBar" placeholder="Search"
-								   onChange ={this.inputChange}
-								   onClick={this.timerReset}/>
-                        </div> 
-						<h4 className="LoadedCouponCount"> Available Coupons ({couponsLength}) </h4>
-						</div> */}
 						<SearchCouponByName />
-						<div onClick={this.newXyz}>
+						<div onClick={this.timerReset}>
 						<CouponCards  />
 						</div>
 					</div>

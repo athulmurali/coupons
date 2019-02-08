@@ -2,7 +2,8 @@ export const UPDATE_DISPLAY_COUPON_STATE  = "UPDATE_DISPLAY_COUPON_STATE";
 export const RESET = "RESET";
 
 const initialState = {
-	searchedCouponName : ""
+	searchedCouponName : "",
+	searchedCouponsLength: ""
 };
 
 

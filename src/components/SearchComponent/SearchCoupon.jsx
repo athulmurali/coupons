@@ -10,6 +10,7 @@ class SearchCouponByName extends React.Component {
 	}
 
 	render(){
+		let couponsLength = this.props.couponsLength;
 
 		return(
 			<div className="CouponSearch">
@@ -20,7 +21,7 @@ class SearchCouponByName extends React.Component {
 						// onClick={this.timerReset}
 					/>
 				</div> 
-				<h4 className="LoadedCouponCount"> Available Coupons ('couponsLength') </h4>
+				<h4 className="LoadedCouponCount"> Available Coupons ({couponsLength}) </h4>
 			</div>
 		);
 	}
@@ -29,8 +30,7 @@ class SearchCouponByName extends React.Component {
 
 const mapStateToProps = (state) => {
 	return {
-		data : state.UserIdentification.couponDetails,
-		dataCopy: state.UserIdentification.couponDetailsSearchedCopy,
+		couponsLength : state.DisplayCouponStateUpdate.searchedCouponsLength
 	};
 };
 
