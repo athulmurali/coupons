@@ -1,7 +1,6 @@
 import React from "react";
 import Header from "../HeaderComponent/Header";
 import "./DisplayCoupons.css";
-import Popup from "reactjs-popup";
 import ReactToPrint from "react-to-print";
 import Config from "../../config/config";
 import {connect} from "react-redux";
@@ -10,7 +9,7 @@ import {updateCoupons} from "../../redux/actions/UserIdentification";
 import {displayCouponState} from "../../redux/actions/DisplayCouponAction";
 import SearchCouponByName from "../SearchComponent/SearchCoupon";
 import PopUpLogOut from "../PopUpLogOut";
-import SessionEndPopUp from "../SessionEndPopUp/SessionEndPopUp";
+import PopUpSessionEnd from "../PopUpSessionEnd/PopUpSessionEnd";
 
 class Coupons extends React.Component {
 
@@ -233,7 +232,7 @@ class Coupons extends React.Component {
 						{ this.Filter_Category() } */}
                     </ul>
                     <PopUpLogOut LogOut_Success={LogOut_Success}/>
-                    <SessionEndPopUp logOutPopUpTrigger={logOutPopUpTrigger} buttonTrigger={buttonTrigger}/>
+                    <PopUpSessionEnd logOutPopUpTrigger={logOutPopUpTrigger} buttonTrigger={buttonTrigger}/>
                     <div className="LoadedCoupons" hidden={this.state.hideNewCoupons}>
                         <SearchCouponByName/>
                         <div onClick={this.timerReset}>

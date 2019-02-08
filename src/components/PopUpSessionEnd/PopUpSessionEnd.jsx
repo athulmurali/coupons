@@ -1,7 +1,7 @@
 import Popup from "../DisplayCouponComponent/DisplayCoupons";
 import React from "react";
 
-const SessionEndPopUp = (props) => (
+const PopUpSessionEnd = (props) => (
     <Popup
         trigger={<button ref={props.buttonTrigger} className="button"/>} true modal>
         {close => (
@@ -32,4 +32,4 @@ const SessionEndPopUp = (props) => (
             </div>
         )}
     </Popup>)
-export default SessionEndPopUp
+export default PopUpSessionEnd
