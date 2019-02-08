@@ -49,34 +49,28 @@ class Coupons extends React.Component {
 	tick () {
 	  this.setState({count: (this.state.count + 1)});
 	}
+
 	startTimer () {
 		clearInterval(this.timer);
 		this.timer = setInterval(this.tick.bind(this), 1000);
 	}
+
 	timerReset = () =>  {
 		this.setState({count : 0});
 	}
-
 
 	handleScreenTap = () => {
 			this.props.history.push(`/`);
 	}
 
 	NewCoupons = () => {
-		this.setState({count : 0});
-		this.setState({hideNewCoupons : false});
-		this.setState({hideLoadedCoupons : true});
-		this.setState({activeNewCoupons : "active"});
-		this.setState({activeLoadedCoupons : "inactive"});
+		this.setState({count : 0, hideNewCoupons : false, hideLoadedCoupons : true, activeNewCoupons : "active", activeLoadedCoupons : "inactive"});
 	}
 
 	LoadedCoupons = () => {
-		this.setState({count : 0});
-		this.setState({hideNewCoupons : true});
-		this.setState({hideLoadedCoupons : false});
-		this.setState({activeNewCoupons : "inactive"});
-		this.setState({activeLoadedCoupons : "active"});
+		this.setState({count : 0, hideNewCoupons : true, hideLoadedCoupons : false, activeNewCoupons : "inactive", activeLoadedCoupons : "active"});
 	}
+
 	Filter = () => {
 		if(this.state.filter_arrow === false){
 		this.setState({filter_arrow : true});
