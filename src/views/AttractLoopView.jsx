@@ -1,9 +1,7 @@
 import React, {Component} from "react";
 import AttractLoop from "../components/AttractLoopComponent/AttractLoop";
-
 // import BarcodeScanner from "../components/BarcodeScanner/BarcodeScanner";
-import { connect } from "react-redux";
-import displayCouponsStateUpdate from "../actions/displayCouponActions";
+import {connect} from "react-redux";
 
 class AttractLoopView extends Component{
 	// constructor(props){
