@@ -185,11 +185,11 @@ class DialPad extends Component {
             <div className="messsgeDisplay">
                 <div>
                     <button className={this.state.phoneButton} onClick={this.handlePhoneClick}>
-                        <img className="image-width" src={slideImages[1]}/>
+                        <img className="image-width" alt="phone number" src={slideImages[1]}/>
                         Phone Number
                     </button>
                     <button className={this.state.cardButton} onClick={this.handleCardClick}>
-                        <img className="image-width" src={slideImages[0]}/>
+                        <img className="image-width" alt ="card number" src={slideImages[0]}/>
                         Card Number
                     </button>
                 </div>

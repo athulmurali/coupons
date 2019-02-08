@@ -6,10 +6,7 @@ import PopUpWindow from "./PopUpWindow";
 
 class AssistancePopUpComponent extends React.Component {
 
-	constructor(props) {
-		super(props);
 
-	}
 
 	render() {
 		return <Popup contentStyle={{minWidth: "600px",textAlign :"left"}}

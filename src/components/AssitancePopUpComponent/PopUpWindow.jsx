@@ -56,7 +56,7 @@ class  PopUpWindow extends React.Component{
 							<span className="popupMessage" style={PARA_TEXT_STYLE}>{para2_text_1}</span><br/>
 							<span className="popupMessage" style={PARA_TEXT_STYLE}>{para2_text_2}</span>
 						</div>
-						<img src={no_Image_No_Problem} style={IMG_STYLE} alt="no image found" />
+						<img src={no_Image_No_Problem} style={IMG_STYLE} alt="Not found!" />
 
 					</div>
 				</div>
