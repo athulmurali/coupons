@@ -3,12 +3,14 @@ export const RESET = "RESET";
 
 const initialState = {
 	searchedCouponName : "",
-	searchedCouponsLength: ""
+	searchedCouponsLength: "",
+	// logOutTrigger: false,
+	// logOutReload: false,
 };
 
 
 
-const DisplayCouponStateUpdate = (state = initialState, action)=>{
+const DisplayCouponStateUpdate = (state = initialState, action) => {
 
 	switch (action.type) {
 		
