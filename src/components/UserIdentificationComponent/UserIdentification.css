@@ -15,7 +15,7 @@
 	margin-bottom: 0px;
 	margin-right: 8px;
 }
-.inactive {
+.inact {
 	width: 200px;
 	height: 55px;
 	margin-block-end: 1em;
@@ -25,11 +25,11 @@
 	border: 1px solid lightgrey;
 	color: #63666A;
 }
-.inactive:focus{
+.inact:focus{
 	outline: 0em;
 }
 
-.active{
+.act{
 	width: 200px;
 	height: 55px;
 	margin-block-end: 1em;
@@ -39,7 +39,7 @@
 	border: 1px solid lightgrey;
 	color: white;
 }
-.active:focus{
+.act:focus{
 	outline: 0em;
 }
 
