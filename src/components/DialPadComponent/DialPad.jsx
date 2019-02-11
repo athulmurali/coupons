@@ -23,11 +23,6 @@ class DialPad extends Component {
 		};
 		window.addEventListener('orientationchange', this.orientationChange);
 		this.couponsDetails = [];
-<<<<<<< HEAD
-		let Image_card;
-		let Image_phone;
-=======
->>>>>>> eaa40aa76474135bc64b90be54757f488cc2afbc
 		this.Image_card = require('../../assets/icon-card-gray.svg');
 		this.Image_phone = require('../../assets/icon-phone-white.svg');
 	}
@@ -123,19 +118,12 @@ class DialPad extends Component {
 }
 else{
 	if(this.state.phoneNumber.length < 13){
-<<<<<<< HEAD
-=======
 	
->>>>>>> eaa40aa76474135bc64b90be54757f488cc2afbc
 	const clickedValue = e.target.innerText.trim() ;
 	let prev = this.state.phoneNumber;
 		let disableInputArea = false;
 		if( !clickedValue ){
-<<<<<<< HEAD
-			alert("Passed nothing");
-=======
 			// alert("Passed nothing");
->>>>>>> eaa40aa76474135bc64b90be54757f488cc2afbc
 		}
 		else{
 			this.setState({
@@ -163,10 +151,7 @@ else{
 	};
 
 	handlePhoneClick = () => {
-<<<<<<< HEAD
-=======
 		this.state.count = 0;
->>>>>>> eaa40aa76474135bc64b90be54757f488cc2afbc
 		this.setState({cardNumber: false,
 			 phoneButton : "act",
 			 cardButton : "inact",
@@ -179,10 +164,7 @@ else{
 	};
 	
 	handleCardClick = () => {
-<<<<<<< HEAD
-=======
 		this.state.count = 0;
->>>>>>> eaa40aa76474135bc64b90be54757f488cc2afbc
 		this.setState({cardNumber: true,
 			cardButton : "act",
 			phoneButton : "inact",
@@ -197,15 +179,6 @@ else{
 
 	render(){
 
-<<<<<<< HEAD
-		
-
-	
-		
-		
-	
-=======
->>>>>>> eaa40aa76474135bc64b90be54757f488cc2afbc
 		const slideImages = [
 			this.Image_card,
 			this.Image_phone
@@ -229,14 +202,9 @@ else{
 						</button>
 					</div>
 					<input className= "inputText" id="test-input" maxLength= {12}  defaultValue={ this.state.phoneNumber} />
-<<<<<<< HEAD
-					<div>
-						<h3 className="statusMessage"> {this.state.defaultMessage} </h3>
-=======
 					<div className="status-block">
 						<h3 className="statusMessage"> {this.state.defaultMessage} </h3>
 						<h3 className="statusMessage">associated with your account</h3>
->>>>>>> eaa40aa76474135bc64b90be54757f488cc2afbc
 					</div>
 					<div id="container">
 						<ul id="keyboard"  >   

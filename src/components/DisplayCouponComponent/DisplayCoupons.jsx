@@ -5,12 +5,9 @@ import Flippy, {BackSide, FrontSide} from "react-flippy";
 import Popup from "reactjs-popup";
 import ReactToPrint from "react-to-print";
 import Config from "../../config/config";
-<<<<<<< HEAD
-=======
 import {connect} from "react-redux";
 
 class Coupons extends React.Component {
->>>>>>> eaa40aa76474135bc64b90be54757f488cc2afbc
 
 
 	constructor(props){
@@ -161,11 +158,8 @@ class Coupons extends React.Component {
 		let userCouponData = "";
 		let couponsLength = "";
 		let userName = "";
-<<<<<<< HEAD
-=======
 		let searchedCoupons = "";
 		let searchedCoupon = this.state.searchedCouponName;
->>>>>>> eaa40aa76474135bc64b90be54757f488cc2afbc
 		if(this.state.count > Config.POPUPTIMER){
 				buttonTrigger = this.buttonClick;
 				if(this.state.count > Config.LOGOUTTIMER) {
@@ -194,10 +188,6 @@ class Coupons extends React.Component {
 			console.log(couponData)
 			userCouponData = couponData[1];
 			couponsLength = userCouponData.length;
-<<<<<<< HEAD
-			userName = userCouponData[0].userName;
-			userName.toString();
-=======
 			userName = couponData[0].FirstName;
 			searchedCoupons = userCouponData;
 			if(searchedCoupons.length > 0) {
@@ -208,7 +198,6 @@ class Coupons extends React.Component {
 			}
 		}
 
->>>>>>> eaa40aa76474135bc64b90be54757f488cc2afbc
 
 		if(this.state.array_filter.length > 0){
 			// userCoupons.filter(function(filterMatch){
@@ -301,11 +290,7 @@ class Coupons extends React.Component {
 			<div >
 				<div className="WelcomeUser_Logout" >
 					<h2 className="userName"> Welcome {userName}! </h2>
-<<<<<<< HEAD
-					<button className="logoutButton" onClick ={this.handleScreenTap} > Exit </button>
-=======
 					<button className="logoutButton" ref = {logOutPopUpTrigger} onClick={() => this.setState({logOutTrigger: true})} > Log Out </button>
->>>>>>> eaa40aa76474135bc64b90be54757f488cc2afbc
 				</div>
 				<Header/>
 				<div className="printDiv">
