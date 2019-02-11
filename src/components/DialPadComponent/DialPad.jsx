@@ -14,7 +14,7 @@ class DialPad extends Component {
             phoneNumber: '',
             disableTextArea: false,
             defaultMessage: 'Enter the Phone number',
-            count: this.props.count,
+            count: 0,
             cardNumber: false,
             mouseHover: false,
             phoneButton: "act",
