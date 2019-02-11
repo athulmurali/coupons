@@ -1,4 +1,54 @@
-.Cards{
+.image_arrow {
+	float: right;
+	width: 17px;
+	height: 17px;
+	margin-right: 15px;
+}
+.filter_sort_list{
+	font-size: 14px;
+    color: #E0004D;
+	padding: 5px 0px;
+}
+input[type="checkbox"] {
+	flex-shrink: 0;
+	-webkit-appearance: none;
+    -moz-appearance: none;
+	outline: none;
+	cursor: pointer;
+	height: 10px;
+	width: 10px;
+	border: 1px solid #63666A;
+	display: -webkit-inline-flex;
+	margin: 0.5em 0.7em 0.6em 0.5em;
+  }
+input[type="checkbox"]:checked{
+	background-color: #E0004D;
+	border: 1px solid #E0004D;
+}
+input[type="checkbox"]:checked + label{
+	color: #E0004D;
+}
+
+.filter_sort{
+	font-weight: bold;
+    margin: 15px 10px 0px;
+    color: #63666A;
+    border: 1.3px #ECECEC solid;
+    padding: 15px 10px 10px;
+	background: #FBFBFB;
+	min-height: 44px;
+}
+.filter_inside{
+	color: #63666A;
+	margin: 0px 10px 0px ;
+    border: 1.3px #ECECEC solid;
+    padding: 12px 10px 15px;
+	background: #FBFBFB;
+	font-size: smaller;
+	font-weight: 500;
+}
+
+.Cards {
 	display: inline-flex;
 	margin-right: 14px;
 	text-align: center;
@@ -11,10 +61,13 @@
 	word-wrap: normal;
  }
  
- .viewMore{
+ .viewMore {
 	text-decoration: underline;
  }
  
+ .couponDescription {
+	word-break: break-word;
+}
  span{
 	color: black;
  }
@@ -26,49 +79,62 @@
 	color: black;
  }
 
- img{
+ img {
 	margin-bottom: 8px;
  }
 
- h6{
+ h6 {
 	padding: 0;
 	margin: 5px;
 	text-align: left;
 	color: grey;
  }
 
- .UserAvatar {
-  display: inline-block;
+ .CouponSearch {
+	 width: 100%;
+	 display: inline-flex;
+	 margin-top: 10px;
+ }
+
+ .SearchBarImage {
+	 display: inline-flex;
+	 background-color: #989B9F;
+	 width: 100%;
+	 color: white;
+
+ }
+
+ .SearchImage {
+	height: 25px;
+	margin-top: 12px;
+	margin-left: 10px;
+ }
+
+ .SearchBar {
+	width: 95%;
+	padding: 13px;
+	font-size: 20px;
+	background-color: #989B9F;
+	border: none;
+	justify-content: center;
+	display: flex;
+	margin: auto;
 	color: white;
-	font-weight: bold;
-	font-size: 24px;
-	margin-top: 5px;
-	cursor: normal;
-}
+	outline: 0;
+ }
 
-.UserAvatar--inner {
-  box-sizing: border-box;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+ .SearchBar::placeholder {
+	 color: white;
+ }
 
-.UserAvatar--light {
-  color: gray;
-}
-
-.UserAvatar--light .UserAvatar--inner {
-  border: 1px solid lightgray;
-}
-
-.WelcomeUser_Logout{
+.WelcomeUser_Logout {
 	display: flex;
 	justify-content: flex-end;
 	margin-right: 20px;
 	margin-bottom: 0;
  }
 
- .userName{
+ .userName {
 	font-style: italic;
 	color: grey;
 	margin-top: 25px;
@@ -76,12 +142,14 @@
  }
 
  .logoutButton {
-	width: 100px;
-	height: 40px;
-	margin: 20px 5px 10px 20px;
+	width: 150px;
+	height: 45px;
+	margin: 18px 5px 10px 10px;
 	font-size: 20px;
 	font-weight: bold;
 	color: grey;
+	background-color: white;
+	border: 1px solid gray;
  }
 
  .logoutButton:hover {
@@ -90,14 +158,14 @@
 	 color: white;
  }
 
- .printDiv{
+ .printDiv {
 	display: flex;
 	justify-content: flex-end;
 	margin-right: 20px;
 	margin-bottom: 0;
  }
 
- .printButton{
+ .printButton {
 	font-size: 20px;
 	font-weight: bold;
 	color: #E0004D;
@@ -105,7 +173,7 @@
 	margin-bottom: 0;
  }
 
- .printButton:hover{
+ .printButton:hover {
 	border: 0;
 	cursor: pointer;
 	background-color: #E0004D;
@@ -117,18 +185,32 @@
 	display: none;
 }
 
+.logOutMessage1 {
+	text-align: center;
+	color: gray;
+}
+.logOutMessage2 {
+	text-align: center;
+	color: gray;
+	font-weight: normal;
+}
 .modal {
 	padding: 50px;
  }
 
- .popupHeader{
+ .logOutImage {
+	 display: flex;
+	 margin: auto;
+ }
+
+ .popupHeader {
 	font-family: sans-serif;
 	color:grey;
 	margin: 0;
 	margin-bottom: 10px;
  }
 
- .popupMessage{
+ .popupMessage {
 	font-family: sans-serif;
 	color:grey;
 	margin: 0;
@@ -157,13 +239,13 @@
 	}
  }
 
- .actions{
+ .actions {
 	margin: auto;
 	text-align: center;
 	margin-top: 20px;
  }
 
- .buttons{
+ .buttons {
 	background-color: white;
 	width: 250px;
 	height: 50px;
@@ -173,13 +255,13 @@
 	color:gray;
  }
 
- .buttons:hover{
+ .buttons:hover {
 	background-color: #E0004D;
 	color: white;
  }
 
 
-.AllCoupons{
+.AllCoupons {
 	margin-top: 0;
 	display: flex;
 	width: 100%;
@@ -219,13 +301,16 @@
 	color: white;
  }
 
- .LoadedCoupons{
+ .LoadedCoupons {
 	color: grey;
-	padding: 10px 20px 10px 50px;
 	background-color: #EEF0F3;
 	border-top: 2px solid lightgrey;
 	height: -webkit-fill-available;
+	height: 100%;
+	min-height: 870px;
 	width: -webkit-fill-available;
+	padding-left: 18px;
+	padding-bottom: 100px;
  }
 
  .LoadedCouponCount {
@@ -234,6 +319,9 @@
 	text-align: left;
 	color: grey;
 	font-weight: normal;
+	margin-top: 17px;
+	margin-left: 20px;
+	width: 240px;
  }
 
 

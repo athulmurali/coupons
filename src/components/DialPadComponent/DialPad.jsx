@@ -1,11 +1,16 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import API from '../../utils/API';
 import './DialPad.css';
 import Config from '../../config/config';
+import AssistancePopUpComponent from "../AssitancePopUpComponent/AssistancePopUpComponent";
+import {connect} from "react-redux";
+import {ROUTE_DISPLAY_COUPONS} from "../../utils/RouteConstants";
+import {updateCoupons} from "../../redux/actions/UserIdentification";
 
 class DialPad extends Component {
 	constructor(props){
 		super(props);
+		const isPortrait = window.matchMedia('(orientation: portrait)').matches;
 		this.state = {
 			phoneNumber: '',
 			disableTextArea: false,
@@ -16,33 +21,49 @@ class DialPad extends Component {
 			phoneButton: "act",
 			cardButton: "inact",
 		};
+		window.addEventListener('orientationchange', this.orientationChange);
 		this.couponsDetails = [];
+<<<<<<< HEAD
 		let Image_card;
 		let Image_phone;
+=======
+>>>>>>> eaa40aa76474135bc64b90be54757f488cc2afbc
 		this.Image_card = require('../../assets/icon-card-gray.svg');
 		this.Image_phone = require('../../assets/icon-phone-white.svg');
 	}
-
 	deleteTheLastDigit = () => {
 		let prev = this.state.phoneNumber.slice(0,-1)
-		if(prev.length === 5){
-				prev += ' '
+		if(prev.length === 6){
+				prev = this.state.phoneNumber.slice(0,-1)
 		}
-		else if(prev.length === 8){
-				prev += ' '
+		else if(prev.length === 9){
+			prev = this.state.phoneNumber.slice(0,-1)
 		}
 		this.setState({ phoneNumber: prev })
 };
 
 	searchForThePhoneNumberInDatabase = async () => {
 		try{	
-			const extractNumberFromFormat = ( this.state.phoneNumber.substring(1,4) + this.state.phoneNumber.substring(6,9) + this.state.phoneNumber.substring(10) );
-			const response = await API.getUserMobileNumber(extractNumberFromFormat);
-			
-			this.couponsDetails = response.data.response;
-			this.props.identificationfromDiaPad(true,this.state.phoneNumber,this.couponsDetails);
-			
+			if(this.state.cardNumber === false){
+			this.extractNumberFromFormat = ( this.state.phoneNumber.substring(1,4) + this.state.phoneNumber.substring(6,9) + this.state.phoneNumber.substring(10) );
+			}
+			else{
+				
+				this.extractNumberFromFormat = this.state.phoneNumber.slice(0,-1);
+			}
+			console.log(this.extractNumberFromFormat);
+			const response = await API.getUserDetails(this.extractNumberFromFormat);
+
+			this.couponsDetails.push(response.data.response.response.Customer[0]);
+			const barCodeNumber=  response.data.response.response.Customer[0].ID[0].attributes.Value
+			const couponsDetails = await API.getUserCoupons(barCodeNumber);
+			const couponDetailsArray  = couponsDetails.data.response
+
+			this.couponsDetails.push(couponDetailsArray);
+			this.props.updateCoupons({'couponDetails' : this.couponsDetails})
+			this.props.history.push(ROUTE_DISPLAY_COUPONS)
 		} catch (error){
+			
 			this.setErrorMessage();
 		}
 		
@@ -55,9 +76,17 @@ class DialPad extends Component {
 	};
 
 	checkPhoneNumber = () => {
-		const extractNumberFromFormat = ( this.state.phoneNumber.substring(1,4) + this.state.phoneNumber.substring(6,9) + this.state.phoneNumber.substring(10) );
-		this.searchForThePhoneNumberInDatabase(extractNumberFromFormat);
-		extractNumberFromFormat.length === 10 && this.state.phoneNumber ? this.searchForThePhoneNumberInDatabase() : this.setErrorMessage();
+		
+		if(this.state.cardNumber === false){
+			this.extractNumberFromFormat = ( this.state.phoneNumber.substring(1,4) + this.state.phoneNumber.substring(6,9) + this.state.phoneNumber.substring(10) );
+			console.log(this.extractNumberFromFormat);
+		}
+		else{
+			this.extractNumberFromFormat = this.state.phoneNumber.slice(0,-1);
+		}
+	//	this.searchForThePhoneNumberInDatabase(this.extractNumberFromFormat);
+		
+		(this.extractNumberFromFormat.length === 10 || this.extractNumberFromFormat.length === 12) && this.state.phoneNumber ? this.searchForThePhoneNumberInDatabase() : this.setErrorMessage();
 		
 	};
 
@@ -69,7 +98,7 @@ class DialPad extends Component {
 		const clickedValue = e.target.innerText.trim() ;
 		let disableInputArea = false;
 		if( !clickedValue ){
-			alert("Passed nothing");
+			// alert("Passed nothing");
 		}
 		
 		else {
@@ -94,11 +123,19 @@ class DialPad extends Component {
 }
 else{
 	if(this.state.phoneNumber.length < 13){
+<<<<<<< HEAD
+=======
+	
+>>>>>>> eaa40aa76474135bc64b90be54757f488cc2afbc
 	const clickedValue = e.target.innerText.trim() ;
 	let prev = this.state.phoneNumber;
 		let disableInputArea = false;
 		if( !clickedValue ){
+<<<<<<< HEAD
 			alert("Passed nothing");
+=======
+			// alert("Passed nothing");
+>>>>>>> eaa40aa76474135bc64b90be54757f488cc2afbc
 		}
 		else{
 			this.setState({
@@ -126,6 +163,10 @@ else{
 	};
 
 	handlePhoneClick = () => {
+<<<<<<< HEAD
+=======
+		this.state.count = 0;
+>>>>>>> eaa40aa76474135bc64b90be54757f488cc2afbc
 		this.setState({cardNumber: false,
 			 phoneButton : "act",
 			 cardButton : "inact",
@@ -138,6 +179,10 @@ else{
 	};
 	
 	handleCardClick = () => {
+<<<<<<< HEAD
+=======
+		this.state.count = 0;
+>>>>>>> eaa40aa76474135bc64b90be54757f488cc2afbc
 		this.setState({cardNumber: true,
 			cardButton : "act",
 			phoneButton : "inact",
@@ -152,12 +197,15 @@ else{
 
 	render(){
 
+<<<<<<< HEAD
 		
 
 	
 		
 		
 	
+=======
+>>>>>>> eaa40aa76474135bc64b90be54757f488cc2afbc
 		const slideImages = [
 			this.Image_card,
 			this.Image_phone
@@ -181,8 +229,14 @@ else{
 						</button>
 					</div>
 					<input className= "inputText" id="test-input" maxLength= {12}  defaultValue={ this.state.phoneNumber} />
+<<<<<<< HEAD
 					<div>
 						<h3 className="statusMessage"> {this.state.defaultMessage} </h3>
+=======
+					<div className="status-block">
+						<h3 className="statusMessage"> {this.state.defaultMessage} </h3>
+						<h3 className="statusMessage">associated with your account</h3>
+>>>>>>> eaa40aa76474135bc64b90be54757f488cc2afbc
 					</div>
 					<div id="container">
 						<ul id="keyboard"  >   
@@ -201,10 +255,25 @@ else{
 							<li className="switch" onClick={this.checkPhoneNumber}>Sign in</li> 
 						</ul>
 					</div>
-					<div className="switchNoCard">No card, no problem</div>
+					<AssistancePopUpComponent/>
 			</div>
 		);
 	};
 }
 
-export default DialPad;
+
+const mapStateToProps=(state)=>{
+	return {
+		couponDetails : state.UserIdentification.couponsDetails
+	}
+}
+
+
+const mapDispatchToProps=(dispatch)=>(
+	{
+		updateCoupons :( couponDetails)=> updateCoupons(dispatch,  couponDetails )
+
+	}
+)
+
+export default connect(mapStateToProps,mapDispatchToProps)( DialPad)

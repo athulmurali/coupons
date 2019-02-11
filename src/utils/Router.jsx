@@ -1,49 +1,40 @@
-import React, { Component } from 'react';
-import { HashRouter, Route, Switch } from 'react-router-dom';
-import AttractLoopView from  '../views/AttractLoopView';
-import Config from '../config/config';
-import UserIdentificationView from '../views/UserIdentificationView';
-import DisplayCouponsView from '../views/DisplayCouponsView';
-import PropTypes from 'prop-types';
-import AssistancePopUpComponent from "../components/AssitancePopUpComponent/AssistancePopUpComponent";
+import React, {Component} from "react";
+import {HashRouter, Route, Switch} from "react-router-dom";
+import AttractLoopView from "../views/AttractLoopView";
+import UserIdentificationView from "../views/UserIdentificationView";
+import DisplayCouponsView from "../views/DisplayCouponsView";
+import CameraScanner from "../components/CameraScannerComponent/CameraScanner";
+import {ROUTE_DISPLAY_COUPONS, ROUTE_SCAN_IMAGE, ROUTE_USER_IDENTIFICATION} from "./RouteConstants";
 
 class Router extends Component {
-  constructor(props) {
-    super(props);
-    this.flag = false;
-    this.timer = null;
-    this.reset = true;
-    this.state = {
-      overtime: false,
-    };
-  }
+	constructor(props) {
+		super(props);
+		this.flag = false;
+		this.reset = true;
 
+	}
 
-  render() {
+	componentWillMount() {
+		sessionStorage.setItem("Phone-Number", "");
+		sessionStorage.setItem("token",false);
+	}
 
-    return (
-      <HashRouter >
-        <div
-          onClick={this.handleUserInteract}
-          onKeyDown={this.handleUserInteract}
-          onScroll={this.handleUserInteract}
-          role="button"
-        >       
-          <Switch>
-            <Route exact path="/" history={this.props.history} component={AttractLoopView} />
-            <Route exact path="/userIdentification" render={props => <UserIdentificationView history={this.props.history} overtime={this.state.overtime} {...props} />} />
-            <Route exact path="/DisplayCoupons" render={props => <DisplayCouponsView history={this.props.history}  overtime={this.state.overtime}  {...props} />} />
-            <Route exact path="/temp" component={AssistancePopUpComponent} />} />
-          </Switch>
-        </div>
-      </HashRouter>
-    );
-  }
+  
+
+	render() {
+
+		return (
+			<HashRouter >
+				<Switch>
+					<Route exact path={"/"}  component={AttractLoopView} />
+					<Route exact path={ROUTE_USER_IDENTIFICATION} component={UserIdentificationView} />
+					<Route exact path={ROUTE_DISPLAY_COUPONS} component={DisplayCouponsView} />
+					<Route exact path={ROUTE_SCAN_IMAGE}  component ={CameraScanner} />
+				</Switch>
+
+			</HashRouter>
+		);
+	}
 }
 
 export default Router;
-Router.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func,
-  }),
-};

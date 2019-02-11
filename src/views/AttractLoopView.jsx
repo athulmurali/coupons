@@ -1,6 +1,7 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import PropTypes from "prop-types";
 import AttractLoop from "../components/AttractLoopComponent/AttractLoop";
+
 // import BarcodeScanner from "../components/BarcodeScanner/BarcodeScanner";
 
 

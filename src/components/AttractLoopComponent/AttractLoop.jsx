@@ -1,18 +1,49 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import './AttractLoop.css';
-import { Slide } from 'react-slideshow-image';
+import {Slide} from 'react-slideshow-image';
 import ScanBarcode from '../ScanBarcode/ScanBarcode';
 import Header from '../HeaderComponent/Header';
 import Config from '../../config/config';
+import CameraScanner from '../../components/CameraScannerComponent/CameraScanner';
+import {ROUTE_USER_IDENTIFICATION} from "../../utils/RouteConstants";
+import {connect} from "react-redux";
+import {reset_all_redux} from "../../redux/actions/Common";
 
 
 class AttractLoop extends Component {
+	constructor(props){
+		super(props);
+		const isPortrait = window.matchMedia('(orientation: portrait)').matches;
+		this.state = {
+			scanning: false,
+			isPortrait,
+      results: [
+        // {
+        //   codeResult: {
+        //     code: '123ABCabc'
+        //   }
+        // }
+      ]
+		}
+		window.addEventListener('orientationchange', this.orientationChange);
+  
+	}
+	orientationChange = () =>{
+		this.setState({
+      isPortrait: !window.matchMedia('(orientation: portrait)').matches,
+    });
+	}
   handleScreenTap = () => {
-    this.props.history.push(`/userIdentification`);
-  };
+    this.props.history.push(ROUTE_USER_IDENTIFICATION);
+	};
+	componentWillMount() {
+        this.props.reset_all_redux()
+    }
 
-  render() {
+
+    render() {
+		
     const Image_coupon1 = require('../../assets/coupons-attract-Images-03.png');
     const Image_coupon2 = require('../../assets/coupons-attract-Images-04.png');
     const Image_coupon3 = require('../../assets/coupons-attract-Images-05.png');
@@ -33,6 +64,7 @@ class AttractLoop extends Component {
 
 		Config.loggedIn = false;
 		
+		
     return (
       
       <div className="AttractLoop" onClick={this.handleScreenTap}>
@@ -40,7 +72,7 @@ class AttractLoop extends Component {
         <Slide {...slide_properties} className="couponScreenBackground">
           <div className="each-slide">
             <div className="couponImageCover" style={{ 'backgroundImage': `url(${slideImages[0]})` }}>
-            </div>
+          </div>
           </div>
           <div className="each-slide">
             <div className="couponImageCover" style={{ 'backgroundImage': `url(${slideImages[1]})` }}>
@@ -48,7 +80,7 @@ class AttractLoop extends Component {
           </div>
           <div className="each-slide">
             <div className="couponImageCover" style={{ 'backgroundImage': `url(${slideImages[2]})` }}>
-            </div>
+          </div>
           </div>
         </Slide>
         <div id="one" className="screen">
@@ -56,15 +88,24 @@ class AttractLoop extends Component {
             <span className="tapAnywhere">Tap anywhere to start</span>
           </div>
         </div>
-        <ScanBarcode />
+				<ScanBarcode history= {this.props.history}/>
+				<CameraScanner history={this.props.history}></CameraScanner>
       </div>
     );
   }
 }
-export default AttractLoop;
+
+const mapDispatchToProps =(dispatch)=>{
+
+    return {
+        reset_all_redux:()=>reset_all_redux(dispatch)
+    }
+
+}
 
 AttractLoop.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
 };
+export default connect(null,mapDispatchToProps)(AttractLoop) ;

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './App.css';
 
 
@@ -19,6 +19,6 @@ class AppProvider extends Component {
   }
 }
 
-const App = ({ children }) => <AppProvider>{children} </AppProvider>;
+const App = ({ children }) => <AppProvider >{children} </AppProvider>;
 
 export { App, AppProvider, AppContext, AppConsumer };
