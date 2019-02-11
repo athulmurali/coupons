@@ -210,7 +210,7 @@ class Coupons extends React.Component {
                 <div className="AllCoupons">
                     <ul>
                         <li>
-                            <a href="#" className={this.state.activeNewCoupons} onClick={this.NewCoupons}> New Coupons </a>
+                            <a href={"#"} className={this.state.activeNewCoupons} onClick={this.NewCoupons}> New Coupons </a>
                         </li>
                         {/* <li> <a  className={this.state.activeLoadedCoupons} onClick={this.LoadedCoupons}> Loaded Coupons </a></li> */}
 
