@@ -19,7 +19,6 @@ const middleware = applyMiddleware(  promise(), thunk ,logger);
 
 const store = createStore(combinedReducer,middleware);
 
-
 ReactDOM.render(
 	<Provider store={store}>
 		<App>

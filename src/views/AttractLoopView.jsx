@@ -1,28 +1,27 @@
 import React, {Component} from "react";
-import PropTypes from "prop-types";
 import AttractLoop from "../components/AttractLoopComponent/AttractLoop";
-
 // import BarcodeScanner from "../components/BarcodeScanner/BarcodeScanner";
-
+import {connect} from "react-redux";
 
 class AttractLoopView extends Component{
-	constructor(props){
-		super(props);
-	}  
+	// constructor(props){
+	// 	super(props);
+	// }  
 
 	render(){
 		return(
 			<div>
-				<AttractLoop history={this.props.history}></AttractLoop>
+				<AttractLoop history={this.props.history} />
 			</div>
 		);
 	}
 }
 
-export default AttractLoopView;
+const mapStateToProps = state => ({
+	...state
+});
+// const mapDispatchToProps = dispatch => ({
+	
+// });
 
-AttractLoopView.propTypes = {
-	history: PropTypes.shape({
-		push: PropTypes.func,
-	}).isRequired,
-};
+export default connect(mapStateToProps, null)(AttractLoopView);

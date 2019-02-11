@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import './AttractLoop.css';
 import {Slide} from 'react-slideshow-image';
 import ScanBarcode from '../ScanBarcode/ScanBarcode';
@@ -27,7 +26,6 @@ class AttractLoop extends Component {
       ]
 		}
 		window.addEventListener('orientationchange', this.orientationChange);
-  
 	}
 	orientationChange = () =>{
 		this.setState({
@@ -62,12 +60,9 @@ class AttractLoop extends Component {
       arrows: false,
     }
 
-		Config.loggedIn = false;
-		
-		
     return (
       
-      <div className="AttractLoop" onClick={this.handleScreenTap}>
+      <div className="AttractLoop" onClick={this.handleScreenTap}  >
         <Header />
         <Slide {...slide_properties} className="couponScreenBackground">
           <div className="each-slide">
@@ -103,9 +98,4 @@ const mapDispatchToProps =(dispatch)=>{
 
 }
 
-AttractLoop.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func,
-  }).isRequired,
-};
 export default connect(null,mapDispatchToProps)(AttractLoop) ;
