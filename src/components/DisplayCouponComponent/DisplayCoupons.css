@@ -37,6 +37,7 @@ input[type="checkbox"]:checked + label{
     padding: 15px 10px 10px;
 	background: #FBFBFB;
 	min-height: 44px;
+	cursor: pointer;
 }
 .filter_inside{
 	color: #63666A;

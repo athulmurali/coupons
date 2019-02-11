@@ -9,6 +9,7 @@ import CouponCards from "../CouponCardComponent/CouponCards";
 import {updateCoupons} from "../../redux/actions/UserIdentification";
 import {displayCouponState} from "../../redux/actions/DisplayCouponAction";
 import SearchCouponByName from "../SearchComponent/SearchCoupon";
+import SortComponent from "../SortComponent";
 class Coupons extends React.Component {
 
     constructor(props){
@@ -81,29 +82,29 @@ class Coupons extends React.Component {
             this.Image_up = require('../../assets/new-filter-arrow-down.svg');
         }
     }
-    Sort = () => {
-        if(this.state.sort_arrow === false){
-            this.setState({sort_arrow : true});
-            this.Sort_up = require('../../assets/new-filter-arrow-up.svg');
-        }
-        else{
-            this.setState({sort_arrow : false});
-            this.Sort_up = require('../../assets/new-filter-arrow-down.svg');
-        }
-    }
+    // Sort = () => {
+    //     if(this.state.sort_arrow === false){
+    //         this.setState({sort_arrow : true});
+    //         this.Sort_up = require('../../assets/new-filter-arrow-up.svg');
+    //     }
+    //     else{
+    //         this.setState({sort_arrow : false});
+    //         this.Sort_up = require('../../assets/new-filter-arrow-down.svg');
+    //     }
+    // }
 
 
-    Sorting_Category = () => {
-        const sort_category = ["Redeem By Date"	,"Value(Low to High)	","Value(High to Low)"	," Brand"];
-        return(
-            sort_category.map( cate => <div key={cate} className="filter_inside" hidden= {!this.state.sort_arrow}>
-                <input name="_filter" type="checkbox"/>
-                <label>
-                    {cate}
-                </label>
-            </div>)
-        )
-    }
+    // Sorting_Category = () => {
+    //     const sort_category = ["Redeem By Date"	,"Value(Low to High)	","Value(High to Low)"	," Brand"];
+    //     return(
+    //         sort_category.map( cate => <div key={cate} className="filter_inside" hidden= {!this.state.sort_arrow}>
+    //             <input name="_filter" type="checkbox"/>
+    //             <label>
+    //                 {cate}
+    //             </label>
+    //         </div>)
+    //     )
+    // }
 
     Filter_Category = () => {
         const filter_category = ["Baby & Childcare"	,"Bakeray","Beverages"	,"Condiments & Sauces","Dairy","Deli","Ethnic Products","Frozen Food","General Merchandise"];
@@ -247,7 +248,8 @@ class Coupons extends React.Component {
 							<img className="image_arrow" src={slideArrow[0]}  onClick={this.Filter}/>
 							<div className="filter_sort_list" hidden= {this.state.filter_arrow} >No filter added</div>
 						</div>
-						{ this.Filter_Category() } */}
+                        { this.Filter_Category() } */}
+                        <SortComponent/>
                     </ul>
                     {popUpLogout}
                     {sessionEndPopUp}
