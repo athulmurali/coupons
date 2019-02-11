@@ -5,12 +5,6 @@ import PopUpWindow from "./PopUpWindow";
 
 
 class AssistancePopUpComponent extends React.Component {
-
-	constructor(props) {
-		super(props);
-
-	}
-
 	render() {
 		return <Popup contentStyle={{minWidth: "600px",textAlign :"left"}}
 			trigger={<span className="switchNoCard" >No card, no problem</span>}
