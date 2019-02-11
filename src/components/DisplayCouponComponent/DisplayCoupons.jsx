@@ -6,14 +6,16 @@ import Popup from "reactjs-popup";
 import ReactToPrint from "react-to-print";
 import Config from "../../config/config";
 import {connect} from "react-redux";
-
+import { ROUTE_DISPLAY_COUPONS } from "../../utils/RouteConstants";
+import {useState,useEffect} from "react";
 class Coupons extends React.Component {
 
 
 	constructor(props){
 		super(props);
 		this.state = {
-			couponDetails : [],
+			checkedChange:true,
+			couponDetails : this.props.data,
 			count: 0,
 			hideLoadedCoupons: true,
 			hideNewCoupons: false,
@@ -25,21 +27,25 @@ class Coupons extends React.Component {
 			barName:  "Search By Coupon Name",
 			filter_arrow: false,
 			sort_arrow: false,
-			array_filter : []
+			array_filter : [],
 			
-		};		
+		};
+		this.userCouponData = [];
 		this.Image_up = require('../../assets/new-filter-arrow-down.svg');
 		this.Sort_up = require('../../assets/new-filter-arrow-down.svg');
-		let sort_category = ["Redeem By Date"	,"Value(Low to High)	","Value(High to Low)"	," Brand"	, "Recommended"];
-		let filter_category = [];
 	}
 	
+	handleChecked = () => {
+		this.setState({checkedChange:!this.state.checkedChange});
+	}
 	buttonClick = (el) => {
 		if(el) {
-		el.click();
+			el.click();
 		};
 	}
+	shouldComponentUpdate(){
 
+	}
 	componentWillUnmount () {
 		clearInterval(this.timer);
 	}
@@ -52,9 +58,14 @@ class Coupons extends React.Component {
 		this.setState({count: (this.state.count + 1)});
 	}
 	startTimer () {
-		clearInterval(this.timer);
-		this.timer = setInterval(this.tick.bind(this), 1000);
+		//clearInterval(this.timer);
+		//this.timer = setInterval(this.tick.bind(this), 1000);
+		console.log(window)
+		if('requestIdleCallback' in window){
+			requestIdleCallback(() => {alert("asd")});
+		}
 	}
+	 
 	timerReset = () => {
 		this.setState({count: 0});
 	}
@@ -64,8 +75,9 @@ class Coupons extends React.Component {
 	}
 
 	handleScreenTap = () => {
-			this.props.history.push(`/`);
+		this.props.history.push(`/`);
 	}
+
 
 
 
@@ -87,24 +99,24 @@ class Coupons extends React.Component {
 	}
 	Filter = () => {
 		if(this.state.filter_arrow === false){
-		this.setState({filter_arrow : true});
-		this.Image_up = require('../../assets/new-filter-arrow-up.svg');
+			this.setState({filter_arrow : true});
+			this.Image_up = require('../../assets/new-filter-arrow-up.svg');
 		}
 		else{
 			this.setState({filter_arrow : false});
-		this.Image_up = require('../../assets/new-filter-arrow-down.svg');
+			this.Image_up = require('../../assets/new-filter-arrow-down.svg');
 		}
 		
 		console.log(this.state.filter_arrow);
 	}
 	Sort = () => {
 		if(this.state.sort_arrow === false){
-		this.setState({sort_arrow : true});
-		this.Sort_up = require('../../assets/new-filter-arrow-up.svg');
+			this.setState({sort_arrow : true});
+			this.Sort_up = require('../../assets/new-filter-arrow-up.svg');
 		}
 		else{
 			this.setState({sort_arrow : false});
-		this.Sort_up = require('../../assets/new-filter-arrow-down.svg');
+			this.Sort_up = require('../../assets/new-filter-arrow-down.svg');
 		}
 	}
 
@@ -121,16 +133,46 @@ class Coupons extends React.Component {
 	}
 	Sorting_Category = () => {
 		const sort_category = ["Redeem By Date"	,"Value(Low to High)	","Value(High to Low)"	," Brand"];
+		this.userCouponData = this.couponDetails;
 		return(
-			sort_category.map( cate => <div key={cate} className="filter_inside" hidden= {!this.state.sort_arrow}>
-			<input name="_filter" type="checkbox"/>
+			sort_category.map( cate => <div key={cate} className="filter_inside"  hidden= {!this.state.sort_arrow} >
+			<input name="_filter" type="checkbox" onChange={this.handleChecked} onClick={() => this.sortin(cate)}/>
 			<label>
 				  {cate}
 			</label>
 		</div>)
 		)
 	 }
+	 sortin = (cat) => {
+		if(cat === "Redeem By Date"){
+		 	if(this.state.checkedChange){
+				
+				let coupData = (this.state.couponDetails).slice();
+				
+				let userCouponDat = (coupData[1]).slice();
+				if(userCouponDat.length > 0){
+					let sorted_meetings = userCouponDat.sort((a,b) => {
+						return new Date(a.EndDate).getTime() - 
+							new Date(b.EndDate).getTime()
+					});
+				this.setState({couponDetails:sorted_meetings});
+				console.log(this.state.couponDetails)
+				console.log(sorted_meetings)
+				this.setState(this.state);
+				
+				}
+				
+				
 
+				
+				
+			 }
+			 else{
+				 this.state.couponDetails = this.props.data;
+			}
+		}
+		
+	}
 	 Filter_Category = () => {
 		const filter_category = ["Baby & Childcare"	,"Bakeray","Beverages"	,"Condiments & Sauces","Dairy","Deli","Ethnic Products","Frozen Food","General Merchandise"];
 		return(
@@ -143,13 +185,11 @@ class Coupons extends React.Component {
 		)
 	 }
 	 filtering = (e) => {
-		
-		this.state.array_filter.push(e);
-		
-     }
-     
+		this.state.array_filter.push(e);	
+	 }
+	 
 	render() {
-		let couponData = this.props.data;
+		let couponData = this.state.couponDetails;
 		let buttonTrigger = "";
 		let logOutPopUpTrigger = "";
 		let userCoupons = [];
@@ -183,7 +223,7 @@ class Coupons extends React.Component {
 
 		if (couponData.length > 0) {
 
-			// console.log(couponData)
+	//		console.log(couponData)
 			userCouponData = couponData[1];
 			couponsLength = userCouponData.length;
 			userName = couponData[0].FirstName;
@@ -282,6 +322,22 @@ class Coupons extends React.Component {
 						</div>
 					)}
 				</Popup> 	);
+
+			// if(userCouponData.length > 0){
+			// 	let sorted_meetings = userCouponData.sort((a,b) => {
+			// 		return new Date(a.EndDate).getTime() - 
+			// 			new Date(b.EndDate).getTime()
+			// 	});
+			// 	console.log(sorted_meetings);
+			// }
+				
+
+				
+				// for(let i = 0;i< userCouponData.length;i++){
+				// 	console.log(userCouponData[i].EndDate);
+				// }
+				
+			
 			
 
 		return (
@@ -302,7 +358,7 @@ class Coupons extends React.Component {
 					<ul>
 						<li> <a  className={this.state.activeNewCoupons} onClick={this.NewCoupons} > New Coupons </a></li>
 						{/* <li> <a  className={this.state.activeLoadedCoupons} onClick={this.LoadedCoupons}> Loaded Coupons </a></li> */}
-						{/* <div className="filter_sort">
+						 <div className="filter_sort">
 							Sort
 							<img className="image_arrow" src={slideArrow_Sort[0]}  onClick={this.Sort}/>
 							<div className="filter_sort_list" hidden= {this.state.sort_arrow} >By Recommended</div>
@@ -319,7 +375,7 @@ class Coupons extends React.Component {
 							<img className="image_arrow" src={slideArrow[0]}  onClick={this.Filter}/>
 							<div className="filter_sort_list" hidden= {this.state.filter_arrow} >No filter added</div>
 						</div>
-						{ this.Filter_Category() } */}
+						{ this.Filter_Category() } 
 					</ul>
 					{popUpLogout}
 					{sessionEndPopUp}

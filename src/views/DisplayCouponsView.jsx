@@ -9,12 +9,12 @@ class DisplayCouponsView extends React.Component{
 	
 	componentDidMount(){
 		
-		this.couponsDetails.push(this.props.location.state);
+		// this.couponsDetails.push(this.props.location.state);
 		
 		
 	}
 	render(){
-		return (<Coupons history={this.props.history} data = {this.couponsDetails}></Coupons>);
+		return (<Coupons history={this.props.history}></Coupons>);
 	}
 }
 export default DisplayCouponsView;

@@ -151,6 +151,9 @@ class CameraScanner extends Component{
 		if(result.codeResult.code && this.state.scanning){
 			try
 			{
+				this.setState({
+					scanning:false
+				});
 				this.setState({scanning:false});
 				this._searchUserInDatabase(result.codeResult.code);
 				// alert(result.codeResult.code)
