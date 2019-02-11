@@ -19,8 +19,8 @@ class Coupons extends React.Component {
 			hideNewCoupons: false,
 			activeNewCoupons: "active",
 			activeLoadedCoupons: "inactive",
-			logOutTrigger: false,
-			logOutReload: false,
+			// logOutTrigger: false,
+			// logOutReload: false,
 			filter_arrow: false,
 			sort_arrow: false,
 			array_filter : []
@@ -124,13 +124,13 @@ class Coupons extends React.Component {
      
 	render() {
 
-		if(this.props.data.length<1) {
+		if(this.props.data.length < 1) {
 			return <div>No Data Obtained</div>
 		}
 
 		let couponData = this.props.data;
-		let buttonTrigger = "";
-		let logOutPopUpTrigger = "";
+		// let buttonTrigger = "";
+		// let logOutPopUpTrigger = "";
 		let userName = "";
 			
 		if(couponData.length > 0) {
@@ -139,24 +139,24 @@ class Coupons extends React.Component {
 
 
 		if(this.state.count > Config.POPUPTIMER){
-				buttonTrigger = this.buttonClick;
+				this.props.buttonTrigger = this.buttonClick;
 				if(this.state.count > Config.LOGOUTTIMER) {
 					this.handleScreenTap();
 				}
     }
         
-		if(this.state.logOutTrigger) {
-			logOutPopUpTrigger = this.buttonClick;
-			this.setState({logOutTrigger: false},
+		if(this.props.logOutTrigger) {
+			this.props.logOutPopUpTrigger = this.buttonClick;
+			this.props.displayCouponState({'logOutTrigger': false},
 				()=>{
 					this.setState({count : 0},
 						()=>{
-							this.setState({logOutReload: true});
+							this.props.displayCouponState({'logOutReload': true});
 						});
 				});
 		}
 
-		if(this.state.logOutReload) {
+		if(this.props.logOutReload) {
 			if (this.state.count > 3) {
 				this.handleScreenTap()
 			}
@@ -177,16 +177,16 @@ class Coupons extends React.Component {
 			this.Sort_up
 		];
 
-	let popUpLogout = (<Popup trigger={<button ref = {logOutPopUpTrigger}  className="button" ></button>} true modal>
+	let popUpLogout = (<Popup trigger={<button ref = {this.props.logOutPopUpTrigger}  className="button" ></button>} true modal>
 					{close => (
 						<div className="modal">
 							<img className="logOutImage" src={LogOut_Success}></img>
 							<h1 className="logOutMessage1"> Enjoy your savings!</h1>
 							<h4 className="logOutMessage2">You have been successfully logged out. <br/> See you soon!</h4>
 						</div>)}
-				</Popup> );
+				</Popup>);
 
-	let sessionEndPopUp = (<Popup trigger={<button ref = {buttonTrigger}  className="button" ></button>} true modal>
+	let sessionEndPopUp = (<Popup trigger={<button ref = {this.props.buttonTrigger}  className="button" ></button>} true modal>
 					{close => (
 						<div className="modal">
 							<h1 className="popupHeader"> Are you still there? </h1>
@@ -215,7 +215,7 @@ class Coupons extends React.Component {
 			<div>
 				<div className="WelcomeUser_Logout" >
 					<h2 className="userName"> Welcome {userName}! </h2>
-					<button className="logoutButton" ref = {logOutPopUpTrigger} onClick={() => this.setState({logOutTrigger: true})} > Log Out </button>
+					<button className="logoutButton" ref = {this.props.logOutPopUpTrigger} onClick={() => this.setState({logOutTrigger: true})} > Log Out </button>
 				</div>
 				<Header/>
 				<div className="printDiv">
@@ -249,8 +249,8 @@ class Coupons extends React.Component {
 						</div>
 						{ this.Filter_Category() } */}
 					</ul>
-					{popUpLogout}
-					{sessionEndPopUp}
+                    {popUpLogout}
+                    {sessionEndPopUp}
 					<div className="LoadedCoupons"  hidden={this.state.hideNewCoupons}   >
 						<SearchCouponByName />
 						<div onClick={this.timerReset}>
@@ -260,7 +260,7 @@ class Coupons extends React.Component {
 					{/* <div className="LoadedCoupons"  hidden={this.state.hideLoadedCoupons} ref= {el => (this.componentRef = el)} >
 						<h4 className="LoadedCouponCount"> Loaded Coupons ({couponsLength}) </h4>
 						{userCoupons}        
-					</div> */}
+                    </div> */}
 				</div> 
 			</div>
 		);
@@ -270,7 +270,10 @@ class Coupons extends React.Component {
 const mapStateToProps=(state)=>{
  	return {
 		 data : state.UserIdentification.couponDetails,
-		 searchedCouponName: state.DisplayCouponStateUpdate.searchedCouponName,
+         searchedCouponName: state.DisplayCouponStateUpdate.searchedCouponName,
+         logOutTrigger: state.DisplayCouponStateUpdate.logOutTrigger,
+         logOutReload: state.DisplayCouponStateUpdate.logOutReload,
+         logOutPopUpTrigger: state.DisplayCouponStateUpdate.logOutPopUpTrigger,
 	}
 }
 

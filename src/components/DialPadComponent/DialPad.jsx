@@ -14,7 +14,7 @@ class DialPad extends Component {
             phoneNumber: '',
             disableTextArea: false,
             defaultMessage: 'Enter the Phone number',
-            count: this.props.count,
+            count: 0,
             cardNumber: false,
             mouseHover: false,
             phoneButton: "act",
@@ -56,11 +56,8 @@ class DialPad extends Component {
             this.props.updateCoupons({'couponDetails': this.couponsDetails})
             this.props.history.push(ROUTE_DISPLAY_COUPONS)
         } catch (error) {
-
             this.setErrorMessage();
         }
-
-
     };
 
     setErrorMessage = () => {
@@ -130,6 +127,10 @@ class DialPad extends Component {
         clearInterval(this.timer)
     }
 
+    componentDidMount() {
+        this.startTimer();
+    }
+
     tick() {
         this.setState({count: (this.state.count + 1)})
     }
@@ -176,7 +177,6 @@ class DialPad extends Component {
             this.Image_phone
         ];
 
-        this.startTimer();
         if (this.state.count > Config.INACTIVE_USER_IDENTIFICATION) {
             this.setState({count: 0})
             this.handleScreenTap();
