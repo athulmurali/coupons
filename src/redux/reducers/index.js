@@ -1,8 +1,8 @@
 import {combineReducers} from "redux";
 import AssistanceReducer from "./AssistanceReducer";
 import UserIdentification from "./UserIdentification";
-import SortFilterReducer from "./SortFilterReducer";
+import SearchSortFilterReducer from "./SearchSortFilterReducer";
 
 
-const combinedReducers = combineReducers({  AssistanceReducer,UserIdentification,SortFilterReducer});
+const combinedReducers = combineReducers({  AssistanceReducer,UserIdentification,SortFilterReducer: SearchSortFilterReducer});
 export default  combinedReducers

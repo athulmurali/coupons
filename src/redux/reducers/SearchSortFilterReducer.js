@@ -18,7 +18,7 @@ const initialState = {
 // to be moved to config
 const MINIMUM_SEARCH_LENGTH = 3;
 
-const SortFilterReducer = (state = initialState, action) => {
+const SearchSortFilterReducer = (state = initialState, action) => {
 
     switch (action.type) {
 
@@ -74,4 +74,4 @@ const SortFilterReducer = (state = initialState, action) => {
     }
 }
 
-export default SortFilterReducer
+export default SearchSortFilterReducer
