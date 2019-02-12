@@ -9,7 +9,7 @@ const initialState={
 const MINIMUM_SEARCH_LENGTH = 3
 export const FETCH_COUPONS = "FETCH_COUPONS"
 
-const TestReducer =(state= initialState, action)=>{
+const SortFilterReducer =(state= initialState, action)=>{
 
     switch(action.type)
     {
@@ -52,4 +52,4 @@ const TestReducer =(state= initialState, action)=>{
     }
 }
 
-export  default  TestReducer
+export  default  SortFilterReducer
