@@ -12,31 +12,15 @@ import {applyMiddleware, createStore} from "redux";
 import promise from "redux-promise-middleware";
 import thunk from "redux-thunk";
 import logger from "redux-logger";
-import combinedReducer from './redux/reducers'
-import {fetchCouponsFromServer} from "./redux/actions/FetchCoupons";
+import combinedReducer from "./redux/reducers";
+import {onChangeSearchSortFilter} from "./redux/postStateChangeCallers";
 
 const middleware = applyMiddleware(  promise(), thunk ,logger);
 
 
 const store = createStore(combinedReducer,middleware);
 
-
-store.subscribe(()=>{
-
-
-	const SortFilterReducer = store.getState().SortFilterReducer
-
-	const searchParams = SortFilterReducer.search
-	const filterParams = SortFilterReducer.filters
-	const sortParams = SortFilterReducer.sort
-
-
-	console.log(SortFilterReducer.toBeFetched)
-
-	if (!!SortFilterReducer.toBeFetched){
-		fetchCouponsFromServer( store.dispatch, searchParams, filterParams , sortParams )
-	}
-})
+store.subscribe(()=>onChangeSearchSortFilter( store.getState(), store.dispatch ))
 window.store=store
 
 ReactDOM.render(
