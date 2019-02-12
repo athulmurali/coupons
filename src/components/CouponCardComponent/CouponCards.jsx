@@ -13,7 +13,7 @@ class CouponCards extends React.Component {
 		let searchedCouponName = this.props.searchedCouponName;
 		let couponsLength =  coupons.length;
 		let searchedCoupons = this.props.searchedCoupons;
-		if(searchedCouponName !== "")  {
+		if(searchedCouponName !== "" && searchedCouponName.length > 2)  {
 			searchedCoupons = coupons.filter(function(couponName){
 				return couponName.Name.toLowerCase().includes(searchedCouponName.toLowerCase());
 			});
