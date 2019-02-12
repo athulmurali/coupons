@@ -1,23 +1,69 @@
-export const UPDATE_COUPON_DETAILS  = "UPDATE_COUPON_DETAILS";
+export const FETCH_LOADED_COUPONS = "FETCH_LOADED_COUPONS";
+export const FETCH_LOADED_COUPONS_PENDING = "FETCH_LOADED_COUPONS_PENDING";
+export const FETCH_LOADED_COUPONS_REJECTED = "FETCH_LOADED_COUPONS_REJECTED";
+export const FETCH_LOADED_COUPONS_FULFILLED = "FETCH_LOADED_COUPONS_FULFILLED";
+
+
+export const UPDATE_COUPON_DETAILS = "UPDATE_COUPON_DETAILS";
 export const RESET = "RESET";
 
 
 const initialState = {
-	couponDetails : [],
-	searchedCoupons :[],
-	couponDetailsSearchedCopy :[],
+	couponDetails: [],
+
+	// LoadedCoupons is an array of objects strictly. An iterable of coupons
+	// Each object is  a coupon and
+	loadedCoupons: []
 };
 
-const UserIdentification = (state = initialState, action)=>{
+
+const UserIdentification = (state = initialState, action) => {
+
+
 	switch (action.type) {
-	case "UPDATE_COUPON_DETAILS" :  return {
-		...state,...action.payload
-	};
-	case RESET : return {
-		...initialState
-	};
-	default : return state;
+
+		case  UPDATE_COUPON_DETAILS :
+			return {
+				...state, ...action.payload
+			};
+
+		case RESET :
+			return {
+
+				...initialState
+			};
+
+
+		case FETCH_LOADED_COUPONS_PENDING :
+			return {
+				...state,
+				toBeFetched: false,
+				isLoading: false
+
+			};
+
+		case FETCH_LOADED_COUPONS_REJECTED :
+			return {
+				...state,
+				toBeFetched: false,
+				isLoading: false
+
+			};
+
+		case FETCH_LOADED_COUPONS_FULFILLED : {
+			return {
+				...state,
+				toBeFetched: false,
+				isLoading: false,
+				arr: action.payload.data.results
+
+			};
+		}
+		default :
+			return state;
+
+
 	}
 };
 
-export default  UserIdentification;
+export default UserIdentification;
