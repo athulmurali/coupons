@@ -26,10 +26,15 @@ store.subscribe(()=>{
 
 	const SortFilterReducer = store.getState().SortFilterReducer
 
+	const searchParams = SortFilterReducer.search
+	const filterParams = SortFilterReducer.filters
+	const sortParams = SortFilterReducer.sort
+
+
 	console.log(SortFilterReducer.toBeFetched)
 
 	if (!!SortFilterReducer.toBeFetched){
-		fetchCouponsFromServer( store.dispatch, search, filters , sort )
+		fetchCouponsFromServer( store.dispatch, searchParams, filterParams , sortParams )
 	}
 })
 window.store=store
