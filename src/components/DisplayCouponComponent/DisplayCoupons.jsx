@@ -9,8 +9,8 @@ import CouponCards from "../CouponCardComponent/CouponCards";
 import {updateCoupons} from "../../redux/actions/UserIdentification";
 import {displayCouponState} from "../../redux/actions/DisplayCouponAction";
 import SearchCouponByName from "../SearchComponent/SearchCoupon";
-class Coupons extends React.Component {
 
+class Coupons extends React.Component {
     constructor(props){
         super(props);
         this.state = {
@@ -136,7 +136,6 @@ class Coupons extends React.Component {
         if(couponData.length > 0) {
             userName = couponData[0].FirstName;
         }
-
 
         if(this.state.count > Config.POPUPTIMER){
             buttonTrigger = this.buttonClick;
