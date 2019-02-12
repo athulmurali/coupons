@@ -10,6 +10,7 @@ import {updateCoupons} from "../../redux/actions/UserIdentification";
 import {displayCouponState} from "../../redux/actions/DisplayCouponAction";
 import SearchCouponByName from "../SearchComponent/SearchCoupon";
 import SortComponent from "../SortComponent";
+import FilterComponent from "../FilterComponent/filterComponent"
 class Coupons extends React.Component {
 
     constructor(props){
@@ -249,6 +250,7 @@ class Coupons extends React.Component {
 							<div className="filter_sort_list" hidden= {this.state.filter_arrow} >No filter added</div>
 						</div>
                         { this.Filter_Category() } */}
+                        <FilterComponent/>
                         <SortComponent/>
                     </ul>
                     {popUpLogout}

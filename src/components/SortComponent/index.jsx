@@ -4,7 +4,7 @@ import image_sort_up from "../../assets/new-filter-arrow-up.svg";
 import image_sort_down from "../../assets/new-filter-arrow-down.svg";
 const SORT_CATEOGRY = ["Redeem By Date"	,"Value(Low to High)	","Value(High to Low)"	," Brand"];
 
-class SortComponent extends React.Component{
+export default class SortComponent extends React.Component{
 
 	constructor(props){
 		super(props);
@@ -59,16 +59,16 @@ class SortComponent extends React.Component{
 		)
 	}
 }
-const mapStateToProps = (state) => {
-	return { 
-		checkedArray : state.SortFilterReducer.checkedArray ,
-		SORT_CATEOGRY : state.SortFilterReducer.sortCategory 
+// const mapStateToProps = (state) => {
+// 	return { 
+// 		checkedArray : state.SortFilterReducer.checkedArray ,
+// 		SORT_CATEOGRY : state.SortFilterReducer.sortCategory 
 
-	}
-}
-const mapDispatcherToProps = (dispatch) => {
+// 	}
+// }
+// const mapDispatcherToProps = (dispatch) => {
 
-}
+// }
 
 
-export default connect(mapStateToProps,mapDispatcherToProps)(SortComponent);
+// export default connect(mapStateToProps,mapDispatcherToProps)(SortComponent);
