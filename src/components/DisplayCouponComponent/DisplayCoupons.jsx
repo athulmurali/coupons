@@ -9,28 +9,29 @@ import CouponCards from "../CouponCardComponent/CouponCards";
 import {updateCoupons} from "../../redux/actions/UserIdentification";
 import {displayCouponState} from "../../redux/actions/DisplayCouponAction";
 import SearchCouponByName from "../SearchComponent/SearchCoupon";
-
+import SortComponent from "../SortComponent";
+import FilterComponent from "../FilterComponent/filterComponent"
 class Coupons extends React.Component {
+
     constructor(props){
         super(props);
         this.state = {
-            count: this.props.count,
+            count: 0,
             hideLoadedCoupons: true,
             hideNewCoupons: false,
             activeNewCoupons: "active",
             activeLoadedCoupons: "inactive",
             logOutTrigger: false,
             logOutReload: false,
-            filter_arrow: false,
-            sort_arrow: false,
-            array_filter : []
+
         };
-        this.Image_up = require('../../assets/new-filter-arrow-down.svg');
-        this.Sort_up = require('../../assets/new-filter-arrow-down.svg');
-        let sort_category = ["Redeem By Date"	,"Value(Low to High)	","Value(High to Low)"	," Brand"	, "Recommended"];
-        let filter_category = [];
     }
 
+    buttonClick = (el) => {
+        if(el) {
+            el.click();
+        };
+    }
 
     componentWillUnmount () {
         clearInterval(this.timer);
@@ -66,57 +67,6 @@ class Coupons extends React.Component {
         this.setState({count : 0, hideNewCoupons : true, hideLoadedCoupons : false, activeNewCoupons : "inactive", activeLoadedCoupons : "active"});
     }
 
-    Filter = () => {
-        if(this.state.filter_arrow === false){
-            this.setState({filter_arrow : true});
-            this.Image_up = require('../../assets/new-filter-arrow-up.svg');
-        }
-        else{
-            this.setState({filter_arrow : false});
-            this.Image_up = require('../../assets/new-filter-arrow-down.svg');
-        }
-    }
-    Sort = () => {
-        if(this.state.sort_arrow === false){
-            this.setState({sort_arrow : true});
-            this.Sort_up = require('../../assets/new-filter-arrow-up.svg');
-        }
-        else{
-            this.setState({sort_arrow : false});
-            this.Sort_up = require('../../assets/new-filter-arrow-down.svg');
-        }
-    }
-
-
-    Sorting_Category = () => {
-        const sort_category = ["Redeem By Date"	,"Value(Low to High)	","Value(High to Low)"	," Brand"];
-        return(
-            sort_category.map( cate => <div key={cate} className="filter_inside" hidden= {!this.state.sort_arrow}>
-                <input name="_filter" type="checkbox"/>
-                <label>
-                    {cate}
-                </label>
-            </div>)
-        )
-    }
-
-    Filter_Category = () => {
-        const filter_category = ["Baby & Childcare"	,"Bakeray","Beverages"	,"Condiments & Sauces","Dairy","Deli","Ethnic Products","Frozen Food","General Merchandise"];
-        return(
-            filter_category.map( fill => <div  key={fill} className="filter_inside" hidden= {!this.state.filter_arrow}>
-                <input name="_filter" type="checkbox" onClick={() => this.filtering(fill)}/>
-                <label>
-                    {fill}
-                </label>
-            </div>)
-        )
-    }
-    filtering = (e) => {
-
-        this.state.array_filter.push(e);
-
-    }
-
     render() {
 
         if(this.props.data.length<1) {
@@ -132,15 +82,16 @@ class Coupons extends React.Component {
             userName = couponData[0].FirstName;
         }
 
+
         if(this.state.count > Config.POPUPTIMER){
-            buttonTrigger = this.props.buttonClick;
+            buttonTrigger = this.buttonClick;
             if(this.state.count > Config.LOGOUTTIMER) {
                 this.handleScreenTap();
             }
         }
 
         if(this.state.logOutTrigger) {
-            logOutPopUpTrigger = this.props.buttonClick;
+            logOutPopUpTrigger = this.buttonClick;
             this.setState({logOutTrigger: false},
                 ()=>{
                     this.setState({count : 0},
@@ -156,25 +107,12 @@ class Coupons extends React.Component {
             }
         }
 
-        if(this.state.array_filter.length > 0){
-            // userCoupons.filter(function(filterMatch){
-            // 	return filterMatch.
-            // })
-            // console.log(userCoupons);
-        }
         const LogOut_Success = require("../../assets/success.svg");
         const Search_Icon = require("../../assets/new-filter-search.png");
-        const slideArrow = [
-            this.Image_up
-        ];
-        const slideArrow_Sort = [
-            this.Sort_up
-        ];
-
         let popUpLogout = (<Popup trigger={<button ref = {logOutPopUpTrigger}  className="button" ></button>} true modal>
             {close => (
                 <div className="modal">
-                    <img className="logOutImage" alt="log Out Success" src={LogOut_Success}></img>
+                    <img className="logOutImage" src={LogOut_Success}></img>
                     <h1 className="logOutMessage1"> Enjoy your savings!</h1>
                     <h4 className="logOutMessage2">You have been successfully logged out. <br/> See you soon!</h4>
                 </div>)}
@@ -224,24 +162,8 @@ class Coupons extends React.Component {
                         <li> <a  className={this.state.activeNewCoupons} onClick={this.NewCoupons} > New Coupons </a></li>
                         {/* <li> <a  className={this.state.activeLoadedCoupons} onClick={this.LoadedCoupons}> Loaded Coupons </a></li> */}
 
-                        {/* <div className="filter_sort">
-							Sort
-							<img className="image_arrow" src={slideArrow_Sort[0]}  onClick={this.Sort}/>
-							<div className="filter_sort_list" hidden= {this.state.sort_arrow} >By Recommended</div>
-						</div>
-						{ this.Sorting_Category() }
-						<div className="filter_inside" hidden= {!this.state.sort_arrow}>
-							<input name="_filter" type="checkbox" defaultChecked/>
-							<label>
-		  						Recommended
-        					</label>
-						</div>
-						<div className="filter_sort">
-							Filter
-							<img className="image_arrow" src={slideArrow[0]}  onClick={this.Filter}/>
-							<div className="filter_sort_list" hidden= {this.state.filter_arrow} >No filter added</div>
-						</div>
-						{ this.Filter_Category() } */}
+                        <FilterComponent/>
+                        <SortComponent/>
                     </ul>
                     {popUpLogout}
                     {sessionEndPopUp}
@@ -265,18 +187,13 @@ const mapStateToProps=(state)=>{
     return {
         data : state.UserIdentification.couponDetails,
         searchedCouponName: state.DisplayCouponStateUpdate.searchedCouponName,
-        count: state.UserIdentification.count,
     }
 }
 
 const mapDispatchToProps = (dispatch) => (
     {
         displayCouponState : (updatedValue) => displayCouponState(dispatch, updatedValue),
-        updateCoupons :( updatedValue)=> updateCoupons(dispatch,  updatedValue ),
-        buttonClick : (el) => { if(el) {
-                el.click();
-            };
-        }
+        updateCoupons :( updatedValue)=> updateCoupons(dispatch,  updatedValue )
 
     }
 )
