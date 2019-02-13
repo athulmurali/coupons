@@ -10,7 +10,6 @@ const getMap = (storeNo = Config.storeNumber) => {
 };
 const getUserDetails = (barcodeNumber) => {
 	const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/customer/fetch/`+barcodeNumber;
-	
 	return axios.get(url);
 };
 const getUserCoupons = (barcodeNumber) => {

@@ -46,12 +46,10 @@ class DialPad extends Component {
             }
             console.log(this.extractNumberFromFormat);
             const response = await API.getUserDetails(this.extractNumberFromFormat);
-
             this.couponsDetails.push(response.data.response.response.Customer[0]);
             const barCodeNumber = response.data.response.response.Customer[0].ID[0].attributes.Value
             const couponsDetails = await API.getUserCoupons(barCodeNumber);
             const couponDetailsArray = couponsDetails.data.response
-
             this.couponsDetails.push(couponDetailsArray);
             this.props.updateCoupons({'couponDetails': this.couponsDetails})
             this.props.history.push(ROUTE_DISPLAY_COUPONS)

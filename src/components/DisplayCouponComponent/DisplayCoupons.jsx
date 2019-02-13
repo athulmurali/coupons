@@ -14,7 +14,7 @@ class Coupons extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            count: 0,
+            count: this.props.count,
             hideLoadedCoupons: true,
             hideNewCoupons: false,
             activeNewCoupons: "active",
@@ -31,11 +31,6 @@ class Coupons extends React.Component {
         let filter_category = [];
     }
 
-    buttonClick = (el) => {
-        if(el) {
-            el.click();
-        };
-    }
 
     componentWillUnmount () {
         clearInterval(this.timer);
@@ -138,14 +133,14 @@ class Coupons extends React.Component {
         }
 
         if(this.state.count > Config.POPUPTIMER){
-            buttonTrigger = this.buttonClick;
+            buttonTrigger = this.props.buttonClick;
             if(this.state.count > Config.LOGOUTTIMER) {
                 this.handleScreenTap();
             }
         }
 
         if(this.state.logOutTrigger) {
-            logOutPopUpTrigger = this.buttonClick;
+            logOutPopUpTrigger = this.props.buttonClick;
             this.setState({logOutTrigger: false},
                 ()=>{
                     this.setState({count : 0},
@@ -179,7 +174,7 @@ class Coupons extends React.Component {
         let popUpLogout = (<Popup trigger={<button ref = {logOutPopUpTrigger}  className="button" ></button>} true modal>
             {close => (
                 <div className="modal">
-                    <img className="logOutImage" src={LogOut_Success}></img>
+                    <img className="logOutImage" alt="log Out Success" src={LogOut_Success}></img>
                     <h1 className="logOutMessage1"> Enjoy your savings!</h1>
                     <h4 className="logOutMessage2">You have been successfully logged out. <br/> See you soon!</h4>
                 </div>)}
@@ -270,13 +265,18 @@ const mapStateToProps=(state)=>{
     return {
         data : state.UserIdentification.couponDetails,
         searchedCouponName: state.DisplayCouponStateUpdate.searchedCouponName,
+        count: state.UserIdentification.count,
     }
 }
 
 const mapDispatchToProps = (dispatch) => (
     {
         displayCouponState : (updatedValue) => displayCouponState(dispatch, updatedValue),
-        updateCoupons :( updatedValue)=> updateCoupons(dispatch,  updatedValue )
+        updateCoupons :( updatedValue)=> updateCoupons(dispatch,  updatedValue ),
+        buttonClick : (el) => { if(el) {
+                el.click();
+            };
+        }
 
     }
 )
