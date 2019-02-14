@@ -46,16 +46,21 @@ class DialPad extends Component {
             }
             console.log(this.extractNumberFromFormat);
             const response = await API.getUserDetails(this.extractNumberFromFormat);
-            this.couponsDetails.push(response.data.response.response.Customer[0]);
-            const barCodeNumber = response.data.response.response.Customer[0].ID[0].attributes.Value
+
+            this.couponsDetails.push(response.data.response.Customer[0]);
+            const barCodeNumber = response.data.response.Customer[0].ID[0].attributes.Value
             const couponsDetails = await API.getUserCoupons(barCodeNumber);
             const couponDetailsArray = couponsDetails.data.response
+
             this.couponsDetails.push(couponDetailsArray);
             this.props.updateCoupons({'couponDetails': this.couponsDetails})
             this.props.history.push(ROUTE_DISPLAY_COUPONS)
         } catch (error) {
+
             this.setErrorMessage();
         }
+
+
     };
 
     setErrorMessage = () => {
@@ -125,10 +130,6 @@ class DialPad extends Component {
         clearInterval(this.timer)
     }
 
-    componentDidMount() {
-        this.startTimer();
-    }
-
     tick() {
         this.setState({count: (this.state.count + 1)})
     }
@@ -175,6 +176,7 @@ class DialPad extends Component {
             this.Image_phone
         ];
 
+        this.startTimer();
         if (this.state.count > Config.INACTIVE_USER_IDENTIFICATION) {
             this.setState({count: 0})
             this.handleScreenTap();
