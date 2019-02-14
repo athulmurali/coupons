@@ -18,7 +18,7 @@ export const onChangeSearchSortFilter=(state, dispatch )=>{
 		// if coupons type count grows greater than 2, then update the following code to a switch case
 		if (couponsType === CouponsTypeEnum.ALL)
 		{
-			fetchAllCouponsFromServer( dispatch, searchParams, filterParams , sortParams, false )
+			fetchAllCouponsFromServer( dispatch, searchParams, filterParams , sortParams )
 		}
 		else {	fetchAllCouponsFromServer( dispatch, searchParams, filterParams , sortParams, true )}
 

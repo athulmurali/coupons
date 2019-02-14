@@ -14,8 +14,10 @@ const getUserDetails = (barcodeNumber) => {
 	return axios.get(url);
 };
 const getUserCoupons = (barcodeNumber) => {
-	const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/fetchCouponsByFilter`;
-	
+	//change in the api , hence barcode parameter will not be used
+	//to be changed to new a function in the  later build
+	const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/coupons/fetchCouponsByFilter`;
+
 	return axios.get(url);
 };
 

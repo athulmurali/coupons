@@ -53,7 +53,9 @@ class DialPad extends Component {
             const couponDetailsArray = couponsDetails.data.response
 
             this.couponsDetails.push(couponDetailsArray);
-            this.props.updateCoupons({'couponDetails': this.couponsDetails})
+            this.props.updateCoupons({'couponDetails': this.couponsDetails,
+                allCoupons: couponDetailsArray,
+                userInfo: response.data.response.Customer[0]})
             this.props.history.push(ROUTE_DISPLAY_COUPONS)
         } catch (error) {
 

@@ -108,8 +108,7 @@ class CameraScanner extends Component{
 		this.setState({scanning: !this.state.scanning});
 	}
 	_searchUserInDatabase = async  (searchBarcode) => {
-		try{	
-			
+		try{
 			let responeData = [];
 			const userDetails = await API.getUserDetails(searchBarcode.slice(0,-1));
 			// alert(userDetails)
@@ -123,14 +122,14 @@ class CameraScanner extends Component{
 
 			sessionStorage.setItem('token',true);
 
-
-			this.props.updateCoupons({
-				couponDetails: responeData,
-				allCoupons: response.data.response,
-				userInfo: userDetails
-			});
+			this.props.updateCoupons({couponDetails : responeData,
+										userInfo   : responeData[0],
+										allCoupons: responeData[1]
+			})
 
 			this.props.history.push({pathname : ROUTE_DISPLAY_COUPONS});
+
+
 		} catch (error){
 			this.setState(
 				{

@@ -55,9 +55,9 @@ class CouponCards extends React.Component {
 						height: "264px"
 					}}>
 						<img src={StopAndShopImg} width="103px" height="103px" alt="image_image" /> <br />
-						<h5> {coupon.Name}</h5>
-						<h6 className="couponDescription"> {coupon.Description}</h6>
-						<h6> Exp: {coupon.EndDate.slice(0,10)} </h6>
+						<h5> {coupon.name}</h5>
+						<h6 className="couponDescription"> {coupon.description}</h6>
+						<h6> Exp: {coupon.expirationDate.slice(0,10)} </h6>
 						<h6 className="viewMore"> Tap to View more </h6>
 					</FrontSide>
 				</Flippy>

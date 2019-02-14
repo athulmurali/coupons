@@ -27,8 +27,6 @@ class FilterComponent extends React.Component{
 
 	updateChange = (array_filter,category) => {
 
-		this.updateCheckedFilters({categories :  array_filter})
-
 		let checkedFilters =array_filter
 
 
@@ -51,7 +49,7 @@ class FilterComponent extends React.Component{
 	Filter_Category = () => {
         return(
             filter_category.map( fill => <div  key={fill} className="filter_inside" hidden= {!this.state.filter_arrow}>
-                <input name="_filter" type="checkbox" onClick={(e) => this.updateChange(this.state.array_filter  ,fill)}/>
+                <input name="_filter" type="checkbox" onClick={(_) => this.updateChange(this.state.array_filter  ,fill)}/>
                 <label> {fill} </label>
             </div>)
         )
