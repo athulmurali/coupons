@@ -42,8 +42,8 @@ input[type="checkbox"]:checked + label{
 .filter_inside{
 	color: #63666A;
 	margin: 0px 10px 0px ;
-    border: 1.3px #ECECEC solid;
-    padding: 12px 10px 15px;
+  border: 1.3px #ECECEC solid;
+  padding: 12px 10px 15px;
 	background: #FBFBFB;
 	font-size: smaller;
 	font-weight: 500;
@@ -54,12 +54,13 @@ input[type="checkbox"]:checked + label{
 	margin-right: 14px;
 	text-align: center;
 	margin-top: 10px;
-	height: 264px;
-	width: 171px;
+	height: 344px;
+	width: 261px;
 	background-color: white;
 	align-items: flex-start;
 	cursor: pointer;
 	word-wrap: normal;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,.2);
  }
  
  .viewMore {
@@ -230,7 +231,7 @@ input[type="checkbox"]:checked + label{
  }
  
  .in {
-	animation: fill 10s linear 1;
+	animation: fill 5s linear 1;
 	height: 100%;
 	background-color:#E0004D;
  }
@@ -272,7 +273,7 @@ input[type="checkbox"]:checked + label{
 	width: 100%;
 	height: 100%vh;
  }
- 
+
  ul {
 	list-style-type: none;
 	margin: 0;
@@ -317,7 +318,9 @@ input[type="checkbox"]:checked + label{
 	padding-left: 18px;
 	padding-bottom: 100px;
 	cursor: pointer;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
  }
+
 
  .LoadedCouponCount {
 	padding: 0;
@@ -331,4 +334,10 @@ input[type="checkbox"]:checked + label{
  }
 
 
-
+.plusIcon {
+ width: 40px;
+ /* right: 15%; */
+ margin: auto;
+ display: flex;
+ /* position: absolute; */
+}

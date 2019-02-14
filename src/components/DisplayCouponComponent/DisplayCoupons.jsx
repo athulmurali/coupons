@@ -16,7 +16,7 @@ class Coupons extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            count: 0,
+            count: this.props.count,
             hideLoadedCoupons: true,
             hideNewCoupons: false,
             activeNewCoupons: "active",
@@ -52,7 +52,7 @@ class Coupons extends React.Component {
     }
 
     timerReset = () =>  {
-        this.setState({count : 0});
+        this.setState({count : this.props.count});
     }
 
     handleScreenTap = () => {
@@ -60,11 +60,11 @@ class Coupons extends React.Component {
     }
 
     NewCoupons = () => {
-        this.setState({count : 0, hideNewCoupons : false, hideLoadedCoupons : true, activeNewCoupons : "active", activeLoadedCoupons : "inactive"});
+        this.setState({count : this.props.count, hideNewCoupons : false, hideLoadedCoupons : true, activeNewCoupons : "active", activeLoadedCoupons : "inactive"});
     }
 
     LoadedCoupons = () => {
-        this.setState({count : 0, hideNewCoupons : true, hideLoadedCoupons : false, activeNewCoupons : "inactive", activeLoadedCoupons : "active"});
+        this.setState({count : this.props.count, hideNewCoupons : true, hideLoadedCoupons : false, activeNewCoupons : "inactive", activeLoadedCoupons : "active"});
     }
 
     render() {
@@ -72,7 +72,6 @@ class Coupons extends React.Component {
         if(this.props.data.length<1) {
             return <div>No Data Obtained</div>
         }
-
         let couponData = this.props.data;
         let buttonTrigger = "";
         let logOutPopUpTrigger = "";
@@ -94,7 +93,7 @@ class Coupons extends React.Component {
             logOutPopUpTrigger = this.buttonClick;
             this.setState({logOutTrigger: false},
                 ()=>{
-                    this.setState({count : 0},
+                    this.setState({count : this.props.count},
                         ()=>{
                             this.setState({logOutReload: true});
                         });
@@ -112,7 +111,7 @@ class Coupons extends React.Component {
         let popUpLogout = (<Popup trigger={<button ref = {logOutPopUpTrigger}  className="button" ></button>} true modal>
             {close => (
                 <div className="modal">
-                    <img className="logOutImage" src={LogOut_Success}></img>
+                    <img className="logOutImage" src={LogOut_Success} alt="No Image Found"></img>
                     <h1 className="logOutMessage1"> Enjoy your savings!</h1>
                     <h4 className="logOutMessage2">You have been successfully logged out. <br/> See you soon!</h4>
                 </div>)}
@@ -140,7 +139,7 @@ class Coupons extends React.Component {
                     </div>
                 </div>
             )}
-        </Popup> 	);
+        </Popup>);
 
 
         return (
@@ -155,6 +154,7 @@ class Coupons extends React.Component {
                         trigger={() => <button 	className="printButton" hidden={this.state.hideLoadedCoupons}>PRINT</button>}
                         content={() => this.componentRef}
                     />
+
                 </div>
 
                 <div className="AllCoupons">
@@ -162,16 +162,14 @@ class Coupons extends React.Component {
                         <li> <a  className={this.state.activeNewCoupons} onClick={this.NewCoupons} > New Coupons </a></li>
                         {/* <li> <a  className={this.state.activeLoadedCoupons} onClick={this.LoadedCoupons}> Loaded Coupons </a></li> */}
 
-                        <FilterComponent/>
-                        <SortComponent/>
+                        {/* <FilterComponent/> */}
+                        {/* <SortComponent/> */}
                     </ul>
                     {popUpLogout}
                     {sessionEndPopUp}
-                    <div className="LoadedCoupons"  hidden={this.state.hideNewCoupons}   >
+                    <div className="LoadedCoupons"  hidden={this.state.hideNewCoupons} onClick={this.timerReset} onKeyPress={this.timerReset}   >
                         <SearchCouponByName />
-                        <div onClick={this.timerReset}>
                             <CouponCards  />
-                        </div>
                     </div>
                     {/* <div className="LoadedCoupons"  hidden={this.state.hideLoadedCoupons} ref= {el => (this.componentRef = el)} >
 						<h4 className="LoadedCouponCount"> Loaded Coupons ({couponsLength}) </h4>
@@ -187,6 +185,7 @@ const mapStateToProps=(state)=>{
     return {
         data : state.UserIdentification.couponDetails,
         searchedCouponName: state.DisplayCouponStateUpdate.searchedCouponName,
+        count: state.UserIdentification.count
     }
 }
 

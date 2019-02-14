@@ -4,11 +4,33 @@ import Flippy, {BackSide, FrontSide} from "react-flippy";
 import StopAndShopImg from "../../assets/stopandshop.png";
 import {updateCoupons} from "../../redux/actions/UserIdentification";
 import {displayCouponState} from "../../redux/actions/DisplayCouponAction";
-
+import PlusIcon from "../../assets/plus-icon.svg";
+import LogOut_Success from "../../assets/success.svg";
+let x =[0];
 
 class CouponCards extends React.Component {
-	render() {
+	constructor(props) {
+		super(props);
+		this.state = {
+			valuess: [0],
+		}
+	}
 
+	swapIcon = (i) => {
+		if(i.isLoaded === true) {
+		i.isLoaded = false;
+		}
+		else {
+			i.isLoaded = true;
+		}
+		x.push(i);
+		this.setState({valuess : x});
+		console.log("helllpp "  + i.isLoaded);
+	}
+
+
+
+	render() {
 		let coupons = this.props.data[1];
 		let searchedCouponName = this.props.searchedCouponName;
 		let couponsLength =  coupons.length;
@@ -29,33 +51,41 @@ class CouponCards extends React.Component {
 			return <div> No Coupons Found </div>;
 		}
 
+
 		if(coupons.length > 0 ){
 			return coupons.map((coupon,i)=><div className="Cards" key={i}>
 				<Flippy flipOnHover={false} // default false
-					flipOnClick={true} // default false
+					flipOnClick={false} // default false
 					flipDirection="horizontal" // horizontal or vertical
 					ref={(r) => this.flippy = r} // to use toggle method like this.flippy.toggle()
 					style={{
-						width: "170px",
-						height: "150px",
-						padding: "0",
+						width: "264px",
+						height: "294px",
+						padding: "30",
 					}}>
 					<BackSide style={{
 						backgroundColor: "white",
 						color: "black",
-						width: "171px",
-						height: "264px",
+						width: "264px",
+						height: "294px",
 					}} >
+											<h6 className="couponDescription"> {coupon.Description}</h6>
 					</BackSide>
 					<FrontSide style={{
-						width: "171px",
-						height: "264px"
+						width: "264px",
+						height: "294px",
+						'box-shadow': "none",
 					}}>
-						<img src={StopAndShopImg} width="103px" height="103px" alt="image_image" /> <br />
-						<h5> {coupon.Name}</h5>
-						<h6 className="couponDescription"> {coupon.Description}</h6>
+						<img src={StopAndShopImg} width="103px" height="103px" alt="image_image" />
+						<div className= "plusIcon" onClick = {() => this.swapIcon(coupon)}>
+						<img height="40px" src={(coupon.isLoaded) ? LogOut_Success: PlusIcon} alt="plus sign unable to load"/>	
+						</div>
+						<h5> {coupon.Name}</h5> 
+
+						<h6 className="couponDescription"> {coupon.Description} </h6>
 						<h6> Exp: {coupon.EndDate.slice(0,10)} </h6>
-						<h6 className="viewMore"> Tap to View more </h6>
+
+						{/* <h6 className="viewMore"> Tap to View more </h6> */}
 					</FrontSide>
 				</Flippy>
 			</div>);
@@ -72,7 +102,6 @@ const mapStateToProps=(state)=>{
 		searchedCouponName: state.DisplayCouponStateUpdate.searchedCouponName,
 		searchedCoupons : state.UserIdentification.searchedCoupons,
 		couponsLength : state.DisplayCouponStateUpdate.searchedCouponsLength
-
 	};
 };
 

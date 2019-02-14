@@ -1,7 +1,4 @@
 import React from "react";
-import {connect} from "react-redux";
-import image_sort_up from "../../assets/new-filter-arrow-up.svg";
-import image_sort_down from "../../assets/new-filter-arrow-down.svg";
 const SORT_CATEOGRY = ["Redeem By Date"	,"Value(Low to High)	","Value(High to Low)"	," Brand"];
 
 export default class SortComponent extends React.Component{
@@ -27,7 +24,7 @@ export default class SortComponent extends React.Component{
 	}
 	updateChange = (checkedArray, categoryName) =>{
 		if(checkedArray.includes(categoryName)){
-			this.setState({checkedArray : checkedArray.filter(name=>(name!=categoryName))})
+			this.setState({checkedArray : checkedArray.filter(name=>(name !== categoryName))})
 		}
 		else{
 			this.setState({checkedArray : [...this.state.checkedArray,categoryName ] })
@@ -53,22 +50,7 @@ export default class SortComponent extends React.Component{
 						{category}
 					</label>
 				</div>)}
-			</div>	
-			
-	
+			</div>		
 		)
 	}
 }
-// const mapStateToProps = (state) => {
-// 	return { 
-// 		checkedArray : state.SortFilterReducer.checkedArray ,
-// 		SORT_CATEOGRY : state.SortFilterReducer.sortCategory 
-
-// 	}
-// }
-// const mapDispatcherToProps = (dispatch) => {
-
-// }
-
-
-// export default connect(mapStateToProps,mapDispatcherToProps)(SortComponent);
