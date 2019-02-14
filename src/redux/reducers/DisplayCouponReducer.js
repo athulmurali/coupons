@@ -21,7 +21,7 @@ const DisplayCouponsReducer = (state = initialState, action) => {
 				...state, ...action.payload
 			};
 
-		case "UPDATE_DISPLAY_COUPON_STATE" :
+		case UPDATE_DISPLAY_COUPON_STATE :
 			return {
 				...state, ...action.payload
 			};
