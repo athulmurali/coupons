@@ -16,7 +16,9 @@ const initialState = {
     toBeFetched: false,
     filters: {},
     search: {},
-    arr: []
+    arr: [],
+
+    array_filter :[]
 }
 
 // to be moved to config

@@ -1,5 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
+import {updateFilters} from "../../redux/actions/SearchSortFilter";
 
 const filter_category = ["Baby & Childcare"	,"Bakeray","Beverages"	,"Condiments & Sauces","Dairy","Deli","Ethnic Products","Frozen Food","General Merchandise"];
 
@@ -25,13 +26,26 @@ class FilterComponent extends React.Component{
 
 
 	updateChange = (array_filter,category) => {
+
+		this.updateCheckedFilters({categories :  array_filter})
+
+		let checkedFilters =array_filter
+
+
 		if(array_filter.includes(category)){
-			this.setState({array_filter : array_filter.filter(name => (name!==category))});
+			checkedFilters = array_filter.filter(name => (name!==category))
+			this.setState({array_filter :  checkedFilters});
 
 		}
 		else{
-			this.setState({array_filter : [...this.state.array_filter,category]});
+			checkedFilters = [...this.state.array_filter,category]
+
+
+			this.setState({array_filter : checkedFilters});
 		}
+
+		this.props.updateCheckedFilters({category : checkedFilters})
+
 	}
 
 	Filter_Category = () => {
@@ -67,15 +81,18 @@ class FilterComponent extends React.Component{
 		)
 	}
 }
-export const mapStateToProps =() =>{
+export const mapStateToProps =(state) =>{
 	return {
+
+		// array_filter : state.UserIdentification.array_filter
 
 
 	}
 }
 
-export const mapDispatchToProps =()=>{
+export const mapDispatchToProps =(dispatch)=>{
 	return {
+		updateCheckedFilters :(filterParams)=> updateFilters(dispatch, filterParams)
 
 	}
 }
