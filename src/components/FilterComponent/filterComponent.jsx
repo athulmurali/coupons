@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 
 const filter_category = ["Baby & Childcare"	,"Bakeray","Beverages"	,"Condiments & Sauces","Dairy","Deli","Ethnic Products","Frozen Food","General Merchandise"];
 
-export default class FilterComponent extends React.Component{
+class FilterComponent extends React.Component{
 	constructor(props){
 		super(props)
 		this.state = {
@@ -26,7 +26,7 @@ export default class FilterComponent extends React.Component{
 
 	updateChange = (array_filter,category) => {
 		if(array_filter.includes(category)){
-			this.setState({array_filter : array_filter.filter(name => name!category)});
+			this.setState({array_filter : array_filter.filter(name => (name!==category))});
 
 		}
 		else{
