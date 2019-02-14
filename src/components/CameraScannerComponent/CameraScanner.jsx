@@ -123,7 +123,12 @@ class CameraScanner extends Component{
 
 			sessionStorage.setItem('token',true);
 
-			this.props.updateCoupons({couponDetails : responeData})
+
+			this.props.updateCoupons({
+				couponDetails: responeData,
+				allCoupons: response.data.response,
+				userInfo: userDetails
+			});
 
 			this.props.history.push({pathname : ROUTE_DISPLAY_COUPONS});
 		} catch (error){
