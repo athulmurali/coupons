@@ -60,7 +60,7 @@ const UserIdentification = (state = initialState, action) => {
 				...state,
 				toBeFetched: false,
 				isLoading: false,
-				arr: action.payload.data.response
+				allCoupons: action.payload.data.response
 
 			}
 
