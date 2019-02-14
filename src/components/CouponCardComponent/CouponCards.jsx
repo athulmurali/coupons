@@ -9,28 +9,31 @@ import {displayCouponState} from "../../redux/actions/DisplayCouponAction";
 class CouponCards extends React.Component {
 	render() {
 
-		let coupons = this.props.data[1];
-		let searchedCouponName = this.props.searchedCouponName;
+		let coupons = this.props.allCoupons
 		let couponsLength =  coupons.length;
-		let searchedCoupons = this.props.searchedCoupons;
-		if(searchedCouponName !== "")  {
-			searchedCoupons = coupons.filter(function(couponName){
-				return couponName.Name.toLowerCase().includes(searchedCouponName.toLowerCase());
-			});
-			coupons = searchedCoupons;
-			couponsLength = searchedCoupons.length;
-			this.props.displayCouponState({"searchedCouponsLength": couponsLength});
-		}
-		else {
-			this.props.displayCouponState({"searchedCouponsLength": couponsLength});
-		}
+
+
+		 // The following is supposed to be moved to backed
+
+		// if(searchedCouponName !== "")  {
+
+		// 	searchedCoupons = coupons.filter(function(couponName){
+		// 		return couponName.Name.toLowerCase().includes(searchedCouponName.toLowerCase());
+		// 	});
+		// 	coupons = searchedCoupons;
+		// 	couponsLength = searchedCoupons.length;
+		// 	this.props.displayCouponState({"searchedCouponsLength": couponsLength});
+		// }
+		// else {
+		// 	this.props.displayCouponState({"searchedCouponsLength": couponsLength});
+		// }
 
 		if(couponsLength === 0) {
 			return <div> No Coupons Found </div>;
 		}
 
-		if(coupons.length > 0 ){
-			return coupons.map((coupon,i)=><div className="Cards" key={i}>
+
+		return coupons.map((coupon,i)=><div className="Cards" key={i}>
 				<Flippy flipOnHover={false} // default false
 					flipOnClick={true} // default false
 					flipDirection="horizontal" // horizontal or vertical
@@ -59,7 +62,7 @@ class CouponCards extends React.Component {
 					</FrontSide>
 				</Flippy>
 			</div>);
-		}
+
 	}
 
 }
@@ -67,12 +70,8 @@ class CouponCards extends React.Component {
 
 const mapStateToProps=(state)=>{
 	return {
-		data : state.UserIdentification.couponDetails,
-		dataCopy: state.UserIdentification.couponDetailsSearchedCopy,
-		searchedCouponName: state.DisplayCouponStateUpdate.searchedCouponName,
-		searchedCoupons : state.UserIdentification.searchedCoupons,
-		couponsLength : state.DisplayCouponStateUpdate.searchedCouponsLength
 
+		allCoupons :state.DisplayCouponsReducer.allCoupons
 	};
 };
 

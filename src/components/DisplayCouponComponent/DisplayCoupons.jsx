@@ -69,17 +69,17 @@ class Coupons extends React.Component {
 
     render() {
 
-        if(this.props.data.length<1) {
+        if(this.props.allCoupons.length<1) {
             return <div>No Data Obtained</div>
         }
 
-        let couponData = this.props.data;
+        let couponData = this.props.allCoupons;
         let buttonTrigger = "";
         let logOutPopUpTrigger = "";
         let userName = "";
 
         if(couponData.length > 0) {
-            userName = couponData[0].FirstName;
+            userName = this.props.userInfo.FirstName;
         }
 
 
@@ -186,7 +186,8 @@ class Coupons extends React.Component {
 const mapStateToProps=(state)=>{
     return {
         data : state.UserIdentification.couponDetails,
-        searchedCouponName: state.DisplayCouponStateUpdate.searchedCouponName,
+        userInfo : state.DisplayCouponsReducer.userInfo,
+        allCoupons: state.DisplayCouponsReducer.allCoupons
     }
 }
 
