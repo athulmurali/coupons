@@ -59,33 +59,30 @@ class CouponCards extends React.Component {
 					flipDirection="horizontal" // horizontal or vertical
 					ref={(r) => this.flippy = r} // to use toggle method like this.flippy.toggle()
 					style={{
-						width: "264px",
-						height: "294px",
+						width: "260px",
+						height: "343px",
 						padding: "30",
 					}}>
 					<BackSide style={{
 						backgroundColor: "white",
 						color: "black",
-						width: "264px",
-						height: "294px",
+						width: "260px",
+						height: "343px",
 					}} >
-											<h6 className="couponDescription"> {coupon.Description}</h6>
+						<h6 className="couponDescription"> {coupon.Description}</h6>
 					</BackSide>
 					<FrontSide style={{
-						width: "264px",
-						height: "294px",
-						'box-shadow': "none",
+						width: "260px",
+						height: "343px",
 					}}>
-						<img src={StopAndShopImg} width="103px" height="103px" alt="image_image" />
+						<img src={StopAndShopImg} width="80px" height="100px" alt="image_image" />
+						<h5> {coupon.Name}</h5> 
+						<h6 className="couponDescription"> {coupon.Description} </h6>
+						<h6> Exp: {coupon.EndDate.slice(0,10)} </h6>
+						{/* <h6 className="viewMore"> Tap to View more </h6> */}
 						<div className= "plusIcon" onClick = {() => this.swapIcon(coupon)}>
 						<img height="40px" src={(coupon.isLoaded) ? LogOut_Success: PlusIcon} alt="plus sign unable to load"/>	
 						</div>
-						<h5> {coupon.Name}</h5> 
-
-						<h6 className="couponDescription"> {coupon.Description} </h6>
-						<h6> Exp: {coupon.EndDate.slice(0,10)} </h6>
-
-						{/* <h6 className="viewMore"> Tap to View more </h6> */}
 					</FrontSide>
 				</Flippy>
 			</div>);

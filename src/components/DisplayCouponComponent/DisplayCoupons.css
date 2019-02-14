@@ -39,6 +39,7 @@ input[type="checkbox"]:checked + label{
 	min-height: 44px;
 	cursor: pointer;
 }
+
 .filter_inside{
 	color: #63666A;
 	margin: 0px 10px 0px ;
@@ -50,12 +51,13 @@ input[type="checkbox"]:checked + label{
 }
 
 .Cards {
+	padding: 12px;
 	display: inline-flex;
 	margin-right: 14px;
 	text-align: center;
 	margin-top: 10px;
-	height: 344px;
-	width: 261px;
+	height: 343px;
+	width: 260px;
 	background-color: white;
 	align-items: flex-start;
 	cursor: pointer;
@@ -336,8 +338,8 @@ input[type="checkbox"]:checked + label{
 
 .plusIcon {
  width: 40px;
- /* right: 15%; */
+ right: 15%;
  margin: auto;
  display: flex;
- /* position: absolute; */
+ position: absolute;
 }
