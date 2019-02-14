@@ -14,7 +14,7 @@ const getUserDetails = (barcodeNumber) => {
 	return axios.get(url);
 };
 const getUserCoupons = (barcodeNumber) => {
-	const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/customer/fetchBarcode/`+barcodeNumber;
+	const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/fetchCouponsByFilter`;
 	
 	return axios.get(url);
 };
