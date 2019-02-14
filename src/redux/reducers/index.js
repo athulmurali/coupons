@@ -4,5 +4,5 @@ import UserIdentification from "./UserIdentification";
 import SearchSortFilterReducer from "./SearchSortFilterReducer";
 
 
-const combinedReducers = combineReducers({  AssistanceReducer,UserIdentification,SearchSortFilterReducer});
+const combinedReducers = combineReducers({  AssistanceReducer,UserIdentification,SearchSortFilterReducer,DisplayCouponsReducer});
 export default  combinedReducers
