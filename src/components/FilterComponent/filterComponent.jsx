@@ -1,8 +1,9 @@
 import React from "react";
+import {connect} from "react-redux";
 
 const filter_category = ["Baby & Childcare"	,"Bakeray","Beverages"	,"Condiments & Sauces","Dairy","Deli","Ethnic Products","Frozen Food","General Merchandise"];
 
-export default class SortComponent extends React.Component{
+export default class FilterComponent extends React.Component{
 	constructor(props){
 		super(props)
 		this.state = {
@@ -21,10 +22,22 @@ export default class SortComponent extends React.Component{
             this.Image_up = require('../../assets/new-filter-arrow-down.svg');
         }
 	}
+
+
+	updateChange = (array_filter,category) => {
+		if(array_filter.includes(category)){
+			this.setState({array_filter : array_filter.filter(name => name!category)});
+
+		}
+		else{
+			this.setState({array_filter : [...this.state.array_filter,category]});
+		}
+	}
+
 	Filter_Category = () => {
         return(
             filter_category.map( fill => <div  key={fill} className="filter_inside" hidden= {!this.state.filter_arrow}>
-                <input name="_filter" type="checkbox" onClick={() => this.filtering(fill)}/>
+                <input name="_filter" type="checkbox" onClick={(e) => this.updateChange(this.state.array_filter  ,fill)}/>
                 <label> {fill} </label>
             </div>)
         )
@@ -54,3 +67,16 @@ export default class SortComponent extends React.Component{
 		)
 	}
 }
+export const mapStateToProps =() =>{
+	return {
+
+
+	}
+}
+
+export const mapDispatchToProps =()=>{
+	return {
+
+	}
+}
+export default connect(mapStateToProps, mapDispatchToProps)(FilterComponent)
