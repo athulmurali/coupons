@@ -78,10 +78,10 @@ class CouponCards extends React.Component {
 						<img src={StopAndShopImg} width="80px" height="100px" alt="image_image" />
 						<h5> {coupon.Name}</h5> 
 						<h6 className="couponDescription"> {coupon.Description} </h6>
-						<h6> Exp: {coupon.EndDate.slice(0,10)} </h6>
-						{/* <h6 className="viewMore"> Tap to View more </h6> */}
+						<h6 className="expireDate"> Exp: {coupon.EndDate.slice(0,10)} </h6>
+						<h6 className="viewMore"> View more </h6>
 						<div className= "plusIcon" onClick = {() => this.swapIcon(coupon)}>
-						<img height="40px" src={(coupon.isLoaded) ? LogOut_Success: PlusIcon} alt="plus sign unable to load"/>	
+						<img height="66px" width="66px" src={(coupon.isLoaded) ? LogOut_Success: PlusIcon} alt="plus sign unable to load"/>	
 						</div>
 					</FrontSide>
 				</Flippy>
