@@ -64,13 +64,14 @@ const SearchSortFilterReducer = (state = initialState, action) => {
             }
 
         case FETCH_COUPONS_FULFILLED : {
+            console.log(action.payload.data.response)
             return {
                 ...state,
                 toBeFetched: false,
                 isLoading: false,
-                arr: action.payload.data.results
+                arr: action.payload.data.response
 
-            }
+            };
         }
 
         default             :

@@ -1,3 +1,5 @@
+import {FETCH_COUPONS_FULFILLED} from "./SearchSortFilterReducer";
+
 export const FETCH_LOADED_COUPONS = "FETCH_LOADED_COUPONS";
 export const FETCH_LOADED_COUPONS_PENDING = "FETCH_LOADED_COUPONS_PENDING";
 export const FETCH_LOADED_COUPONS_REJECTED = "FETCH_LOADED_COUPONS_REJECTED";
@@ -13,7 +15,9 @@ const initialState = {
 
 	// LoadedCoupons is an array of objects strictly. An iterable of coupons
 	// Each object is  a coupon and
-	loadedCoupons: []
+	loadedCoupons: [],
+
+	allCoupons :[]
 };
 
 
@@ -50,15 +54,20 @@ const UserIdentification = (state = initialState, action) => {
 
 			};
 
-		case FETCH_LOADED_COUPONS_FULFILLED : {
+		case FETCH_COUPONS_FULFILLED : {
+			console.log(action.payload.data.response)
 			return {
 				...state,
 				toBeFetched: false,
 				isLoading: false,
-				arr: action.payload.data.results
+				arr: action.payload.data.response
 
-			};
+			}
+
 		}
+
+
+
 		default :
 			return state;
 
