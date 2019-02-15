@@ -56,7 +56,7 @@ export const getAllCoupons =  (searchParams, filterParams, sortParams) => {
 
 
     const tempUrl = "http://innovationd.aholdusa.com:3526/couponServer/coupons/fetchCouponsByFilter"
-    return  axiosInstance.get(tempUrl, {
+    return  axios.get(tempUrl, {
 
         params : {
             ...processedQueryParams

@@ -69,9 +69,9 @@ class Coupons extends React.Component {
 
     render() {
 
-        if(this.props.allCoupons.length<1) {
-            return <div>No Data Obtained</div>
-        }
+        // if(this.props.allCoupons.length<1) {
+        //     return <div>No Data Obtained</div>
+        // }
 
         let couponData = this.props.allCoupons;
         let buttonTrigger = "";
