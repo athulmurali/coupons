@@ -32,7 +32,11 @@ const constants = {
 	POPUPTIMER: 20,						// in seconds
 	LOGOUTTIMER: 30,						// in seconds
 	ATTRACT_LOOP_SLIDE_DURATION: 3000,  // in milli-seconds
+
+
+	MINIMUM_SEARCH_LENGTH  : 3 //characters count for triggering the api
 };
+
 
 let config = {
 	...env,

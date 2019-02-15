@@ -1,3 +1,5 @@
+import Config from "../../config/config";
+
 import {RESET} from "./DisplayCouponReducer";
 
 export const FETCH_COUPONS = "FETCH_COUPONS";
@@ -24,7 +26,6 @@ const initialState = {
 };
 
 // to be moved to config
-const MINIMUM_SEARCH_LENGTH = 3;
 
 const SearchSortFilterReducer = (state = initialState, action) => {
 
@@ -49,10 +50,18 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 			};
 
 		case SET_SEARCH  :
+			const searchOnDeleteChar = (!!action.payload.searchString &&
+				(action.payload.searchString.length == Config.MINIMUM_SEARCH_LENGTH - 1)
+				&& state.search.searchString.length === Config.MINIMUM_SEARCH_LENGTH);
+
+			const searchOnMinChars = (!!action.payload.searchString &&
+				action.payload.searchString.length >= Config.MINIMUM_SEARCH_LENGTH);
+
 			return {
 				...state,
 				search: action.payload,
-				toBeFetched: !!action.payload.searchString && action.payload.searchString.length >= MINIMUM_SEARCH_LENGTH
+				toBeFetched: searchOnDeleteChar || searchOnMinChars
+
 			};
 
 		case FETCH_COUPONS_PENDING :
