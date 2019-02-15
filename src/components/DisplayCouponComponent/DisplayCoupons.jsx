@@ -28,6 +28,7 @@ class Coupons extends React.Component {
 			el.click();
 		};
 	}
+	
 
   componentWillUnmount () {
       clearInterval(this.timer);

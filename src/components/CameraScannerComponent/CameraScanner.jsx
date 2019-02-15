@@ -19,6 +19,15 @@ class CameraScanner extends Component{
 		this._onDetected= this._onDetected.bind(this);
 		this._searchUserInDatabase = this._searchUserInDatabase.bind(this);
 	}
+	componentWillMount = () => {
+		this.setState(
+			{
+				scanning:false,
+				couponDetails: [],
+				results: [],
+			}
+		)
+	}
 	componentWillUnmount = () => {
 		this.setState(
 			{
