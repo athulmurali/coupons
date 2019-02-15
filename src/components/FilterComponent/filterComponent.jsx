@@ -54,10 +54,7 @@ class FilterComponent extends React.Component{
             </div>)
         )
     }
-	//
-    // filtering = (filtered_category) => {
-    //     this.state.array_filter.push(filtered_category);
-    // }
+
 	
 	render(){
 		const slideArrow = [
