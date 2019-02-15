@@ -75,7 +75,7 @@ class DialPad extends Component {
     };
 
     checkPhoneNumber = () => {
-				alert("called")
+				
         if (this.state.cardNumber === false) {
             this.extractNumberFromFormat = (this.state.phoneNumber.substring(1, 4) + this.state.phoneNumber.substring(6, 9) + this.state.phoneNumber.substring(10));
             console.log(this.extractNumberFromFormat);
