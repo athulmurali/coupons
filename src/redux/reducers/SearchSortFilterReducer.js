@@ -56,6 +56,13 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 			const searchOnMinChars = (!!action.payload.searchString &&
 				action.payload.searchString.length >= Config.MINIMUM_SEARCH_LENGTH);
 
+			if(!!searchOnDeleteChar){
+				action.payload.searchString = ""
+
+			}
+
+
+
 			return {
 				...state,
 				search: action.payload,
