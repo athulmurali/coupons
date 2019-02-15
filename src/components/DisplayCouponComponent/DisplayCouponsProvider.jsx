@@ -4,50 +4,53 @@ import SortComponent from "../SortComponent";
 import FilterComponent from "../FilterComponent/filterComponent";
 import SearchCouponByName from "../SearchComponent/SearchCoupon";
 import CouponCards from "../CouponCardComponent/CouponCards";
+import Popup from "reactjs-popup";
 const context = React.createContext();
 const {Provider,Consumer} = context;
 
+export const PopupTrigger = (props) => {
+	return(
+	
+		(<Popup trigger={<button ref = {props.logOutPopUpTrigger}  className="button" ></button>} true modal>
+			{close => (
+				<div className="modal">
+					<img className="logOutImage" src={props.LogOut_Success}></img>
+					<h1 className="logOutMessage1"> Enjoy your savings!</h1>
+					<h4 className="logOutMessage2">You have been successfully logged out. <br/> See you soon!</h4>
+				</div>)}
+		</Popup> )
+
+	);
+
+};
 export const LoadedCouponsSideBar = (props) => (
 	<Consumer>{
 		() => <div className="LoadedCoupons"  hidden={props.hideNewCoupons}   >
-		<SearchCouponByName />
-		<div onClick={props.timerReset}>
+			<SearchCouponByName />
+			<div onClick={props.timerReset}>
 				<CouponCards  />
+			</div>
 		</div>
-	</div>
 	}
 	
 	</Consumer>
-)
+);
 
 export const SideBar = (props) => (
 	<Consumer>
 		{
 			() => 
 				<ul>
-                        <li> <a  className={props.activeNewCoupons} onClick={props.NewCoupons} > New Coupons </a></li>
-                        <FilterComponent/>
-                        <SortComponent/>
-                    </ul>
+					<li> <a  className={props.activeNewCoupons} onClick={props.NewCoupons} > New Coupons </a></li>
+					<FilterComponent/>
+					<SortComponent/>
+				</ul>
 			
 		}
 	</Consumer>	
-)
+);
 
-export default class AllCoupons extends Component{
-	state={
 
-	};
-	render(){
-		return(
-			<Provider>
-			<div className="AllCoupons">
-				{this.props.children}
-				</div>
-			</Provider>
-		);
-	}
-}
 export const WelcomeHeader = (props) =>{
 	return(<div className="WelcomeUser_Logout" >
 		<h2 className="userName"> Welcome {props.userName}! </h2>
@@ -67,4 +70,17 @@ export const PrintComponent = (props) =>{
 	);
 };
 
+export default class AllCoupons extends Component{
+	state={
 
+	};
+	render(){
+		return(
+			<Provider>
+			<div className="AllCoupons">
+				{this.props.children}
+				</div>
+			</Provider>
+		);
+	}
+}

@@ -4,12 +4,9 @@ import "./DisplayCoupons.css";
 import Popup from "reactjs-popup";
 import Config from "../../config/config";
 import {connect} from "react-redux";
-import CouponCards from "../CouponCardComponent/CouponCards";
 import {updateCoupons} from "../../redux/actions/UserIdentification";
 import {displayCouponState} from "../../redux/actions/DisplayCouponAction";
-import SearchCouponByName from "../SearchComponent/SearchCoupon";
-import SortComponent from "../SortComponent";
-import FilterComponent from "../FilterComponent/filterComponent"
+
 import AllCoupons, { WelcomeHeader, PrintComponent, SideBar, LoadedCouponsSideBar } from "./DisplayCouponsProvider";
 class Coupons extends React.Component {
 	constructor(props){
@@ -104,10 +101,9 @@ class Coupons extends React.Component {
             if (this.state.count > 3) {
                 this.handleScreenTap()
             }
-        }
-
-        const LogOut_Success = require("../../assets/success.svg");
-        const Search_Icon = require("../../assets/new-filter-search.png");
+				}
+				const LogOut_Success = require("../../assets/success.svg");
+				const Search_Icon = require("../../assets/new-filter-search.png");
         let popUpLogout = (<Popup trigger={<button ref = {logOutPopUpTrigger}  className="button" ></button>} true modal>
             {close => (
                 <div className="modal">
