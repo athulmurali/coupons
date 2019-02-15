@@ -42,7 +42,7 @@ class FilterComponent extends React.Component{
 			this.setState({array_filter : checkedFilters});
 		}
 
-		this.props.updateCheckedFilters({category : checkedFilters})
+		this.props.updateCheckedFilters({filterByCategory : checkedFilters})
 
 	}
 
@@ -54,10 +54,10 @@ class FilterComponent extends React.Component{
             </div>)
         )
     }
-
-    filtering = (filtered_category) => {
-        this.state.array_filter.push(filtered_category);
-    }
+	//
+    // filtering = (filtered_category) => {
+    //     this.state.array_filter.push(filtered_category);
+    // }
 	
 	render(){
 		const slideArrow = [
