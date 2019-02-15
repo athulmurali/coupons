@@ -9,7 +9,6 @@ import CouponCards from "../CouponCardComponent/CouponCards";
 import SearchCouponByName from "../SearchComponent/SearchCoupon";
 import SortComponent from "../SortComponent";
 import FilterComponent from "../FilterComponent/filterComponent"
-import {updateCoupons} from "../../redux/actions/DisplayCouponAction";
 class Coupons extends React.Component {
 
     constructor(props){
@@ -185,10 +184,5 @@ const mapStateToProps=(state)=>{
     }
 }
 
-const mapDispatchToProps = (dispatch) => (
-    {
-        updateCoupons :( updatedValue)=> updateCoupons(dispatch,  updatedValue )
-
-    }
-)
+const mapDispatchToProps = (_) => ({})
 export default connect(mapStateToProps,mapDispatchToProps)(Coupons);
