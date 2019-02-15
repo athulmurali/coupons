@@ -1,8 +1,9 @@
 import React from "react";
+import {connect} from "react-redux";
+import {updateFilters} from "../../redux/actions/SearchSortFilter";
 
-const filter_category = ["Baby & Childcare"	,"Bakeray","Beverages"	,"Condiments & Sauces","Dairy","Deli","Ethnic Products","Frozen Food","General Merchandise"];
 
-export default class SortComponent extends React.Component{
+class FilterComponent extends React.Component{
 	constructor(props){
 		super(props)
 		this.state = {
@@ -11,6 +12,11 @@ export default class SortComponent extends React.Component{
 		}
 		this.Image_up = require('../../assets/new-filter-arrow-down.svg');
 	}
+
+
+	componentWillMount() {}
+
+
 	Filter = () => {
         if(this.state.filter_arrow === false){
             this.setState({filter_arrow : true});
@@ -21,18 +27,39 @@ export default class SortComponent extends React.Component{
             this.Image_up = require('../../assets/new-filter-arrow-down.svg');
         }
 	}
+
+
+	updateChange = (array_filter,category) => {
+
+		let checkedFilters =array_filter
+
+
+		if(array_filter.includes(category)){
+			checkedFilters = array_filter.filter(name => (name!==category))
+			this.setState({array_filter :  checkedFilters});
+
+		}
+		else{
+			checkedFilters = [...this.state.array_filter,category]
+
+
+			this.setState({array_filter : checkedFilters});
+		}
+
+		this.props.updateCheckedFilters({filterByCategory : checkedFilters})
+
+	}
+
 	Filter_Category = () => {
         return(
-            filter_category.map( fill => <div  key={fill} className="filter_inside" hidden= {!this.state.filter_arrow}>
-                <input name="_filter" type="checkbox" onClick={() => this.filtering(fill)}/>
-                <label> {fill} </label>
+			this.props.categoriesAvailable.map((category,index) => <div key={index} className="filter_inside"
+																	  hidden= {!this.state.filter_arrow}>
+                <input name="_filter" type="checkbox" onClick={(_) => this.updateChange(this.state.array_filter  ,category.displayName)}/>
+                <label> {category.displayName} </label>
             </div>)
         )
     }
 
-    filtering = (filtered_category) => {
-        this.state.array_filter.push(filtered_category);
-    }
 	
 	render(){
 		const slideArrow = [
@@ -54,3 +81,22 @@ export default class SortComponent extends React.Component{
 		)
 	}
 }
+export const mapStateToProps =(state) =>{
+	return {
+
+		// array_filter : state.UserIdentification.array_filter
+
+		categoriesAvailable : state.SearchSortFilterReducer.categoriesAvailable
+
+
+	}
+}
+
+export const mapDispatchToProps =(dispatch)=>{
+	return {
+		updateCheckedFilters :(filterParams)=> updateFilters(dispatch, filterParams)
+		// getCategories : _=>getCategories(dispatch,)
+
+	}
+}
+export default connect(mapStateToProps, mapDispatchToProps)(FilterComponent)

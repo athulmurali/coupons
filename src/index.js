@@ -12,12 +12,17 @@ import {applyMiddleware, createStore} from "redux";
 import promise from "redux-promise-middleware";
 import thunk from "redux-thunk";
 import logger from "redux-logger";
-import combinedReducer from './redux/reducers'
+import combinedReducer from "./redux/reducers";
+import {onChangeSearchSortFilter} from "./redux/storeChangeListeners";
+import {composeWithDevTools} from "redux-devtools-extension";
 
 const middleware = applyMiddleware(  promise(), thunk ,logger);
 
 
-const store = createStore(combinedReducer,middleware);
+const store = createStore(combinedReducer,composeWithDevTools(middleware));
+
+store.subscribe(()=>onChangeSearchSortFilter( store.getState(), store.dispatch ))
+window.store=store
 
 ReactDOM.render(
 	<Provider store={store}>

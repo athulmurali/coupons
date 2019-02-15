@@ -29,6 +29,15 @@ input[type="checkbox"]:checked + label{
 	color: #E0004D;
 }
 
+
+input[type="radio"]:after {
+	background-color: #E0004D;
+	border: 1px solid #E0004D;
+}
+input[type="radio"]:checked after + label{
+	color: #E0004D;
+}
+
 .filter_sort{
 	font-weight: bold;
     margin: 15px 10px 0px;
