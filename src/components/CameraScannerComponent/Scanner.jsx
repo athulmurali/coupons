@@ -28,7 +28,7 @@ class Scanner extends React.Component {
 				patchSize: "medium",
 				halfSample: true
 			},
-			numOfWorkers: 3,
+			numOfWorkers: 0,
 			decoder: {
 				readers: [
 				
@@ -49,7 +49,7 @@ class Scanner extends React.Component {
 				if (result.boxes) {
 					drawingCtx.clearRect(0, 0, parseInt(drawingCanvas.getAttribute("width")), parseInt(drawingCanvas.getAttribute("height")));
 					result.boxes.filter(box => box !== result.box).forEach(box => {
-						Quagga.ImageDebug.drawPath(box, {x: 0, y: 1}, drawingCtx, {color: "green", lineWidth: 2});
+						Quagga.ImageDebug.drawPath(box, {x: 0, y: 1}, drawingCtx, {color: "white", lineWidth: 2});
 					});
 				}
 

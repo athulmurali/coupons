@@ -18,12 +18,15 @@ const getUserCoupons = (barcodeNumber) => {
 	
 	return axios.get(url);
 };
-
+const loadNewCoupons = (listOfCoupons,cardNumber) => {
+	alert("");
+}
 
 const API = {
 	getMap,
 	getUserDetails,
 	getUserCoupons,
+	loadNewCoupons,
 };
 
 export default API;

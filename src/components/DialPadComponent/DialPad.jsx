@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component,createContext } from 'react';
 import API from '../../utils/API';
 import './DialPad.css';
 import Config from '../../config/config';
@@ -6,8 +6,13 @@ import AssistancePopUpComponent from "../AssitancePopUpComponent/AssistancePopUp
 import {connect} from "react-redux";
 import {ROUTE_DISPLAY_COUPONS} from "../../utils/RouteConstants";
 import {updateCoupons} from "../../redux/actions/UserIdentification";
+import {KeyBoard,CardNuumberComponent,input, InputText,PhoneNumberImage} from './KeyBoard';
+import { MessageDisplay } from '../../utils/App';
+
+
 
 class DialPad extends Component {
+	
     constructor(props) {
         super(props);
         this.state = {
@@ -46,7 +51,8 @@ class DialPad extends Component {
             }
             console.log(this.extractNumberFromFormat);
             const response = await API.getUserDetails(this.extractNumberFromFormat);
-
+						console.log(response)
+						console.log(response.data.response.Customer[0]);
             this.couponsDetails.push(response.data.response.Customer[0]);
             const barCodeNumber = response.data.response.Customer[0].ID[0].attributes.Value
             const couponsDetails = await API.getUserCoupons(barCodeNumber);
@@ -56,7 +62,7 @@ class DialPad extends Component {
             this.props.updateCoupons({'couponDetails': this.couponsDetails})
             this.props.history.push(ROUTE_DISPLAY_COUPONS)
         } catch (error) {
-
+						console.log(error)
             this.setErrorMessage();
         }
 
@@ -69,7 +75,7 @@ class DialPad extends Component {
     };
 
     checkPhoneNumber = () => {
-
+				
         if (this.state.cardNumber === false) {
             this.extractNumberFromFormat = (this.state.phoneNumber.substring(1, 4) + this.state.phoneNumber.substring(6, 9) + this.state.phoneNumber.substring(10));
             console.log(this.extractNumberFromFormat);
@@ -153,7 +159,7 @@ class DialPad extends Component {
         });
         this.Image_phone = require('../../assets/icon-phone-white.svg');
         this.Image_card = require('../../assets/icon-card-gray.svg');
-        console.log(this.state.cardNumber);
+        
     };
     handleCardClick = () => {
         this.setState({
@@ -182,41 +188,16 @@ class DialPad extends Component {
             this.handleScreenTap();
         }
         return (
-            <div className="messsgeDisplay">
-                <div>
-                    <button className={this.state.phoneButton} onClick={this.handlePhoneClick}>
-                        <img className="image-width" alt="phone number" src={slideImages[1]}/>
-                        Phone Number
-                    </button>
-                    <button className={this.state.cardButton} onClick={this.handleCardClick}>
-                        <img className="image-width" alt ="card number" src={slideImages[0]}/>
-                        Card Number
-                    </button>
-                </div>
-                <input className="inputText" id="test-input" maxLength={12} defaultValue={this.state.phoneNumber}/>
-                <div className="status-block">
-                    <h3 className="statusMessage"> {this.state.defaultMessage} </h3>
-                    <h3 className="statusMessage">associated with your account</h3>
-                </div>
-                <div id="container">
-                    <ul id="keyboard">
-                        <li className="letter" onClick={this.handleTheKeyClicks}>1</li>
-                        <li className="letter" onClick={this.handleTheKeyClicks}>2</li>
-                        <li className="letter" onClick={this.handleTheKeyClicks}>3</li>
-                        <li className="letter clearl" onClick={this.handleTheKeyClicks}>4</li>
-                        <li className="letter" onClick={this.handleTheKeyClicks}>5</li>
-                        <li className="letter" onClick={this.handleTheKeyClicks}>6</li>
-                        <li className="letter clearl" onClick={this.handleTheKeyClicks}>7</li>
-                        <li className="letter " onClick={this.handleTheKeyClicks}>8</li>
-                        <li className="letter" onClick={this.handleTheKeyClicks}>9</li>
-                        <li className="letter clearl"></li>
-                        <li className="letter" onClick={this.handleTheKeyClicks}>0</li>
-                        <li className="letter" onClick={this.deleteTheLastDigit}>&lt;</li>
-                        <li className="switch" onClick={this.checkPhoneNumber}>Sign in</li>
-                    </ul>
-                </div>
-                <AssistancePopUpComponent/>
-            </div>
+					
+						<MessageDisplay>
+								<PhoneNumberImage phoneButton = {this.state.phoneButton} handlePhoneClick = {this.handlePhoneClick} slideImages = {slideImages} >
+								<CardNuumberComponent cardButton = {this.state.cardButton} handleCardClick = {this.handleCardClick} slideImages={slideImages} />
+								</PhoneNumberImage>
+								<InputText phoneNumber = {this.state.phoneNumber} defaultMessage = {this.state.defaultMessage} />
+                <KeyBoard handleTheKeyClicks = {this.handleTheKeyClicks} deleteTheLastDigit = {this.deleteTheLastDigit} checkPhoneNumber = {this.checkPhoneNumber}></KeyBoard>
+								<AssistancePopUpComponent/>
+							</MessageDisplay>
+					
         );
     };
 }

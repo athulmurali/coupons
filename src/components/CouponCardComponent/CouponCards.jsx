@@ -4,6 +4,7 @@ import Flippy, {BackSide, FrontSide} from "react-flippy";
 import StopAndShopImg from "../../assets/stopandshop.png";
 import {updateCoupons} from "../../redux/actions/UserIdentification";
 import {displayCouponState} from "../../redux/actions/DisplayCouponAction";
+import {FlippyStyle,BackgroundStyle,FrontSideStyle} from "./CouponCardStyle";
 
 
 class CouponCards extends React.Component {
@@ -35,22 +36,10 @@ class CouponCards extends React.Component {
 					flipOnClick={true} // default false
 					flipDirection="horizontal" // horizontal or vertical
 					ref={(r) => this.flippy = r} // to use toggle method like this.flippy.toggle()
-					style={{
-						width: "170px",
-						height: "150px",
-						padding: "0",
-					}}>
-					<BackSide style={{
-						backgroundColor: "white",
-						color: "black",
-						width: "171px",
-						height: "264px",
-					}} >
+					style={FlippyStyle}>
+					<BackSide style={BackgroundStyle} >
 					</BackSide>
-					<FrontSide style={{
-						width: "171px",
-						height: "264px"
-					}}>
+					<FrontSide style={FrontSideStyle}>
 						<img src={StopAndShopImg} width="103px" height="103px" alt="image_image" /> <br />
 						<h5> {coupon.Name}</h5>
 						<h6 className="couponDescription"> {coupon.Description}</h6>

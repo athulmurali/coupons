@@ -19,6 +19,15 @@ class CameraScanner extends Component{
 		this._onDetected= this._onDetected.bind(this);
 		this._searchUserInDatabase = this._searchUserInDatabase.bind(this);
 	}
+	componentWillMount = () => {
+		this.setState(
+			{
+				scanning:false,
+				couponDetails: [],
+				results: [],
+			}
+		)
+	}
 	componentWillUnmount = () => {
 		this.setState(
 			{
@@ -122,7 +131,11 @@ class CameraScanner extends Component{
 			console.log(responeData)
 
 			sessionStorage.setItem('token',true);
-
+			this.setState(
+				{
+					scanning:false
+				}
+			);
 			this.props.updateCoupons({couponDetails : responeData})
 
 			this.props.history.push({pathname : ROUTE_DISPLAY_COUPONS});
@@ -140,6 +153,7 @@ class CameraScanner extends Component{
 		if(result.codeResult.code && this.state.scanning){
 			try
 			{
+				
 				this.setState({scanning:false});
 				this._searchUserInDatabase(result.codeResult.code);
 				// alert(result.codeResult.code)
