@@ -122,7 +122,11 @@ class CameraScanner extends Component{
 			console.log(responeData)
 
 			sessionStorage.setItem('token',true);
-
+			this.setState(
+				{
+					scanning:false
+				}
+			);
 			this.props.updateCoupons({couponDetails : responeData})
 
 			this.props.history.push({pathname : ROUTE_DISPLAY_COUPONS});
@@ -140,6 +144,7 @@ class CameraScanner extends Component{
 		if(result.codeResult.code && this.state.scanning){
 			try
 			{
+				alert("scanned")
 				this.setState({scanning:false});
 				this._searchUserInDatabase(result.codeResult.code);
 				// alert(result.codeResult.code)
