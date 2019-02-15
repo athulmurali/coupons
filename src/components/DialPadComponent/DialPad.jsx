@@ -1,4 +1,4 @@
-import React, {Component,createContext } from 'react';
+import React, {Component} from "react";
 import API from "../../utils/API";
 import "./DialPad.css";
 import Config from "../../config/config";
@@ -6,7 +6,7 @@ import AssistancePopUpComponent from "../AssitancePopUpComponent/AssistancePopUp
 import {connect} from "react-redux";
 import {ROUTE_DISPLAY_COUPONS} from "../../utils/RouteConstants";
 import {updateCoupons} from "../../redux/actions/DisplayCouponAction";
-import {KeyBoard, CardNuumberComponent, input, InputText, PhoneNumberImage} from "./KeyBoard";
+import {CardNuumberComponent, input, InputText, KeyBoard, PhoneNumberImage} from "./KeyBoard";
 import {MessageDisplay} from "../../utils/App";
 
 
@@ -28,6 +28,7 @@ class DialPad extends Component {
 		this.Image_card = require("../../assets/icon-card-gray.svg");
 		this.Image_phone = require("../../assets/icon-phone-white.svg");
 	}
+
 
 	deleteTheLastDigit = () => {
 		let prev = this.state.phoneNumber.slice(0, -1);
@@ -217,7 +218,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => (
 	{
-		updateCoupons: (couponDetails) => updateCoupons(dispatch, couponDetails)
+		updateCoupons: (couponDetails) => updateCoupons(dispatch, couponDetails),
 
 	}
 );

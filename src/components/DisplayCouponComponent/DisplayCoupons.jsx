@@ -5,6 +5,7 @@ import Popup from "reactjs-popup";
 import Config from "../../config/config";
 import {connect} from "react-redux";
 import AllCoupons, {LoadedCouponsSideBar, PrintComponent, SideBar, WelcomeHeader} from "./DisplayCouponsProvider";
+import {reset_all_redux} from "../../redux/actions/Common";
 
 class Coupons extends React.Component {
 	constructor(props){
@@ -36,6 +37,10 @@ class Coupons extends React.Component {
     this.startTimer();
     this.tick();
   }
+	componentWillMount() {
+		console.log("hi i am here ")
+		this.props.resetRedux()
+	}
 
   tick () {
     this.setState({count: (this.state.count + 1)});
@@ -161,5 +166,8 @@ const mapStateToProps=(state)=>{
     }
 	}
 
-const mapDispatchToProps = (_) => ({})
+const mapDispatchToProps = (_) => ({
+	resetRedux : ()=>reset_all_redux
+
+})
 export default connect(mapStateToProps,mapDispatchToProps)(Coupons);
