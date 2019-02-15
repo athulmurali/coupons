@@ -102,6 +102,11 @@ class CameraScanner extends Component {
 	}
 
 	render() {
+		//reroute to Display coupons if the userInfo is set
+		if (!!this.props.userInfo){
+			this.props.history.push({pathname: ROUTE_DISPLAY_COUPONS});
+
+		}
 		return this._renderVideoStream();
 	}
 
@@ -128,7 +133,6 @@ class CameraScanner extends Component {
 					userInfo: userInfo
 				});
 
-			this.props.history.push({pathname: ROUTE_DISPLAY_COUPONS});
 		} catch (error) {
 			console.log(error);
 		}
