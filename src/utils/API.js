@@ -1,5 +1,6 @@
 import axios from "axios";
 import Config from "./../config/config";
+import {processQueryParams} from "./utils";
 
 const http = Config.https ? "https" : "http";
 
@@ -22,10 +23,29 @@ const getUserCoupons = (barcodeNumber) => {
 };
 
 
+
+ const getCouponsWithFilters =  (searchParams, filterParams, sortParams) => {
+	const queryParams = {
+		...searchParams,
+		...filterParams,
+		...sortParams
+	}
+	const processedQueryParams = processQueryParams(queryParams)
+	const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/coupons/fetchCouponsByFilter`;
+
+	return  axios.get(url, {
+
+		params : {
+			...processedQueryParams
+		}
+	})
+}
+
 const API = {
 	getMap,
 	getUserDetails,
 	getUserCoupons,
+	getCouponsWithFilters
 };
 
 export default API;

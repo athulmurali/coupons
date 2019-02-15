@@ -1,9 +1,9 @@
 import {FETCH_COUPONS} from "../reducers/SearchSortFilterReducer";
-import {getAllCoupons} from "../../utils/services/test";
+import API from "../../utils/API";
 
 export const fetchAllCouponsFromServer = (dispatch, searchParams, filterParams, sortParams,isLoaded) => {
 
-	const getCouponsPromise = getAllCoupons(searchParams, filterParams, sortParams);
+	const getCouponsPromise = API.getCouponsWithFilters(searchParams, filterParams, sortParams);
 
 	dispatch(
 		{
