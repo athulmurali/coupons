@@ -6,7 +6,7 @@ import {updateSearch} from "../../redux/actions/SearchSortFilter";
 class SearchCouponByName extends React.Component {
 
 	inputChange = (e) => {
-		this.props.updateSearchParams({name : e.target.value});
+		this.props.updateSearchParams({searchString : e.target.value});
 	}
 
 	render(){

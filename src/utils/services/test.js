@@ -49,7 +49,6 @@ export const getAllCoupons =  (searchParams, filterParams, sortParams) => {
 
     console.log(searchParams)
 
-    filterParams ={cat : [1,3,45]}
     const queryParams = {
         ...searchParams,
         ...filterParams,
@@ -62,7 +61,7 @@ export const getAllCoupons =  (searchParams, filterParams, sortParams) => {
     const processedQueryParams = processQueryParams(queryParams)
 
 
-    const tempUrl = "http://innovationd.aholdusa.com:3526/couponServer/coupons/fetchCouponsByFilter/?sortBy=price&sortOrder=asc&filterByString=[Soups%20_%20Canned%20Goods]&searchString=Kel&loaded=false"
+    const tempUrl = "http://innovationd.aholdusa.com:3526/couponServer/coupons/fetchCouponsByFilter"
     return  axiosInstance.get(tempUrl, {
 
         params : {

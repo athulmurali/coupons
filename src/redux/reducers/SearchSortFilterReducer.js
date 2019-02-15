@@ -46,7 +46,7 @@ const SearchSortFilterReducer = (state = initialState, action) => {
             return {
                 ...state,
                 search: action.payload,
-                toBeFetched: !!action.payload.name && action.payload.name.length >= MINIMUM_SEARCH_LENGTH
+                toBeFetched: !!action.payload.searchString && action.payload.searchString.length >= MINIMUM_SEARCH_LENGTH
             }
 
         case FETCH_COUPONS_PENDING :
