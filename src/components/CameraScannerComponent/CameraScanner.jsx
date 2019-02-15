@@ -124,9 +124,6 @@ class CameraScanner extends Component {
 
 			const userInfo = userDetailsResponse.data.response.Customer[0];
 			const allCoupons = couponsResponse.data.response;
-
-			sessionStorage.setItem("token", true);
-
 			this.props.updateCoupons(
 				{
 					allCoupons: allCoupons,
