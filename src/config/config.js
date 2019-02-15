@@ -59,9 +59,9 @@ let config = {
 export default config;
 
 
-export const FILTER_CATEGORIES = ["Bakery,Beverages","Breakfast","Condiments & Sauces","Dairy","Ethnic Products", +
-"Frozen Food","Soups" & "Canned Goods" +
-"Snacks","Pet Care","Personal Care","Meat & Seafood","Household","Health& Wellness"]
+export const FILTER_CATEGORIES = ["Bakery,Beverages","Breakfast","Condiments & Sauces","Dairy","Ethnic Products",
+"Frozen Food","Soups & Canned Goods" ,
+"Snacks","Pet Care","Personal Care","Meat & Seafood","Household","Health & Wellness"]
 
 export const SORT_CATEGORIES = [
 	{
