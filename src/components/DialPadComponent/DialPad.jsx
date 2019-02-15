@@ -226,7 +226,6 @@ class DialPad extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		couponDetails: state.UserIdentification.couponsDetails,
 		userInfo: state.DisplayCouponsReducer.userInfo,
 		allCoupons: state.DisplayCouponsReducer.allCoupons
 
