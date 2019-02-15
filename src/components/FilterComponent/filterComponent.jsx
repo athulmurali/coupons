@@ -1,7 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
 import {updateFilters} from "../../redux/actions/SearchSortFilter";
-import {FILTER_CATEGORIES} from "../../config/config";
 
 
 class FilterComponent extends React.Component{
@@ -13,6 +12,11 @@ class FilterComponent extends React.Component{
 		}
 		this.Image_up = require('../../assets/new-filter-arrow-down.svg');
 	}
+
+
+	componentWillMount() {}
+
+
 	Filter = () => {
         if(this.state.filter_arrow === false){
             this.setState({filter_arrow : true});
@@ -48,9 +52,10 @@ class FilterComponent extends React.Component{
 
 	Filter_Category = () => {
         return(
-            FILTER_CATEGORIES.map(fill => <div key={fill} className="filter_inside" hidden= {!this.state.filter_arrow}>
-                <input name="_filter" type="checkbox" onClick={(_) => this.updateChange(this.state.array_filter  ,fill)}/>
-                <label> {fill} </label>
+			this.props.categoriesAvailable.map((category,index) => <div key={index} className="filter_inside"
+																	  hidden= {!this.state.filter_arrow}>
+                <input name="_filter" type="checkbox" onClick={(_) => this.updateChange(this.state.array_filter  ,category.displayName)}/>
+                <label> {category.displayName} </label>
             </div>)
         )
     }
@@ -81,6 +86,8 @@ export const mapStateToProps =(state) =>{
 
 		// array_filter : state.UserIdentification.array_filter
 
+		categoriesAvailable : state.SearchSortFilterReducer.categoriesAvailable
+
 
 	}
 }
@@ -88,6 +95,7 @@ export const mapStateToProps =(state) =>{
 export const mapDispatchToProps =(dispatch)=>{
 	return {
 		updateCheckedFilters :(filterParams)=> updateFilters(dispatch, filterParams)
+		// getCategories : _=>getCategories(dispatch,)
 
 	}
 }

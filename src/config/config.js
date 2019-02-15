@@ -59,9 +59,70 @@ let config = {
 export default config;
 
 
-export const FILTER_CATEGORIES = ["Bakery,Beverages","Breakfast","Condiments & Sauces","Dairy","Ethnic Products",
-"Frozen Food","Soups & Canned Goods" ,
-"Snacks","Pet Care","Personal Care","Meat & Seafood","Household","Health & Wellness"]
+export const FILTER_CATEGORIES = [
+	{
+		displayName :"Bakery",
+		sequenceNumber : 0,
+		name :"Bakery"
+	},
+		{
+		displayName :"Beverages ",
+		sequenceNumber : 0,
+		name :"Bakery"
+	},	{
+		displayName :"Condiments & Sauces",
+		sequenceNumber : 0,
+		name :"Bakery"
+	},
+		{
+		displayName :"Dairy",
+		sequenceNumber : 0,
+		name :"Bakery"
+	},	{
+		displayName :"Ethnic Products",
+		sequenceNumber : 0,
+		name :"Bakery"
+	},
+		{
+		displayName :"Frozen Food",
+		sequenceNumber : 0,
+		name :"Bakery"
+	},	{
+		displayName :"Soups & Canned Goods",
+		sequenceNumber : 0,
+		name :"Bakery"
+	},
+		{
+		displayName :"Snacks",
+		sequenceNumber : 0,
+		name :"Bakery"
+	},	{
+		displayName :"Pet Care",
+		sequenceNumber : 0,
+		name :"Bakery"
+	},
+		{
+		displayName :"Personal Care",
+		sequenceNumber : 0,
+		name :"Bakery"
+	},	{
+		displayName :"Meat & Seafood",
+		sequenceNumber : 0,
+		name :"Bakery"
+	},
+		{
+		displayName :"Household",
+		sequenceNumber : 0,
+		name :"Bakery"
+	},{
+		displayName :"Health & Wellness",
+		sequenceNumber : 0,
+		name :"Bakery"
+	},
+
+
+
+	]
 
 export const SORT_CATEGORIES = [
 	{

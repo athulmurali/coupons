@@ -1,4 +1,4 @@
-import Config, {CouponsTypeEnum} from "../../config/config";
+import Config, {CouponsTypeEnum, FILTER_CATEGORIES} from "../../config/config";
 
 import {RESET} from "./DisplayCouponReducer";
 
@@ -11,7 +11,11 @@ export const FETCH_COUPONS_PENDING = FETCH_COUPONS + "_PENDING";
 export const FETCH_COUPONS_REJECTED = FETCH_COUPONS + "_REJECTED";
 export const FETCH_COUPONS_FULFILLED = FETCH_COUPONS + "_FULFILLED";
 
+export const FETCH_CATEGORIES = "FETCH_CATEGORIES"
 
+export const FETCH_CATEGORIES_PENDING = FETCH_CATEGORIES +"_PENDING"
+export const FETCH_CATEGORIES_REJECTED = FETCH_CATEGORIES + "_REJECTED";
+export const FETCH_CATEGORIES_FULFILLED = FETCH_CATEGORIES + "_FULFILLED";
 
 
 const initialState = {
@@ -21,7 +25,8 @@ const initialState = {
 	search: {},
 	arr: [],
 
-	array_filter: []
+	array_filter: [],
+	categoriesAvailable :FILTER_CATEGORIES
 };
 
 // to be moved to config
@@ -87,13 +92,23 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 			};
 
 		case FETCH_COUPONS_FULFILLED : {
-			console.log(action.payload.data.response);
 			return {
 				...state,
 				toBeFetched: false,
 				isLoading: false,
 				arr: action.payload.data.response
 
+			};
+		}
+
+
+		case FETCH_CATEGORIES_FULFILLED :{
+			return {
+				...state,
+				isLoading: false,
+
+				//to be checked before the following is used for fetching categories
+				categoriesAvailable: action.payload.data.response
 			};
 		}
 
