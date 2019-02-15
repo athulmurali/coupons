@@ -5,7 +5,6 @@ import API from "../../utils/API";
 import PropTypes from "prop-types";
 import {ROUTE_DISPLAY_COUPONS} from "../../utils/RouteConstants";
 import {connect} from "react-redux";
-import {updateCoupons} from "../../redux/actions/UserIdentification";
 
 class CameraScanner extends Component{
 	constructor(props) {
@@ -170,7 +169,7 @@ const mapStateToProps=()=>{
 }
 const mapDispatchToProps=(dispatch)=>{
 	return {
-		updateCoupons:( couponDetails)=>updateCoupons(dispatch,couponDetails )
+		updateCoupons:( couponDetails)=>displayCouponState(dispatch,couponDetails )
 
 	}
 }

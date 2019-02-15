@@ -5,7 +5,7 @@ import Config from '../../config/config';
 import AssistancePopUpComponent from "../AssitancePopUpComponent/AssistancePopUpComponent";
 import {connect} from "react-redux";
 import {ROUTE_DISPLAY_COUPONS} from "../../utils/RouteConstants";
-import {updateCoupons} from "../../redux/actions/UserIdentification";
+import {updateCoupons} from "../../redux/actions/DisplayCouponAction";
 
 class DialPad extends Component {
     constructor(props) {

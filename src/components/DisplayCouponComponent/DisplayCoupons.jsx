@@ -6,11 +6,10 @@ import ReactToPrint from "react-to-print";
 import Config from "../../config/config";
 import {connect} from "react-redux";
 import CouponCards from "../CouponCardComponent/CouponCards";
-import {updateCoupons} from "../../redux/actions/UserIdentification";
-import {displayCouponState} from "../../redux/actions/DisplayCouponAction";
 import SearchCouponByName from "../SearchComponent/SearchCoupon";
 import SortComponent from "../SortComponent";
 import FilterComponent from "../FilterComponent/filterComponent"
+import {updateCoupons} from "../../redux/actions/DisplayCouponAction";
 class Coupons extends React.Component {
 
     constructor(props){
@@ -173,10 +172,6 @@ class Coupons extends React.Component {
                             <CouponCards  />
                         </div>
                     </div>
-                    {/* <div className="LoadedCoupons"  hidden={this.state.hideLoadedCoupons} ref= {el => (this.componentRef = el)} >
-						<h4 className="LoadedCouponCount"> Loaded Coupons ({couponsLength}) </h4>
-						{userCoupons}
-					</div> */}
                 </div>
             </div>
         );
@@ -192,7 +187,6 @@ const mapStateToProps=(state)=>{
 
 const mapDispatchToProps = (dispatch) => (
     {
-        displayCouponState : (updatedValue) => displayCouponState(dispatch, updatedValue),
         updateCoupons :( updatedValue)=> updateCoupons(dispatch,  updatedValue )
 
     }

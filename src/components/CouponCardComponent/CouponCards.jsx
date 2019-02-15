@@ -2,8 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import Flippy, {BackSide, FrontSide} from "react-flippy";
 import StopAndShopImg from "../../assets/stopandshop.png";
-import {updateCoupons} from "../../redux/actions/UserIdentification";
-import {displayCouponState} from "../../redux/actions/DisplayCouponAction";
+import {updateCoupons} from "../../redux/actions/DisplayCouponAction";
 
 
 class CouponCards extends React.Component {
@@ -11,22 +10,6 @@ class CouponCards extends React.Component {
 
 		let coupons = this.props.allCoupons
 		let couponsLength =  coupons.length;
-
-
-		 // The following is supposed to be moved to backed
-
-		// if(searchedCouponName !== "")  {
-
-		// 	searchedCoupons = coupons.filter(function(couponName){
-		// 		return couponName.Name.toLowerCase().includes(searchedCouponName.toLowerCase());
-		// 	});
-		// 	coupons = searchedCoupons;
-		// 	couponsLength = searchedCoupons.length;
-		// 	this.props.displayCouponState({"searchedCouponsLength": couponsLength});
-		// }
-		// else {
-		// 	this.props.displayCouponState({"searchedCouponsLength": couponsLength});
-		// }
 
 		if(couponsLength === 0) {
 			return <div> No Coupons Found </div>;
@@ -76,9 +59,7 @@ const mapStateToProps=(state)=>{
 };
 
 const mapDispatchToProps = (dispatch) => ({
-	updateCoupons :( updatedValue)=> updateCoupons(dispatch,  updatedValue ),
-	displayCouponState : (updatedValue) => displayCouponState(dispatch, updatedValue),
-
+	updateCoupons :( updatedValue)=> updateCoupons(dispatch,  updatedValue )
 }
 );
  
