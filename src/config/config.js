@@ -1,3 +1,5 @@
+import {SORT_ODERS} from "../redux/constants";
+
 const env = {
 	environment: "dev", // options: dev, prod
 	device: "kisok", // options: mobile, kiosk
@@ -38,6 +40,7 @@ const constants = {
 };
 
 
+
 let config = {
 	...env,
 	...constants,
@@ -54,3 +57,33 @@ let config = {
 };
 
 export default config;
+
+
+export const FILTER_CATEGORIES = ["Baby & Childcare"	,"Bakery","Beverages"	,"Condiments & Sauces","Dairy","Deli","Ethnic Products","Frozen Food","General Merchandise"];
+
+export const SORT_CATEGORIES = [
+	{
+		displayName : 'Redeem By Date',
+		sortBy      : 'expirationDate',
+		sortOrder   : SORT_ODERS.ASC
+	},
+	{
+		displayName : 'Value(Low to High)',
+		sortBy      : 'expirationDate',
+		sortOrder   : SORT_ODERS.ASC
+	},
+	{
+		displayName : 'Value(High to Low)',
+		sortBy      : 'expirationDate',
+		sortOrder   : SORT_ODERS.DESC
+	},
+	{
+		displayName : 'Brand',
+		sortBy      : 'name',
+		sortOrder   : SORT_ODERS.ASC
+	},
+
+];
+
+
+export const CouponsTypeEnum = Object.freeze({LOADED: "LOADED", ALL: "ALL"});

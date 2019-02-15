@@ -1,31 +1,8 @@
 import React from "react";
-import {SORT_ODERS} from "../../redux/constants";
 import {updateSort} from "../../redux/actions/SearchSortFilter";
 import {connect} from "react-redux";
+import {SORT_CATEGORIES} from "../../config/config";
 
-const SORT_CATEOGRY = [
-	{
-		displayName : 'Redeem By Date',
-		sortBy      : 'expirationDate',
-		sortOrder   : SORT_ODERS.ASC
-	},
-	{
-		displayName : 'Value(Low to High)',
-		sortBy      : 'expirationDate',
-		sortOrder   : SORT_ODERS.ASC
-	},
-	{
-		displayName : 'Value(High to Low)',
-		sortBy      : 'expirationDate',
-		sortOrder   : SORT_ODERS.DESC
-	},
-	{
-		displayName : 'Brand',
-		sortBy      : 'name',
-		sortOrder   : SORT_ODERS.ASC
-	},
-
-];
 
 class SortComponent extends React.Component{
 
@@ -65,7 +42,7 @@ class SortComponent extends React.Component{
 					<img className="image_arrow" src={slideArrow_Sort[0]}  onClick={this.Sort}/>
 					<div className="filter_sort_list" hidden= {this.state.sort_arrow} >By Recommended</div>
 				</div>
-				{SORT_CATEOGRY.map( category => <div key={category.displayName} className="filter_inside" hidden= {!this.state.sort_arrow}>
+				{SORT_CATEGORIES.map( category => <div key={category.displayName} className="filter_inside" hidden= {!this.state.sort_arrow}>
 					<input name="_filter" type="radio"
 					onClick={() => this.updateChange(category.sortBy,category.sortOrder)} />
 					<label>

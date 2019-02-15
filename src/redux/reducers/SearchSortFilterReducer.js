@@ -1,4 +1,4 @@
-import Config from "../../config/config";
+import Config, {CouponsTypeEnum} from "../../config/config";
 
 import {RESET} from "./DisplayCouponReducer";
 
@@ -12,7 +12,6 @@ export const FETCH_COUPONS_REJECTED = FETCH_COUPONS + "_REJECTED";
 export const FETCH_COUPONS_FULFILLED = FETCH_COUPONS + "_FULFILLED";
 
 
-export const CouponsTypeEnum = Object.freeze({LOADED: "LOADED", ALL: "ALL"});
 
 
 const initialState = {

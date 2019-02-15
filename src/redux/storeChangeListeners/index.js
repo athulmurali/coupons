@@ -1,5 +1,5 @@
 import {fetchAllCouponsFromServer} from "../actions/FetchCoupons";
-import {CouponsTypeEnum} from "../reducers/SearchSortFilterReducer";
+import {CouponsTypeEnum} from "../../config/config";
 
 export const onChangeSearchSortFilter=(state, dispatch )=>{
 

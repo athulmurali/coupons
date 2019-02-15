@@ -1,8 +1,8 @@
 import React from "react";
 import {connect} from "react-redux";
 import {updateFilters} from "../../redux/actions/SearchSortFilter";
+import {FILTER_CATEGORIES} from "../../config/config";
 
-const filter_category = ["Baby & Childcare"	,"Bakery","Beverages"	,"Condiments & Sauces","Dairy","Deli","Ethnic Products","Frozen Food","General Merchandise"];
 
 class FilterComponent extends React.Component{
 	constructor(props){
@@ -48,7 +48,7 @@ class FilterComponent extends React.Component{
 
 	Filter_Category = () => {
         return(
-            filter_category.map( fill => <div  key={fill} className="filter_inside" hidden= {!this.state.filter_arrow}>
+            FILTER_CATEGORIES.map(fill => <div key={fill} className="filter_inside" hidden= {!this.state.filter_arrow}>
                 <input name="_filter" type="checkbox" onClick={(_) => this.updateChange(this.state.array_filter  ,fill)}/>
                 <label> {fill} </label>
             </div>)
