@@ -69,12 +69,12 @@ export const SORT_CATEGORIES = [
 	},
 	{
 		displayName : 'Value(Low to High)',
-		sortBy      : 'expirationDate',
+		sortBy      : 'price',
 		sortOrder   : SORT_ODERS.ASC
 	},
 	{
 		displayName : 'Value(High to Low)',
-		sortBy      : 'expirationDate',
+		sortBy      : 'price',
 		sortOrder   : SORT_ODERS.DESC
 	},
 	{
