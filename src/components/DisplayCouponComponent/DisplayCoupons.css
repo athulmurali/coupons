@@ -30,11 +30,11 @@ input[type="checkbox"]:checked + label{
 }
 
 
-input[type="radio"]:checked{
+input[type="radio"]:after {
 	background-color: #E0004D;
 	border: 1px solid #E0004D;
 }
-input[type="radio"]:checked + label{
+input[type="radio"]:checked after + label{
 	color: #E0004D;
 }
 
