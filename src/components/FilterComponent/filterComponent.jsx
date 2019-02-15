@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {updateFilters} from "../../redux/actions/SearchSortFilter";
 
-const filter_category = ["Baby & Childcare"	,"Bakeray","Beverages"	,"Condiments & Sauces","Dairy","Deli","Ethnic Products","Frozen Food","General Merchandise"];
+const filter_category = ["Baby & Childcare"	,"Bakery","Beverages"	,"Condiments & Sauces","Dairy","Deli","Ethnic Products","Frozen Food","General Merchandise"];
 
 class FilterComponent extends React.Component{
 	constructor(props){
