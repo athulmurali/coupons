@@ -1,9 +1,8 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import './UserIdentification.css';
-import Header from '../../components/HeaderComponent/Header';
-import DialPad from '../DialPadComponent/DialPad';
-import connect from "react-redux/es/connect/connect";
+import React, {Component} from "react";
+import PropTypes from "prop-types";
+import "./UserIdentification.css";
+import Header from "../../components/HeaderComponent/Header";
+import DialPad from "../DialPadComponent/DialPad";
 
 class UserIdentification extends Component{
 	constructor(props){
@@ -32,13 +31,4 @@ UserIdentification.propTypes = {
     }).isRequired,
   };
 
-
-const mapStateToProps=(state)=>{
-	return {
-		couponDetails : state.UserIdentification.couponsDetails
-	}
-}
-
-
-
-export default connect (mapStateToProps,null)(UserIdentification)
+export default UserIdentification

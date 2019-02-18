@@ -166,3 +166,40 @@ export const importAll = (r) => {
 	r.keys().forEach((item) => { images[item.replace("./", "")] = r(item); });
 	return images;
 };
+
+
+// The following functions have been added for URL params processing :
+const arrayToArrayString = (arrayObject )=>("["+ arrayObject.toString() +"]")
+const encodeSpecialChars=(strToEncode)=>(strToEncode.replace('&', '_'))
+
+export const  processQueryParams=(queryParams)=>{
+
+
+	let processedQueryParams = { }
+
+	for (let key in queryParams){
+
+		console.log(key,queryParams[key] )
+
+		if (queryParams[key] === "")
+		{
+			continue
+		}
+		else if (queryParams[key] instanceof  Array){
+			processedQueryParams[key] = arrayToArrayString(queryParams[key])
+			continue
+
+		}
+		else if (typeof queryParams[key]  === "string")
+		{
+			processedQueryParams[key] =  encodeSpecialChars(queryParams[key])
+			continue
+		}
+
+		else{
+			processedQueryParams[key] =queryParams[key]
+		}
+	}
+
+	return processedQueryParams
+}

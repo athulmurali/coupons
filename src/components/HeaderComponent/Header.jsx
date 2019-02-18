@@ -8,6 +8,7 @@ const AttractHeader = styled.div`
 	font-family: sans-serif;
 	font-size: calc(10px + .7vmin);
 	color: black;
+	padding: 30px;
 `;
 
 class Header extends React.Component {

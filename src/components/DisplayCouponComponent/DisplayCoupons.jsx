@@ -2,86 +2,92 @@ import React from "react";
 import Header from "../HeaderComponent/Header";
 import "./DisplayCoupons.css";
 import Popup from "reactjs-popup";
-import ReactToPrint from "react-to-print";
 import Config from "../../config/config";
 import {connect} from "react-redux";
-import CouponCards from "../CouponCardComponent/CouponCards";
-import {updateCoupons} from "../../redux/actions/UserIdentification";
-import {displayCouponState} from "../../redux/actions/DisplayCouponAction";
-import SearchCouponByName from "../SearchComponent/SearchCoupon";
-import SortComponent from "../SortComponent";
-import FilterComponent from "../FilterComponent/filterComponent"
-class Coupons extends React.Component {
+import AllCoupons, {LoadedCouponsSideBar, PrintComponent, SideBar, WelcomeHeader} from "./DisplayCouponsProvider";
+import {reset_all_redux} from "../../redux/actions/Common";
+import {ROUTE_HOME_PAGE} from "../../utils/RouteConstants";
+import {updateCoupons} from "../../redux/actions/DisplayCouponAction";
+import {updateLoaded} from "../../redux/actions/SearchSortFilter";
 
-    constructor(props){
+class Coupons extends React.Component {
+	constructor(props){
         super(props);
         this.state = {
-            count: this.props.count,
+            count: 0,
             hideLoadedCoupons: true,
             hideNewCoupons: false,
             activeNewCoupons: "active",
             activeLoadedCoupons: "inactive",
             logOutTrigger: false,
             logOutReload: false,
-
         };
+  	}
+
+  buttonClick = (el) => {
+		if(el) {
+			el.click();
+		};
+	}
+
+
+  componentWillUnmount () {
+      clearInterval(this.timer);
+	  this.props.resetRedux()
+
+  }
+
+  componentDidMount () {
+    this.props.updateLoaded({loaded: false});
+    this.startTimer();
+    this.tick();
+  }
+
+
+  tick () {
+    this.setState({count: (this.state.count + 1)});
+	}
+
+  startTimer () {
+		clearInterval(this.timer);
+    this.timer = setInterval(this.tick.bind(this), 1000);
+  }
+
+  timerReset = () =>  {
+    this.setState({count : 0});
+  }
+
+  handleScreenTap = () => {
+		this.props.resetRedux()
+  }
+
+  NewCoupons = () => {
+    this.props.updateLoaded({loaded: false});
+    this.props.updateCoupons({LoadedCouponsTrigger: false});
+    this.setState({count : 0, activeNewCoupons : "active", activeLoadedCoupons : "inactive"});
     }
 
-    buttonClick = (el) => {
-        if(el) {
-            el.click();
-        };
+  LoadedCoupons = () => {
+    this.props.updateLoaded({loaded: true});
+    this.props.updateCoupons({LoadedCouponsTrigger: true});
+    this.setState({count : 0, activeNewCoupons : "inactive", activeLoadedCoupons : "active"});
     }
 
-    componentWillUnmount () {
-        clearInterval(this.timer);
-    }
-
-    componentDidMount () {
-        this.startTimer();
-        this.tick();
-    }
-
-    tick () {
-        this.setState({count: (this.state.count + 1)});
-    }
-
-    startTimer () {
-        clearInterval(this.timer);
-        this.timer = setInterval(this.tick.bind(this), 1000);
-    }
-
-    timerReset = () =>  {
-        this.setState({count : this.props.count});
-    }
-
-    handleScreenTap = () => {
-        this.props.history.push(`/`);
-    }
-
-    NewCoupons = () => {
-        this.props.updateCoupons({LoadedCouponsTrigger: false});
-
-        this.setState({count : this.props.count, hideNewCoupons : false, hideLoadedCoupons : true, activeNewCoupons : "active", activeLoadedCoupons : "inactive"});
-    }
-
-    LoadedCoupons = () => {
-        this.props.updateCoupons({LoadedCouponsTrigger: true});
-        this.setState({count : this.props.count, activeNewCoupons : "inactive", activeLoadedCoupons : "active", hideLoadedCoupons: false});
-    }
 
     render() {
 
-        if(this.props.data.length<1) {
-            return <div>No Data Obtained</div>
-        }
-        let couponData = this.props.data;
+        if(!this.props.userInfo){
+        	this.props.history.push(ROUTE_HOME_PAGE)
+
+		}
+
+        let couponData = this.props.allCoupons;
         let buttonTrigger = "";
         let logOutPopUpTrigger = "";
         let userName = "";
 
         if(couponData.length > 0) {
-            userName = couponData[0].FirstName;
+            userName = this.props.userInfo.FirstName;
         }
 
 
@@ -96,7 +102,7 @@ class Coupons extends React.Component {
             logOutPopUpTrigger = this.buttonClick;
             this.setState({logOutTrigger: false},
                 ()=>{
-                    this.setState({count : this.props.count},
+                    this.setState({count : 0},
                         ()=>{
                             this.setState({logOutReload: true});
                         });
@@ -107,14 +113,13 @@ class Coupons extends React.Component {
             if (this.state.count > 3) {
                 this.handleScreenTap()
             }
-        }
-
-        const LogOut_Success = require("../../assets/success.svg");
-        const Search_Icon = require("../../assets/new-filter-search.png");
+				}
+				const LogOut_Success = require("../../assets/success.svg");
+				const Search_Icon = require("../../assets/new-filter-search.png");
         let popUpLogout = (<Popup trigger={<button ref = {logOutPopUpTrigger}  className="button" ></button>} true modal>
             {close => (
                 <div className="modal">
-                    <img className="logOutImage" src={LogOut_Success} alt="No Image Found"></img>
+                    <img className="logOutImage" src={LogOut_Success}></img>
                     <h1 className="logOutMessage1"> Enjoy your savings!</h1>
                     <h4 className="logOutMessage2">You have been successfully logged out. <br/> See you soon!</h4>
                 </div>)}
@@ -142,61 +147,37 @@ class Coupons extends React.Component {
                     </div>
                 </div>
             )}
-        </Popup>);
+        </Popup> 	);
 
 
         return (
-            <div>
-                <div className="WelcomeUser_Logout" >
-                    <h2 className="userName"> Welcome {userName}! </h2>
-                    <button className="logoutButton" ref = {logOutPopUpTrigger} onClick={() => this.setState({logOutTrigger: true})} > Log Out </button>
-                </div>
-                <Header/>
-                <div className="printDiv">
-                    <ReactToPrint
-                        trigger={() => <button 	className="printButton" hidden={this.state.hideLoadedCoupons}>PRINT</button>}
-                        content={() => this.componentRef}
-                    />
+						<div>
+								<WelcomeHeader userName={userName} parent={this}></WelcomeHeader>
+								<Header/>
+								<PrintComponent hideLoadedCoupons={this.state.hideLoadedCoupons} componentRef={this.componentRef}></PrintComponent>
 
-                </div>
-
-                <div className="AllCoupons">
-                    <ul>
-                        <li> <a  className={this.state.activeNewCoupons} onClick={this.NewCoupons} > New Coupons </a></li>
-                        <li> <a  className={this.state.activeLoadedCoupons} onClick={this.LoadedCoupons}> Loaded Coupons </a></li>
-
-                        {/* <FilterComponent/> */}
-                        {/* <SortComponent/> */}
-                    </ul>
-                    {popUpLogout}
-                    {sessionEndPopUp}
-                    <div className="LoadedCoupons"  hidden={this.state.hideNewCoupons} onClick={this.timerReset} onKeyPress={this.timerReset}   >
-                        <SearchCouponByName />
-                            <CouponCards ref= {el => (this.componentRef = el)} />
-                    </div>
-                    {/* <div className="LoadedCoupons"  hidden={this.state.hideLoadedCoupons} ref= {el => (this.componentRef = el)} >
-						<h4 className="LoadedCouponCount"> Loaded Coupons ({couponsLength}) </h4>
-						{userCoupons}
-					</div> */}
-                </div>
+								<AllCoupons>
+									<SideBar activeNewCoupons={this.state.activeNewCoupons} activeLoadedCoupons={this.state.activeLoadedCoupons} NewCoupons={this.NewCoupons} LoadedCoupons={this.LoadedCoupons} />
+										{popUpLogout}
+										{sessionEndPopUp}
+										<LoadedCouponsSideBar hideNewCoupons={this.state.hideNewCoupons} timerReset={this.timerReset}></LoadedCouponsSideBar>
+                    </AllCoupons>
             </div>
-        );
-    }
+        	);
+    	}
 }
 
 const mapStateToProps=(state)=>{
     return {
-        data : state.UserIdentification.couponDetails,
-        searchedCouponName: state.DisplayCouponStateUpdate.searchedCouponName,
-        count: state.UserIdentification.count
+        userInfo : state.DisplayCouponsReducer.userInfo,
+        allCoupons: state.DisplayCouponsReducer.allCoupons
     }
-}
+	}
 
-const mapDispatchToProps = (dispatch) => (
-    {
-        displayCouponState : (updatedValue) => displayCouponState(dispatch, updatedValue),
-        updateCoupons :( updatedValue)=> updateCoupons(dispatch,  updatedValue )
+const mapDispatchToProps = (dispatch) => ({
+    resetRedux : ()=>reset_all_redux(dispatch),
+    updateCoupons: (updatedValue) => updateCoupons(dispatch, updatedValue),
+    updateLoaded: (updatedLoadedParams) => updateLoaded(dispatch, updatedLoadedParams)
 
-    }
-)
+})
 export default connect(mapStateToProps,mapDispatchToProps)(Coupons);

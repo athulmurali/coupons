@@ -10,7 +10,7 @@ class AssistancePopUpComponent extends React.Component {
 
 	render() {
 		return <Popup contentStyle={{minWidth: "600px",textAlign :"left"}}
-			trigger={<span className="switchNoCard" >No card, no problem</span>}
+			trigger={<span className="switchNoCard" style={{display :'flex', justifyContent :'center'}} >No card, no problem</span>}
 			modal
 			open={!!this.props.isPopUpOpen}>
 

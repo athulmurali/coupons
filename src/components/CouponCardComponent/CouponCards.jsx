@@ -1,63 +1,56 @@
 import React from "react";
 import {connect} from "react-redux";
 import Flippy, {BackSide, FrontSide} from "react-flippy";
-import StopAndShopImg from "../../assets/stopandshop.png";
-import {updateCoupons} from "../../redux/actions/UserIdentification";
-import {displayCouponState} from "../../redux/actions/DisplayCouponAction";
+import {updateCoupons} from "../../redux/actions/DisplayCouponAction";
 import PlusIcon from "../../assets/addNew.svg";
 import LogOut_Success from "../../assets/addedNew.svg";
+let loadedSet = new Set([]);
 let x = [];
+
 class CouponCards extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			valuess: [],
+			values: [],
 			loadedCouponsCheck: true, 
+			checkNewCoupon: false,
+			tempLoadedCoupons: [],
 		}
 	}
 
 	swapIcon = (coupon, e) => {
-		if(e.target !== e.currentTarget && coupon.isLoaded === false || coupon.isLoaded === undefined) {
-			coupon.isLoaded = true;
+		if(!loadedSet.has(coupon._id) && e.target !== e.currentTarget && !!coupon.loaded === false) {
+			coupon.loaded = true;
+			loadedSet.add(coupon._id);
 			x.push(coupon);
-			this.setState({valuess : x});
-			localStorage.setItem("LoadedCoupons", this.state.valuess);
+			this.setState({tempLoadedCoupons : x});
+			// localStorage.setItem("LoadedCoupons", this.state.values);
+			this.props.updateCoupons({loadedCouponIds: loadedSet});
+			console.log(loadedSet);
+		}
+		else if(coupon.loaded === false){
+			coupon.loaded = true;
+			this.setState({checkNewCoupon: true});
 		}
 	}
 
-	render() {
-		let coupons = this.props.data[1];
-		let searchedCouponName = this.props.searchedCouponName;
-		let couponsLength =  coupons.length;
-		let searchedCoupons = this.props.searchedCoupons;
 
-		if(searchedCouponName !== "" && searchedCouponName.length > 2)  {
-			searchedCoupons = coupons.filter(function(couponName){
-				return couponName.Name.toLowerCase().includes(searchedCouponName.toLowerCase());
-			});
-			coupons = searchedCoupons;
-			couponsLength = searchedCoupons.length;
-			this.props.displayCouponState({"searchedCouponsLength": couponsLength});
-		}
-		else {
-			this.props.displayCouponState({"searchedCouponsLength": couponsLength});
-		}
+	render() {
+		let coupons = this.props.allCoupons
+		let couponsLength = coupons.length;
+		this.props.updateCoupons({"searchedCouponsLength": couponsLength});
+
 		if(couponsLength === 0) {
 			return <div> No Coupons Found </div>;
 		}
-		if(this.props.LoadedCouponsTrigger && this.state.valuess.length === 0 ) {
-			return <div>No Coupons loaded</div>
-		}
 
-		if(this.state.valuess.length > 0 && this.props.LoadedCouponsTrigger){
-			coupons = this.state.valuess;
+		if(this.props.LoadedCouponsTrigger){
+			coupons = coupons.concat(this.state.tempLoadedCoupons);
 			couponsLength = coupons.length;
-			this.props.displayCouponState({"searchedCouponsLength": couponsLength});
+			this.props.updateCoupons({"searchedCouponsLength": couponsLength});
 		}
-
-		if(coupons.length > 0 ){
-			return coupons.map((coupon,i)=><div className="Cards" key={i} >
-
+		
+		return coupons.map((coupon,i)=><div className="Cards" key={i}>
 				<Flippy flipOnHover={false} // default false
 					flipOnClick={true} // default false
 					flipOnHover={false} // default false
@@ -84,38 +77,32 @@ class CouponCards extends React.Component {
 						width: "260px",
 						height: "399px",
 					}}>
-						<img src={StopAndShopImg} width="80px" height="100px" alt="image_image" />
-						<h5> {coupon.Name}</h5> 
-						<h6 className="couponDescription"> {coupon.Description} </h6>
-						<h6 className="expireDate"> Exp: {coupon.EndDate.slice(0,10)} </h6>
+						<img src={coupon.url} width="80px" height="100px" alt="image_image" />
+						<h5> {coupon.name}</h5> 
+						<h6 className="couponDescription"> {coupon.description} </h6>
+						<h6 className="expireDate"> Exp: {coupon.expirationDate.slice(0,10)} </h6>
 						<h6 className="viewMore"> View more </h6>
 					</FrontSide>
 				</Flippy>
 				<div className= "plusIcon" onClick={(e) => this.swapIcon(coupon, e)}>
-							<img className="addCheck" height="56px" width="56px" src={(coupon.isLoaded) ? LogOut_Success: PlusIcon} alt = "plus sign unable to load"/>	
+							<img className="addCheck" height="56px" width="56px" src={(coupon.loaded) ? LogOut_Success: PlusIcon} alt = "plus sign unable to load"/>	
 						</div>
 			</div>);
-		}
-	}
 
+	}
 }
 
 
 const mapStateToProps=(state)=>{
 	return {
-		data : state.UserIdentification.couponDetails,
-		dataCopy: state.UserIdentification.couponDetailsSearchedCopy,
-		searchedCouponName: state.DisplayCouponStateUpdate.searchedCouponName,
-		searchedCoupons : state.UserIdentification.searchedCoupons,
-		couponsLength : state.DisplayCouponStateUpdate.searchedCouponsLength,
-		LoadedCouponsTrigger: state.UserIdentification.LoadedCouponsTrigger,
+		allCoupons :state.DisplayCouponsReducer.allCoupons,
+		LoadedCouponsTrigger: state.DisplayCouponsReducer.LoadedCouponsTrigger,
+
 	};
 };
 
 const mapDispatchToProps = (dispatch) => ({
-	updateCoupons :( updatedValue)=> updateCoupons(dispatch,  updatedValue ),
-	displayCouponState : (updatedValue) => displayCouponState(dispatch, updatedValue),
-
+	updateCoupons :( updatedValue)=> updateCoupons(dispatch,  updatedValue )
 }
 );
  
