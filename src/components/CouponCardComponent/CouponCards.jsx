@@ -76,7 +76,7 @@ class CouponCards extends React.Component {
 						width: "260px",
 						height: "399px",
 					}} >
-						<h6 className="couponDescription"> {coupon.Description}</h6>
+						{/* <h6 className="couponDescription"> {coupon.Description}</h6> */}
 					</BackSide>
 					<FrontSide 
 										// ref = {el => this.flippy.toggle = el}
