@@ -26,7 +26,6 @@ class CouponCards extends React.Component {
 		}
 	}
 	render() {
-
 		let coupons = this.props.allCoupons
 		let couponsLength = coupons.length;
 		this.props.updateCoupons({"searchedCouponsLength": couponsLength});
@@ -39,11 +38,13 @@ class CouponCards extends React.Component {
 			return <div>No Coupons loaded</div>
 		}
 
-		// if(this.state.valuess.length > 0 && this.props.LoadedCouponsTrigger){
-		// 	coupons = this.state.valuess;
-		// 	couponsLength = coupons.length;
-		// 	this.props.updateCoupons({"searchedCouponsLength": coupons.length});
-		// }
+		debugger;
+		if(this.state.valuess.length > 0 && this.props.LoadedCouponsTrigger){
+			coupons = this.state.valuess;
+			couponsLength = coupons.length;
+			this.props.updateCoupons({"searchedCouponsLength": coupons.length});
+
+		}
 
 		return coupons.map((coupon,i)=><div className="Cards" key={i}>
 				<Flippy flipOnHover={false} // default false
@@ -72,7 +73,7 @@ class CouponCards extends React.Component {
 						width: "260px",
 						height: "399px",
 					}}>
-						<img src={StopAndShopImg} width="80px" height="100px" alt="image_image" />
+						<img src={coupon.url} width="80px" height="100px" alt="image_image" />
 						<h5> {coupon.name}</h5> 
 						<h6 className="couponDescription"> {coupon.description} </h6>
 						<h6 className="expireDate"> Exp: {coupon.expirationDate.slice(0,10)} </h6>
