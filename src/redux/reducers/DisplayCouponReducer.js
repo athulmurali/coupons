@@ -11,6 +11,7 @@ const initialState = {
 	userInfo: null,
 	allCoupons: [],
 	searchedCouponsLength: "",
+	loadedCouponIds: [],
 };
 
 

@@ -4,8 +4,8 @@ import Flippy, {BackSide, FrontSide} from "react-flippy";
 import {updateCoupons} from "../../redux/actions/DisplayCouponAction";
 import PlusIcon from "../../assets/addNew.svg";
 import LogOut_Success from "../../assets/addedNew.svg";
-
-let x =[];
+let loadedSet = new Set([]);
+let x = [];
 
 class CouponCards extends React.Component {
 	constructor(props) {
@@ -13,17 +13,28 @@ class CouponCards extends React.Component {
 		this.state = {
 			values: [],
 			loadedCouponsCheck: true, 
+			checkNewCoupon: false,
+			tempLoadedCoupons: [],
 		}
 	}
 
 	swapIcon = (coupon, e) => {
-		if(e.target !== e.currentTarget && !!coupon.isLoaded === false) {
-			coupon.isLoaded = true;
+		if(!loadedSet.has(coupon._id) && e.target !== e.currentTarget && !!coupon.loaded === false) {
+			coupon.loaded = true;
+			loadedSet.add(coupon._id);
 			x.push(coupon);
-			this.setState({values : x});
-			localStorage.setItem("LoadedCoupons", this.state.values);
+			this.setState({tempLoadedCoupons : x});
+			// localStorage.setItem("LoadedCoupons", this.state.values);
+			this.props.updateCoupons({loadedCouponIds: loadedSet});
+			console.log(loadedSet);
+		}
+		else if(coupon.loaded === false){
+			coupon.loaded = true;
+			this.setState({checkNewCoupon: true});
 		}
 	}
+
+
 	render() {
 		let coupons = this.props.allCoupons
 		let couponsLength = coupons.length;
@@ -31,6 +42,12 @@ class CouponCards extends React.Component {
 
 		if(couponsLength === 0) {
 			return <div> No Coupons Found </div>;
+		}
+
+		if(this.props.LoadedCouponsTrigger){
+			coupons = coupons.concat(this.state.tempLoadedCoupons);
+			couponsLength = coupons.length;
+			this.props.updateCoupons({"searchedCouponsLength": couponsLength});
 		}
 		
 		return coupons.map((coupon,i)=><div className="Cards" key={i}>
@@ -68,7 +85,7 @@ class CouponCards extends React.Component {
 					</FrontSide>
 				</Flippy>
 				<div className= "plusIcon" onClick={(e) => this.swapIcon(coupon, e)}>
-							<img className="addCheck" height="56px" width="56px" src={(coupon.isLoaded) ? LogOut_Success: PlusIcon} alt = "plus sign unable to load"/>	
+							<img className="addCheck" height="56px" width="56px" src={(coupon.loaded) ? LogOut_Success: PlusIcon} alt = "plus sign unable to load"/>	
 						</div>
 			</div>);
 
