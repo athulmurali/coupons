@@ -68,7 +68,7 @@ class Coupons extends React.Component {
     }
 
   LoadedCoupons = () => {
-    // this.props.updateLoaded({loaded: true});
+    this.props.updateLoaded({loaded: true});
     this.props.updateCoupons({LoadedCouponsTrigger: true});
     this.setState({count : 0, activeNewCoupons : "inactive", activeLoadedCoupons : "active"});
     }

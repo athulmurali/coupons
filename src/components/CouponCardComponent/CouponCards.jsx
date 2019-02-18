@@ -1,18 +1,17 @@
 import React from "react";
 import {connect} from "react-redux";
 import Flippy, {BackSide, FrontSide} from "react-flippy";
-import StopAndShopImg from "../../assets/stopandshop.png";
 import {updateCoupons} from "../../redux/actions/DisplayCouponAction";
-import {FlippyStyle,BackgroundStyle,FrontSideStyle} from "./CouponCardStyle";
 import PlusIcon from "../../assets/addNew.svg";
 import LogOut_Success from "../../assets/addedNew.svg";
+
 let x =[];
 
 class CouponCards extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			valuess: [],
+			values: [],
 			loadedCouponsCheck: true, 
 		}
 	}
@@ -21,8 +20,8 @@ class CouponCards extends React.Component {
 		if(e.target !== e.currentTarget && !!coupon.isLoaded === false) {
 			coupon.isLoaded = true;
 			x.push(coupon);
-			this.setState({valuess : x});
-			localStorage.setItem("LoadedCoupons", this.state.valuess);
+			this.setState({values : x});
+			localStorage.setItem("LoadedCoupons", this.state.values);
 		}
 	}
 	render() {
@@ -33,19 +32,7 @@ class CouponCards extends React.Component {
 		if(couponsLength === 0) {
 			return <div> No Coupons Found </div>;
 		}
-
-		if(this.props.LoadedCouponsTrigger && this.state.valuess.length === 0 ) {
-			return <div>No Coupons loaded</div>
-		}
-
-		debugger;
-		if(this.state.valuess.length > 0 && this.props.LoadedCouponsTrigger){
-			coupons = this.state.valuess;
-			couponsLength = coupons.length;
-			this.props.updateCoupons({"searchedCouponsLength": coupons.length});
-
-		}
-
+		
 		return coupons.map((coupon,i)=><div className="Cards" key={i}>
 				<Flippy flipOnHover={false} // default false
 					flipOnClick={true} // default false
@@ -86,13 +73,11 @@ class CouponCards extends React.Component {
 			</div>);
 
 	}
-
 }
 
 
 const mapStateToProps=(state)=>{
 	return {
-
 		allCoupons :state.DisplayCouponsReducer.allCoupons,
 		LoadedCouponsTrigger: state.DisplayCouponsReducer.LoadedCouponsTrigger,
 

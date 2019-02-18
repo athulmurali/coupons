@@ -8,6 +8,7 @@ export const onChangeSearchSortFilter=(state, dispatch )=>{
 	const searchParams = SearchSortFilterReducer.search
 	const filterParams = SearchSortFilterReducer.filters
 	const sortParams = SearchSortFilterReducer.sort
+	const loadedParams = SearchSortFilterReducer.loaded
 
 	const couponsType = SearchSortFilterReducer.couponsType
 
@@ -20,7 +21,7 @@ export const onChangeSearchSortFilter=(state, dispatch )=>{
 		{
 			fetchAllCouponsFromServer( dispatch, searchParams, filterParams , sortParams )
 		}
-		else {	fetchAllCouponsFromServer( dispatch, searchParams, filterParams , sortParams, true )}
+		else {	fetchAllCouponsFromServer( dispatch, searchParams, filterParams , sortParams,loadedParams  )}
 
 	}
 

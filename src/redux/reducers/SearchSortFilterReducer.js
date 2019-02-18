@@ -57,6 +57,7 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 			return {
 				...state,
 				loaded: action.payload,
+				couponsType : CouponsTypeEnum.LOADED,
 				toBeFetched: true
 			};			
 
