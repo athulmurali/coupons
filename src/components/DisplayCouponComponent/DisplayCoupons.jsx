@@ -60,11 +60,14 @@ class Coupons extends React.Component {
     }
 
     NewCoupons = () => {
+        this.props.updateCoupons({LoadedCouponsTrigger: false});
+
         this.setState({count : this.props.count, hideNewCoupons : false, hideLoadedCoupons : true, activeNewCoupons : "active", activeLoadedCoupons : "inactive"});
     }
 
     LoadedCoupons = () => {
-        this.setState({count : this.props.count, hideNewCoupons : true, hideLoadedCoupons : false, activeNewCoupons : "inactive", activeLoadedCoupons : "active"});
+        this.props.updateCoupons({LoadedCouponsTrigger: true});
+        this.setState({count : this.props.count, activeNewCoupons : "inactive", activeLoadedCoupons : "active", hideLoadedCoupons: false});
     }
 
     render() {
@@ -160,7 +163,7 @@ class Coupons extends React.Component {
                 <div className="AllCoupons">
                     <ul>
                         <li> <a  className={this.state.activeNewCoupons} onClick={this.NewCoupons} > New Coupons </a></li>
-                        {/* <li> <a  className={this.state.activeLoadedCoupons} onClick={this.LoadedCoupons}> Loaded Coupons </a></li> */}
+                        <li> <a  className={this.state.activeLoadedCoupons} onClick={this.LoadedCoupons}> Loaded Coupons </a></li>
 
                         {/* <FilterComponent/> */}
                         {/* <SortComponent/> */}
@@ -169,7 +172,7 @@ class Coupons extends React.Component {
                     {sessionEndPopUp}
                     <div className="LoadedCoupons"  hidden={this.state.hideNewCoupons} onClick={this.timerReset} onKeyPress={this.timerReset}   >
                         <SearchCouponByName />
-                            <CouponCards  />
+                            <CouponCards ref= {el => (this.componentRef = el)} />
                     </div>
                     {/* <div className="LoadedCoupons"  hidden={this.state.hideLoadedCoupons} ref= {el => (this.componentRef = el)} >
 						<h4 className="LoadedCouponCount"> Loaded Coupons ({couponsLength}) </h4>

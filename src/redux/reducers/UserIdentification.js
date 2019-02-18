@@ -6,7 +6,8 @@ const initialState = {
 	couponDetails : [],
 	searchedCoupons :[],
 	couponDetailsSearchedCopy :[],
-	count: 0
+	count: 0,
+	LoadedCouponsTrigger: false,
 };
 
 const UserIdentification = (state = initialState, action)=>{

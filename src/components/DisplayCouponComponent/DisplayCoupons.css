@@ -78,7 +78,7 @@ input[type="checkbox"]:checked + label{
  h5 {
 	margin: 4px;
 	text-align: left;
-	color: black;
+	color: "#63666A";
 	font-size: 22px;
 	font-weight: bold;
 	min-height: 60px;
@@ -359,9 +359,10 @@ input[type="checkbox"]:checked + label{
 	text-align: left;
 	color: grey;
 	font-weight: normal;
-	margin-top: 17px;
+	margin-top: 20px;
 	margin-left: 20px;
-	width: 240px;
+	width: 270px;
+	font-size: 18px;
  }
 
 
@@ -372,5 +373,10 @@ input[type="checkbox"]:checked + label{
  display: flex;
  position: absolute;
  right: 15px;
- bottom: 30px;
+ bottom: 25px;
+}
+
+.addCheck{
+	/* border: 2px solid #E0004D; */
+	/* border-radius: 50%; */
 }

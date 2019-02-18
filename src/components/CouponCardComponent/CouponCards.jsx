@@ -4,37 +4,34 @@ import Flippy, {BackSide, FrontSide} from "react-flippy";
 import StopAndShopImg from "../../assets/stopandshop.png";
 import {updateCoupons} from "../../redux/actions/UserIdentification";
 import {displayCouponState} from "../../redux/actions/DisplayCouponAction";
-import PlusIcon from "../../assets/plus-icon.svg";
-import LogOut_Success from "../../assets/success.svg";
-let x =[0];
-
+import PlusIcon from "../../assets/addNew.svg";
+import LogOut_Success from "../../assets/addedNew.svg";
+let x = [];
 class CouponCards extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			valuess: [0],
+			valuess: [],
+			loadedCouponsCheck: true, 
 		}
 	}
 
-	swapIcon = (i) => {
-		if(i.isLoaded === true) {
-		i.isLoaded = false;
+	swapIcon = (coupon, e) => {
+		debugger;
+		if(e.target !== e.currentTarget && coupon.isLoaded === false || coupon.isLoaded === undefined) {
+			coupon.isLoaded = true;
+			x.push(coupon);
+			this.setState({valuess : x});
+			localStorage.setItem("LoadedCoupons", this.state.valuess);
 		}
-		else {
-			i.isLoaded = true;
-		}
-		x.push(i);
-		this.setState({valuess : x});
-		console.log("helllpp "  + i.isLoaded);
 	}
-
-
 
 	render() {
 		let coupons = this.props.data[1];
 		let searchedCouponName = this.props.searchedCouponName;
 		let couponsLength =  coupons.length;
 		let searchedCoupons = this.props.searchedCoupons;
+
 		if(searchedCouponName !== "" && searchedCouponName.length > 2)  {
 			searchedCoupons = coupons.filter(function(couponName){
 				return couponName.Name.toLowerCase().includes(searchedCouponName.toLowerCase());
@@ -46,16 +43,23 @@ class CouponCards extends React.Component {
 		else {
 			this.props.displayCouponState({"searchedCouponsLength": couponsLength});
 		}
-
 		if(couponsLength === 0) {
 			return <div> No Coupons Found </div>;
 		}
+		if(this.props.LoadedCouponsTrigger && this.state.valuess.length === 0 ) {
+			return <div>No Coupons loaded</div>
+		}
 
+		if(this.state.valuess.length > 0 && this.props.LoadedCouponsTrigger){
+			coupons = this.state.valuess;
+		}
 
 		if(coupons.length > 0 ){
-			return coupons.map((coupon,i)=><div className="Cards" key={i}>
+			return coupons.map((coupon,i)=><div className="Cards" key={i} onClick={(e) => this.swapIcon(coupon, e)} >
 				<Flippy flipOnHover={false} // default false
-					flipOnClick={false} // default false
+					flipOnClick={true} // default false
+					flipOnHover={true} // default false
+					// isFlipped = {this.state.flipcheck}
 					flipDirection="horizontal" // horizontal or vertical
 					ref={(r) => this.flippy = r} // to use toggle method like this.flippy.toggle()
 					style={{
@@ -63,7 +67,8 @@ class CouponCards extends React.Component {
 						height: "343px",
 						padding: "30",
 					}}>
-					<BackSide style={{
+					<BackSide 
+					style={{
 						backgroundColor: "white",
 						color: "black",
 						width: "260px",
@@ -71,7 +76,9 @@ class CouponCards extends React.Component {
 					}} >
 						<h6 className="couponDescription"> {coupon.Description}</h6>
 					</BackSide>
-					<FrontSide style={{
+					<FrontSide 
+										// ref = {el => this.flippy.toggle = el}
+										style={{
 						width: "260px",
 						height: "343px",
 					}}>
@@ -80,11 +87,12 @@ class CouponCards extends React.Component {
 						<h6 className="couponDescription"> {coupon.Description} </h6>
 						<h6 className="expireDate"> Exp: {coupon.EndDate.slice(0,10)} </h6>
 						<h6 className="viewMore"> View more </h6>
-						<div className= "plusIcon" onClick = {() => this.swapIcon(coupon)}>
-						<img height="66px" width="66px" src={(coupon.isLoaded) ? LogOut_Success: PlusIcon} alt="plus sign unable to load"/>	
-						</div>
 					</FrontSide>
+						<div className= "plusIcon" onClick={(e) => this.swapIcon(coupon, e)}>
+							<img className="addCheck" height="56px" width="56px" src={(coupon.isLoaded) ? LogOut_Success: PlusIcon} alt = "plus sign unable to load"/>	
+						</div>
 				</Flippy>
+
 			</div>);
 		}
 	}
@@ -98,7 +106,8 @@ const mapStateToProps=(state)=>{
 		dataCopy: state.UserIdentification.couponDetailsSearchedCopy,
 		searchedCouponName: state.DisplayCouponStateUpdate.searchedCouponName,
 		searchedCoupons : state.UserIdentification.searchedCoupons,
-		couponsLength : state.DisplayCouponStateUpdate.searchedCouponsLength
+		couponsLength : state.DisplayCouponStateUpdate.searchedCouponsLength,
+		LoadedCouponsTrigger: state.UserIdentification.LoadedCouponsTrigger,
 	};
 };
 
