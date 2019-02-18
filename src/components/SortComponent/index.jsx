@@ -13,17 +13,17 @@ class SortComponent extends React.Component{
 
 			selectedIndex : 0
 		}
-		this.Sort_up = require('../../assets/new-filter-arrow-up.svg');
+		this.Sort_up = require('../../assets/new-filter-arrow-down.svg');
 
 	}
 	Sort = () => {
         if(this.state.sort_arrow === false){
-            this.setState({sort_arrow : true});
-            this.Sort_up = require('../../assets/new-filter-arrow-down.svg');
+						this.setState({sort_arrow : true});
+						this.Sort_up = require('../../assets/new-filter-arrow-up.svg');
         }
         else{
             this.setState({sort_arrow : false});
-            this.Sort_up = require('../../assets/new-filter-arrow-up.svg');
+						this.Sort_up = require('../../assets/new-filter-arrow-down.svg');
         }
 	}
 	updateChange = ( sortBy, sortOrder) =>{
