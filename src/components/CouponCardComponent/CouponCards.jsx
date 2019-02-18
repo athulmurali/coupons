@@ -18,7 +18,7 @@ class CouponCards extends React.Component {
 	}
 
 	swapIcon = (coupon, e) => {
-		if(e.target !== e.currentTarget && coupon.isLoaded === false || coupon.isLoaded === undefined) {
+		if(e.target !== e.currentTarget && !!coupon.isLoaded === false) {
 			coupon.isLoaded = true;
 			x.push(coupon);
 			this.setState({valuess : x});
@@ -39,11 +39,12 @@ class CouponCards extends React.Component {
 			return <div>No Coupons loaded</div>
 		}
 
-		if(this.state.valuess.length > 0 && this.props.LoadedCouponsTrigger){
-			coupons = this.state.valuess;
-			couponsLength = coupons.length;
-			this.props.updateCoupons({"searchedCouponsLength": coupons.length});
-		}
+		// if(this.state.valuess.length > 0 && this.props.LoadedCouponsTrigger){
+		// 	coupons = this.state.valuess;
+		// 	couponsLength = coupons.length;
+		// 	this.props.updateCoupons({"searchedCouponsLength": coupons.length});
+		// }
+
 		return coupons.map((coupon,i)=><div className="Cards" key={i}>
 				<Flippy flipOnHover={false} // default false
 					flipOnClick={true} // default false
