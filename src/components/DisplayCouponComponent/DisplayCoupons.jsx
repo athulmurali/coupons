@@ -6,6 +6,7 @@ import Config from "../../config/config";
 import {connect} from "react-redux";
 import AllCoupons, {LoadedCouponsSideBar, PrintComponent, SideBar, WelcomeHeader} from "./DisplayCouponsProvider";
 import {reset_all_redux} from "../../redux/actions/Common";
+import {ROUTE_HOME_PAGE} from "../../utils/RouteConstants";
 
 class Coupons extends React.Component {
 	constructor(props){
@@ -31,16 +32,15 @@ class Coupons extends React.Component {
 
   componentWillUnmount () {
       clearInterval(this.timer);
+	  this.props.resetRedux()
+
   }
 
   componentDidMount () {
     this.startTimer();
     this.tick();
   }
-	componentWillMount() {
-		console.log("hi i am here ")
-		this.props.resetRedux()
-	}
+
 
   tick () {
     this.setState({count: (this.state.count + 1)});
@@ -56,7 +56,7 @@ class Coupons extends React.Component {
   }
 
   handleScreenTap = () => {
-    this.props.history.push(`/`);
+		this.props.resetRedux()
   }
 
   NewCoupons = () => {
@@ -69,9 +69,10 @@ class Coupons extends React.Component {
 
     render() {
 
-        // if(this.props.allCoupons.length<1) {
-        //     return <div>No Data Obtained</div>
-        // }
+        if(!this.props.userInfo){
+        	this.props.history.push(ROUTE_HOME_PAGE)
+
+		}
 
         let couponData = this.props.allCoupons;
         let buttonTrigger = "";
@@ -166,8 +167,8 @@ const mapStateToProps=(state)=>{
     }
 	}
 
-const mapDispatchToProps = (_) => ({
-	resetRedux : ()=>reset_all_redux
+const mapDispatchToProps = (dispatch) => ({
+	resetRedux : ()=>reset_all_redux(dispatch)
 
 })
 export default connect(mapStateToProps,mapDispatchToProps)(Coupons);

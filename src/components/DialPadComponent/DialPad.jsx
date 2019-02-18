@@ -190,16 +190,22 @@ class DialPad extends Component {
 		}
 		return (
 
-			<MessageDisplay>
-				<PhoneNumberImage phoneButton={this.state.phoneButton} handlePhoneClick={this.handlePhoneClick}
-								  slideImages={slideImages}>
-					<CardNuumberComponent cardButton={this.state.cardButton} handleCardClick={this.handleCardClick}
-										  slideImages={slideImages}/>
-				</PhoneNumberImage>
-				<InputText phoneNumber={this.state.phoneNumber} defaultMessage={this.state.defaultMessage}/>
-				<KeyBoard handleTheKeyClicks={this.handleTheKeyClicks} deleteTheLastDigit={this.deleteTheLastDigit}
-						  checkPhoneNumber={this.checkPhoneNumber}></KeyBoard>
+			<MessageDisplay >
+				<div style={{display: "flex",
+					justifyContent: "center"}}>
+					<PhoneNumberImage  phoneButton = {this.state.phoneButton} handlePhoneClick = {this.handlePhoneClick} slideImages = {slideImages} >
+						<phoneNumberComponent></phoneNumberComponent>
+						<CardNuumberComponent cardButton = {this.state.cardButton} handleCardClick = {this.handleCardClick} slideImages={slideImages} />
+					</PhoneNumberImage>
+				</div>
+				<div style={{display: "flex",
+					justifyContent: "center"}}>
+
+					<InputText phoneNumber = {this.state.phoneNumber} defaultMessage = {this.state.defaultMessage} />
+				</div>
+				<KeyBoard handleTheKeyClicks = {this.handleTheKeyClicks} deleteTheLastDigit = {this.deleteTheLastDigit} checkPhoneNumber = {this.checkPhoneNumber}></KeyBoard>
 				<AssistancePopUpComponent/>
+
 			</MessageDisplay>
 
 		);
