@@ -7,10 +7,10 @@ export const RESET = "RESET";
 
 const initialState = {
 	searchedCouponName: "",
-	searchedCouponsLength: "",
-
+	LoadedCouponsTrigger: false,
 	userInfo: null,
-	allCoupons: []
+	allCoupons: [],
+	searchedCouponsLength: "",
 };
 
 

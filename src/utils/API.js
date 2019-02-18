@@ -24,12 +24,13 @@ const getUserCoupons = (barcodeNumber) => {
 
 
 
-const getCouponsWithFilters =  (searchParams, filterParams, sortParams) => {
+const getCouponsWithFilters =  (searchParams, filterParams, sortParams, loadedParams) => {
 	const queryParams = {
 		...searchParams,
 		...filterParams,
-		...sortParams
-	}
+		...sortParams,
+		...loadedParams,
+	};
 	const processedQueryParams = processQueryParams(queryParams)
 	const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/coupons/fetchCouponsByFilter`;
 

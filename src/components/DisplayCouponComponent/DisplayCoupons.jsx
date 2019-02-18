@@ -7,6 +7,8 @@ import {connect} from "react-redux";
 import AllCoupons, {LoadedCouponsSideBar, PrintComponent, SideBar, WelcomeHeader} from "./DisplayCouponsProvider";
 import {reset_all_redux} from "../../redux/actions/Common";
 import {ROUTE_HOME_PAGE} from "../../utils/RouteConstants";
+import {updateCoupons} from "../../redux/actions/DisplayCouponAction";
+import {updateLoaded} from "../../redux/actions/SearchSortFilter";
 
 class Coupons extends React.Component {
 	constructor(props){
@@ -19,7 +21,6 @@ class Coupons extends React.Component {
             activeLoadedCoupons: "inactive",
             logOutTrigger: false,
             logOutReload: false,
-
         };
   	}
 
@@ -37,6 +38,7 @@ class Coupons extends React.Component {
   }
 
   componentDidMount () {
+    this.props.updateLoaded({loaded: false});
     this.startTimer();
     this.tick();
   }
@@ -60,12 +62,17 @@ class Coupons extends React.Component {
   }
 
   NewCoupons = () => {
-    this.setState({count : 0, hideNewCoupons : false, hideLoadedCoupons : true, activeNewCoupons : "active", activeLoadedCoupons : "inactive"});
-  }
+    this.props.updateLoaded({loaded: false});
+    // this.props.updateCoupons({LoadedCouponsTrigger: false});
+    this.setState({count : 0, activeNewCoupons : "active", activeLoadedCoupons : "inactive"});
+    }
 
   LoadedCoupons = () => {
-    this.setState({count : 0, hideNewCoupons : true, hideLoadedCoupons : false, activeNewCoupons : "inactive", activeLoadedCoupons : "active"});
-  }
+    this.props.updateLoaded({loaded: true});
+    // this.props.updateCoupons({LoadedCouponsTrigger: true});
+    this.setState({count : 0, activeNewCoupons : "inactive", activeLoadedCoupons : "active"});
+    }
+
 
     render() {
 
@@ -150,7 +157,7 @@ class Coupons extends React.Component {
 								<PrintComponent hideLoadedCoupons={this.state.hideLoadedCoupons} componentRef={this.componentRef}></PrintComponent>
 
 								<AllCoupons>
-									<SideBar activeNewCoupons={this.state.activeNewCoupons} NewCoupons={this.NewCoupons} />
+									<SideBar activeNewCoupons={this.state.activeNewCoupons} NewCoupons={this.NewCoupons} LoadedCoupons={this.LoadedCoupons} />
 										{popUpLogout}
 										{sessionEndPopUp}
 										<LoadedCouponsSideBar hideNewCoupons={this.state.hideNewCoupons} timerReset={this.timerReset}></LoadedCouponsSideBar>
@@ -168,7 +175,9 @@ const mapStateToProps=(state)=>{
 	}
 
 const mapDispatchToProps = (dispatch) => ({
-	resetRedux : ()=>reset_all_redux(dispatch)
+    resetRedux : ()=>reset_all_redux(dispatch),
+    updateCoupons: (updatedValue) => updateCoupons(dispatch, updatedValue),
+    updateLoaded: (updatedLoadedParams) => updateLoaded(dispatch, updatedLoadedParams)
 
 })
 export default connect(mapStateToProps,mapDispatchToProps)(Coupons);

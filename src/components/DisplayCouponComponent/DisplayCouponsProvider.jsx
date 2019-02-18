@@ -25,7 +25,7 @@ export const PopupTrigger = (props) => {
 };
 export const LoadedCouponsSideBar = (props) => (
 	<Consumer>{
-		() => <div className="LoadedCoupons"  hidden={props.hideNewCoupons}   >
+		() => <div className="LoadedCoupons" hidden={props.hideNewCoupons}   >
 			<SearchCouponByName />
 			<div onClick={props.timerReset}>
 				<CouponCards  />
@@ -42,6 +42,7 @@ export const SideBar = (props) => (
 			() => 
 				<ul>
 					<li> <a  className={props.activeNewCoupons} onClick={props.NewCoupons} > New Coupons </a></li>
+					<li> <a  className={props.activeLoadedCoupons} onClick={props.LoadedCoupons}> Loaded Coupons </a></li>
 					<FilterComponent/>
 					<SortComponent/>
 				</ul>
@@ -71,13 +72,13 @@ export const PrintComponent = (props) =>{
 };
 
 export default class AllCoupons extends Component{
-	state={
+	// state={
 
-	};
+	// };
 	render(){
 		return(
 			<Provider>
-			<div className="AllCoupons">
+	   <div className="AllCoupons">
 				{this.props.children}
 				</div>
 			</Provider>

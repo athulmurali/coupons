@@ -6,7 +6,7 @@ export const FETCH_COUPONS = "FETCH_COUPONS";
 export const SET_SORT = "SET_SORT";
 export const SET_FILTERS = "SET_FILTERS";
 export const SET_SEARCH = "SET_SEARCH";
-
+export const SET_LOADED = "SET_LOADED";
 export const FETCH_COUPONS_PENDING = FETCH_COUPONS + "_PENDING";
 export const FETCH_COUPONS_REJECTED = FETCH_COUPONS + "_REJECTED";
 export const FETCH_COUPONS_FULFILLED = FETCH_COUPONS + "_FULFILLED";
@@ -16,7 +16,7 @@ export const FETCH_CATEGORIES = "FETCH_CATEGORIES"
 export const FETCH_CATEGORIES_PENDING = FETCH_CATEGORIES +"_PENDING"
 export const FETCH_CATEGORIES_REJECTED = FETCH_CATEGORIES + "_REJECTED";
 export const FETCH_CATEGORIES_FULFILLED = FETCH_CATEGORIES + "_FULFILLED";
-
+export const LOADED_DEFAULT = false;
 
 const initialState = {
 	couponsType: CouponsTypeEnum.ALL,
@@ -24,7 +24,7 @@ const initialState = {
 	filters: {},
 	search: {},
 	arr: [],
-
+	loaded: {loaded: LOADED_DEFAULT},
 	array_filter: [],
 	categoriesAvailable :FILTER_CATEGORIES
 };
@@ -52,6 +52,15 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 				filters: action.payload,
 				toBeFetched: true
 			};
+
+			case SET_LOADED :
+			return {
+				...state,
+				loaded: action.payload,
+				toBeFetched: true
+			};			
+
+
 
 		case SET_SEARCH  :
 			const searchOnDeleteChar = (!!action.payload.searchString &&
