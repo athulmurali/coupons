@@ -55,12 +55,10 @@ class DialPad extends Component {
             this.couponsDetails.push(couponDetailsArray);
             this.props.updateCoupons({'couponDetails': this.couponsDetails})
             this.props.history.push(ROUTE_DISPLAY_COUPONS)
-        } catch (error) {
-
+        } 
+        catch (error) {
             this.setErrorMessage();
         }
-
-
     };
 
     setErrorMessage = () => {
@@ -100,8 +98,6 @@ class DialPad extends Component {
                     } else if (prev.length === 9) {
                         prev += ' ';
                     }
-
-
                     this.setState({
                         phoneNumber: prev + clickedValue,
                         disableTextArea: disableInputArea

@@ -51,11 +51,12 @@ input[type="checkbox"]:checked + label{
 }
 
 .Cards {
-	display: inline-flex;
+	display: inline-table;
 	margin-right: 14px;
 	text-align: center;
 	margin-top: 10px;
-	height: 343px;
+	/* height: 343px; */
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,.2);
 	width: 260px;
 	background-color: white;
 	align-items: flex-start;
@@ -208,6 +209,7 @@ input[type="checkbox"]:checked + label{
 	color: #E0004D;
 	border: none;
 	margin-bottom: 0;
+	background-color: white;
  }
 
  .printButton:hover {
@@ -367,13 +369,17 @@ input[type="checkbox"]:checked + label{
 
 
 .plusIcon {
- width: 56px;
- height: 56px;
- margin: auto;
- display: flex;
- position: absolute;
- right: 15px;
- bottom: 25px;
+	width: 56px;
+	height: 56px;
+	/* margin: auto; */
+	/* display: flex; */
+	position: relative;
+	/* z-index: 1; */
+	left: 186px;
+	/* top: 260px; */
+	/* position: absolute; */
+	/* left: 194px; */
+	bottom: 33px;
 }
 
 .addCheck{

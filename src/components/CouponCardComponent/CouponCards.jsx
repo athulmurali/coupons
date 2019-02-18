@@ -17,7 +17,6 @@ class CouponCards extends React.Component {
 	}
 
 	swapIcon = (coupon, e) => {
-		debugger;
 		if(e.target !== e.currentTarget && coupon.isLoaded === false || coupon.isLoaded === undefined) {
 			coupon.isLoaded = true;
 			x.push(coupon);
@@ -52,13 +51,16 @@ class CouponCards extends React.Component {
 
 		if(this.state.valuess.length > 0 && this.props.LoadedCouponsTrigger){
 			coupons = this.state.valuess;
+			couponsLength = coupons.length;
+			this.props.displayCouponState({"searchedCouponsLength": couponsLength});
 		}
 
 		if(coupons.length > 0 ){
-			return coupons.map((coupon,i)=><div className="Cards" key={i} onClick={(e) => this.swapIcon(coupon, e)} >
+			return coupons.map((coupon,i)=><div className="Cards" key={i} >
+
 				<Flippy flipOnHover={false} // default false
 					flipOnClick={true} // default false
-					flipOnHover={true} // default false
+					flipOnHover={false} // default false
 					// isFlipped = {this.state.flipcheck}
 					flipDirection="horizontal" // horizontal or vertical
 					ref={(r) => this.flippy = r} // to use toggle method like this.flippy.toggle()
@@ -72,7 +74,7 @@ class CouponCards extends React.Component {
 						backgroundColor: "white",
 						color: "black",
 						width: "260px",
-						height: "343px",
+						height: "399px",
 					}} >
 						<h6 className="couponDescription"> {coupon.Description}</h6>
 					</BackSide>
@@ -80,7 +82,7 @@ class CouponCards extends React.Component {
 										// ref = {el => this.flippy.toggle = el}
 										style={{
 						width: "260px",
-						height: "343px",
+						height: "399px",
 					}}>
 						<img src={StopAndShopImg} width="80px" height="100px" alt="image_image" />
 						<h5> {coupon.Name}</h5> 
@@ -88,11 +90,10 @@ class CouponCards extends React.Component {
 						<h6 className="expireDate"> Exp: {coupon.EndDate.slice(0,10)} </h6>
 						<h6 className="viewMore"> View more </h6>
 					</FrontSide>
-						<div className= "plusIcon" onClick={(e) => this.swapIcon(coupon, e)}>
+				</Flippy>
+				<div className= "plusIcon" onClick={(e) => this.swapIcon(coupon, e)}>
 							<img className="addCheck" height="56px" width="56px" src={(coupon.isLoaded) ? LogOut_Success: PlusIcon} alt = "plus sign unable to load"/>	
 						</div>
-				</Flippy>
-
 			</div>);
 		}
 	}
