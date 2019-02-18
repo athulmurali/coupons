@@ -157,7 +157,7 @@ class Coupons extends React.Component {
 								<PrintComponent hideLoadedCoupons={this.state.hideLoadedCoupons} componentRef={this.componentRef}></PrintComponent>
 
 								<AllCoupons>
-									<SideBar activeNewCoupons={this.state.activeNewCoupons} NewCoupons={this.NewCoupons} LoadedCoupons={this.LoadedCoupons} />
+									<SideBar activeNewCoupons={this.state.activeNewCoupons} activeLoadedCoupons={this.state.activeLoadedCoupons} NewCoupons={this.NewCoupons} LoadedCoupons={this.LoadedCoupons} />
 										{popUpLogout}
 										{sessionEndPopUp}
 										<LoadedCouponsSideBar hideNewCoupons={this.state.hideNewCoupons} timerReset={this.timerReset}></LoadedCouponsSideBar>
