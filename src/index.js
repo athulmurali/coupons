@@ -16,7 +16,7 @@ import combinedReducer from "./redux/reducers";
 import {onChangeSearchSortFilter} from "./redux/storeChangeListeners";
 import {composeWithDevTools} from "redux-devtools-extension";
 
-const middleware = applyMiddleware(  promise(), thunk ,logger);
+const middleware = applyMiddleware(promise(), thunk ,logger);
 
 
 const store = createStore(combinedReducer,composeWithDevTools(middleware));

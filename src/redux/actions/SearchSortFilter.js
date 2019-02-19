@@ -1,4 +1,4 @@
-import {SET_FILTERS, SET_SEARCH, SET_SORT} from "../reducers/SearchSortFilterReducer";
+import {SET_FILTERS, SET_SEARCH, SET_SORT, SET_LOADED} from "../reducers/SearchSortFilterReducer";
 
 /**
  *
@@ -59,6 +59,17 @@ export const updateSort=(dispatch, sortParams)=>{
 	dispatch({
 		type : SET_SORT,
 		payload :  sortParams
+
+	})
+
+}
+
+
+export const updateLoaded=(dispatch, loadedParams)=>{
+
+	dispatch({
+		type : SET_LOADED,
+		payload :  loadedParams
 
 	})
 

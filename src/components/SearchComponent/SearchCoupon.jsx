@@ -30,7 +30,7 @@ class SearchCouponByName extends React.Component {
 
 const mapStateToProps = (state) => {
 	return {
-		couponsLength : state.DisplayCouponsReducer.allCoupons.length
+		couponsLength : state.DisplayCouponsReducer.searchedCouponsLength
 	};
 };
 

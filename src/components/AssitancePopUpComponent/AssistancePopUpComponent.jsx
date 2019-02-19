@@ -5,6 +5,9 @@ import PopUpWindow from "./PopUpWindow";
 
 
 class AssistancePopUpComponent extends React.Component {
+
+
+
 	render() {
 		return <Popup contentStyle={{minWidth: "600px",textAlign :"left"}}
 			trigger={<span className="switchNoCard" style={{display :'flex', justifyContent :'center'}} >No card, no problem</span>}

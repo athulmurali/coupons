@@ -13,6 +13,10 @@ class AttractLoop extends React.Component {
     this.props.history.push(`/userIdentification`);
   };
 
+  componentWillMount() {
+    window.location.reload();
+  }
+
   render() {
     const Image_coupon1 = require('../assets/coupons-attract-Images-03.png');
     const Image_coupon2 = require('../assets/coupons-attract-Images-04.png');

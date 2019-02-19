@@ -29,75 +29,98 @@ input[type="checkbox"]:checked + label{
 	color: #E0004D;
 }
 
-
-input[type="radio"]:after {
-	background-color: #E0004D;
-	border: 1px solid #E0004D;
-}
-input[type="radio"]:checked after + label{
-	color: #E0004D;
-}
-
 .filter_sort{
 	font-weight: bold;
-    margin: 15px 10px 0px;
-    color: #63666A;
-    border: 1.3px #ECECEC solid;
-    padding: 15px 10px 10px;
+  margin: 15px 10px 0px;
+  color: #63666A;
+  border: 1.3px #ECECEC solid;
+  padding: 15px 10px 10px;
 	background: #FBFBFB;
 	min-height: 44px;
 	cursor: pointer;
 }
+
 .filter_inside{
 	color: #63666A;
 	margin: 0px 10px 0px ;
-    border: 1.3px #ECECEC solid;
-    padding: 12px 10px 15px;
+  border: 1.3px #ECECEC solid;
+  padding: 12px 10px 15px;
 	background: #FBFBFB;
 	font-size: smaller;
 	font-weight: 500;
 }
 
 .Cards {
-	display: inline-flex;
+	display: inline-table;
 	margin-right: 14px;
 	text-align: center;
-	margin-top: 10px;
-	height: 264px;
-	width: 171px;
+	margin-top: 19px;
+	height: 399px;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,.2);
+	width: 260px;
 	background-color: white;
 	align-items: flex-start;
 	cursor: pointer;
 	word-wrap: normal;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,.2);
  }
  
- .viewMore {
-	text-decoration: underline;
- }
- 
+
  .couponDescription {
 	word-break: break-word;
 }
+
  span{
 	color: black;
  }
  
- h4, h5 {
-	padding: 0;
-	margin: 2px;
+ /* h5 {
+	margin: 4px;
 	text-align: left;
-	color: black;
- }
+	color: "#63666A";
+	font-size: 22px;
+	font-weight: bold;
+	min-height: 60px;
+ } */
 
  img {
 	margin-bottom: 8px;
  }
 
- h6 {
+ h6.couponDescription {
 	padding: 0;
 	margin: 3px;
 	text-align: left;
 	color: grey;
+	font-size: 18px;
+	font-weight: normal;
+	min-height: 50px;
+ }
+
+ h6.expireDate {
+	padding: 0;
+	margin: 3px;
+	text-align: left;
+	color: grey;
+	font-size: 16px;
+	font-weight: normal;
+	min-height: 20px;
+	bottom: 30px;
+ }
+
+ h6.viewMore{
+	padding: 0;
+	margin: 3px;
+	text-align: left;
+	color: grey;
+	font-size: 16px;
+	font-weight: bold;
+	/* min-height: 60px; */
+	bottom: 20px;
+	font-size: 14px;
+	font-weight: bold;
+	position: absolute;
+	text-decoration: underline;
  }
 
 .expText{
@@ -115,13 +138,14 @@ input[type="radio"]:checked after + label{
 	 background-color: #989B9F;
 	 width: 100%;
 	 color: white;
+	 padding: 6px;
 
  }
 
  .SearchImage {
-	height: 25px;
-	margin-top: 12px;
-	margin-left: 10px;
+	height: 32px;
+	margin-top: 10px;
+	margin-left: 21px;
  }
 
  .SearchBar {
@@ -185,6 +209,7 @@ input[type="radio"]:checked after + label{
 	color: #E0004D;
 	border: none;
 	margin-bottom: 0;
+	background-color: white;
  }
 
  .printButton:hover {
@@ -239,7 +264,7 @@ input[type="radio"]:checked after + label{
  }
  
  .in {
-	animation: fill 10s linear 1;
+	animation: fill 5s linear 1;
 	height: 100%;
 	background-color:#E0004D;
  }
@@ -281,7 +306,7 @@ input[type="radio"]:checked after + label{
 	width: 100%;
 	height: 100%vh;
  }
- 
+
  ul {
 	list-style-type: none;
 	margin: 0;
@@ -323,10 +348,12 @@ input[type="radio"]:checked after + label{
 	height: 100%;
 	min-height: 870px;
 	width: -webkit-fill-available;
-	padding-left: 18px;
+	padding-left: 24px;
 	padding-bottom: 100px;
 	cursor: pointer;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
  }
+
 
  .LoadedCouponCount {
 	padding: 0;
@@ -334,10 +361,53 @@ input[type="radio"]:checked after + label{
 	text-align: left;
 	color: grey;
 	font-weight: normal;
-	margin-top: 17px;
+	margin-top: 20px;
 	margin-left: 20px;
-	width: 240px;
+	width: 270px;
+	font-size: 18px;
  }
 
 
+.plusIcon {
+	width: 56px;
+	height: 56px;
+	/* margin: auto; */
+	/* display: flex; */
+	position: relative;
+	/* z-index: 1; */
+	left: 186px;
+	/* top: 260px; */
+	/* position: absolute; */
+	/* left: 194px; */
+	bottom: 33px;
+}
 
+.couponTitle{
+	margin: 4px;
+	text-align: left;
+	color: #63666A;
+	font-size: 22px;
+	font-weight: bold;
+	min-height: 30px;
+}
+
+.couponName{
+	margin: 4px;
+	text-align: left;
+	color: #63666A;
+	font-size: 18px;
+	font-weight: bold;
+	min-height: 30px;
+}
+
+.expire{
+	padding: 0;
+	margin: 3px;
+	text-align: left;
+	color: grey;
+	font-size: 16px;
+	font-weight: normal;
+	min-height: 20px;
+	text-decoration: underline;
+	font-weight: bold;
+}
