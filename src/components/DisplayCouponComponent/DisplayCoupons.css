@@ -94,7 +94,8 @@ input[type="checkbox"]:checked + label{
 	color: grey;
 	font-size: 18px;
 	font-weight: normal;
-	min-height: 50px;
+	max-height: 124px;
+	overflow: hidden;
  }
 
  h6.expireDate {
@@ -103,9 +104,12 @@ input[type="checkbox"]:checked + label{
 	text-align: left;
 	color: grey;
 	font-size: 16px;
-	font-weight: normal;
-	min-height: 20px;
-	bottom: 30px;
+	font-weight: bold;
+	/* min-height: 60px; */
+	bottom: 50px;
+	font-size: 14px;
+	font-weight: bold;
+	position: absolute;
  }
 
  h6.viewMore{

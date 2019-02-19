@@ -32,7 +32,6 @@ export const LoadedCouponsSideBar = (props) => (
 			</div>
 		</div>
 	}
-	
 	</Consumer>
 );
 
@@ -63,10 +62,7 @@ export const WelcomeHeader = (props) =>{
 export const PrintComponent = (props) =>{
 	return(
 		<div className="printDiv">
-			<ReactToPrint
-				trigger={() => <button 	className="printButton" hidden={props.hideLoadedCoupons}>PRINT</button>}
-				content={() => props.parent.componentRef}
-			/>
+			<button className="printButton" onClick={() => window.print()} hidden={props.hideLoadedCoupons}>PRINT</button>
 		</div>
 	);
 };
