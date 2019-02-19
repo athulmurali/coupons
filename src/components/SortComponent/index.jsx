@@ -1,16 +1,17 @@
 import React from "react";
+import {updateSort} from "../../redux/actions/SearchSortFilter";
 import {connect} from "react-redux";
-import image_sort_up from "../../assets/new-filter-arrow-up.svg";
-import image_sort_down from "../../assets/new-filter-arrow-down.svg";
-const SORT_CATEOGRY = ["Redeem By Date"	,"Value(Low to High)	","Value(High to Low)"	," Brand"];
+import {SORT_CATEGORIES} from "../../config/config";
 
-export default class SortComponent extends React.Component{
+
+class SortComponent extends React.Component{
 
 	constructor(props){
 		super(props);
 		this.state={
 			sort_arrow: false,
-			checkedArray : []
+
+			selectedIndex : 0
 		}
 		this.Sort_up = require('../../assets/new-filter-arrow-up.svg');
 
@@ -25,13 +26,8 @@ export default class SortComponent extends React.Component{
             this.Sort_up = require('../../assets/new-filter-arrow-up.svg');
         }
 	}
-	updateChange = (checkedArray, categoryName) =>{
-		if(checkedArray.includes(categoryName)){
-			this.setState({checkedArray : checkedArray.filter(name=>(name!=categoryName))})
-		}
-		else{
-			this.setState({checkedArray : [...this.state.checkedArray,categoryName ] })
-		}
+	updateChange = ( sortBy, sortOrder) =>{
+		this.props.updateSort({sortBy,sortOrder})
 
 	}
 
@@ -46,11 +42,11 @@ export default class SortComponent extends React.Component{
 					<img className="image_arrow" src={slideArrow_Sort[0]}  onClick={this.Sort}/>
 					<div className="filter_sort_list" hidden= {this.state.sort_arrow} >By Recommended</div>
 				</div>
-				{SORT_CATEOGRY.map( category => <div key={category} className="filter_inside" hidden= {!this.state.sort_arrow}>
-					<input name="_filter" type="checkbox" 
-					onClick={() => this.updateChange(this.state.checkedArray,category)} />
+				{SORT_CATEGORIES.map( category => <div key={category.displayName} className="filter_inside" hidden= {!this.state.sort_arrow}>
+					<input name="_filter" type="radio"
+					onClick={() => this.updateChange(category.sortBy,category.sortOrder)} />
 					<label>
-						{category}
+						{category.displayName}
 					</label>
 				</div>)}
 			</div>	
@@ -59,16 +55,18 @@ export default class SortComponent extends React.Component{
 		)
 	}
 }
-// const mapStateToProps = (state) => {
-// 	return { 
-// 		checkedArray : state.SortFilterReducer.checkedArray ,
-// 		SORT_CATEOGRY : state.SortFilterReducer.sortCategory 
+const mapStateToProps = (state) => {
+	return {
 
-// 	}
-// }
-// const mapDispatcherToProps = (dispatch) => {
+	}
+}
+const mapDispatcherToProps = (dispatch) => {
+	return {
 
-// }
+		updateSort:(sortParams)=>{updateSort(dispatch, sortParams) }
+	}
+
+}
 
 
-// export default connect(mapStateToProps,mapDispatcherToProps)(SortComponent);
+export default connect(mapStateToProps,mapDispatcherToProps)(SortComponent);

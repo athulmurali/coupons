@@ -13,10 +13,7 @@
 .act:focus{
 	outline: 0em;
 }
-body{
-	margin-top: 70px;
-	text-align: center;
-}
+
 .inact {
 	width: 200px;
 	height: 55px;
