@@ -61,7 +61,6 @@ class Coupons extends React.Component {
   }
 
   handleScreenTap = () => {
-		alert("as")
 		this.props.resetRedux()
   }
 
