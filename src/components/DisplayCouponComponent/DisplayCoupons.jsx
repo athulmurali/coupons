@@ -30,11 +30,9 @@ class Coupons extends React.Component {
 		};
 	}
 
-
   componentWillUnmount () {
       clearInterval(this.timer);
-	  this.props.resetRedux()
-
+	  this.props.resetRedux();
   }
 
   componentDidMount () {
@@ -42,7 +40,6 @@ class Coupons extends React.Component {
     this.startTimer();
     this.tick();
   }
-
 
   tick () {
     this.setState({count: (this.state.count + 1)});
@@ -150,22 +147,19 @@ class Coupons extends React.Component {
         </Popup> 	);
 
 
-        return (
-						<div>
-								<WelcomeHeader userName={userName} parent={this}></WelcomeHeader>
-								<Header/>
-								<PrintComponent hideLoadedCoupons={this.state.hideLoadedCoupons} componentRef={this.componentRef}></PrintComponent>
-
-								<AllCoupons>
-									<SideBar activeNewCoupons={this.state.activeNewCoupons} activeLoadedCoupons={this.state.activeLoadedCoupons} NewCoupons={this.NewCoupons} LoadedCoupons={this.LoadedCoupons} />
-										{popUpLogout}
-										{sessionEndPopUp}
-										<LoadedCouponsSideBar hideNewCoupons={this.state.hideNewCoupons} timerReset={this.timerReset}></LoadedCouponsSideBar>
-                    </AllCoupons>
-            </div>
-        	);
-    	}
-}
+        return (<div>
+			    <WelcomeHeader userName={userName} parent={this}></WelcomeHeader>
+				<Header/>
+                <PrintComponent hideLoadedCoupons={this.state.hideLoadedCoupons} componentRef={this.componentRef}></PrintComponent>
+                <AllCoupons>
+                <SideBar activeNewCoupons={this.state.activeNewCoupons} activeLoadedCoupons={this.state.activeLoadedCoupons} NewCoupons={this.NewCoupons} LoadedCoupons={this.LoadedCoupons} />
+                    {popUpLogout}
+					{sessionEndPopUp}
+				<LoadedCouponsSideBar hideNewCoupons={this.state.hideNewCoupons} timerReset={this.timerReset}></LoadedCouponsSideBar>
+                </AllCoupons>
+            </div>);
+        }
+    }
 
 const mapStateToProps=(state)=>{
     return {

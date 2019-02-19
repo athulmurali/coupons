@@ -81,7 +81,8 @@ class CouponCards extends React.Component {
 										style={{
 						width: "260px",
 						height: "399px",
-					}} >
+					}} 
+					>
 						<img src={coupon.url} width="80px" height="100px" alt="image_image" />
 						<h5 className="couponTitle"> {coupon.title}</h5> 
 						<h5 className="couponName"> {coupon.name}</h5> 

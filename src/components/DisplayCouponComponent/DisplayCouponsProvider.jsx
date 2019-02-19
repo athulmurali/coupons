@@ -78,8 +78,8 @@ export default class AllCoupons extends Component{
 	render(){
 		return(
 			<Provider>
-	   <div className="AllCoupons">
-				{this.props.children}
+				<div className="AllCoupons">
+					{this.props.children}
 				</div>
 			</Provider>
 		);
