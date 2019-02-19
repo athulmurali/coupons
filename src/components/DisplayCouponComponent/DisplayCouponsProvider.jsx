@@ -43,8 +43,8 @@ export const SideBar = (props) => (
 				<ul>
 					<li> <a  className={props.activeNewCoupons} onClick={props.NewCoupons} > New Coupons </a></li>
 					<li> <a  className={props.activeLoadedCoupons} onClick={props.LoadedCoupons}> Loaded Coupons </a></li>
-					<FilterComponent timerReset={props.timerReset}/>
 					<SortComponent timerReset={props.timerReset}/>
+					<FilterComponent timerReset={props.timerReset}/>
 				</ul>
 			
 		}
@@ -73,9 +73,6 @@ export const PrintComponent = (props) =>{
 };
 
 export default class AllCoupons extends Component{
-	// state={
-
-	// };
 	render(){
 		return(
 			<Provider>

@@ -141,7 +141,7 @@ class Coupons extends React.Component {
                     <div className="actions">
                         <button
                             className="buttons"
-                            onClick={() => {close(); this.setState({logOutTrigger: true})}} >
+                            onClick={() => { this.setState({logOutTrigger: true}, close())}} >
                             Logout
                         </button>
                         <button
