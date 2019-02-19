@@ -21,7 +21,8 @@ class Coupons extends React.Component {
             activeLoadedCoupons: "inactive",
             logOutTrigger: false,
             logOutReload: false,
-        };
+				};
+				this.inputRef = React.createRef();
   	}
 
   buttonClick = (el) => {
@@ -40,7 +41,12 @@ class Coupons extends React.Component {
     this.startTimer();
     this.tick();
   }
-
+	shouldComponentUpdate(){
+		if(this.state.count == 20 || this.state.count == 3 || this.state.count ==4){
+			return true
+		}
+		return false
+	}
   tick () {
     this.setState({count: (this.state.count + 1)});
 	}
@@ -55,6 +61,7 @@ class Coupons extends React.Component {
   }
 
   handleScreenTap = () => {
+		alert("as")
 		this.props.resetRedux()
   }
 
@@ -69,10 +76,12 @@ class Coupons extends React.Component {
     this.props.updateCoupons({LoadedCouponsTrigger: true});
     this.setState({count : 0, activeNewCoupons : "inactive", hideLoadedCoupons:false, activeLoadedCoupons : "active"});
     }
-
+	setRef = (ref) => {
+		this.inputRef = ref;
+	}
 
     render() {
-
+				console.log(this.state.count)
         if(!this.props.userInfo){
         	this.props.history.push(ROUTE_HOME_PAGE)
 
@@ -147,16 +156,17 @@ class Coupons extends React.Component {
         </Popup> 	);
 
 
-        return (<div>
+        return (<div >
 			    <WelcomeHeader userName={userName} parent={this}></WelcomeHeader>
 				<Header/>
-                <PrintComponent hideLoadedCoupons={this.state.hideLoadedCoupons} componentRef={this.componentRef}></PrintComponent>
+                <PrintComponent hideLoadedCoupons={this.state.hideLoadedCoupons} componentRef={this.componentRef} ></PrintComponent>
                 <AllCoupons>
-                <SideBar activeNewCoupons={this.state.activeNewCoupons} activeLoadedCoupons={this.state.activeLoadedCoupons} NewCoupons={this.NewCoupons} LoadedCoupons={this.LoadedCoupons} />
+                <SideBar activeNewCoupons={this.state.activeNewCoupons} timerReset={this.timerReset} activeLoadedCoupons={this.state.activeLoadedCoupons} NewCoupons={this.NewCoupons} LoadedCoupons={this.LoadedCoupons} />
                     {popUpLogout}
 					{sessionEndPopUp}
 				<LoadedCouponsSideBar hideNewCoupons={this.state.hideNewCoupons} timerReset={this.timerReset}></LoadedCouponsSideBar>
-                </AllCoupons>
+								</AllCoupons>
+								
             </div>);
         }
     }

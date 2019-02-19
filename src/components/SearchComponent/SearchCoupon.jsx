@@ -13,7 +13,7 @@ class SearchCouponByName extends React.Component {
 		let couponsLength = this.props.couponsLength;
 
 		return(
-			<div className="CouponSearch">
+			<div className="CouponSearch" onKeyDown={this.props.timerReset}>
 				<div className="SearchBarImage">
 					<img className="SearchImage" src={Search_Icon} alt ="Search icon not found" />
 					<input type="text" className = "SearchBar" placeholder="Search"

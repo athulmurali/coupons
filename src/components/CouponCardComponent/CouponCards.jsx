@@ -51,6 +51,7 @@ class CouponCards extends React.Component {
 		}
 		
 		return coupons.map((coupon,i)=><div className="Cards" key={i}>
+				
 				<Flippy flipOnHover={false} // default false
 					flipOnClick={true} // default false
 					flipOnHover={false} // default false
@@ -77,12 +78,14 @@ class CouponCards extends React.Component {
 
 					</BackSide>
 					<FrontSide 
-										// ref = {el => this.flippy.toggle = el}
+										
+										// ref = {el => this.flippy.toggle = el} 'http'+coupon.url.substring(5)
 										style={{
 						width: "260px",
 						height: "399px",
 					}} 
 					>
+					
 						<img src={coupon.url} width="80px" height="100px" alt="image_image" />
 						<h5 className="couponTitle"> {coupon.title}</h5> 
 						<h5 className="couponName"> {coupon.name}</h5> 
