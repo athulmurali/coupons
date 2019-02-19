@@ -31,10 +31,10 @@ input[type="checkbox"]:checked + label{
 
 .filter_sort{
 	font-weight: bold;
-    margin: 15px 10px 0px;
-    color: #63666A;
-    border: 1.3px #ECECEC solid;
-    padding: 15px 10px 10px;
+  margin: 15px 10px 0px;
+  color: #63666A;
+  border: 1.3px #ECECEC solid;
+  padding: 15px 10px 10px;
 	background: #FBFBFB;
 	min-height: 44px;
 	cursor: pointer;
@@ -54,7 +54,7 @@ input[type="checkbox"]:checked + label{
 	display: inline-table;
 	margin-right: 14px;
 	text-align: center;
-	margin-top: 10px;
+	margin-top: 19px;
 	height: 399px;
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,.2);
 	width: 260px;
@@ -65,25 +65,23 @@ input[type="checkbox"]:checked + label{
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,.2);
  }
  
- .viewMore {
-	text-decoration: underline;
- }
- 
+
  .couponDescription {
 	word-break: break-word;
 }
+
  span{
 	color: black;
  }
  
- h5 {
+ /* h5 {
 	margin: 4px;
 	text-align: left;
 	color: "#63666A";
 	font-size: 22px;
 	font-weight: bold;
 	min-height: 60px;
- }
+ } */
 
  img {
 	margin-bottom: 8px;
@@ -107,6 +105,7 @@ input[type="checkbox"]:checked + label{
 	font-size: 16px;
 	font-weight: normal;
 	min-height: 20px;
+	bottom: 30px;
  }
 
  h6.viewMore{
@@ -121,6 +120,7 @@ input[type="checkbox"]:checked + label{
 	font-size: 14px;
 	font-weight: bold;
 	position: absolute;
+	text-decoration: underline;
  }
 
 .expText{
@@ -380,4 +380,34 @@ input[type="checkbox"]:checked + label{
 	/* position: absolute; */
 	/* left: 194px; */
 	bottom: 33px;
+}
+
+.couponTitle{
+	margin: 4px;
+	text-align: left;
+	color: #63666A;
+	font-size: 22px;
+	font-weight: bold;
+	min-height: 30px;
+}
+
+.couponName{
+	margin: 4px;
+	text-align: left;
+	color: #63666A;
+	font-size: 18px;
+	font-weight: bold;
+	min-height: 30px;
+}
+
+.expire{
+	padding: 0;
+	margin: 3px;
+	text-align: left;
+	color: grey;
+	font-size: 16px;
+	font-weight: normal;
+	min-height: 20px;
+	text-decoration: underline;
+	font-weight: bold;
 }

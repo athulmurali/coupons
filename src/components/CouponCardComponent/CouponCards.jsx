@@ -69,18 +69,24 @@ class CouponCards extends React.Component {
 						width: "260px",
 						height: "399px",
 					}} >
-						{/* <h6 className="couponDescription"> {coupon.Description}</h6> */}
+						<h5 className="couponTitle"> {coupon.title}</h5> 
+						<h5 className="couponName"> {coupon.name}</h5> 
+						<h6 className="couponDescription"> {coupon.description} </h6>
+						{/* <h6 className="legalText"> {coupon.legalText} </h6> */}
+						<h6 className="viewMore"> View less </h6>
+
 					</BackSide>
 					<FrontSide 
 										// ref = {el => this.flippy.toggle = el}
 										style={{
 						width: "260px",
 						height: "399px",
-					}}>
+					}} >
 						<img src={coupon.url} width="80px" height="100px" alt="image_image" />
-						<h5> {coupon.name}</h5> 
+						<h5 className="couponTitle"> {coupon.title}</h5> 
+						<h5 className="couponName"> {coupon.name}</h5> 
 						<h6 className="couponDescription"> {coupon.description} </h6>
-						<h6 className="expireDate"> Exp: {coupon.expirationDate.slice(0,10)} </h6>
+						<h6 className="expireDate"> <span className="expire">Exp:</span>{coupon.expirationDate.slice(0,10)} </h6>
 						<h6 className="viewMore"> View more </h6>
 					</FrontSide>
 				</Flippy>
