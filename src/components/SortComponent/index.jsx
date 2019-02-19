@@ -43,10 +43,14 @@ class SortComponent extends React.Component{
 					<div className="filter_sort_list" hidden= {this.state.sort_arrow} >By Recommended</div>
 				</div>
 				{SORT_CATEGORIES.map( category => <div key={category.displayName} className="filter_inside" hidden= {!this.state.sort_arrow}>
-					<input name="_filter" type="radio"
+					{/* <input name="_filter" type="radio"
 					onClick={() => this.updateChange(category.sortBy,category.sortOrder)} />
 					<label>
 						{category.displayName}
+					</label> */}
+					<label class="container"> {category.displayName}
+  						<input type="radio"  name="radio" onClick={() => this.updateChange(category.sortBy,category.sortOrder)}/>
+  						<span class="checkmark"></span>
 					</label>
 				</div>)}
 			</div>	
