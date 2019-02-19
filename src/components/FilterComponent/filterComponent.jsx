@@ -32,7 +32,7 @@ class FilterComponent extends React.Component{
 	updateChange = (array_filter,category) => {
 
 		let checkedFilters =array_filter
-
+		
 
 		if(array_filter.includes(category)){
 			checkedFilters = array_filter.filter(name => (name!==category))
@@ -52,12 +52,14 @@ class FilterComponent extends React.Component{
 
 	Filter_Category = () => {
         return(
-			this.props.categoriesAvailable.map((category,index) => <div key={index} className="filter_inside"
+					<div onClick={this.props.timerReset}>
+			{this.props.categoriesAvailable.map((category,index) => <div key={index} className="filter_inside"
 																	  hidden= {!this.state.filter_arrow}>
                 <input name="_filter" type="checkbox" onClick={(_) => this.updateChange(this.state.array_filter  ,category.displayName)}/>
-                <label> {category.displayName} </label>
-            </div>)
-        )
+                <label > {category.displayName} </label>
+            </div>)}
+						</div>
+						)
     }
 
 	
@@ -66,7 +68,7 @@ class FilterComponent extends React.Component{
             this.Image_up
         ];
 		return(
-			<div>
+			<div onClick={this.props.timerReset}>
 				<div className="filter_inside" hidden= {!this.state.sort_arrow}>
 					<input name="_filter" type="checkbox" defaultChecked/>
 						<label> Recommended </label>

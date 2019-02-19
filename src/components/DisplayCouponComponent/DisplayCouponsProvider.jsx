@@ -26,9 +26,9 @@ export const PopupTrigger = (props) => {
 export const LoadedCouponsSideBar = (props) => (
 	<Consumer>{
 		() => <div className="LoadedCoupons" hidden={props.hideNewCoupons}   >
-			<SearchCouponByName />
+			<SearchCouponByName timerReset={props.timerReset} />
 			<div onClick={props.timerReset}>
-				<CouponCards  />
+				<CouponCards  setRef={props}/>
 			</div>
 		</div>
 	}
@@ -43,8 +43,8 @@ export const SideBar = (props) => (
 				<ul>
 					<li> <a  className={props.activeNewCoupons} onClick={props.NewCoupons} > New Coupons </a></li>
 					<li> <a  className={props.activeLoadedCoupons} onClick={props.LoadedCoupons}> Loaded Coupons </a></li>
-					<FilterComponent/>
-					<SortComponent/>
+					<FilterComponent timerReset={props.timerReset}/>
+					<SortComponent timerReset={props.timerReset}/>
 				</ul>
 			
 		}
@@ -64,8 +64,9 @@ export const PrintComponent = (props) =>{
 	return(
 		<div className="printDiv">
 			<ReactToPrint
-				trigger={() => <button 	className="printButton" hidden={props.hideLoadedCoupons}>PRINT</button>}
-				content={() => props.parent.componentRef}
+			
+				trigger={() => <button 	className="printButton" hidden={true}>PRINT</button>}
+				content={() => props.componentRef}
 			/>
 		</div>
 	);

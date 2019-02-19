@@ -37,8 +37,15 @@ class Scanner extends React.Component {
 				]
 			},
 			locate: true
-		}, function(err) {
-			Quagga.start();
+		}, function() {
+			try{
+				Quagga.start();
+			}
+			catch(error){
+				// eslint-disable-next-line no-console
+				console.log("error")
+			}
+			
 		});
 		Quagga.onDetected(this._onDetected.bind(this));
 		Quagga.onProcessed(function(result) {

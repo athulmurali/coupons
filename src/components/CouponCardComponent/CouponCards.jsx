@@ -77,6 +77,7 @@ class CouponCards extends React.Component {
 
 					</BackSide>
 					<FrontSide 
+										
 										// ref = {el => this.flippy.toggle = el}
 										style={{
 						width: "260px",
