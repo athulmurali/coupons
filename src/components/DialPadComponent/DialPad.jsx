@@ -194,7 +194,7 @@ class DialPad extends Component {
 				<div style={{display: "flex",
 					justifyContent: "center"}}>
 					<PhoneNumberImage  phoneButton = {this.state.phoneButton} handlePhoneClick = {this.handlePhoneClick} slideImages = {slideImages} >
-						<phoneNumberComponent></phoneNumberComponent>
+						
 						<CardNuumberComponent cardButton = {this.state.cardButton} handleCardClick = {this.handleCardClick} slideImages={slideImages} />
 					</PhoneNumberImage>
 				</div>

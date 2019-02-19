@@ -36,7 +36,7 @@ class SortComponent extends React.Component{
             this.Sort_up
         ];
 		return (
-			<div>
+			<div onClick={this.props.timerReset}> 
 				<div className="filter_sort">
 					Sort
 					<img className="image_arrow" src={slideArrow_Sort[0]}  onClick={this.Sort}/>
