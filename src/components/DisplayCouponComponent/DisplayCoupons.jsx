@@ -42,7 +42,7 @@ class Coupons extends React.Component {
     this.tick();
   }
 	shouldComponentUpdate(){
-		if(this.state.count == 20 ){
+		if(this.state.count == 20 || this.state.count == 3 || this.state.count ==4){
 			return true
 		}
 		return false
@@ -61,6 +61,7 @@ class Coupons extends React.Component {
   }
 
   handleScreenTap = () => {
+		alert("as")
 		this.props.resetRedux()
   }
 
