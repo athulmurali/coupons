@@ -4,10 +4,12 @@ import "./DisplayCoupons.css";
 import Popup from "reactjs-popup";
 import Config from "../../config/config";
 import {connect} from "react-redux";
-import {updateCoupons} from "../../redux/actions/UserIdentification";
-import {displayCouponState} from "../../redux/actions/DisplayCouponAction";
+import AllCoupons, {LoadedCouponsSideBar, PrintComponent, SideBar, WelcomeHeader} from "./DisplayCouponsProvider";
+import {reset_all_redux} from "../../redux/actions/Common";
+import {ROUTE_HOME_PAGE} from "../../utils/RouteConstants";
+import {updateCoupons} from "../../redux/actions/DisplayCouponAction";
+import {updateLoaded} from "../../redux/actions/SearchSortFilter";
 
-import AllCoupons, { WelcomeHeader, PrintComponent, SideBar, LoadedCouponsSideBar } from "./DisplayCouponsProvider";
 class Coupons extends React.Component {
 	constructor(props){
         super(props);
@@ -19,7 +21,6 @@ class Coupons extends React.Component {
             activeLoadedCoupons: "inactive",
             logOutTrigger: false,
             logOutReload: false,
-
         };
   	}
 
@@ -28,13 +29,14 @@ class Coupons extends React.Component {
 			el.click();
 		};
 	}
-	
 
   componentWillUnmount () {
       clearInterval(this.timer);
+	  this.props.resetRedux();
   }
 
   componentDidMount () {
+    this.props.updateLoaded({loaded: false});
     this.startTimer();
     this.tick();
   }
@@ -53,50 +55,56 @@ class Coupons extends React.Component {
   }
 
   handleScreenTap = () => {
-    this.props.history.push(`/`);
+		this.props.resetRedux()
   }
 
   NewCoupons = () => {
-    this.setState({count : 0, hideNewCoupons : false, hideLoadedCoupons : true, activeNewCoupons : "active", activeLoadedCoupons : "inactive"});
-  }
-
-  LoadedCoupons = () => {
-    this.setState({count : 0, hideNewCoupons : true, hideLoadedCoupons : false, activeNewCoupons : "inactive", activeLoadedCoupons : "active"});
-  }
-
-  render() {
-		if(this.props.data.length<1) {
-			return <div>No Data Obtained</div>
+    this.props.updateLoaded({loaded: false});
+    this.props.updateCoupons({LoadedCouponsTrigger: false});
+    this.setState({count : 0, activeNewCoupons : "active", activeLoadedCoupons : "inactive", hideLoadedCoupons:true});
     }
 
-    let couponData = this.props.data;
-    let buttonTrigger = "";
-    let logOutPopUpTrigger = "";
-    let userName = "";
+  LoadedCoupons = () => {
+    this.props.updateLoaded({loaded: true});
+    this.props.updateCoupons({LoadedCouponsTrigger: true});
+    this.setState({count : 0, activeNewCoupons : "inactive", hideLoadedCoupons:false, activeLoadedCoupons : "active"});
+    }
 
-    if(couponData.length > 0) {
-      userName = couponData[0].FirstName;
+
+    render() {
+
+        if(!this.props.userInfo){
+        	this.props.history.push(ROUTE_HOME_PAGE)
+
 		}
-		if(this.state.count > Config.POPUPTIMER){
-			buttonTrigger = this.buttonClick;
-      if(this.state.count > Config.LOGOUTTIMER) {
-        this.handleScreenTap();
+
+        let couponData = this.props.allCoupons;
+        let buttonTrigger = "";
+        let logOutPopUpTrigger = "";
+        let userName = "";
+
+        if(couponData.length > 0) {
+            userName = this.props.userInfo.FirstName;
         }
-			}
-			if(this.state.logOutTrigger) {
-				logOutPopUpTrigger = this.buttonClick;
-				this.setState({logOutTrigger: false},
-					()=>{
-						this.setState({
-							count : 0
-						},
-						()=>{
-							this.setState({
-								logOutReload: true
-								});
-							});
-						});
-					}
+
+
+        if(this.state.count > Config.POPUPTIMER){
+            buttonTrigger = this.buttonClick;
+            if(this.state.count > Config.LOGOUTTIMER) {
+                this.handleScreenTap();
+            }
+        }
+
+        if(this.state.logOutTrigger) {
+            logOutPopUpTrigger = this.buttonClick;
+            this.setState({logOutTrigger: false},
+                ()=>{
+                    this.setState({count : 0},
+                        ()=>{
+                            this.setState({logOutReload: true});
+                        });
+                });
+        }
 
         if(this.state.logOutReload) {
             if (this.state.count > 3) {
@@ -139,35 +147,31 @@ class Coupons extends React.Component {
         </Popup> 	);
 
 
-        return (
-						<div>
-								<WelcomeHeader userName={userName} parent={this}></WelcomeHeader>
-								<Header/>
-								<PrintComponent hideLoadedCoupons={this.state.hideLoadedCoupons} componentRef={this.componentRef}></PrintComponent>
-								
-								<AllCoupons>
-									<SideBar activeNewCoupons={this.state.activeNewCoupons} NewCoupons={this.NewCoupons} />
-										{popUpLogout}
-										{sessionEndPopUp}
-										<LoadedCouponsSideBar hideNewCoupons={this.state.hideNewCoupons} timerReset={this.timerReset}></LoadedCouponsSideBar>
-                    </AllCoupons>
-            </div>
-        	);
-    	}
-}
+        return (<div>
+			    <WelcomeHeader userName={userName} parent={this}></WelcomeHeader>
+				<Header/>
+                <PrintComponent hideLoadedCoupons={this.state.hideLoadedCoupons} componentRef={this.componentRef}></PrintComponent>
+                <AllCoupons>
+                <SideBar activeNewCoupons={this.state.activeNewCoupons} activeLoadedCoupons={this.state.activeLoadedCoupons} NewCoupons={this.NewCoupons} LoadedCoupons={this.LoadedCoupons} />
+                    {popUpLogout}
+					{sessionEndPopUp}
+				<LoadedCouponsSideBar hideNewCoupons={this.state.hideNewCoupons} timerReset={this.timerReset}></LoadedCouponsSideBar>
+                </AllCoupons>
+            </div>);
+        }
+    }
 
 const mapStateToProps=(state)=>{
     return {
-        data : state.UserIdentification.couponDetails,
-        searchedCouponName: state.DisplayCouponStateUpdate.searchedCouponName,
+        userInfo : state.DisplayCouponsReducer.userInfo,
+        allCoupons: state.DisplayCouponsReducer.allCoupons
     }
-	}	
+	}
 
-const mapDispatchToProps = (dispatch) => (
-    {
-        displayCouponState : (updatedValue) => displayCouponState(dispatch, updatedValue),
-        updateCoupons :( updatedValue)=> updateCoupons(dispatch,  updatedValue )
+const mapDispatchToProps = (dispatch) => ({
+    resetRedux : ()=>reset_all_redux(dispatch),
+    updateCoupons: (updatedValue) => updateCoupons(dispatch, updatedValue),
+    updateLoaded: (updatedLoadedParams) => updateLoaded(dispatch, updatedLoadedParams)
 
-    }
-)
+})
 export default connect(mapStateToProps,mapDispatchToProps)(Coupons);

@@ -1,7 +1,8 @@
 import {combineReducers} from "redux";
 import AssistanceReducer from "./AssistanceReducer";
-import UserIdentification from "./UserIdentification";
-import DisplayCouponStateUpdate from "./DisplayCouponReducer";
+import SearchSortFilterReducer from "./SearchSortFilterReducer";
+import DisplayCouponsReducer from "./DisplayCouponReducer";
 
-const combinedReducers = combineReducers({  AssistanceReducer,UserIdentification, DisplayCouponStateUpdate});
-export default  combinedReducers;
+
+const combinedReducers = combineReducers({  AssistanceReducer,SearchSortFilterReducer,DisplayCouponsReducer});
+export default  combinedReducers

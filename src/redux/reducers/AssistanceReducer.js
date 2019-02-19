@@ -3,7 +3,8 @@
 // Notes:
 // To be made sure that the api response : _id or id
 
-import {RESET} from "./UserIdentification";
+
+import {RESET} from "./DisplayCouponReducer";
 
 export const TOGGLE_POP_UP = "TOGGLE_POP_UP"
 const initialState = {

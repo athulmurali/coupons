@@ -55,9 +55,9 @@
 	margin-bottom: 0em;
 	margin-top: 0em;
 }
+
 .status-block{
-	margin-block-start: 1em;
-	
+	text-align: center;	
 }
 #keyboard {
 	margin: 0;
