@@ -41,7 +41,12 @@ class Coupons extends React.Component {
     this.startTimer();
     this.tick();
   }
-
+	shouldComponentUpdate(){
+		if(this.state.count == 20 ){
+			return true
+		}
+		return false
+	}
   tick () {
     this.setState({count: (this.state.count + 1)});
 	}
