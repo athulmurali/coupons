@@ -67,11 +67,11 @@ export const FILTER_CATEGORIES = [
 		name: "Bakery"
 	},
 	{
-		displayName: "Beverages ",
+		displayName: "Beverages",
 		sequenceNumber: 2,
 		name: "Beverages"
-	}, {
-		displayName: "Breakfast ",
+	},  {
+		displayName: "Breakfast",
 		sequenceNumber: 3,
 		name: "Breakfast"
 	}, {
