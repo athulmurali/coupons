@@ -39,9 +39,7 @@ class AttractLoop extends Component {
         this.props.reset_all_redux();
     }
 
-  componentDidMount(){
-    this.props.history.push(`/`);
-  }
+
 
     render() {
 		

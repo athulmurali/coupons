@@ -414,7 +414,8 @@ input[type="checkbox"]:checked + label{
 
 
  li button {
-	/* background-color: #E0004D; */
+	 border: none;
+	 background-color: white;
 	color: white;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 	width: 100%;
@@ -427,7 +428,8 @@ input[type="checkbox"]:checked + label{
  }
  
  li button.active {
-	background-color: #E0004D;
+	 border: none;
+	 background-color: #E0004D;
 	color: white;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 	width: 100%;
