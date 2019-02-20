@@ -17,8 +17,6 @@ class Coupons extends React.Component {
             count: 0,
             hideLoadedCoupons: true,
             hideNewCoupons: false,
-            activeNewCoupons: "active",
-            activeLoadedCoupons: "inactive",
             logOutTrigger: false,
             logOutReload: false,
 				};
@@ -66,21 +64,20 @@ class Coupons extends React.Component {
 
   NewCoupons = () => {
     this.props.updateLoaded({loaded: false});
-    this.props.updateCoupons({LoadedCouponsTrigger: false});
-    this.setState({count : 0, activeNewCoupons : "active", activeLoadedCoupons : "inactive", hideLoadedCoupons:true});
+    // this.props.updateCoupons({LoadedCouponsTrigger: false});
+    this.setState({count : 0,  hideLoadedCoupons:true});
     }
 
   LoadedCoupons = () => {
     this.props.updateLoaded({loaded: true});
-    this.props.updateCoupons({LoadedCouponsTrigger: true});
-    this.setState({count : 0, activeNewCoupons : "inactive", hideLoadedCoupons:false, activeLoadedCoupons : "active"});
+    // this.props.updateCoupons({LoadedCouponsTrigger: true});
+    this.setState({count : 0,  hideLoadedCoupons:false});
     }
 	setRef = (ref) => {
 		this.inputRef = ref;
 	}
 
     render() {
-				console.log(this.state.count)
         if(!this.props.userInfo){
         	this.props.history.push(ROUTE_HOME_PAGE)
 

@@ -4,6 +4,7 @@ import Flippy, {BackSide, FrontSide} from "react-flippy";
 import {updateCoupons} from "../../redux/actions/DisplayCouponAction";
 import PlusIcon from "../../assets/addNew.svg";
 import LogOut_Success from "../../assets/addedNew.svg";
+import {CouponsTypeEnum} from "../../config/config";
 let loadedSet = new Set([]);
 let x = [];
 
@@ -38,13 +39,14 @@ class CouponCards extends React.Component {
 	render() {
 		let coupons = this.props.allCoupons
 		let couponsLength = coupons.length;
+
 		this.props.updateCoupons({"searchedCouponsLength": couponsLength});
 
 		if(couponsLength === 0) {
 			return <div> No Coupons Found </div>;
 		}
 
-		if(this.props.LoadedCouponsTrigger){
+		if(this.props.loaded){
 			coupons = coupons.concat(this.state.tempLoadedCoupons);
 			couponsLength = coupons.length;
 			this.props.updateCoupons({"searchedCouponsLength": couponsLength});
@@ -107,6 +109,7 @@ const mapStateToProps=(state)=>{
 	return {
 		allCoupons :state.DisplayCouponsReducer.allCoupons,
 		LoadedCouponsTrigger: state.DisplayCouponsReducer.LoadedCouponsTrigger,
+		loaded: state.SearchSortFilterReducer.loaded.loaded
 
 	};
 };

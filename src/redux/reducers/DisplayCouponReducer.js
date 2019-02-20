@@ -10,8 +10,10 @@ const initialState = {
 	LoadedCouponsTrigger: false,
 	userInfo: null,
 	allCoupons: [],
-	searchedCouponsLength: "",
+	searchedCouponsLength: 0,
 	loadedCouponIds: [],
+	activeNewCoupons: "active",
+	activeLoadedCoupons: "inactive",
 };
 
 

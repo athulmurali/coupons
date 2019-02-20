@@ -14,6 +14,7 @@ class UserIdentification extends Component{
 		}
 		componentDidMount = () => {
 			sessionStorage.setItem('token',true);
+
 		}
 
     render(){

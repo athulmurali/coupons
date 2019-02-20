@@ -8,14 +8,15 @@ import Config from '../config/config';
 
 
 class AttractLoop extends React.Component {
-  
+
+  componentWillMount() {
+  }
+
   handleScreenTap = () => {
     this.props.history.push(`/userIdentification`);
   };
 
-  componentWillMount() {
-    window.location.reload();
-  }
+
 
   render() {
     const Image_coupon1 = require('../assets/coupons-attract-Images-03.png');
