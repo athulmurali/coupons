@@ -39,12 +39,12 @@ class Coupons extends React.Component {
     this.startTimer();
     this.tick();
   }
-	// shouldComponentUpdate(){
-	// 	if(this.state.count == 20 || this.state.count == 3 || this.state.count == 4){
-	// 		return true
-	// 	}
-	// 	return false
-	// }
+	shouldComponentUpdate(){
+		if(this.state.logOutTrigger  || this.state.logOutReload || this.state.count === 20 || this.state.count >= 30){
+			return true
+		}
+		return false
+	}
   tick () {
     this.setState({count: (this.state.count + 1)});
 	}
@@ -71,6 +71,7 @@ class Coupons extends React.Component {
     this.props.updateLoaded({loaded: true});
     this.setState({count : 0});
     }
+
 	setRef = (ref) => {
 		this.inputRef = ref;
 	}

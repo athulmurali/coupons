@@ -73,7 +73,7 @@ class CouponCards extends React.Component {
 						<h5 className="couponTitle"> {coupon.title}</h5> 
 						<h5 className="couponName"> {coupon.name}</h5> 
 						<h6 className="couponDescription"> {coupon.description} </h6>
-						{/* <h6 className="legalText"> {coupon.legalText} </h6> */}
+						<h6 className="legalText"> {coupon.legalText} </h6>
 						<h6 className="viewMore"> View less </h6>
 
 					</BackSide>

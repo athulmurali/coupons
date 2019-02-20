@@ -182,7 +182,7 @@ input[type="checkbox"]:checked + label{
 	font-size: 16px;
 	font-weight: bold;
 	/* min-height: 60px; */
-	bottom: 50px;
+	bottom: 45px;
 	font-size: 14px;
 	font-weight: bold;
 	position: absolute;
@@ -469,7 +469,7 @@ input[type="checkbox"]:checked + label{
 	color: #63666A;
 	font-size: 22px;
 	font-weight: bold;
-	min-height: 30px;
+	min-height: 25px;
 }
 
 .couponName{
@@ -478,7 +478,18 @@ input[type="checkbox"]:checked + label{
 	color: #63666A;
 	font-size: 18px;
 	font-weight: bold;
-	min-height: 30px;
+	min-height: 36px;
+}
+
+.legalText {
+	padding: 0;
+	margin-top: 14px;
+	text-align: left;
+	color: grey;
+	font-size: 18px;
+	font-weight: normal;
+	max-height: 124px;
+	overflow: hidden;
 }
 
 .expire{
