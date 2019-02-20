@@ -14,7 +14,7 @@ class FilterComponent extends React.Component{
 	}
 
 
-	componentWillMount() {}
+	// componentWillMount() {}
 
 
 	Filter = () => {

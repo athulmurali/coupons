@@ -114,7 +114,6 @@ class Coupons extends React.Component {
             }
 				}
 				const LogOut_Success = require("../../assets/success.svg");
-				const Search_Icon = require("../../assets/new-filter-search.png");
         let popUpLogout = (<Popup trigger={<button ref = {logOutPopUpTrigger}  className="button" ></button>} true modal>
             {close => (
                 <div className="modal">

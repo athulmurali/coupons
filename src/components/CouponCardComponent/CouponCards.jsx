@@ -25,9 +25,7 @@ class CouponCards extends React.Component {
 			loadedSet.add(coupon._id);
 			x.push(coupon);
 			this.setState({tempLoadedCoupons : x});
-			// localStorage.setItem("LoadedCoupons", this.state.values);
 			this.props.updateCoupons({loadedCouponIds: loadedSet});
-			console.log(loadedSet);
 		}
 		else if(coupon.loaded === false){
 			coupon.loaded = true;
@@ -39,8 +37,8 @@ class CouponCards extends React.Component {
 	render() {
 		let coupons = this.props.allCoupons
 		let couponsLength = coupons.length;
-
 		this.props.updateCoupons({"searchedCouponsLength": couponsLength});
+
 
 		if(couponsLength === 0) {
 			return <div> No Coupons Found </div>;
@@ -109,7 +107,8 @@ const mapStateToProps=(state)=>{
 	return {
 		allCoupons :state.DisplayCouponsReducer.allCoupons,
 		LoadedCouponsTrigger: state.DisplayCouponsReducer.LoadedCouponsTrigger,
-		loaded: state.SearchSortFilterReducer.loaded.loaded
+		loaded: state.SearchSortFilterReducer.loaded.loaded,
+		searchedCouponsLength: state.DisplayCouponsReducer.searchedCouponsLength
 
 	};
 };

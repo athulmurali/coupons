@@ -45,7 +45,6 @@ const SideBarComp = (props) => (
 
 					<li> <a  className={!props.loaded ? "active" : "inactive"}
 							 onClick={props.NewCoupons} > New Coupons </a></li>
-
 					<li> <a  className={props.loaded ? "active" : "inactive"} onClick={props.LoadedCoupons}> Loaded Coupons </a></li>
 					<SortComponent timerReset={props.timerReset}/>
 					<FilterComponent timerReset={props.timerReset}/>
