@@ -1,4 +1,4 @@
-.container {
+.SortFilterContainer {
     display: block;
     position: relative;
     padding-left: 26px;
@@ -12,7 +12,7 @@
 }
 
 /* Hide the browser's default radio button */
-.container input {
+.SortFilterContainer input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -31,12 +31,12 @@
 }
 
 /* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
+.SortFilterContainer:hover input ~ .checkmark {
     background-color: #ccc;
 }
 
 /* When the radio button is checked, add a blue background */
-.container input:checked ~ .checkmark {
+.SortFilterContainer input:checked ~ .checkmark {
     background-color: #E0004D;
 }
 
@@ -48,12 +48,12 @@
 }
 
 /* Show the indicator (dot/circle) when checked */
-.container input:checked ~ .checkmark:after {
+.SortFilterContainer input:checked ~ .checkmark:after {
     display: block;
 }
 
 /* Style the indicator (dot/circle) */
-.container .checkmark:after {
+.SortFilterContainer .checkmark:after {
     top: 5px;
     left: 5px;
     width: 8px;
@@ -68,17 +68,15 @@
     height: 17px;
     margin-right: 15px;
 }
-
-.image_arrow:focus {
+.image_arrow:focus{
     outline: 0;
 }
 
-.filter_sort_list {
+.filter_sort_list{
     font-size: 14px;
     color: #E0004D;
     padding: 5px 0px;
 }
-
 input[type="checkbox"] {
     flex-shrink: 0;
     -webkit-appearance: none;
@@ -90,18 +88,20 @@ input[type="checkbox"] {
     border: 1px solid #63666A;
     display: -webkit-inline-flex;
     margin: 0.5em 0.7em 0.6em 0.5em;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
-
-input:checked {
+input:checked{
     background-color: #E0004D;
     border: 1px solid #E0004D;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
-input[type="checkbox"]:checked + label {
+input[type="checkbox"]:checked + label{
     color: #E0004D;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
-.filter_sort {
+.filter_sort{
     font-weight: bold;
     margin: 15px 10px 0px;
     color: #63666A;
@@ -110,18 +110,21 @@ input[type="checkbox"]:checked + label {
     background: #FBFBFB;
     min-height: 44px;
     cursor: pointer;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
-.filter_inside {
+
+.filter_inside{
     color: #63666A;
-    margin: 0px 10px 0px;
+    margin: 0px 10px 0px ;
     border: 1.3px #ECECEC solid;
     padding: 12px 10px 15px;
-    background: #FBFBFB;
+    background-color: #FBFBFB;
     font-size: smaller;
     font-weight: 500;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
+
 
 .Cards {
     display: inline-table;
@@ -129,13 +132,13 @@ input[type="checkbox"]:checked + label {
     text-align: center;
     margin-top: 19px;
     height: 399px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .2);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,.2);
     width: 260px;
     background-color: white;
     align-items: flex-start;
     cursor: pointer;
     word-wrap: normal;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .2);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,.2);
 }
 
 
@@ -143,7 +146,7 @@ input[type="checkbox"]:checked + label {
     word-break: break-word;
 }
 
-span {
+span{
     color: black;
 }
 
@@ -167,7 +170,8 @@ h6.couponDescription {
     color: grey;
     font-size: 18px;
     font-weight: normal;
-    min-height: 50px;
+    max-height: 124px;
+    overflow: hidden;
 }
 
 h6.expireDate {
@@ -176,12 +180,15 @@ h6.expireDate {
     text-align: left;
     color: grey;
     font-size: 16px;
-    font-weight: normal;
-    min-height: 20px;
-    bottom: 30px;
+    font-weight: bold;
+    /* min-height: 60px; */
+    bottom: 45px;
+    font-size: 14px;
+    font-weight: bold;
+    position: absolute;
 }
 
-h6.viewMore {
+h6.viewMore{
     padding: 0;
     margin: 3px;
     text-align: left;
@@ -196,7 +203,7 @@ h6.viewMore {
     text-decoration: underline;
 }
 
-.expText {
+.expText{
     text-decoration: underline;
 }
 
@@ -301,13 +308,11 @@ h6.viewMore {
     text-align: center;
     color: gray;
 }
-
 .logOutMessage2 {
     text-align: center;
     color: gray;
     font-weight: normal;
 }
-
 .modal {
     padding: 50px;
 }
@@ -319,14 +324,14 @@ h6.viewMore {
 
 .popupHeader {
     font-family: sans-serif;
-    color: grey;
+    color:grey;
     margin: 0;
     margin-bottom: 10px;
 }
 
 .popupMessage {
     font-family: sans-serif;
-    color: grey;
+    color:grey;
     margin: 0;
     margin-bottom: 10px;
     padding-left: 3px;
@@ -339,9 +344,9 @@ h6.viewMore {
 }
 
 .in {
-    animation: fill 5s linear 1;
+    animation: fill 10s linear 1;
     height: 100%;
-    background-color: #E0004D;
+    background-color:#E0004D;
 }
 
 @keyframes fill {
@@ -366,7 +371,7 @@ h6.viewMore {
     margin-left: 40px;
     font-size: 16px;
     font-weight: bold;
-    color: gray;
+    color:gray;
 }
 
 .buttons:hover {
@@ -379,7 +384,7 @@ h6.viewMore {
     margin-top: 0;
     display: flex;
     width: 100%;
-    height: 100% vh;
+    height: 100%vh;
 }
 
 ul {
@@ -389,74 +394,79 @@ ul {
     width: 100%;
     max-width: 230px;
     background-color: white;
-    height: 100% vh;
+    height: 100%vh;
     border: 2px solid lightgrey;
 }
 
-/* Old css list lags and anchor tags*/
-li a {
+.tabActive{
     display: flex;
-    color: #000;
+    color: white;
     text-decoration: none;
     height: 40px;
     font-weight: bold;
-    padding: 20px 10px 0px 15px;
+    padding: 20px 10px 40px 10px;
     cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    background-color: #E0004D;
+    width:100%;
+    font-weight: bold;
+    font-size: 17px;
+    border: none;
 
 }
 
-li a.active {
+.tabActive:active{
+    outline: 0;
+}
+
+
+.tabInactive{
+    display: flex;
+    color: black;
+    text-decoration: none;
+    height: 40px;
+    font-weight: bold;
+    padding: 20px 10px 40px 10px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    background-color: white;
+    width:100%;
+    font-weight: bold;
+    font-size: 17px;
+    border: none;
+}
+
+button:focus{
+    outline: 0;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+input:focus{
+    outline: 0;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.tabInactive:active {
+    outline: 0;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.tabInactive:hover{
     background-color: #E0004D;
     color: white;
+}
+
+/* li a.active {
+   background-color: #E0004D;
+   color: white;
+   -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 
 li a:hover:not(.active) {
-    background-color: #E0004D;
-    color: white;
-}
-
-/* Old css list lags and anchor tags*/
-
-
-li button {
-    border: none;
-    background-color: white;
-    color: white;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    width: 100%;
-    padding: 10px;
-    height: 60px;
-    font-size: 17px;
-    color: black;
-    text-align: left;
-    font-weight: bold;
-}
-
-li button.active {
-    border: none;
-    background-color: #E0004D;
-    color: white;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    width: 100%;
-    padding: 10px;
-    height: 60px;
-    font-size: 17px;
-}
-
-li button.active:focus {
-    outline: 0;
-}
-
-li button:focus {
-    outline: 0;
-}
-
-
-li button:hover:not(.active) {
-    background-color: #E0004D;
-    color: white;
-}
+   background-color: #E0004D;
+   color: white;
+} */
 
 .LoadedCoupons {
     color: grey;
@@ -469,7 +479,7 @@ li button:hover:not(.active) {
     padding-left: 24px;
     padding-bottom: 100px;
     cursor: pointer;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 
@@ -500,25 +510,43 @@ li button:hover:not(.active) {
     bottom: 33px;
 }
 
-.couponTitle {
+.couponTitle{
     margin: 4px;
     text-align: left;
     color: #63666A;
     font-size: 22px;
     font-weight: bold;
-    min-height: 30px;
+    min-height: 25px;
 }
-
-.couponName {
+.couponCategory {
     margin: 4px;
     text-align: left;
     color: #63666A;
     font-size: 18px;
     font-weight: bold;
-    min-height: 30px;
+    min-height: 20px;
+}
+.couponName{
+    margin: 4px;
+    text-align: left;
+    color: #63666A;
+    font-size: 18px;
+    font-weight: bold;
+    min-height: 36px;
 }
 
-.expire {
+.legalText {
+    padding: 0;
+    margin-top: 14px;
+    text-align: left;
+    color: grey;
+    font-size: 18px;
+    font-weight: normal;
+    max-height: 124px;
+    overflow: hidden;
+}
+
+.expire{
     padding: 0;
     margin: 3px;
     text-align: left;
