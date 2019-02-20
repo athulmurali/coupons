@@ -161,3 +161,6 @@ export const SORT_CATEGORIES = [
 
 
 export const CouponsTypeEnum = Object.freeze({LOADED: "LOADED", ALL: "ALL"});
+
+export const DEFAULT_SORT = SORT_CATEGORIES[0];
+export const LOADED_DEFAULT = false;

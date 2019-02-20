@@ -26,8 +26,8 @@ class SortComponent extends React.Component{
 			this.Sort_up = require('../../assets/new-filter-arrow-up.svg');
         }
 	}
-	updateChange = ( sortBy, sortOrder) =>{
-		this.props.updateSort({sortBy,sortOrder})
+	updateChange = ( sortBy, sortOrder,displayName) =>{
+		this.props.updateSort({sortBy,sortOrder,displayName})
 
 	}
 
@@ -40,11 +40,12 @@ class SortComponent extends React.Component{
 				<div className="filter_sort">
 					Sort
 					<img className="image_arrow" alt="Sort expansion filter" src={slideArrow_Sort[0]}  onClick={this.Sort}/>
-					<div className="filter_sort_list" hidden= {this.state.sort_arrow} >By Recommended</div>
+					<div className="filter_sort_list" hidden= {this.state.sort_arrow} >{this.props.selectedSortOption.displayName}</div>
 				</div>
-				{SORT_CATEGORIES.map( category => <div key={category.displayName} className="filter_inside" hidden= {!this.state.sort_arrow}>
+				{SORT_CATEGORIES.map( (category,index )=> <div key={index} className="filter_inside" hidden= {!this.state.sort_arrow}>
 					<label className="SortFilterContainer"> {category.displayName}
-  						<input type="radio"  name="radio" onClick={() => this.updateChange(category.sortBy,category.sortOrder)}/>
+  						<input type="radio"  name="radio" onClick={() => this.updateChange(category.sortBy,category.sortOrder, category.displayName)}
+							   checked={this.props.selectedSortOption.displayName === category.displayName }/>
   						<span className="checkmark"></span>
 					</label>
 				</div>)}
@@ -54,7 +55,9 @@ class SortComponent extends React.Component{
 		)
 	}
 }
-const mapStateToProps = (_) =>({})
+const mapStateToProps = (state) =>({
+	selectedSortOption :state.SearchSortFilterReducer.sort
+})
 const mapDispatcherToProps = (dispatch) => {
 	return {
 

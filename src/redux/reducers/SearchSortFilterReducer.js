@@ -1,4 +1,4 @@
-import Config, {CouponsTypeEnum, FILTER_CATEGORIES} from "../../config/config";
+import Config, {CouponsTypeEnum, DEFAULT_SORT, FILTER_CATEGORIES, LOADED_DEFAULT} from "../../config/config";
 
 import {RESET} from "./DisplayCouponReducer";
 
@@ -16,11 +16,11 @@ export const FETCH_CATEGORIES = "FETCH_CATEGORIES";
 export const FETCH_CATEGORIES_PENDING = FETCH_CATEGORIES + "_PENDING";
 export const FETCH_CATEGORIES_REJECTED = FETCH_CATEGORIES + "_REJECTED";
 export const FETCH_CATEGORIES_FULFILLED = FETCH_CATEGORIES + "_FULFILLED";
-export const LOADED_DEFAULT = false;
 
 const initialState = {
 	couponsType: CouponsTypeEnum.LOADED,
 	toBeFetched: false,
+	sort:{...DEFAULT_SORT},
 	filters: {},
 	search: {},
 	arr: [],
