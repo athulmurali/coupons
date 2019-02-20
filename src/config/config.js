@@ -70,7 +70,7 @@ export const FILTER_CATEGORIES = [
 		displayName: "Beverages",
 		sequenceNumber: 2,
 		name: "Beverages"
-	}, {
+	},  {
 		displayName: "Breakfast",
 		sequenceNumber: 3,
 		name: "Breakfast"
