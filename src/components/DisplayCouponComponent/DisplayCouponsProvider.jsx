@@ -5,6 +5,8 @@ import FilterComponent from "../FilterComponent/filterComponent";
 import SearchCouponByName from "../SearchComponent/SearchCoupon";
 import CouponCards from "../CouponCardComponent/CouponCards";
 import Popup from "reactjs-popup";
+import {connect} from "react-redux";
+
 const context = React.createContext();
 const {Provider,Consumer} = context;
 
@@ -14,7 +16,7 @@ export const PopupTrigger = (props) => {
 		(<Popup trigger={<button ref = {props.logOutPopUpTrigger}  className="button" ></button>} true modal>
 			{close => (
 				<div className="modal">
-					<img className="logOutImage" src={props.LogOut_Success}></img>
+					<img className="logOutImage" alt="logout success" src={props.LogOut_Success}></img>
 					<h1 className="logOutMessage1"> Enjoy your savings!</h1>
 					<h4 className="logOutMessage2">You have been successfully logged out. <br/> See you soon!</h4>
 				</div>)}
@@ -32,24 +34,29 @@ export const LoadedCouponsSideBar = (props) => (
 			</div>
 		</div>
 	}
-	
 	</Consumer>
 );
 
-export const SideBar = (props) => (
+const SideBarComp = (props) => (
 	<Consumer>
 		{
-			() => 
+			() =>
 				<ul>
-					<li> <a  className={props.activeNewCoupons} onClick={props.NewCoupons} > New Coupons </a></li>
-					<li> <a  className={props.activeLoadedCoupons} onClick={props.LoadedCoupons}> Loaded Coupons </a></li>
-					<FilterComponent timerReset={props.timerReset}/>
+
+					<li> <button  className={props.loaded ? "tabInactive" : "tabActive"}
+							 onClick={props.NewCoupons} > New Coupons </button></li>
+					<li> <button  className={props.loaded ? "tabActive" : "tabInactive"} onClick={props.LoadedCoupons}> Loaded Coupons </button></li>
 					<SortComponent timerReset={props.timerReset}/>
+					<FilterComponent timerReset={props.timerReset}/>
 				</ul>
-			
+
 		}
-	</Consumer>	
+	</Consumer>
 );
+
+const mapStateToProps=(state)=> ({	loaded :  state.SearchSortFilterReducer.loaded.loaded})
+
+export const SideBar =connect(mapStateToProps,null)(SideBarComp)
 
 
 export const WelcomeHeader = (props) =>{
@@ -73,9 +80,6 @@ export const PrintComponent = (props) =>{
 };
 
 export default class AllCoupons extends Component{
-	// state={
-
-	// };
 	render(){
 		return(
 			<Provider>

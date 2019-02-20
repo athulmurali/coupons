@@ -36,13 +36,10 @@ class AttractLoop extends Component {
     this.props.history.push(ROUTE_USER_IDENTIFICATION);
 	};
 	componentWillMount() {
-        this.props.history.push(`/`);
         this.props.reset_all_redux();
     }
 
-  componentDidMount(){
-    this.props.history.push(`/`);
-  }
+
 
     render() {
 		

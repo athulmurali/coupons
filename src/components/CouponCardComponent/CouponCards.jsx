@@ -24,9 +24,7 @@ class CouponCards extends React.Component {
 			loadedSet.add(coupon._id);
 			x.push(coupon);
 			this.setState({tempLoadedCoupons : x});
-			// localStorage.setItem("LoadedCoupons", this.state.values);
 			this.props.updateCoupons({loadedCouponIds: loadedSet});
-			console.log(loadedSet);
 		}
 		else if(coupon.loaded === false){
 			coupon.loaded = true;
@@ -40,11 +38,12 @@ class CouponCards extends React.Component {
 		let couponsLength = coupons.length;
 		this.props.updateCoupons({"searchedCouponsLength": couponsLength});
 
+
 		if(couponsLength === 0) {
 			return <div> No Coupons Found </div>;
 		}
 
-		if(this.props.LoadedCouponsTrigger){
+		if(this.props.loaded){
 			coupons = coupons.concat(this.state.tempLoadedCoupons);
 			couponsLength = coupons.length;
 			this.props.updateCoupons({"searchedCouponsLength": couponsLength});
@@ -54,8 +53,6 @@ class CouponCards extends React.Component {
 				
 				<Flippy flipOnHover={false} // default false
 					flipOnClick={true} // default false
-					flipOnHover={false} // default false
-					// isFlipped = {this.state.flipcheck}
 					flipDirection="horizontal" // horizontal or vertical
 					ref={(r) => this.flippy = r} // to use toggle method like this.flippy.toggle()
 					style={{
@@ -72,10 +69,10 @@ class CouponCards extends React.Component {
 					}} >
 						<h5 className="couponTitle"> {coupon.title}</h5> 
 						<h5 className="couponName"> {coupon.name}</h5> 
+						<h5 className="couponCategory"> {coupon.couponCategory}</h5> 
 						<h6 className="couponDescription"> {coupon.description} </h6>
-						{/* <h6 className="legalText"> {coupon.legalText} </h6> */}
+						<h6 className="legalText"> {coupon.legalText} </h6>
 						<h6 className="viewMore"> View less </h6>
-
 					</BackSide>
 					<FrontSide 
 										
@@ -107,6 +104,8 @@ const mapStateToProps=(state)=>{
 	return {
 		allCoupons :state.DisplayCouponsReducer.allCoupons,
 		LoadedCouponsTrigger: state.DisplayCouponsReducer.LoadedCouponsTrigger,
+		loaded: state.SearchSortFilterReducer.loaded.loaded,
+		searchedCouponsLength: state.DisplayCouponsReducer.searchedCouponsLength
 
 	};
 };

@@ -58,68 +58,79 @@ export default config;
 
 export const FILTER_CATEGORIES = [
 	{
-		displayName: "Bakery",
+		displayName: "Baby & ChildCare",
 		sequenceNumber: 0,
+		name: "Baby & ChildCare"
+	}, {
+		displayName: "Bakery",
+		sequenceNumber: 1,
 		name: "Bakery"
 	},
 	{
-		displayName: "Beverages ",
-		sequenceNumber: 1,
-		name: "Bakery"
+		displayName: "Beverages",
+		sequenceNumber: 2,
+		name: "Beverages"
+	}, {
+		displayName: "Breakfast",
+		sequenceNumber: 3,
+		name: "Breakfast"
 	}, {
 		displayName: "Condiments & Sauces",
-		sequenceNumber: 2,
-		name: "Bakery"
+		sequenceNumber: 4,
+		name: "Condiments & Sauces"
 	},
 	{
 		displayName: "Dairy",
-		sequenceNumber: 3,
-		name: "Bakery"
+		sequenceNumber: 5,
+		name: "Dairy"
 	}, {
 		displayName: "Ethnic Products",
-		sequenceNumber: 4,
-		name: "Bakery"
+		sequenceNumber: 6,
+		name: "Ethnic Products"
 	},
 	{
 		displayName: "Frozen Food",
-		sequenceNumber: 5,
-		name: "Bakery"
-	}, {
-		displayName: "Soups & Canned Goods",
-		sequenceNumber: 6,
-		name: "Bakery"
-	},
-	{
-		displayName: "Snacks",
 		sequenceNumber: 7,
-		name: "Bakery"
-	}, {
-		displayName: "Pet Care",
-		sequenceNumber: 8,
-		name: "Bakery"
+		name: "Frozen Food"
 	},
 	{
-		displayName: "Personal Care",
-		sequenceNumber: 9,
-		name: "Bakery"
-	}, {
-		displayName: "Meat & Seafood",
-		sequenceNumber: 10,
-		name: "Bakery"
+		displayName: "Health & Wellness",
+		sequenceNumber: 8,
+		name: "Health & Wellness"
 	},
 	{
 		displayName: "Household",
-		sequenceNumber: 11,
-		name: "Bakery"
-	}, {
-		displayName: "Health & Wellness",
-		sequenceNumber: 12,
-		name: "Bakery"
+		sequenceNumber: 9,
+		name: "Household"
 	},
 
 
+	{
+		displayName: "Meat & Seafood",
+		sequenceNumber: 10,
+		name: "Meat & Seafood"
+	},
+	{
+		displayName: "Personal Care",
+		sequenceNumber: 11,
+		name: "Personal Care"
+	}, {
+		displayName: "Pet Care",
+		sequenceNumber: 12,
+		name: "Pet Care"
+	},
+	{
+		displayName: "Snacks",
+		sequenceNumber: 13,
+		name: "Snacks"
+	},
+	{
+		displayName: "Soups & Canned Goods",
+		sequenceNumber: 14,
+		name: "Soups & Canned Goods"
+	}
 ];
-const SORT_ODERS = Object.freeze({
+const SORT_ORDERS = Object.freeze({
 	ASC: "asc",
 	DESC: "desc"
 });
@@ -128,25 +139,28 @@ export const SORT_CATEGORIES = [
 	{
 		displayName: "Redeem By Date",
 		sortBy: "expirationDate",
-		sortOrder: SORT_ODERS.ASC
+		sortOrder: SORT_ORDERS.ASC
 	},
 	{
 		displayName: "Value(Low to High)",
 		sortBy: "price",
-		sortOrder: SORT_ODERS.ASC
+		sortOrder: SORT_ORDERS.ASC
 	},
 	{
 		displayName: "Value(High to Low)",
 		sortBy: "price",
-		sortOrder: SORT_ODERS.DESC
+		sortOrder: SORT_ORDERS.DESC
 	},
 	{
 		displayName: "Brand",
 		sortBy: "name",
-		sortOrder: SORT_ODERS.ASC
+		sortOrder: SORT_ORDERS.ASC
 	},
 
 ];
 
 
 export const CouponsTypeEnum = Object.freeze({LOADED: "LOADED", ALL: "ALL"});
+
+export const DEFAULT_SORT = SORT_CATEGORIES[0];
+export const LOADED_DEFAULT = false;

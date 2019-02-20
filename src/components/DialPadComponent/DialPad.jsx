@@ -4,9 +4,9 @@ import "./DialPad.css";
 import Config from "../../config/config";
 import AssistancePopUpComponent from "../AssitancePopUpComponent/AssistancePopUpComponent";
 import {connect} from "react-redux";
-import {ROUTE_DISPLAY_COUPONS} from "../../utils/RouteConstants";
+import {ROUTE_DISPLAY_COUPONS, ROUTE_HOME_PAGE} from "../../utils/RouteConstants";
 import {updateCoupons} from "../../redux/actions/DisplayCouponAction";
-import {CardNuumberComponent, input, InputText, KeyBoard, PhoneNumberImage} from "./KeyBoard";
+import {CardNuumberComponent, InputText, KeyBoard, PhoneNumberImage} from "./KeyBoard";
 import {MessageDisplay} from "../../utils/App";
 
 
@@ -50,18 +50,8 @@ class DialPad extends Component {
 			}
 			console.log(this.extractNumberFromFormat);
 			const response = await API.getUserDetails(this.extractNumberFromFormat);
-
-			this.couponsDetails.push(response.data.response.Customer[0]);
-			const barCodeNumber = response.data.response.Customer[0].ID[0].attributes.Value;
-			const couponsDetails = await API.getUserCoupons(barCodeNumber);
-			const couponDetailsArray = couponsDetails.data.response;
-
-			this.couponsDetails.push(couponDetailsArray);
-			this.props.updateCoupons({
-				// allCoupons: couponDetailsArray,
-				userInfo: response.data.response.Customer[0]
-			});
-			this.props.history.push(ROUTE_DISPLAY_COUPONS);
+			const userInfo = response.data.response.Customer[0]
+			this.props.updateCoupons({userInfo: userInfo});
 		} catch (error) {
 			console.log(error);
 			this.setErrorMessage();
@@ -147,7 +137,7 @@ class DialPad extends Component {
 	}
 
 	handleScreenTap = () => {
-		this.props.history.push(`/`);
+		this.props.history.push(ROUTE_HOME_PAGE);
 	};
 	handlePhoneClick = () => {
 		this.setState({
@@ -177,6 +167,11 @@ class DialPad extends Component {
 	};
 
 	render() {
+
+		if(this.props.userInfo ){
+			this.props.history.push(ROUTE_DISPLAY_COUPONS);
+		}
+
 
 		const slideImages = [
 			this.Image_card,
