@@ -471,7 +471,14 @@ input[type="checkbox"]:checked + label{
 	font-weight: bold;
 	min-height: 25px;
 }
-
+.couponCategory {
+	margin: 4px;
+	text-align: left;
+	color: #63666A;
+	font-size: 18px;
+	font-weight: bold;
+	min-height: 20px;
+}
 .couponName{
 	margin: 4px;
 	text-align: left;
