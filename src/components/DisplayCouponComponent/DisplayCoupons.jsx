@@ -86,7 +86,7 @@ class Coupons extends React.Component {
         let logOutPopUpTrigger = "";
         let userName = "";
 
-        if(couponData.length > 3) {
+        if(!!this.props.userInfo) {
             userName = this.props.userInfo.FirstName;
         }
 
