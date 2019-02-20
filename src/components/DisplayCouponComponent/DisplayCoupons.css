@@ -1,46 +1,392 @@
-.AllCoupons{
-	margin-top: 0;
-	display: flex;
-	width: 100%;
-	height: 100%vh;
+.SortFilterContainer {
+  display: block;
+  position: relative;
+	padding-left: 26px;
+	padding-top: 2px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.SortFilterContainer input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 18px;
+  width: 18px;
+  background-color: #eee;
+  border-radius: 50%;
+  
+}
+
+/* On mouse-over, add a grey background color */
+.SortFilterContainer:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.SortFilterContainer input:checked ~ .checkmark {
+  background-color: #E0004D;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.SortFilterContainer input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.SortFilterContainer .checkmark:after {
+ 	top: 5px;
+	left: 5px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: white;
+}
+
+.image_arrow {
+	float: right;
+	width: 17px;
+	height: 17px;
+	margin-right: 15px;
+}
+.image_arrow:focus{
+	outline: 0;
+}
+
+.filter_sort_list{
+	font-size: 14px;
+    color: #E0004D;
+	padding: 5px 0px;
+}
+input[type="checkbox"] {
+	flex-shrink: 0;
+	-webkit-appearance: none;
+    -moz-appearance: none;
+	/* outline: none; */
+	cursor: pointer;
+	height: 12px;
+	width: 12px;
+	border: 1px solid #63666A;
+	display: -webkit-inline-flex;
+	margin: 0.5em 0.7em 0.6em 0.5em;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+  }
+input:checked{
+	background-color: #E0004D;
+	border: 1px solid #E0004D;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+input[type="checkbox"]:checked + label{
+	color: #E0004D;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.filter_sort{
+	font-weight: bold;
+  margin: 15px 10px 0px;
+  color: #63666A;
+  border: 1.3px #ECECEC solid;
+  padding: 15px 10px 10px;
+	background: #FBFBFB;
+	min-height: 44px;
+	cursor: pointer;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+
+.filter_inside{
+	color: #63666A;
+	margin: 0px 10px 0px ;
+  border: 1.3px #ECECEC solid;
+  padding: 12px 10px 15px;
+	background-color: #FBFBFB;
+	font-size: smaller;
+	font-weight: 500;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+
+.Cards {
+	display: inline-table;
+	margin-right: 14px;
+	text-align: center;
+	margin-top: 19px;
+	height: 399px;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,.2);
+	width: 260px;
+	background-color: white;
+	align-items: flex-start;
+	cursor: pointer;
+	word-wrap: normal;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,.2);
  }
  
- .WelcomeUser_Logout{
+
+ .couponDescription {
+	word-break: break-word;
+}
+
+ span{
+	color: black;
+ }
+ 
+ /* h5 {
+	margin: 4px;
+	text-align: left;
+	color: "#63666A";
+	font-size: 22px;
+	font-weight: bold;
+	min-height: 60px;
+ } */
+
+ img {
+	margin-bottom: 8px;
+ }
+
+ h6.couponDescription {
+	padding: 0;
+	margin: 3px;
+	text-align: left;
+	color: grey;
+	font-size: 18px;
+	font-weight: normal;
+	max-height: 124px;
+	overflow: hidden;
+ }
+
+ h6.expireDate {
+	padding: 0;
+	margin: 3px;
+	text-align: left;
+	color: grey;
+	font-size: 16px;
+	font-weight: bold;
+	/* min-height: 60px; */
+	bottom: 45px;
+	font-size: 14px;
+	font-weight: bold;
+	position: absolute;
+ }
+
+ h6.viewMore{
+	padding: 0;
+	margin: 3px;
+	text-align: left;
+	color: grey;
+	font-size: 16px;
+	font-weight: bold;
+	/* min-height: 60px; */
+	bottom: 20px;
+	font-size: 14px;
+	font-weight: bold;
+	position: absolute;
+	text-decoration: underline;
+ }
+
+.expText{
+	text-decoration: underline;
+}
+
+ .CouponSearch {
+	 width: 100%;
+	 display: inline-flex;
+	 margin-top: 10px;
+ }
+
+ .SearchBarImage {
+	 display: inline-flex;
+	 background-color: #989B9F;
+	 width: 100%;
+	 color: white;
+	 padding: 6px;
+
+ }
+
+ .SearchImage {
+	height: 32px;
+	margin-top: 10px;
+	margin-left: 21px;
+ }
+
+ .SearchBar {
+	width: 95%;
+	padding: 13px;
+	font-size: 20px;
+	background-color: #989B9F;
+	border: none;
+	justify-content: center;
+	display: flex;
+	margin: auto;
+	color: white;
+	outline: 0;
+ }
+
+ .SearchBar::placeholder {
+	 color: white;
+ }
+
+.WelcomeUser_Logout {
 	display: flex;
 	justify-content: flex-end;
 	margin-right: 20px;
 	margin-bottom: 0;
  }
- 
+
+ .userName {
+	font-style: italic;
+	color: grey;
+	margin-top: 25px;
+	margin-right: 10px;
+ }
+
  .logoutButton {
-	width: 100px;
-	height: 40px;
-	margin: 5px 5px 10px 20px;
+	width: 150px;
+	height: 45px;
+	margin: 18px 5px 10px 10px;
 	font-size: 20px;
 	font-weight: bold;
 	color: grey;
+	background-color: white;
+	border: 1px solid gray;
  }
- .printDiv{
+
+ .logoutButton:hover {
+	 background-color: #E0004D;
+	 cursor: pointer;
+	 color: white;
+ }
+
+ .printDiv {
 	display: flex;
 	justify-content: flex-end;
 	margin-right: 20px;
 	margin-bottom: 0;
  }
- .printButton{
+
+ .printButton {
 	font-size: 20px;
 	font-weight: bold;
 	color: #E0004D;
 	border: none;
 	margin-bottom: 0;
+	background-color: white;
  }
- .printButton:hover{
+
+ .printButton:hover {
 	border: 0;
+	cursor: pointer;
+	background-color: #E0004D;
+	color: white;
+	text-align: center;
  }
- .userName{
-	font-style: italic;
-	color: grey;
-	margin-top: 10px;
+
+ .button {
+	display: none;
+}
+
+.logOutMessage1 {
+	text-align: center;
+	color: gray;
+}
+.logOutMessage2 {
+	text-align: center;
+	color: gray;
+	font-weight: normal;
+}
+.modal {
+	padding: 50px;
  }
+
+ .logOutImage {
+	 display: flex;
+	 margin: auto;
+ }
+
+ .popupHeader {
+	font-family: sans-serif;
+	color:grey;
+	margin: 0;
+	margin-bottom: 10px;
+ }
+
+ .popupMessage {
+	font-family: sans-serif;
+	color:grey;
+	margin: 0;
+	margin-bottom: 10px;
+	padding-left: 3px;
+ }
+
+ .bar {
+	border: 1px solid red;
+	height: 2px;
+	width: 100%;
+ }
+ 
+ .in {
+	animation: fill 10s linear 1;
+	height: 100%;
+	background-color:#E0004D;
+ }
+ 
+ @keyframes fill {
+	0% {
+		width: 100%;
+	}
+	100% {
+		width: 0%;
+	}
+ }
+
+ .actions {
+	margin: auto;
+	text-align: center;
+	margin-top: 20px;
+ }
+
+ .buttons {
+	background-color: white;
+	width: 250px;
+	height: 50px;
+	margin-left: 40px;
+	font-size: 16px;
+	font-weight: bold;
+	color:gray;
+ }
+
+ .buttons:hover {
+	background-color: #E0004D;
+	color: white;
+ }
+
+
+.AllCoupons {
+	margin-top: 0;
+	display: flex;
+	width: 100%;
+	height: 100%vh;
+ }
+
  ul {
 	list-style-type: none;
 	margin: 0;
@@ -51,73 +397,109 @@
 	height: 100%vh;
 	border: 2px solid lightgrey;
  }
- h4, h5 {
-	padding: 0;
-	margin: 5px;
-	text-align: left;
-	color: black;
- }
- img{
-	margin-bottom: 8px;
- }
- h6{
-	padding: 0;
-	margin: 5px;
-	text-align: left;
-	color: grey;
- }
- .LoadedCouponCount {
-	padding: 0;
-	margin: 5px;
-	text-align: left;
-	color: grey;
-	font-weight: normal;
- }
- 
+
  li a {
 	display: flex;
 	color: #000;
 	text-decoration: none;
 	height: 40px;
 	font-weight: bold;
-	padding: 20px 10px 5px 15px;
+	padding: 20px 10px 0px 15px;
+	cursor: pointer;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
  }
  
  li a.active {
 	background-color: #E0004D;
 	color: white;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
  }
- 
+
+
  li a:hover:not(.active) {
 	background-color: #E0004D;
 	color: white;
  }
- .LoadedCoupons{
+
+ .LoadedCoupons {
 	color: grey;
-	padding: 10px 20px 10px 50px;
 	background-color: #EEF0F3;
 	border-top: 2px solid lightgrey;
 	height: -webkit-fill-available;
+	height: 100%;
+	min-height: 870px;
 	width: -webkit-fill-available;
- }
- .Cards{
-	display: inline-flex;
-	margin-right: 14px;
-	text-align: center;
-	margin-top: 10px;
-	height: 264px;
-	width: 171px;
-	background-color: white;
-	align-items: flex-start;
+	padding-left: 24px;
+	padding-bottom: 100px;
 	cursor: pointer;
-	word-wrap: normal;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
  }
- 
- .viewMore{
+
+
+ .LoadedCouponCount {
+	padding: 0;
+	margin: 5px;
+	text-align: left;
+	color: grey;
+	font-weight: normal;
+	margin-top: 20px;
+	margin-left: 20px;
+	width: 270px;
+	font-size: 18px;
+ }
+
+
+.plusIcon {
+	width: 56px;
+	height: 56px;
+	/* margin: auto; */
+	/* display: flex; */
+	position: relative;
+	/* z-index: 1; */
+	left: 186px;
+	/* top: 260px; */
+	/* position: absolute; */
+	/* left: 194px; */
+	bottom: 33px;
+}
+
+.couponTitle{
+	margin: 4px;
+	text-align: left;
+	color: #63666A;
+	font-size: 22px;
+	font-weight: bold;
+	min-height: 25px;
+}
+
+.couponName{
+	margin: 4px;
+	text-align: left;
+	color: #63666A;
+	font-size: 18px;
+	font-weight: bold;
+	min-height: 36px;
+}
+
+.legalText {
+	padding: 0;
+	margin-top: 14px;
+	text-align: left;
+	color: grey;
+	font-size: 18px;
+	font-weight: normal;
+	max-height: 124px;
+	overflow: hidden;
+}
+
+.expire{
+	padding: 0;
+	margin: 3px;
+	text-align: left;
+	color: grey;
+	font-size: 16px;
+	font-weight: normal;
+	min-height: 20px;
 	text-decoration: underline;
- }
- 
- span{
-	color: black;
- }
- 
+	font-weight: bold;
+}

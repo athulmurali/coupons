@@ -1,14 +1,24 @@
 import React from "react";
 import "./Header.css";
+import styled from "styled-components";
 
+const AttractHeader = styled.div`
+	display: flex;
+	justify-content: center;
+	font-family: sans-serif;
+	font-size: calc(13px + .7vmin);
+	// font-size: 22px;
+	color: black;
+	padding: 30px;
+`;
 
 class Header extends React.Component {
-
+	
 	render() {
 		return(
-			<div className="AttractHeader">
+			<AttractHeader>
 				<h1> Savings & Coupons </h1>
-			</div>
+			</AttractHeader>
 		);
 	}
 
