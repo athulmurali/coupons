@@ -4,7 +4,6 @@ import Flippy, {BackSide, FrontSide} from "react-flippy";
 import {updateCoupons} from "../../redux/actions/DisplayCouponAction";
 import PlusIcon from "../../assets/addNew.svg";
 import LogOut_Success from "../../assets/addedNew.svg";
-import {CouponsTypeEnum} from "../../config/config";
 let loadedSet = new Set([]);
 let x = [];
 
@@ -54,8 +53,6 @@ class CouponCards extends React.Component {
 				
 				<Flippy flipOnHover={false} // default false
 					flipOnClick={true} // default false
-					flipOnHover={false} // default false
-					// isFlipped = {this.state.flipcheck}
 					flipDirection="horizontal" // horizontal or vertical
 					ref={(r) => this.flippy = r} // to use toggle method like this.flippy.toggle()
 					style={{

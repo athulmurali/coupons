@@ -14,9 +14,6 @@ class FilterComponent extends React.Component{
 	}
 
 
-	// componentWillMount() {}
-
-
 	Filter = () => {
         if(this.state.filter_arrow === false){
             this.setState({filter_arrow : true});
@@ -32,7 +29,6 @@ class FilterComponent extends React.Component{
 	updateChange = (array_filter,category) => {
 
 		let checkedFilters =array_filter
-		
 
 		if(array_filter.includes(category)){
 			checkedFilters = array_filter.filter(name => (name!==category))
@@ -41,8 +37,6 @@ class FilterComponent extends React.Component{
 		}
 		else{
 			checkedFilters = [...this.state.array_filter,category]
-
-
 			this.setState({array_filter : checkedFilters});
 		}
 
@@ -75,7 +69,7 @@ class FilterComponent extends React.Component{
 				</div>
 				<div className="filter_sort">
 					Filter
-					<img className="image_arrow" src={slideArrow[0]}  onClick={this.Filter}/>
+					<img className="image_arrow" alt="Filter show/hide selector" src={slideArrow[0]}  onClick={this.Filter}/>
 					<div className="filter_sort_list" hidden= {this.state.filter_arrow} >No filter added</div>
 				</div>
 				{ this.Filter_Category() }
@@ -85,20 +79,13 @@ class FilterComponent extends React.Component{
 }
 export const mapStateToProps =(state) =>{
 	return {
-
-		// array_filter : state.UserIdentification.array_filter
-
-		categoriesAvailable : state.SearchSortFilterReducer.categoriesAvailable
-
-
+		categoriesAvailable: state.SearchSortFilterReducer.categoriesAvailable
 	}
 }
 
 export const mapDispatchToProps =(dispatch)=>{
 	return {
 		updateCheckedFilters :(filterParams)=> updateFilters(dispatch, filterParams)
-		// getCategories : _=>getCategories(dispatch,)
-
 	}
 }
 export default connect(mapStateToProps, mapDispatchToProps)(FilterComponent)
