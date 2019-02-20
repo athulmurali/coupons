@@ -5,8 +5,8 @@ import FilterComponent from "../FilterComponent/filterComponent";
 import SearchCouponByName from "../SearchComponent/SearchCoupon";
 import CouponCards from "../CouponCardComponent/CouponCards";
 import Popup from "reactjs-popup";
-import {CouponsTypeEnum} from "../../config/config";
 import {connect} from "react-redux";
+
 const context = React.createContext();
 const {Provider,Consumer} = context;
 
@@ -16,7 +16,7 @@ export const PopupTrigger = (props) => {
 		(<Popup trigger={<button ref = {props.logOutPopUpTrigger}  className="button" ></button>} true modal>
 			{close => (
 				<div className="modal">
-					<img className="logOutImage" src={props.LogOut_Success}></img>
+					<img className="logOutImage" alt="logout success" src={props.LogOut_Success}></img>
 					<h1 className="logOutMessage1"> Enjoy your savings!</h1>
 					<h4 className="logOutMessage2">You have been successfully logged out. <br/> See you soon!</h4>
 				</div>)}
