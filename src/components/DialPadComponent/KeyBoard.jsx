@@ -45,7 +45,7 @@ export const phoneNumberComponent = (props) => {
 export const InputText = (props)  => {
 	return(
 		<div>
-			<input className="inputText" id="test-input" maxLength={12} defaultValue={props.phoneNumber} placeholder="(---) --- ----"/>
+			<input className="inputText" id="test-input" maxLength={12} defaultValue={props.phoneNumber} />
 			<div className="status-block">
 				<h3 className="statusMessage"> {props.defaultMessage} </h3>
 				<h3 className="statusMessage">associated with your account</h3>
