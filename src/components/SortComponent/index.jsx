@@ -48,7 +48,7 @@ class SortComponent extends React.Component{
 					<label>
 						{category.displayName}
 					</label> */}
-					<label class="container"> {category.displayName}
+					<label class="SortFilterContainer"> {category.displayName}
   						<input type="radio"  name="radio" onClick={() => this.updateChange(category.sortBy,category.sortOrder)}/>
   						<span class="checkmark"></span>
 					</label>

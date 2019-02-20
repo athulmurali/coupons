@@ -39,12 +39,12 @@ class Coupons extends React.Component {
     this.startTimer();
     this.tick();
   }
-	shouldComponentUpdate(){
-		if(this.state.count == 20 || this.state.count == 3 || this.state.count ==4){
-			return true
-		}
-		return false
-	}
+	// shouldComponentUpdate(){
+	// 	if(this.state.count == 20 || this.state.count == 3 || this.state.count == 4){
+	// 		return true
+	// 	}
+	// 	return false
+	// }
   tick () {
     this.setState({count: (this.state.count + 1)});
 	}
@@ -64,14 +64,12 @@ class Coupons extends React.Component {
 
   NewCoupons = () => {
     this.props.updateLoaded({loaded: false});
-    // this.props.updateCoupons({LoadedCouponsTrigger: false});
-    this.setState({count : 0,  hideLoadedCoupons:true});
+    this.setState({count : 0});
     }
 
   LoadedCoupons = () => {
     this.props.updateLoaded({loaded: true});
-    // this.props.updateCoupons({LoadedCouponsTrigger: true});
-    this.setState({count : 0,  hideLoadedCoupons:false});
+    this.setState({count : 0});
     }
 	setRef = (ref) => {
 		this.inputRef = ref;
@@ -80,7 +78,6 @@ class Coupons extends React.Component {
     render() {
         if(!this.props.userInfo){
         	this.props.history.push(ROUTE_HOME_PAGE)
-
 		}
 
         let couponData = this.props.allCoupons;
@@ -88,7 +85,7 @@ class Coupons extends React.Component {
         let logOutPopUpTrigger = "";
         let userName = "";
 
-        if(couponData.length > 0) {
+        if(couponData.length > 3) {
             userName = this.props.userInfo.FirstName;
         }
 

@@ -1,4 +1,4 @@
-.container {
+.SortFilterContainer {
   display: block;
   position: relative;
 	padding-left: 26px;
@@ -12,7 +12,7 @@
 }
 
 /* Hide the browser's default radio button */
-.container input {
+.SortFilterContainer input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -31,12 +31,12 @@
 }
 
 /* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
+.SortFilterContainer:hover input ~ .checkmark {
   background-color: #ccc;
 }
 
 /* When the radio button is checked, add a blue background */
-.container input:checked ~ .checkmark {
+.SortFilterContainer input:checked ~ .checkmark {
   background-color: #E0004D;
 }
 
@@ -48,12 +48,12 @@
 }
 
 /* Show the indicator (dot/circle) when checked */
-.container input:checked ~ .checkmark:after {
+.SortFilterContainer input:checked ~ .checkmark:after {
   display: block;
 }
 
 /* Style the indicator (dot/circle) */
-.container .checkmark:after {
+.SortFilterContainer .checkmark:after {
  	top: 5px;
 	left: 5px;
 	width: 8px;
@@ -88,14 +88,17 @@ input[type="checkbox"] {
 	border: 1px solid #63666A;
 	display: -webkit-inline-flex;
 	margin: 0.5em 0.7em 0.6em 0.5em;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
   }
 input:checked{
 	background-color: #E0004D;
 	border: 1px solid #E0004D;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 input[type="checkbox"]:checked + label{
 	color: #E0004D;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 .filter_sort{
@@ -116,11 +119,12 @@ input[type="checkbox"]:checked + label{
 	margin: 0px 10px 0px ;
   border: 1.3px #ECECEC solid;
   padding: 12px 10px 15px;
-	background: #FBFBFB;
+	background-color: #FBFBFB;
 	font-size: smaller;
 	font-weight: 500;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
+
 
 .Cards {
 	display: inline-table;
