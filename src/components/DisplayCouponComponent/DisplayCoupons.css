@@ -1,4 +1,4 @@
-.SortFilterContainer {
+.container {
   display: block;
   position: relative;
 	padding-left: 26px;
@@ -12,7 +12,7 @@
 }
 
 /* Hide the browser's default radio button */
-.SortFilterContainer input {
+.container input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -31,12 +31,12 @@
 }
 
 /* On mouse-over, add a grey background color */
-.SortFilterContainer:hover input ~ .checkmark {
+.container:hover input ~ .checkmark {
   background-color: #ccc;
 }
 
 /* When the radio button is checked, add a blue background */
-.SortFilterContainer input:checked ~ .checkmark {
+.container input:checked ~ .checkmark {
   background-color: #E0004D;
 }
 
@@ -48,12 +48,12 @@
 }
 
 /* Show the indicator (dot/circle) when checked */
-.SortFilterContainer input:checked ~ .checkmark:after {
+.container input:checked ~ .checkmark:after {
   display: block;
 }
 
 /* Style the indicator (dot/circle) */
-.SortFilterContainer .checkmark:after {
+.container .checkmark:after {
  	top: 5px;
 	left: 5px;
 	width: 8px;
@@ -88,17 +88,14 @@ input[type="checkbox"] {
 	border: 1px solid #63666A;
 	display: -webkit-inline-flex;
 	margin: 0.5em 0.7em 0.6em 0.5em;
-	-webkit-tap-highlight-color: rgba(0,0,0,0);
   }
 input:checked{
 	background-color: #E0004D;
 	border: 1px solid #E0004D;
-	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 input[type="checkbox"]:checked + label{
 	color: #E0004D;
-	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 .filter_sort{
@@ -113,18 +110,15 @@ input[type="checkbox"]:checked + label{
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
-
 .filter_inside{
 	color: #63666A;
 	margin: 0px 10px 0px ;
   border: 1.3px #ECECEC solid;
   padding: 12px 10px 15px;
-	background-color: #FBFBFB;
+	background: #FBFBFB;
 	font-size: smaller;
 	font-weight: 500;
-	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
-
 
 .Cards {
 	display: inline-table;
@@ -170,8 +164,7 @@ input[type="checkbox"]:checked + label{
 	color: grey;
 	font-size: 18px;
 	font-weight: normal;
-	max-height: 124px;
-	overflow: hidden;
+	min-height: 50px;
  }
 
  h6.expireDate {
@@ -180,12 +173,9 @@ input[type="checkbox"]:checked + label{
 	text-align: left;
 	color: grey;
 	font-size: 16px;
-	font-weight: bold;
-	/* min-height: 60px; */
-	bottom: 45px;
-	font-size: 14px;
-	font-weight: bold;
-	position: absolute;
+	font-weight: normal;
+	min-height: 20px;
+	bottom: 30px;
  }
 
  h6.viewMore{
@@ -344,7 +334,7 @@ input[type="checkbox"]:checked + label{
  }
  
  .in {
-	animation: fill 10s linear 1;
+	animation: fill 5s linear 1;
 	height: 100%;
 	background-color:#E0004D;
  }
@@ -398,6 +388,7 @@ input[type="checkbox"]:checked + label{
 	border: 2px solid lightgrey;
  }
 
+ /* Old css list lags and anchor tags*/
  li a {
 	display: flex;
 	color: #000;
@@ -406,17 +397,51 @@ input[type="checkbox"]:checked + label{
 	font-weight: bold;
 	padding: 20px 10px 0px 15px;
 	cursor: pointer;
-	-webkit-tap-highlight-color: rgba(0,0,0,0);
+
  }
  
  li a.active {
 	background-color: #E0004D;
 	color: white;
-	-webkit-tap-highlight-color: rgba(0,0,0,0);
  }
 
 
  li a:hover:not(.active) {
+	background-color: #E0004D;
+	color: white;
+ }
+  /* Old css list lags and anchor tags*/
+
+
+ li button {
+	/* background-color: #E0004D; */
+	color: white;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	width: 100%;
+	padding: 10px;
+	height: 60px;
+	font-size: 17px;
+	color: black;
+	text-align: left;
+	font-weight: bold;
+ }
+ 
+ li button.active {
+	background-color: #E0004D;
+	color: white;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	width: 100%;
+	padding: 10px;
+	height: 60px;
+	font-size: 17px;
+ }
+
+ li button.active:focus{
+	 outline: 0;
+ }
+
+
+ li button:hover:not(.active) {
 	background-color: #E0004D;
 	color: white;
  }
@@ -469,34 +494,16 @@ input[type="checkbox"]:checked + label{
 	color: #63666A;
 	font-size: 22px;
 	font-weight: bold;
-	min-height: 25px;
+	min-height: 30px;
 }
-.couponCategory {
-	margin: 4px;
-	text-align: left;
-	color: #63666A;
-	font-size: 18px;
-	font-weight: bold;
-	min-height: 20px;
-}
+
 .couponName{
 	margin: 4px;
 	text-align: left;
 	color: #63666A;
 	font-size: 18px;
 	font-weight: bold;
-	min-height: 36px;
-}
-
-.legalText {
-	padding: 0;
-	margin-top: 14px;
-	text-align: left;
-	color: grey;
-	font-size: 18px;
-	font-weight: normal;
-	max-height: 124px;
-	overflow: hidden;
+	min-height: 30px;
 }
 
 .expire{
