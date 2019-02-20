@@ -5,6 +5,8 @@ import FilterComponent from "../FilterComponent/filterComponent";
 import SearchCouponByName from "../SearchComponent/SearchCoupon";
 import CouponCards from "../CouponCardComponent/CouponCards";
 import Popup from "reactjs-popup";
+import {CouponsTypeEnum} from "../../config/config";
+import {connect} from "react-redux";
 const context = React.createContext();
 const {Provider,Consumer} = context;
 
@@ -35,20 +37,27 @@ export const LoadedCouponsSideBar = (props) => (
 	</Consumer>
 );
 
-export const SideBar = (props) => (
+const SideBarComp = (props) => (
 	<Consumer>
 		{
-			() => 
+			() =>
 				<ul>
-					<li> <a  className={props.activeNewCoupons} onClick={props.NewCoupons} > New Coupons </a></li>
-					<li> <a  className={props.activeLoadedCoupons} onClick={props.LoadedCoupons}> Loaded Coupons </a></li>
-					<FilterComponent timerReset={props.timerReset}/>
+
+					<li> <a  className={!props.loaded ? "active" : "inactive"}
+							 onClick={props.NewCoupons} > New Coupons </a></li>
+
+					<li> <a  className={props.loaded ? "active" : "inactive"} onClick={props.LoadedCoupons}> Loaded Coupons </a></li>
 					<SortComponent timerReset={props.timerReset}/>
+					<FilterComponent timerReset={props.timerReset}/>
 				</ul>
-			
+
 		}
-	</Consumer>	
+	</Consumer>
 );
+
+const mapStateToProps=(state)=> ({	loaded :  state.SearchSortFilterReducer.loaded.loaded})
+
+export const SideBar =connect(mapStateToProps,null)(SideBarComp)
 
 
 export const WelcomeHeader = (props) =>{
@@ -72,9 +81,6 @@ export const PrintComponent = (props) =>{
 };
 
 export default class AllCoupons extends Component{
-	// state={
-
-	// };
 	render(){
 		return(
 			<Provider>
