@@ -11,9 +11,9 @@ export const FETCH_COUPONS_PENDING = FETCH_COUPONS + "_PENDING";
 export const FETCH_COUPONS_REJECTED = FETCH_COUPONS + "_REJECTED";
 export const FETCH_COUPONS_FULFILLED = FETCH_COUPONS + "_FULFILLED";
 
-export const FETCH_CATEGORIES = "FETCH_CATEGORIES"
+export const FETCH_CATEGORIES = "FETCH_CATEGORIES";
 
-export const FETCH_CATEGORIES_PENDING = FETCH_CATEGORIES +"_PENDING"
+export const FETCH_CATEGORIES_PENDING = FETCH_CATEGORIES + "_PENDING";
 export const FETCH_CATEGORIES_REJECTED = FETCH_CATEGORIES + "_REJECTED";
 export const FETCH_CATEGORIES_FULFILLED = FETCH_CATEGORIES + "_FULFILLED";
 export const LOADED_DEFAULT = false;
@@ -26,7 +26,7 @@ const initialState = {
 	arr: [],
 	loaded: {loaded: LOADED_DEFAULT},
 	array_filter: [],
-	categoriesAvailable :FILTER_CATEGORIES
+	categoriesAvailable: FILTER_CATEGORIES
 };
 
 // to be moved to config
@@ -53,15 +53,13 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 				toBeFetched: true
 			};
 
-			case SET_LOADED :
-
+		case SET_LOADED :
 
 			return {
 				...state,
 				loaded: action.payload,
 				toBeFetched: true,
 			};
-
 
 
 		case SET_SEARCH  :
@@ -72,11 +70,10 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 			const searchOnMinChars = (!!action.payload.searchString &&
 				action.payload.searchString.length >= Config.MINIMUM_SEARCH_LENGTH);
 
-			if(!!searchOnDeleteChar){
-				action.payload.searchString = ""
+			if (!!searchOnDeleteChar) {
+				action.payload.searchString = "";
 
 			}
-
 
 
 			return {
@@ -113,7 +110,7 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 		}
 
 
-		case FETCH_CATEGORIES_FULFILLED :{
+		case FETCH_CATEGORIES_FULFILLED : {
 			return {
 				...state,
 				isLoading: false,
