@@ -1,56 +1,106 @@
 import React from "react";
+import {connect} from "react-redux";
+import {updateFilters} from "../../redux/actions/SearchSortFilter";
 
-const filter_category = ["Baby & Childcare"	,"Bakeray","Beverages"	,"Condiments & Sauces","Dairy","Deli","Ethnic Products","Frozen Food","General Merchandise"];
+const SelectedFilters = (props) => {
+	return <div>
+		{props.selectedFilters.length !== 0 ?
+			props.selectedFilters.map((filterOption, index) => <div
+				style={{display: "inline-block", paddingRight: "3px"}}
+				key={index}> {index < props.selectedFilters.length - 1 ? filterOption + "," : filterOption}</div>) :
+			"None Selected "}
 
-export default class SortComponent extends React.Component{
-	constructor(props){
-		super(props)
+	</div>;
+
+};
+
+class FilterComponent extends React.Component {
+	constructor(props) {
+		super(props);
 		this.state = {
 			filter_arrow: false,
-			array_filter : []
-		}
-		this.Image_up = require('../../assets/new-filter-arrow-down.svg');
+			array_filter: []
+		};
+		this.Image_up = require("../../assets/new-filter-arrow-down.svg");
 	}
-	Filter = () => {
-        if(this.state.filter_arrow === false){
-            this.setState({filter_arrow : true});
-            this.Image_up = require('../../assets/new-filter-arrow-up.svg');
-        }
-        else{
-            this.setState({filter_arrow : false});
-            this.Image_up = require('../../assets/new-filter-arrow-down.svg');
-        }
-	}
-	Filter_Category = () => {
-        return(
-            filter_category.map( fill => <div  key={fill} className="filter_inside" hidden= {!this.state.filter_arrow}>
-                <input name="_filter" type="checkbox" onClick={() => this.filtering(fill)}/>
-                <label> {fill} </label>
-            </div>)
-        )
-    }
 
-    filtering = (filtered_category) => {
-        this.state.array_filter.push(filtered_category);
-    }
-	
-	render(){
+
+	Filter = () => {
+		if (this.state.filter_arrow === false) {
+			this.setState({filter_arrow: true});
+			this.Image_up = require("../../assets/new-filter-arrow-up.svg");
+		} else {
+			this.setState({filter_arrow: false});
+			this.Image_up = require("../../assets/new-filter-arrow-down.svg");
+		}
+	};
+
+
+	updateChange = (array_filter, category) => {
+
+		let checkedFilters = array_filter;
+
+		if (array_filter.includes(category)) {
+			checkedFilters = array_filter.filter(name => (name !== category));
+			this.setState({array_filter: checkedFilters});
+
+		} else {
+			checkedFilters = [...this.state.array_filter, category];
+			this.setState({array_filter: checkedFilters});
+		}
+
+		this.props.updateCheckedFilters({filterByCategory: checkedFilters});
+
+	};
+
+	Filter_Category = () => {
+		return (
+			<div onClick={this.props.timerReset}>
+				{this.props.categoriesAvailable.map((category, index) => <div key={index} className="filter_inside"
+																			  hidden={!this.state.filter_arrow}>
+					<input name="_filter" type="checkbox"
+						   onClick={(_) => this.updateChange(this.state.array_filter, category.displayName)}/>
+					<label> {category.displayName} </label>
+				</div>)}
+			</div>
+		);
+	};
+
+
+	render() {
 		const slideArrow = [
-            this.Image_up
-        ];
-		return(
-			<div>
-				<div className="filter_inside" hidden= {!this.state.sort_arrow}>
+			this.Image_up
+		];
+		return (
+			<div onClick={this.props.timerReset}>
+				<div className="filter_inside" hidden={!this.state.sort_arrow}>
 					<input name="_filter" type="checkbox" defaultChecked/>
-						<label> Recommended </label>
+					<label> Recommended </label>
+					<SelectedFilters selectedFilters={[""]}/>
 				</div>
 				<div className="filter_sort">
 					Filter
-					<img className="image_arrow" src={slideArrow[0]}  onClick={this.Filter}/>
-					<div className="filter_sort_list" hidden= {this.state.filter_arrow} >No filter added</div>
+					<img className="image_arrow" alt="Filter show/hide selector" src={slideArrow[0]}
+						 onClick={this.Filter}/>
+					<div className="filter_sort_list" hidden={this.state.filter_arrow}>
+						<SelectedFilters selectedFilters={this.state.array_filter}/>
+					</div>
 				</div>
-				{ this.Filter_Category() }
+				{this.Filter_Category()}
 			</div>
-		)
+		);
 	}
 }
+
+export const mapStateToProps = (state) => {
+	return {
+		categoriesAvailable: state.SearchSortFilterReducer.categoriesAvailable
+	};
+};
+
+export const mapDispatchToProps = (dispatch) => {
+	return {
+		updateCheckedFilters: (filterParams) => updateFilters(dispatch, filterParams)
+	};
+};
+export default connect(mapStateToProps, mapDispatchToProps)(FilterComponent);

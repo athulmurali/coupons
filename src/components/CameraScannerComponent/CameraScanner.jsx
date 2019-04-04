@@ -5,33 +5,35 @@ import API from "../../utils/API";
 import PropTypes from "prop-types";
 import {ROUTE_DISPLAY_COUPONS} from "../../utils/RouteConstants";
 import {connect} from "react-redux";
-import {updateCoupons} from "../../redux/actions/UserIdentification";
+import {updateCoupons} from "../../redux/actions/DisplayCouponAction";
 
-class CameraScanner extends Component{
+class CameraScanner extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			scanning: false,
-			couponDetails: [],
-			results: [
-			],	
+			results: [],
 		};
-		this._onDetected= this._onDetected.bind(this);
+		this._onDetected = this._onDetected.bind(this);
 		this._searchUserInDatabase = this._searchUserInDatabase.bind(this);
 	}
+
 	componentWillUnmount = () => {
 		this.setState(
 			{
-				scanning:false,
+				scanning: false,
 				couponDetails: [],
-				results:[],
+				results: [],
 			}
 		);
-	}
+	};
+
 	_renderScanButtonAndResults() {
-		if (this.state.scanning) { return null; }
+		if (this.state.scanning) {
+			return null;
+		}
 		return (
-			<div  style={{
+			<div style={{
 				width: "100%",
 				height: "100%",
 				display: "flex",
@@ -67,16 +69,18 @@ class CameraScanner extends Component{
 			</button>
 		);
 	}
-	componentDidMount = () =>{
-		this.setState({scanning:true});
-	}
+
+	componentDidMount = () => {
+		this.setState({scanning: true});
+	};
 
 	_renderResults() {
 		const result = this.state.results[this.state.results.length - 1];
-		if (!result) { return null; }
+		if (!result) {
+			return null;
+		}
 		return (
-			<div style={{
-			}}>
+			<div style={{}}>
 				<h1
 					style={{
 						opacity: "0.5",
@@ -97,56 +101,55 @@ class CameraScanner extends Component{
 	}
 
 	_renderVideoStream() {
-		return <Scanner onDetected={this._onDetected.bind(this)} />;
+		return <Scanner onDetected={this._onDetected.bind(this)}/>;
 	}
 
 	render() {
-		return  this._renderVideoStream();
+		//reroute to Display coupons if the userInfo is set
+		if (!!this.props.userInfo){
+			this.props.history.push({pathname: ROUTE_DISPLAY_COUPONS});
+
+		}
+		return this._renderVideoStream();
 	}
 
 	_scan() {
 		this.setState({scanning: !this.state.scanning});
 	}
-	_searchUserInDatabase = async  (searchBarcode) => {
-		try{	
-			
-			let responeData = [];
-			const userDetails = await API.getUserDetails(searchBarcode.slice(0,-1));
-			// alert(userDetails)
-			// console.log("userdetails")
-			// console.log(userDetails.data.response.Customer[0]);
-			responeData.push(userDetails.data.response.Customer[0]);
-			const response = await API.getUserCoupons(searchBarcode.slice(0,-1));
 
-			responeData.push(response.data.response)
-			console.log(responeData)
+	_searchUserInDatabase = async (searchBarcode) => {
+		try {
 
-			sessionStorage.setItem('token',true);
+			// the following alert to be deleted before merging
+			alert("searching user In database  ")
+			const userDetailsResponse = await API.getUserDetails(searchBarcode.slice(0, -1));
+			const couponsResponse = await API.getUserCoupons(searchBarcode.slice(0, -1));
 
-			this.props.updateCoupons({couponDetails : responeData})
-
-			this.props.history.push({pathname : ROUTE_DISPLAY_COUPONS});
-		} catch (error){
-			this.setState(
+			const userInfo = userDetailsResponse.data.response.Customer[0];
+			const allCoupons = couponsResponse.data.response;
+			this.props.updateCoupons(
 				{
-					couponDetails: null,
-				}
-			)
+					allCoupons: allCoupons,
+					userInfo: userInfo
+				});
+
+		} catch (error) {
 			console.log(error);
 		}
-	}
+	};
+
 	_onDetected(result) {
-		
-		if(result.codeResult.code && this.state.scanning){
-			try
-			{
-				this.setState({scanning:false});
-				this._searchUserInDatabase(result.codeResult.code);
-				// alert(result.codeResult.code)
-				
-				
-			}
-			catch(error){
+
+		if (result.codeResult.code && this.state.scanning) {
+			try {
+				this.setState({scanning: false});
+
+				if(!this.props.userInfo){
+					this._searchUserInDatabase(result.codeResult.code)
+				}
+
+
+			} catch (error) {
 				console.log(error);
 			}
 		}
@@ -161,14 +164,16 @@ CameraScanner.propTypes = {
 };
 
 
-const mapStateToProps=()=>{
-	return {}
-}
-const mapDispatchToProps=(dispatch)=>{
+const mapStateToProps = (props) => {
 	return {
-		updateCoupons:( couponDetails)=>updateCoupons(dispatch,couponDetails )
+		userInfo : props.DisplayCouponsReducer.userInfo
+	};
+};
+const mapDispatchToProps = (dispatch) => {
+	return {
+		updateCoupons: (couponDetails) => updateCoupons(dispatch, couponDetails)
 
-	}
-}
+	};
+};
 
-export default  connect(mapStateToProps	,mapDispatchToProps) (CameraScanner)
+export default connect(mapStateToProps, mapDispatchToProps)(CameraScanner);

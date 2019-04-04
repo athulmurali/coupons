@@ -20,5 +20,5 @@ class AppProvider extends Component {
 }
 
 const App = ({ children }) => <AppProvider >{children} </AppProvider>;
-
-export { App, AppProvider, AppContext, AppConsumer };
+const MessageDisplay = ({ children }) => <AppProvider>{children} </AppProvider>;
+export { App, AppProvider, AppContext, AppConsumer,MessageDisplay };

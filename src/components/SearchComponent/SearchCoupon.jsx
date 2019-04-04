@@ -1,19 +1,19 @@
 import React from "react";
 import {connect} from "react-redux";
 import Search_Icon from "../../assets/new-filter-search.png";
-import {displayCouponState} from "../../redux/actions/DisplayCouponAction";
+import {updateSearch} from "../../redux/actions/SearchSortFilter";
 
 class SearchCouponByName extends React.Component {
 
 	inputChange = (e) => {
-		this.props.displayCouponState({searchedCouponName : e.target.value});
+		this.props.updateSearchParams({searchString : e.target.value});
 	}
 
 	render(){
 		let couponsLength = this.props.couponsLength;
 
 		return(
-			<div className="CouponSearch">
+			<div className="CouponSearch" onKeyDown={this.props.timerReset}>
 				<div className="SearchBarImage">
 					<img className="SearchImage" src={Search_Icon} alt ="Search icon not found" />
 					<input type="text" className = "SearchBar" placeholder="Search"
@@ -30,13 +30,13 @@ class SearchCouponByName extends React.Component {
 
 const mapStateToProps = (state) => {
 	return {
-		couponsLength : state.DisplayCouponStateUpdate.searchedCouponsLength
+		couponsLength : state.DisplayCouponsReducer.searchedCouponsLength
 	};
 };
 
 const mapDispatchToProps = (dispatch) => (
 	{
-		displayCouponState : (updatedValue) => displayCouponState(dispatch, updatedValue),
+		updateSearchParams : (searchParams) => updateSearch(dispatch, searchParams)
 	}
 
 );
