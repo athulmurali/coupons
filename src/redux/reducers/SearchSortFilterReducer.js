@@ -20,6 +20,7 @@ export const FETCH_CATEGORIES_FULFILLED = FETCH_CATEGORIES + "_FULFILLED";
 const initialState = {
 	couponsType: CouponsTypeEnum.LOADED,
 	toBeFetched: false,
+	toBeSearched: false,
 	sort:{...DEFAULT_SORT},
 	filters: {},
 	search: {},
@@ -45,7 +46,6 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 		return {
 			...state,
 			sort: action.payload,
-			toBeFetched: true,
 			isDataUpdated: true
 		};
 
@@ -85,8 +85,8 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 		return {
 			...state,
 			search: action.payload,
-			toBeFetched: searchOnDeleteChar || searchOnMinChars,
-			isDataUpdated :  true
+			toBeSearched: searchOnDeleteChar || searchOnMinChars,
+			isDataUpdated :  true,
 
 		};
 
@@ -106,26 +106,27 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 
 		};
 
-	case FETCH_COUPONS_FULFILLED : {
-		return {
-			...state,
-			toBeFetched: false,
-			isLoading: false,
-			arr: action.payload.data.response
+		case FETCH_COUPONS_FULFILLED : {
+			return {
+				...state,
+				toBeFetched: false,
+				isLoading: false,
+				arr: action.payload.data.response
 
 		};
 	}
 
 
 		case FETCH_CATEGORIES_FULFILLED : {
-		return {
-			...state,
-			isLoading: false,
+			return {
+				...state,
+				isLoading: false,
 
-			//to be checked before the following is used for fetching categories
-			categoriesAvailable: action.payload.data.response
-		};
-	}
+				//to be checked before the following is used for fetching categories
+				categoriesAvailable: action.payload.data.response,
+				isDataUpdated :  true
+			};
+		}
 
 		case FLIP_CARD : {
 			const ind = action.payload.cardIndex;
