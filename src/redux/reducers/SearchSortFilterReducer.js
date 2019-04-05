@@ -20,6 +20,7 @@ export const FETCH_CATEGORIES_FULFILLED = FETCH_CATEGORIES + "_FULFILLED";
 const initialState = {
 	couponsType: CouponsTypeEnum.LOADED,
 	toBeFetched: false,
+	toBeSearched: false,
 	sort:{...DEFAULT_SORT},
 	filters: {},
 	search: {},
@@ -43,7 +44,7 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 			return {
 				...state,
 				sort: action.payload,
-				toBeFetched: true
+
 			};
 
 		case SET_FILTERS :
@@ -79,7 +80,7 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 			return {
 				...state,
 				search: action.payload,
-				toBeFetched: searchOnDeleteChar || searchOnMinChars
+				toBeSearched: searchOnDeleteChar || searchOnMinChars
 
 			};
 
