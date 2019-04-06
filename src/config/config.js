@@ -130,7 +130,7 @@ export const FILTER_CATEGORIES = [
 		name: "Soups & Canned Goods"
 	}
 ];
-const SORT_ORDERS = Object.freeze({
+export const SORT_ORDERS = Object.freeze({
 	ASC: "asc",
 	DESC: "desc"
 });
