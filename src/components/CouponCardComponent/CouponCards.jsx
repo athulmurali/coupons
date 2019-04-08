@@ -55,7 +55,7 @@ class CouponCards extends React.Component {
 		return coupons.map((coupon,i)=><div className="Cards" key={i} onClick={() => this.props.flipCard(i)}>
 				
 				<Flippy 
-					isFlipped={coupon.isFlipped}
+					isFlipped={!isDataUpdated && coupon.isFlipped}
 					flipOnHover={false} // default false
 					flipOnClick={false} // default false
 					flipDirection="horizontal" // horizontal or vertical
@@ -107,7 +107,7 @@ class CouponCards extends React.Component {
 
 const mapStateToProps=(state)=>{
 	return {
-		allCoupons :state.DisplayCouponsReducer.allCoupons,
+		allCoupons :state.SearchSortFilterReducer.arr,
 		LoadedCouponsTrigger: state.DisplayCouponsReducer.LoadedCouponsTrigger,
 		loaded: state.SearchSortFilterReducer.loaded.loaded,
 		searchedCouponsLength: state.DisplayCouponsReducer.searchedCouponsLength,

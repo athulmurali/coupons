@@ -37,15 +37,7 @@ const DisplayCouponsReducer = (state = initialState, action) => {
 			...initialState
 		};
 
-	case FLIP_CARD : {
-		const ind = action.payload.cardIndex;
-		const newArr = state.allCoupons;
-		newArr[ind].isFlipped = !newArr[ind].isFlipped;
-		return {
-			...state,
-			allCoupons : [...newArr]			
-		};
-	}
+
 
 	case FETCH_COUPONS_FULFILLED : {
 		return {

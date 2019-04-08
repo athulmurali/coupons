@@ -1,6 +1,6 @@
 import Config, {CouponsTypeEnum, DEFAULT_SORT, FILTER_CATEGORIES, LOADED_DEFAULT} from "../../config/config";
 
-import {RESET} from "./DisplayCouponReducer";
+import {FLIP_CARD, RESET} from "./DisplayCouponReducer";
 
 export const FETCH_COUPONS = "FETCH_COUPONS";
 export const SET_SORT = "SET_SORT";
@@ -69,7 +69,7 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 		};
 
 
-	case SET_SEARCH  :
+		case SET_SEARCH  :
 		const searchOnDeleteChar = (!!action.payload.searchString &&
 				(action.payload.searchString.length === Config.MINIMUM_SEARCH_LENGTH - 1)
 				&& state.search.searchString.length === Config.MINIMUM_SEARCH_LENGTH);
@@ -79,7 +79,6 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 
 		if (searchOnDeleteChar) {
 			action.payload.searchString = "";
-
 		}
 
 
@@ -87,7 +86,7 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 			...state,
 			search: action.payload,
 			toBeFetched: searchOnDeleteChar || searchOnMinChars,
-			isDataUpdated: true
+			isDataUpdated :  true
 
 		};
 
@@ -118,7 +117,7 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 	}
 
 
-	case FETCH_CATEGORIES_FULFILLED : {
+		case FETCH_CATEGORIES_FULFILLED : {
 		return {
 			...state,
 			isLoading: false,
@@ -127,6 +126,18 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 			categoriesAvailable: action.payload.data.response
 		};
 	}
+
+		case FLIP_CARD : {
+			const ind = action.payload.cardIndex;
+			const newArr = state.arr;
+			newArr[ind].isFlipped = !newArr[ind].isFlipped;
+			return {
+				...state,
+				arr : [...newArr],
+				isDataUpdated : false
+			};
+		}
+
 
 	default             :
 		return {...state};
