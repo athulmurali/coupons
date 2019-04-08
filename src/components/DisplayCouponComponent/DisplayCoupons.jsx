@@ -2,13 +2,14 @@ import React from "react";
 import Header from "../HeaderComponent/Header";
 import "./DisplayCoupons.css";
 import Popup from "reactjs-popup";
-import Config from "../../config/config";
+import Config, {SEARCH_FIELD_NAME} from "../../config/config";
 import {connect} from "react-redux";
 import AllCoupons, {LoadedCouponsSideBar, PrintComponent, SideBar, WelcomeHeader} from "./DisplayCouponsProvider";
 import {reset_all_redux} from "../../redux/actions/Common";
 import {ROUTE_HOME_PAGE} from "../../utils/RouteConstants";
 import {updateCoupons} from "../../redux/actions/DisplayCouponAction";
 import {updateLoaded} from "../../redux/actions/SearchSortFilter";
+import conditionalSearch from "../../utils/conditionalSearch";
 
 class Coupons extends React.Component {
 	constructor(props) {
@@ -176,9 +177,25 @@ class Coupons extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+
+	const comparator=(order ,ascOrderVal)=>
+		(order === ascOrderVal ? (obj1, obj2)=>(obj1 > obj2) : (obj1, obj2)=>(obj1 < obj2));
+
+	const sortByKey = (arr, key, ascOrderVal, order)=>(arr.sort((obj1,obj2)=>
+		(comparator(order,ascOrderVal)(obj1[key],obj2[key])) ? 1 : -1 ));
+
+	let toBeSearched = state.SearchSortFilterReducer.toBeSearched;
+	let searchText =state.SearchSortFilterReducer.search.searchString;
+	let sortOption = state.SearchSortFilterReducer.sort;
+
+	let allCoupons=  state.DisplayCouponsReducer.allCoupons;
+
+	allCoupons = sortByKey(allCoupons, "asc", sortOption.sortBy,sortOption.sortOrder);
+	allCoupons = !!toBeSearched ? conditionalSearch(allCoupons, SEARCH_FIELD_NAME,  searchText) : allCoupons;
+
 	return {
 		userInfo: state.DisplayCouponsReducer.userInfo,
-		allCoupons: state.DisplayCouponsReducer.allCoupons
+		allCoupons
 	};
 };
 

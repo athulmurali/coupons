@@ -23,7 +23,7 @@ const initialState = {
 	toBeSearched: false,
 	sort:{...DEFAULT_SORT},
 	filters: {},
-	search: {},
+	search: {searchString : ""},
 	arr: [],
 	loaded: {loaded: LOADED_DEFAULT},
 	array_filter: [],
