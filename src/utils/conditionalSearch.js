@@ -33,7 +33,8 @@
  *
  *
  */
-const conditionalSearch = (arr,searchFieldName, searchText)=>
-	(arr.filter(obj=>(obj[searchFieldName].toLowerCase().includes(searchText.toLowerCase()) )));
+const conditionalSearch = (arr,searchFieldName, searchText)=>{
+	console.log(arr,searchFieldName, searchText)
+	return arr.filter(obj=>(obj[searchFieldName].toLowerCase().includes(searchText.toLowerCase()) )) ; }
 
 export default conditionalSearch
