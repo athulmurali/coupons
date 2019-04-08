@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import Flippy, {BackSide, FrontSide} from "react-flippy";
-import {updateCoupons} from "../../redux/actions/DisplayCouponAction";
+import {updateCoupons, flipCard} from "../../redux/actions/DisplayCouponAction";
 import PlusIcon from "../../assets/addNew.svg";
 import LogOut_Success from "../../assets/addedNew.svg";
 let loadedSet = new Set([]);
@@ -15,6 +15,7 @@ class CouponCards extends React.Component {
 			loadedCouponsCheck: true, 
 			checkNewCoupon: false,
 			tempLoadedCoupons: [],
+			flipTheCard: false
 		}
 	}
 
@@ -32,15 +33,17 @@ class CouponCards extends React.Component {
 		}
 	}
 
+	
 
 	render() {
 		let coupons = this.props.allCoupons
+		let isDataUpdated = this.props.isDataUpdated;
 		let couponsLength = coupons.length;
 		this.props.updateCoupons({"searchedCouponsLength": couponsLength});
 
 
 		if(couponsLength === 0) {
-			return <div> No Coupons Found </div>;
+			return <div style={{justifyContent:"center", alignItems:"center", display:"flex", height: "670px", fontSize:"21px"}}> No Coupons Found </div>;
 		}
 
 		if(this.props.loaded){
@@ -49,10 +52,12 @@ class CouponCards extends React.Component {
 			this.props.updateCoupons({"searchedCouponsLength": couponsLength});
 		}
 		
-		return coupons.map((coupon,i)=><div className="Cards" key={i}>
+		return coupons.map((coupon,i)=><div className="Cards" key={i} onClick={() => this.props.flipCard(i)}>
 				
-				<Flippy flipOnHover={false} // default false
-					flipOnClick={true} // default false
+				<Flippy 
+					isFlipped={coupon.isFlipped}
+					flipOnHover={false} // default false
+					flipOnClick={false} // default false
 					flipDirection="horizontal" // horizontal or vertical
 					ref={(r) => this.flippy = r} // to use toggle method like this.flippy.toggle()
 					style={{
@@ -105,13 +110,15 @@ const mapStateToProps=(state)=>{
 		allCoupons :state.DisplayCouponsReducer.allCoupons,
 		LoadedCouponsTrigger: state.DisplayCouponsReducer.LoadedCouponsTrigger,
 		loaded: state.SearchSortFilterReducer.loaded.loaded,
-		searchedCouponsLength: state.DisplayCouponsReducer.searchedCouponsLength
+		searchedCouponsLength: state.DisplayCouponsReducer.searchedCouponsLength,
+		isDataUpdated: state.SearchSortFilterReducer.isDataUpdated
 
 	};
 };
 
 const mapDispatchToProps = (dispatch) => ({
-	updateCoupons :( updatedValue)=> updateCoupons(dispatch,  updatedValue )
+	updateCoupons :( updatedValue)=> updateCoupons(dispatch,  updatedValue ),
+	flipCard :(i)=>flipCard(dispatch, i)
 }
 );
  

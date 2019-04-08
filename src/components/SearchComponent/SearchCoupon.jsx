@@ -2,6 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import Search_Icon from "../../assets/new-filter-search.png";
 import {updateSearch} from "../../redux/actions/SearchSortFilter";
+import {updateCoupons} from "../../redux/actions/DisplayCouponAction";
 
 class SearchCouponByName extends React.Component {
 
@@ -36,7 +37,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => (
 	{
-		updateSearchParams : (searchParams) => updateSearch(dispatch, searchParams)
+		updateSearchParams : (searchParams) => updateSearch(dispatch, searchParams),
+		updateCoupons: (searchParams) => updateCoupons(dispatch, searchParams)
 	}
 
 );

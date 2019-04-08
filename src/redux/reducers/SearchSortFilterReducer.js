@@ -26,7 +26,8 @@ const initialState = {
 	arr: [],
 	loaded: {loaded: LOADED_DEFAULT},
 	array_filter: [],
-	categoriesAvailable: FILTER_CATEGORIES
+	categoriesAvailable: FILTER_CATEGORIES,
+	isDataUpdated : false
 };
 
 // to be moved to config
@@ -34,94 +35,101 @@ const initialState = {
 const SearchSortFilterReducer = (state = initialState, action) => {
 
 	switch (action.type) {
-		case RESET :
-			return {
-				...initialState
-			};
-
-		case SET_SORT :
-			return {
-				...state,
-				sort: action.payload,
-				toBeFetched: true
-			};
-
-		case SET_FILTERS :
-			return {
-				...state,
-				filters: action.payload,
-				toBeFetched: true
-			};
-
-		case SET_LOADED :
-
-			return {
-				...state,
-				loaded: action.payload,
-				toBeFetched: true,
-			};
+	case RESET :
+		return {
+			...initialState
+		};
 
 
-		case SET_SEARCH  :
-			const searchOnDeleteChar = (!!action.payload.searchString &&
+	case SET_SORT :
+		return {
+			...state,
+			sort: action.payload,
+			toBeFetched: true,
+			isDataUpdated: true
+		};
+
+	case SET_FILTERS :
+		return {
+			...state,
+			filters: action.payload,
+			toBeFetched: true,
+			isDataUpdated: true
+
+		};
+
+	case SET_LOADED :
+
+		return {
+			...state,
+			loaded: action.payload,
+			toBeFetched: true,
+			isDataUpdated: true
+
+		};
+
+
+	case SET_SEARCH  :
+		const searchOnDeleteChar = (!!action.payload.searchString &&
 				(action.payload.searchString.length === Config.MINIMUM_SEARCH_LENGTH - 1)
 				&& state.search.searchString.length === Config.MINIMUM_SEARCH_LENGTH);
 
-			const searchOnMinChars = (!!action.payload.searchString &&
+		const searchOnMinChars = (!!action.payload.searchString &&
 				action.payload.searchString.length >= Config.MINIMUM_SEARCH_LENGTH);
 
-			if (!!searchOnDeleteChar) {
-				action.payload.searchString = "";
+		if (searchOnDeleteChar) {
+			action.payload.searchString = "";
 
-			}
-
-
-			return {
-				...state,
-				search: action.payload,
-				toBeFetched: searchOnDeleteChar || searchOnMinChars
-
-			};
-
-		case FETCH_COUPONS_PENDING :
-			return {
-				...state,
-				toBeFetched: false,
-				isLoading: false
-
-			};
-
-		case FETCH_COUPONS_REJECTED :
-			return {
-				...state,
-				toBeFetched: false,
-				isLoading: false
-
-			};
-
-		case FETCH_COUPONS_FULFILLED : {
-			return {
-				...state,
-				toBeFetched: false,
-				isLoading: false,
-				arr: action.payload.data.response
-
-			};
 		}
 
 
-		case FETCH_CATEGORIES_FULFILLED : {
-			return {
-				...state,
-				isLoading: false,
+		return {
+			...state,
+			search: action.payload,
+			toBeFetched: searchOnDeleteChar || searchOnMinChars,
+			isDataUpdated: true
 
-				//to be checked before the following is used for fetching categories
-				categoriesAvailable: action.payload.data.response
-			};
-		}
+		};
 
-		default             :
-			return {...state};
+	case FETCH_COUPONS_PENDING :
+		return {
+			...state,
+			toBeFetched: false,
+			isLoading: false
+
+		};
+
+	case FETCH_COUPONS_REJECTED :
+		return {
+			...state,
+			toBeFetched: false,
+			isLoading: false
+
+		};
+
+	case FETCH_COUPONS_FULFILLED : {
+		return {
+			...state,
+			toBeFetched: false,
+			isLoading: false,
+			arr: action.payload.data.response
+
+		};
+	}
+
+
+	case FETCH_CATEGORIES_FULFILLED : {
+		return {
+			...state,
+			isLoading: false,
+
+			//to be checked before the following is used for fetching categories
+			categoriesAvailable: action.payload.data.response
+		};
+	}
+
+	default             :
+		return {...state};
 	}
 };
 
