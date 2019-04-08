@@ -15,7 +15,6 @@ class CouponCards extends React.Component {
 			loadedCouponsCheck: true, 
 			checkNewCoupon: false,
 			tempLoadedCoupons: [],
-			flipTheCard: false
 		}
 	}
 
