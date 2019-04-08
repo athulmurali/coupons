@@ -4,13 +4,15 @@
  * @param order  one of the values in ENUM SORT_ORDERS
  * @returns {function(*, *): boolean}
  */
-import {SORT_ORDERS} from "../config/config";
 
-const comparator=(order)=>(order === SORT_ORDERS.ASC ? (obj1, obj2)=>(obj1 > obj2) : (obj1, obj2)=>(obj1 < obj2));
+const comparator=(order ,ascOrderVal)=>(order === ascOrderVal ? (obj1, obj2)=>(obj1 > obj2) : (obj1, obj2)=>(obj1 < obj2));
 
 /**
  * @param arr the array to be sorted
  * @param key the name of the field in the object in the array based on which it is to be sorted
- * @param order the order based on which arr is to be sorted. ASC or DES
+ * @param ascOrderVal the value for ascending order  comparison.
+ * @param order the order based on which arr is to be sorted.
+ * If the order matches ascOrderVal, it is sorted in ascending order
+ * else, sorting will be done  in descending order
  */
-export const sortByKey = (arr, key, order)=>(arr.sort((obj1,obj2)=>(comparator(order)(obj1[key],obj2[key])) ? 1 : -1 ));
+export const sortByKey = (arr, key, ascOrderVal, order)=>(arr.sort((obj1,obj2)=>(comparator(order,ascOrderVal)(obj1[key],obj2[key])) ? 1 : -1 ));
