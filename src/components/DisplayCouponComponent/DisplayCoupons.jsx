@@ -42,7 +42,7 @@ class Coupons extends React.Component {
 	}
 
 	shouldComponentUpdate() {
-		if (this.state.logOutTrigger || this.state.logOutReload || this.state.count === 20 || this.state.count >= 30) {
+		if (this.state.logOutTrigger || this.state.logOutReload || this.state.count >= 20 || this.state.count >= 30) {
 			return true;
 		}
 		return false;

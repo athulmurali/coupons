@@ -2,6 +2,7 @@ import {FETCH_COUPONS_FULFILLED} from "./SearchSortFilterReducer";
 
 export const UPDATE_DISPLAY_COUPON_STATE = "UPDATE_DISPLAY_COUPON_STATE";
 export const UPDATE_COUPON_DETAILS = "UPDATE_COUPON_DETAILS";
+export const FLIP_CARD = "FLIP_CARD";
 
 export const RESET = "RESET";
 
@@ -37,6 +38,7 @@ const DisplayCouponsReducer = (state = initialState, action) => {
 		};
 
 
+
 	case FETCH_COUPONS_FULFILLED : {
 		return {
 			...state,
@@ -45,7 +47,6 @@ const DisplayCouponsReducer = (state = initialState, action) => {
 			allCoupons: action.payload.data.response
 
 		};
-
 	}
 	default :
 		return state;
