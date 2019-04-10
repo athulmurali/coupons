@@ -29,11 +29,8 @@ const constants = {
 	BOTTOM_LEFT_CORNER: "bottom_left",
 	BOTTOM_RIGHT_CORNER: "bottom_right",
 	INACTIVE_USER_IDENTIFICATION: 15000,   // in ms
-	POPUPTIMER: 20,						// in seconds
-	LOGOUTTIMER: 30,						// in seconds
+	LOGOUT_TIMER: 30000,						// in seconds
 	ATTRACT_LOOP_SLIDE_DURATION: 3000,  // in milli-seconds
-
-
 	MINIMUM_SEARCH_LENGTH: 3 //characters count for triggering the api
 };
 
@@ -91,4 +88,25 @@ export const CouponsTypeEnum = Object.freeze({LOADED: "LOADED", ALL: "ALL"});
 export const DEFAULT_SORT = SORT_CATEGORIES[0];
 export const LOADED_DEFAULT = false;
 export const SEARCH_FIELD_NAMES = ["name","description"];
-export const RESTART_TIMER_EVENTS = ["scroll", "touchstart", "touchend", "click"];
+export const RESTART_TIMER_EVENTS = [ "click","keydown","touchstart","touchend","scroll"];
+// In milliSeconds
+export const COUNTER = {
+	COUNT_DOWN_PROMPT: {
+		name: "COUNT_DOWN_PROMPT",
+		duration: 30000
+	},
+	COUNT_DOWN_LOGOUT: {
+		name: "COUNT_DOWN_LOGOUT",
+		duration: 20000
+		// Make sure to update css class .bar in DisplayCoupons.css whenever you update the above,
+		// the progress bar takes time in seconds and
+		// should be set to the above duration but in seconds for animation
+	},
+	COUNT_DOWN_REDIRECT: {
+		name: "COUNT_DOWN_REDIRECT",
+		duration: 3000
+	}
+};
+export const ERROR_MSG_VALIDATION = "Not a valid number! Please re enter";
+export const ERROR_MSG_BARCODE_INVALID = "Error! Invalid Barcode Scanned !";
+export const ERROR_MSG_INVALID_INPUT = "Error! Invalid phone number or barcode!";

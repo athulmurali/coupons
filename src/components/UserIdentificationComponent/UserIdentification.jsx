@@ -5,13 +5,6 @@ import Header from "../../components/HeaderComponent/Header";
 import DialPad from "../DialPadComponent/DialPad";
 
 class UserIdentification extends Component {
-	constructor(props) {
-		super(props);
-	}
-
-	componentDidMount() {
-	}
-
 	render() {
 		return (
 			<div>

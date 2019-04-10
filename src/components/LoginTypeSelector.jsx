@@ -8,7 +8,7 @@ import MEMBERSHIP_CARD_ACTIVE_IMG from "../assets/icon-card-white.svg";
 import MEMBERSHIP_CARD_INACTIVE_IMG from "../assets/icon-card-gray.svg";
 import LoginTypeCard from "./LoginTypeCard";
 
-const INPUT_TYPE = Object.freeze({
+const LOGIN_TYPES = Object.freeze({
 	PHONE: "PHONE",
 	MEMBERSHIP_CARD: "MEMBERSHIP_CARD",
 });
@@ -16,11 +16,11 @@ const INPUT_TYPE = Object.freeze({
 export default class LoginTypeSelector extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {selectedType: INPUT_TYPE.PHONE};
+		this.state = {selectedType: LOGIN_TYPES.PHONE};
 	}
 
 	handleClicks = (loginType, handlePhoneClick, handleCardClick) => {
-		if (loginType === INPUT_TYPE.PHONE)
+		if (loginType === LOGIN_TYPES.PHONE)
 			handlePhoneClick();
 		else
 			handleCardClick();
@@ -38,8 +38,8 @@ export default class LoginTypeSelector extends React.Component {
 		return <div>
 			<LoginTypeCard
 				cardName={"Phone"}
-				cardType={INPUT_TYPE.PHONE}
-				isActive={this.state.selectedType === INPUT_TYPE.PHONE}
+				cardType={LOGIN_TYPES.PHONE}
+				isActive={this.state.selectedType === LOGIN_TYPES.PHONE}
 				activeIconImgSrc={PHONE_ACTIVE_IMG}
 				inactiveIconImgSrc={PHONE_INACTIVE_IMG}
 				activeClassName="act"
@@ -49,9 +49,9 @@ export default class LoginTypeSelector extends React.Component {
 				}}
 			/>
 			<LoginTypeCard
-				cardName={"Member"}
-				cardType={INPUT_TYPE.MEMBERSHIP_CARD}
-				isActive={this.state.selectedType === INPUT_TYPE.MEMBERSHIP_CARD}
+				cardName={"Card"}
+				cardType={LOGIN_TYPES.MEMBERSHIP_CARD}
+				isActive={this.state.selectedType === LOGIN_TYPES.MEMBERSHIP_CARD}
 				activeIconImgSrc={MEMBERSHIP_CARD_ACTIVE_IMG}
 				inactiveIconImgSrc={MEMBERSHIP_CARD_INACTIVE_IMG}
 				activeClassName="act"

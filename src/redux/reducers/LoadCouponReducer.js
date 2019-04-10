@@ -7,14 +7,13 @@ export const LOAD_COUPON_FULFILLED = LOAD_COUPON + '_FULFILLED';
 export const LOAD_COUPON_REJECTED = LOAD_COUPON + '_REJECTED';
 
 const initialState = {
-
 	isLoading : false,
 	error: null
 };
 
 // to be moved to config
 
-const SearchSortFilterReducer = (state = initialState, action) => {
+const LoadCouponReducer = (state = initialState, action) => {
 
 	switch (action.type) {
 		case RESET :
@@ -32,7 +31,7 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 		}
 
 		case LOAD_COUPON_REJECTED : {
-			alert("Something went wrong while loading the coupon !")
+			alert("Something went wrong while loading the coupon !");
 			return {
 				...state,
 				isLoading: false,
@@ -53,4 +52,4 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 	}
 };
 
-export default SearchSortFilterReducer;
+export default LoadCouponReducer;
