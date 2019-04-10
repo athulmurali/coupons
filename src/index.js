@@ -13,7 +13,7 @@ import promise from "redux-promise-middleware";
 import thunk from "redux-thunk";
 import logger from "redux-logger";
 import combinedReducer from "./redux/reducers";
-import {onChangeSearchSortFilter} from "./redux/storeChangeListeners";
+import {onChangeSearchSortFilter, timerCountDown} from "./redux/storeChangeListeners";
 import {composeWithDevTools} from "redux-devtools-extension";
 
 const middleware = applyMiddleware(promise(), thunk ,logger);
@@ -21,7 +21,9 @@ const middleware = applyMiddleware(promise(), thunk ,logger);
 
 const store = createStore(combinedReducer,composeWithDevTools(middleware));
 
-store.subscribe(()=>onChangeSearchSortFilter( store.getState(), store.dispatch ))
+store.subscribe(()=>{onChangeSearchSortFilter( store.getState(), store.dispatch )
+					timerCountDown(store.getState(), store.dispatch);
+})
 window.store=store
 
 ReactDOM.render(

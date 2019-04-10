@@ -1,5 +1,6 @@
 import {fetchAllCouponsFromServer} from "../actions/FetchCoupons";
 import {CouponsTypeEnum} from "../../config/config";
+import {COUNT_DOWN, COUNT_DOWN_INTERVAL, SET_INTERVAL_OBJ, TIMER_STATUS} from "../reducers/TimerReducer";
 
 export const onChangeSearchSortFilter=(state, dispatch )=>{
 
@@ -26,4 +27,21 @@ export const onChangeSearchSortFilter=(state, dispatch )=>{
 
 	}
 
-}
+};
+
+export const timerCountDown=(state, dispatch)=>{
+
+
+	if (state.TimerReducer.status === TIMER_STATUS.START )
+	{
+		const intervalObj= setInterval(()=>
+				dispatch({type : COUNT_DOWN, payload:{decrementBy : COUNT_DOWN_INTERVAL}}),
+			COUNT_DOWN_INTERVAL);
+
+		dispatch({type:SET_INTERVAL_OBJ, payload: {intervalObj}})
+
+
+	}
+
+
+};
