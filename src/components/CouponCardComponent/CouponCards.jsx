@@ -122,7 +122,7 @@ const mapStateToProps=(state)=>{
 	let allCoupons=  state.DisplayCouponsReducer.allCoupons;
 
 	allCoupons = sortByKey(allCoupons, sortOption.sortBy,SORT_ORDERS.ASC, sortOption.sortOrder);
-	allCoupons = !!toBeSearched ? conditionalSearch(allCoupons, "name",  searchText) : allCoupons;
+	allCoupons =  allCoupons;
 
 	return {
 		allCoupons :allCoupons,

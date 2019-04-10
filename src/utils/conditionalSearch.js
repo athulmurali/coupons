@@ -34,7 +34,7 @@
  *
  */
 const conditionalSearch = (arr,searchFieldName, searchText)=>{
-	console.log(arr,searchFieldName, searchText)
-	return arr.filter(obj=>(obj[searchFieldName].toLowerCase().includes(searchText.toLowerCase()) )) ; }
+	return arr.filter(obj=>(obj[searchFieldName].toLowerCase().includes(searchText.toLowerCase()) )) ;
+};
 
 export default conditionalSearch

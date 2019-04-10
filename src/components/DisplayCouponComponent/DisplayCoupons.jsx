@@ -2,13 +2,12 @@ import React from "react";
 import Header from "../HeaderComponent/Header";
 import "./DisplayCoupons.css";
 import Popup from "reactjs-popup";
-import Config, {SORT_ORDERS} from "../../config/config";
+import Config from "../../config/config";
 import {connect} from "react-redux";
 import AllCoupons, {LoadedCouponsSideBar, PrintComponent, SideBar, WelcomeHeader} from "./DisplayCouponsProvider";
 import {reset_all_redux} from "../../redux/actions/Common";
 import {ROUTE_HOME_PAGE} from "../../utils/RouteConstants";
 import {updateLoaded} from "../../redux/actions/SearchSortFilter";
-import conditionalSearch from "../../utils/conditionalSearch";
 
 class Coupons extends React.Component {
 	constructor(props) {
@@ -41,12 +40,12 @@ class Coupons extends React.Component {
 		this.tick();
 	}
 
-	shouldComponentUpdate() {
-		if (this.state.logOutTrigger || this.state.logOutReload || this.state.count >= 20 || this.state.count >= 30) {
-			return true;
-		}
-		return false;
-	}
+	// shouldComponentUpdate() {
+	// 	if (this.state.logOutTrigger || this.state.logOutReload || this.state.count >= 20 || this.state.count >= 30) {
+	// 		return true;
+	// 	}
+	// 	return false;
+	// }
 
 	tick() {
 		this.setState({count: (this.state.count + 1)});
@@ -176,23 +175,6 @@ class Coupons extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-
-	// const comparator=(order ,ascOrderVal)=>
-	// 	(order === ascOrderVal ? (obj1, obj2)=>(obj1 > obj2) : (obj1, obj2)=>(obj1 < obj2));
-	//
-	// const sortByKey = (arr, key, ascOrderVal, order)=>
-	// 	(arr.sort((obj1,obj2)=>
-	// 		(comparator(order,ascOrderVal)(obj1[key].toString().toLowerCase(),obj2[key].toString().toLowerCase()) ? 1 : -1 )));
-	//
-	// let toBeSearched = state.SearchSortFilterReducer.toBeSearched;
-	// let searchText =state.SearchSortFilterReducer.search.searchString;
-	// let sortOption = state.SearchSortFilterReducer.sort;
-	//
-	// let allCoupons=  state.DisplayCouponsReducer.allCoupons;
-	//
-	// allCoupons = sortByKey(allCoupons, sortOption.sortBy,SORT_ORDERS.ASC, sortOption.sortOrder);
-	// allCoupons = !!toBeSearched ? conditionalSearch(allCoupons, "name",  searchText) : allCoupons;
-
 	return {
 		userInfo: state.DisplayCouponsReducer.userInfo,
 		allCoupons : state.DisplayCouponsReducer.allCoupons
