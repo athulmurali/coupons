@@ -4,6 +4,8 @@ import Flippy, {BackSide, FrontSide} from "react-flippy";
 import {updateCoupons, flipCard} from "../../redux/actions/DisplayCouponAction";
 import PlusIcon from "../../assets/addNew.svg";
 import LogOut_Success from "../../assets/addedNew.svg";
+import {SORT_ORDERS} from "../../config/config";
+import conditionalSearch from "../../utils/conditionalSearch";
 let loadedSet = new Set([]);
 let x = [];
 
@@ -105,8 +107,25 @@ class CouponCards extends React.Component {
 
 
 const mapStateToProps=(state)=>{
+
+	const comparator=(order ,ascOrderVal)=>
+		(order === ascOrderVal ? (obj1, obj2)=>(obj1 > obj2) : (obj1, obj2)=>(obj1 < obj2));
+
+	const sortByKey = (arr, key, ascOrderVal, order)=>
+		(arr.sort((obj1,obj2)=>
+			(comparator(order,ascOrderVal)(obj1[key].toString().toLowerCase(),obj2[key].toString().toLowerCase()) ? 1 : -1 )));
+
+	let toBeSearched = state.SearchSortFilterReducer.toBeSearched;
+	let searchText =state.SearchSortFilterReducer.search.searchString;
+	let sortOption = state.SearchSortFilterReducer.sort;
+
+	let allCoupons=  state.DisplayCouponsReducer.allCoupons;
+
+	allCoupons = sortByKey(allCoupons, sortOption.sortBy,SORT_ORDERS.ASC, sortOption.sortOrder);
+	allCoupons = !!toBeSearched ? conditionalSearch(allCoupons, "name",  searchText) : allCoupons;
+
 	return {
-		allCoupons :state.SearchSortFilterReducer.arr,
+		allCoupons :allCoupons,
 		LoadedCouponsTrigger: state.DisplayCouponsReducer.LoadedCouponsTrigger,
 		loaded: state.SearchSortFilterReducer.loaded.loaded,
 		searchedCouponsLength: state.DisplayCouponsReducer.searchedCouponsLength,
