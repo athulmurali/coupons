@@ -4,7 +4,7 @@ import Flippy, {BackSide, FrontSide} from "react-flippy";
 import {updateCoupons, flipCard} from "../../redux/actions/DisplayCouponAction";
 import PlusIcon from "../../assets/addNew.svg";
 import LogOut_Success from "../../assets/addedNew.svg";
-import {SORT_ORDERS} from "../../config/config";
+import {SEARCH_FIELD_NAMES, SORT_ORDERS} from "../../config/config";
 import conditionalSearch from "../../utils/conditionalSearch";
 let loadedSet = new Set([]);
 let x = [];
@@ -14,7 +14,7 @@ class CouponCards extends React.Component {
 		super(props);
 		this.state = {
 			values: [],
-			loadedCouponsCheck: true, 
+			loadedCouponsCheck: true,
 			checkNewCoupon: false,
 			tempLoadedCoupons: [],
 		}
@@ -34,7 +34,7 @@ class CouponCards extends React.Component {
 		}
 	}
 
-	
+
 
 	render() {
 		let coupons = this.props.allCoupons;
@@ -57,10 +57,10 @@ class CouponCards extends React.Component {
 			couponsLength = coupons.length;
 			this.props.updateCoupons({"searchedCouponsLength": couponsLength});
 		}
-		
+
 		return coupons.map((coupon,i)=><div className="Cards" key={i} onClick={() => this.props.flipCard(i)}>
-				
-				<Flippy 
+
+				<Flippy
 					isFlipped={!isDataUpdated && coupon.isFlipped}
 					flipOnHover={false} // default false
 					flipOnClick={false} // default false
@@ -71,39 +71,39 @@ class CouponCards extends React.Component {
 						height: "343px",
 						padding: "30",
 					}}>
-					<BackSide 
+					<BackSide
 					style={{
 						backgroundColor: "white",
 						color: "black",
 						width: "260px",
 						height: "399px",
 					}} >
-						<h5 className="couponTitle"> {coupon.title}</h5> 
-						<h5 className="couponName"> {coupon.name}</h5> 
-						<h5 className="couponCategory"> {coupon.couponCategory}</h5> 
+						<h5 className="couponTitle"> {coupon.title}</h5>
+						<h5 className="couponName"> {coupon.name}</h5>
+						<h5 className="couponCategory"> {coupon.couponCategory}</h5>
 						<h6 className="couponDescription"> {coupon.description} </h6>
 						<h6 className="legalText"> {coupon.legalText} </h6>
 						<h6 className="viewMore"> View less </h6>
 					</BackSide>
-					<FrontSide 
-										
+					<FrontSide
+
 										// ref = {el => this.flippy.toggle = el} 'http'+coupon.url.substring(5)
 										style={{
 						width: "260px",
 						height: "399px",
-					}} 
+					}}
 					>
-					
+
 						<img src={coupon.url} width="80px" height="100px" alt="image_image" />
-						<h5 className="couponTitle"> {coupon.title}</h5> 
-						<h5 className="couponName"> {coupon.name}</h5> 
+						<h5 className="couponTitle"> {coupon.title}</h5>
+						<h5 className="couponName"> {coupon.name}</h5>
 						<h6 className="couponDescription"> {coupon.description} </h6>
 						<h6 className="expireDate"> <span className="expire">Exp:</span>{coupon.expirationDate.slice(0,10)} </h6>
 						<h6 className="viewMore"> View more </h6>
 					</FrontSide>
 				</Flippy>
 				<div className= "plusIcon" onClick={(e) => this.swapIcon(coupon, e)}>
-							<img className="addCheck" height="56px" width="56px" src={(coupon.loaded) ? LogOut_Success: PlusIcon} alt = "plus sign unable to load"/>	
+							<img className="addCheck" height="56px" width="56px" src={(coupon.loaded) ? LogOut_Success: PlusIcon} alt = "plus sign unable to load"/>
 						</div>
 			</div>);
 
@@ -126,7 +126,7 @@ const mapStateToProps=(state)=>{
 
 	let allCoupons=  state.DisplayCouponsReducer.allCoupons;
 
-	allCoupons =   toBeSearched ? conditionalSearch(allCoupons,"name", searchText) : allCoupons;
+	allCoupons =   toBeSearched ? conditionalSearch(allCoupons,SEARCH_FIELD_NAMES, searchText) : allCoupons;
 	allCoupons = sortByKey(allCoupons, sortOption.sortBy,SORT_ORDERS.ASC, sortOption.sortOrder);
 
 	return {
@@ -144,6 +144,6 @@ const mapDispatchToProps = (dispatch) => ({
 	flipCard :(i)=>flipCard(dispatch, i)
 }
 );
- 
+
 export default connect(mapStateToProps,mapDispatchToProps)(CouponCards);
 
