@@ -39,8 +39,7 @@ class CouponCards extends React.Component {
 	render() {
 		let coupons = this.props.allCoupons
 		let isDataUpdated = this.props.isDataUpdated;
-		let couponsLength = coupons.length;
-		this.props.updateCoupons({"searchedCouponsLength": couponsLength});
+		let couponsLength = this.props.allCoupons.length;
 
 
 		if(couponsLength === 0) {
@@ -121,8 +120,8 @@ const mapStateToProps=(state)=>{
 
 	let allCoupons=  state.DisplayCouponsReducer.allCoupons;
 
-	allCoupons = sortByKey(allCoupons, sortOption.sortBy,SORT_ORDERS.ASC, sortOption.sortOrder);
-	allCoupons =  allCoupons;
+	allCoupons =   toBeSearched ? conditionalSearch(allCoupons,"name", searchText) : allCoupons;
+	// allCoupons = sortByKey(allCoupons, sortOption.sortBy,SORT_ORDERS.ASC, sortOption.sortOrder);
 
 	return {
 		allCoupons :allCoupons,
