@@ -1,6 +1,6 @@
 import Config, {CouponsTypeEnum, DEFAULT_SORT, FILTER_CATEGORIES, LOADED_DEFAULT} from "../../config/config";
 
-import {FLIP_CARD, RESET} from "./DisplayCouponReducer";
+import {RESET} from "./DisplayCouponReducer";
 
 export const FETCH_COUPONS = "FETCH_COUPONS";
 export const SET_SORT = "SET_SORT";
@@ -46,7 +46,7 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 		return {
 			...state,
 			sort: action.payload,
-			isDataUpdated: true
+			isDataUpdated: true,
 		};
 
 	case SET_FILTERS :
@@ -54,8 +54,7 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 			...state,
 			filters: action.payload,
 			toBeFetched: true,
-			isDataUpdated: true
-
+			isDataUpdated: true,
 		};
 
 	case SET_LOADED :
@@ -65,7 +64,6 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 			loaded: action.payload,
 			toBeFetched: true,
 			isDataUpdated: true
-
 		};
 
 
@@ -82,10 +80,11 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 		}
 
 
+		const toBeSearched =  searchOnDeleteChar || searchOnMinChars;
 		return {
 			...state,
 			search: action.payload,
-			toBeSearched: searchOnDeleteChar || searchOnMinChars,
+			toBeSearched,
 			isDataUpdated :  true,
 
 		};
@@ -94,7 +93,8 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 		return {
 			...state,
 			toBeFetched: false,
-			isLoading: false
+			isLoading: false,
+
 
 		};
 
@@ -102,7 +102,7 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 		return {
 			...state,
 			toBeFetched: false,
-			isLoading: false
+			isLoading: false,
 
 		};
 
@@ -127,18 +127,6 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 				isDataUpdated :  true
 			};
 		}
-
-		case FLIP_CARD : {
-			const ind = action.payload.cardIndex;
-			const newArr = state.arr;
-			newArr[ind].isFlipped = !newArr[ind].isFlipped;
-			return {
-				...state,
-				arr : [...newArr],
-				isDataUpdated : false
-			};
-		}
-
 
 	default             :
 		return {...state};
