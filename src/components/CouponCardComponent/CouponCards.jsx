@@ -37,15 +37,21 @@ class CouponCards extends React.Component {
 	
 
 	render() {
-		let coupons = this.props.allCoupons
+		let coupons = this.props.allCoupons;
 		let isDataUpdated = this.props.isDataUpdated;
-		let couponsLength = this.props.allCoupons.length;
+		let couponsLength = coupons.length;
 
 
-		if(couponsLength === 0) {
+		if(!couponsLength) {
 			return <div style={{justifyContent:"center", alignItems:"center", display:"flex", height: "670px", fontSize:"21px"}}> No Coupons Found </div>;
 		}
 
+		/**
+		 *
+		 * The following line might result in infinite re-rendering
+		 * Must be moved to an appropriate lifecycle hook.
+		 *
+		 */
 		if(this.props.loaded){
 			coupons = coupons.concat(this.state.tempLoadedCoupons);
 			couponsLength = coupons.length;
@@ -121,7 +127,7 @@ const mapStateToProps=(state)=>{
 	let allCoupons=  state.DisplayCouponsReducer.allCoupons;
 
 	allCoupons =   toBeSearched ? conditionalSearch(allCoupons,"name", searchText) : allCoupons;
-	// allCoupons = sortByKey(allCoupons, sortOption.sortBy,SORT_ORDERS.ASC, sortOption.sortOrder);
+	allCoupons = sortByKey(allCoupons, sortOption.sortBy,SORT_ORDERS.ASC, sortOption.sortOrder);
 
 	return {
 		allCoupons :allCoupons,
