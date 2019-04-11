@@ -7,7 +7,6 @@ import {connect} from "react-redux";
 import AllCoupons, {LoadedCouponsSideBar, PrintComponent, SideBar, WelcomeHeader} from "./DisplayCouponsProvider";
 import {reset_all_redux} from "../../redux/actions/Common";
 import {ROUTE_HOME_PAGE} from "../../utils/RouteConstants";
-import {updateCoupons} from "../../redux/actions/DisplayCouponAction";
 import {updateLoaded} from "../../redux/actions/SearchSortFilter";
 
 class Coupons extends React.Component {
@@ -41,12 +40,12 @@ class Coupons extends React.Component {
 		this.tick();
 	}
 
-	shouldComponentUpdate() {
-		if (this.state.logOutTrigger || this.state.logOutReload || this.state.count >= 20 || this.state.count >= 30) {
-			return true;
-		}
-		return false;
-	}
+	// shouldComponentUpdate() {
+	// 	if (this.state.logOutTrigger || this.state.logOutReload || this.state.count >= 20 || this.state.count >= 30) {
+	// 		return true;
+	// 	}
+	// 	return false;
+	// }
 
 	tick() {
 		this.setState({count: (this.state.count + 1)});
@@ -178,13 +177,12 @@ class Coupons extends React.Component {
 const mapStateToProps = (state) => {
 	return {
 		userInfo: state.DisplayCouponsReducer.userInfo,
-		allCoupons: state.DisplayCouponsReducer.allCoupons
+		allCoupons : state.DisplayCouponsReducer.allCoupons
 	};
 };
 
 const mapDispatchToProps = (dispatch) => ({
 	resetRedux: () => reset_all_redux(dispatch),
-	updateCoupons: (updatedValue) => updateCoupons(dispatch, updatedValue),
 	updateLoaded: (updatedLoadedParams) => updateLoaded(dispatch, updatedLoadedParams)
 
 });

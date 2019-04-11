@@ -130,7 +130,7 @@ export const FILTER_CATEGORIES = [
 		name: "Soups & Canned Goods"
 	}
 ];
-const SORT_ORDERS = Object.freeze({
+export const SORT_ORDERS = Object.freeze({
 	ASC: "asc",
 	DESC: "desc"
 });
@@ -164,3 +164,5 @@ export const CouponsTypeEnum = Object.freeze({LOADED: "LOADED", ALL: "ALL"});
 
 export const DEFAULT_SORT = SORT_CATEGORIES[0];
 export const LOADED_DEFAULT = false;
+
+export const  SEARCH_FIELD_NAMES = ["name","description"];
