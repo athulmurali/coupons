@@ -2,7 +2,6 @@ import {FETCH_COUPONS_FULFILLED} from "./SearchSortFilterReducer";
 
 export const UPDATE_DISPLAY_COUPON_STATE = "UPDATE_DISPLAY_COUPON_STATE";
 export const UPDATE_COUPON_DETAILS = "UPDATE_COUPON_DETAILS";
-export const FLIP_CARD = "FLIP_CARD";
 
 export const RESET = "RESET";
 

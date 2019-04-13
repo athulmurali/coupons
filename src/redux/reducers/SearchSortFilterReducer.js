@@ -1,4 +1,4 @@
-import Config, {CouponsTypeEnum, DEFAULT_SORT, FILTER_CATEGORIES, LOADED_DEFAULT} from "../../config/config";
+import Config, {CouponsTypeEnum, DEFAULT_SORT, LOADED_DEFAULT} from "../../config/config";
 
 import {RESET} from "./DisplayCouponReducer";
 
@@ -27,8 +27,9 @@ const initialState = {
 	arr: [],
 	loaded: {loaded: LOADED_DEFAULT},
 	array_filter: [],
-	categoriesAvailable: FILTER_CATEGORIES,
-	isDataUpdated : false
+	categoriesAvailable: [],
+	isDataUpdated : false,
+	error: null
 };
 
 // to be moved to config
@@ -118,14 +119,27 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 		};
 	}
 
+		case FETCH_CATEGORIES_PENDING : {
+			return {
+				...state,
+				isLoading: true
+			};
+		}
+
+		case FETCH_CATEGORIES_REJECTED : {
+			return {
+				...state,
+				isLoading: false,
+				error : action.payload.message
+			};
+		}
+
 
 		case FETCH_CATEGORIES_FULFILLED : {
 			return {
 				...state,
 				isLoading: false,
-
-				//to be checked before the following is used for fetching categories
-				categoriesAvailable: action.payload.data.response,
+				categoriesAvailable: action.payload.data,
 				isDataUpdated :  true
 			};
 		}
