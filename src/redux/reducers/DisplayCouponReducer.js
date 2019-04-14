@@ -9,7 +9,7 @@ export const RESET = "RESET";
 const initialState = {
 	searchedCouponName: "",
 	LoadedCouponsTrigger: false,
-	userInfo: null,
+	userInfo: {FirstName : 'John Snow'},
 	allCoupons: [],
 	searchedCouponsLength: 0,
 	loadedCouponIds: [],
@@ -44,7 +44,7 @@ const DisplayCouponsReducer = (state = initialState, action) => {
 			...state,
 			toBeFetched: false,
 			isLoading: false,
-			allCoupons: action.payload.data.response
+			allCoupons: action.payload.data
 
 		};
 	}

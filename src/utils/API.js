@@ -22,9 +22,10 @@ const getUserCoupons = (barcodeNumber) => {
 	return axios.get(url);
 };
 
+// The default loyalty number must be removed once the authentication issue in the backend is fixed
+// This is just a temporary fix
 
-
-const getCouponsWithFilters =  (searchParams, filterParams, sortParams, loadedParams) => {
+const getCouponsWithFilters =  (searchParams, filterParams, sortParams, loadedParams,loyaltyNumber = 2212634049593) => {
 	const queryParams = {
 		...searchParams,
 		...filterParams,
@@ -32,7 +33,7 @@ const getCouponsWithFilters =  (searchParams, filterParams, sortParams, loadedPa
 		...loadedParams,
 	};
 	const processedQueryParams = processQueryParams(queryParams)
-	const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/coupons/fetchCouponsByFilter`;
+	const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/coupons/user/${loyaltyNumber}/`;
 
 	return  axios.get(url, {
 

@@ -172,6 +172,8 @@ export const importAll = (r) => {
 const arrayToArrayString = (arrayObject )=>("["+ arrayObject.toString() +"]")
 const encodeSpecialChars=(strToEncode)=>(strToEncode.replace('&', '_'))
 
+const arrayToSemicolonString = (arrayObject)=>(arrayObject.join(';').toString());
+
 export const  processQueryParams=(queryParams)=>{
 
 
@@ -186,7 +188,7 @@ export const  processQueryParams=(queryParams)=>{
 			continue
 		}
 		else if (queryParams[key] instanceof  Array){
-			processedQueryParams[key] = arrayToArrayString(queryParams[key])
+			processedQueryParams[key] = arrayToSemicolonString(queryParams[key])
 			continue
 
 		}

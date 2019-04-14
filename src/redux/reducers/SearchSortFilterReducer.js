@@ -111,7 +111,7 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 				...state,
 				toBeFetched: false,
 				isLoading: false,
-				arr: action.payload.data.response
+				arr: action.payload.data
 
 		};
 	}
