@@ -27,10 +27,8 @@ const getUserCoupons = (barcodeNumber) => {
 
 const getCouponsWithFilters =  (searchParams, filterParams, sortParams, loadedParams,loyaltyNumber = 2212634049593) => {
 	const queryParams = {
-		...searchParams,
 		...filterParams,
-		...sortParams,
-		...loadedParams,
+		...loadedParams
 	};
 	const processedQueryParams = processQueryParams(queryParams)
 	const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/coupons/user/${loyaltyNumber}/`;
