@@ -177,7 +177,7 @@ class Coupons extends React.Component {
 const mapStateToProps = (state) => {
 	return {
 		userInfo: state.DisplayCouponsReducer.userInfo,
-		allCoupons : state.DisplayCouponsReducer.allCoupons
+		allCoupons : state.SearchSortFilterReducer.arr
 	};
 };
 
