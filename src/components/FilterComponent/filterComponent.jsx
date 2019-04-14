@@ -49,7 +49,7 @@ class FilterComponent extends React.Component {
 			this.setState({array_filter: checkedFilters});
 		}
 
-		this.props.updateCheckedFilters({filterByCategory: checkedFilters});
+		this.props.updateCheckedFilters({categories: checkedFilters});
 
 	};
 
