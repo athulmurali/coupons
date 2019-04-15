@@ -7,7 +7,7 @@ import {connect} from "react-redux";
 import AllCoupons, {LoadedCouponsSideBar, PrintComponent, SideBar, WelcomeHeader} from "./DisplayCouponsProvider";
 import {reset_all_redux} from "../../redux/actions/Common";
 import {ROUTE_HOME_PAGE} from "../../utils/RouteConstants";
-import {updateLoaded} from "../../redux/actions/SearchSortFilter";
+import {fetchCategories, updateLoaded} from "../../redux/actions/SearchSortFilter";
 
 class Coupons extends React.Component {
 	constructor(props) {
@@ -36,6 +36,7 @@ class Coupons extends React.Component {
 
 	componentDidMount() {
 		this.props.updateLoaded({loaded: false});
+		this.props.fetchCategories();
 		this.startTimer();
 		this.tick();
 	}
@@ -183,7 +184,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
 	resetRedux: () => reset_all_redux(dispatch),
-	updateLoaded: (updatedLoadedParams) => updateLoaded(dispatch, updatedLoadedParams)
+	updateLoaded: (updatedLoadedParams) => updateLoaded(dispatch, updatedLoadedParams),
+	fetchCategories: ()=>fetchCategories(dispatch)
 
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Coupons);

@@ -41,11 +41,20 @@ const getCouponsWithFilters =  (searchParams, filterParams, sortParams, loadedPa
 	})
 }
 
+const getCategoriesFromServer=()=>{
+
+	const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/coupons/categories`;
+
+	return  axios.get(url)
+
+};
+
 const API = {
 	getMap,
 	getUserDetails,
 	getUserCoupons,
-	getCouponsWithFilters
+	getCouponsWithFilters,
+	getCategoriesFromServer
 };
 
 export default API;
