@@ -9,7 +9,7 @@ export const RESET = "RESET";
 const initialState = {
 	searchedCouponName: "",
 	LoadedCouponsTrigger: false,
-	userInfo: {FirstName : 'John Snow'},
+	userInfo: {FirstName :'Athul'},
 	allCoupons: [],
 	searchedCouponsLength: 0,
 	loadedCouponIds: [],

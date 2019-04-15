@@ -20,9 +20,10 @@ class CouponCards extends React.Component {
 		}
 	}
 	componentWillReceiveProps(nextProps, nextContext) {
-		if (nextProps && nextProps.allCoupons && nextProps.allCoupons !== this.state.allCoupons)
+		if (!!nextProps && !!nextProps.allCoupons && nextProps.allCoupons !== this.state.allCoupons)
 		{
-			this.setState({allCoupons : nextProps.allCoupons})
+			console.log("new array coming in .. ")
+			this.setState({allCoupons : [...nextProps.allCoupons]})
 		}
 
 
@@ -31,7 +32,7 @@ class CouponCards extends React.Component {
 
 	flipCard =(index)=>{
 
-		const allCoupons =  this.state.allCoupons;
+		const allCoupons =  JSON.parse(JSON.stringify(this.state.allCoupons));
 		const couponToFlip = allCoupons[index];
 		if (!!couponToFlip)
 		{
@@ -44,7 +45,7 @@ class CouponCards extends React.Component {
 
 	loadCoupon = (coupon, e, index) => {
 		e.stopPropagation();
-		const allCoupons =  this.state.allCoupons;
+		const allCoupons =  JSON.parse(JSON.stringify(this.state.allCoupons));
 		const couponToFlip = allCoupons[index];
 		if (!!couponToFlip && !couponToFlip.isLoaded )
 		{
@@ -60,7 +61,9 @@ class CouponCards extends React.Component {
 
 
 
+
 	render() {
+		console.log("couponCards re-rendering")
 		let coupons = this.state.allCoupons;
 		let isDataUpdated = this.props.isDataUpdated;
 		let couponsLength = coupons.length;
@@ -138,6 +141,7 @@ const mapStateToProps=(state)=>{
 	let sortOption = state.SearchSortFilterReducer.sort;
 
 	let allCoupons=  state.SearchSortFilterReducer.arr;
+	allCoupons = JSON.parse(JSON.stringify(allCoupons));
 
 	allCoupons =   toBeSearched ? conditionalSearch(allCoupons,SEARCH_FIELD_NAMES, searchText) : allCoupons;
 	allCoupons = sortByKey(allCoupons, sortOption.sortBy,SORT_ORDERS.ASC, sortOption.sortOrder);

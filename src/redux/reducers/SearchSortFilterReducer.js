@@ -42,11 +42,12 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 		};
 
 
-	case SET_SORT :
+		case SET_SORT :
 		return {
 			...state,
 			sort: action.payload,
 			isDataUpdated: true,
+			arr : [...state.arr]
 		};
 
 	case SET_FILTERS :
@@ -86,6 +87,7 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 			search: action.payload,
 			toBeSearched,
 			isDataUpdated :  true,
+			arr : toBeSearched? [...state.arr] : state.arr
 
 		};
 
