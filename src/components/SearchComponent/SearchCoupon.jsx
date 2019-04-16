@@ -11,6 +11,7 @@ class SearchCouponByName extends React.Component {
 	}
 
 	render(){
+		console.log(this.props)
 		let couponsLength = this.props.couponsLength;
 
 		return(
