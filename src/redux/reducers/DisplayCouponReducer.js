@@ -8,12 +8,13 @@ export const RESET = "RESET";
 const initialState = {
 	searchedCouponName: "",
 	LoadedCouponsTrigger: false,
-	userInfo: {FirstName :'Athul'},
+	userInfo: null,
 	allCoupons: [],
 	searchedCouponsLength: 0,
 	loadedCouponIds: [],
 	activeNewCoupons: "active",
 	activeLoadedCoupons: "inactive",
+	loyaltyNumber: null
 };
 
 

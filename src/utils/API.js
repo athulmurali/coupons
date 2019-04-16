@@ -1,6 +1,7 @@
 import axios from "axios";
 import Config from "./../config/config";
 import {processQueryParams} from "./utils";
+import getCheckSum from "./calculateCheckSum";
 
 const http = Config.https ? "https" : "http";
 
@@ -9,9 +10,8 @@ const getMap = (storeNo = Config.storeNumber) => {
 	const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/customer/fetchCustomer/`;
 	return axios.get(url, { timeout: Config.timeoutLength });
 };
-const getUserDetails = (barcodeNumber) => {
-	const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/customer/fetch/`+barcodeNumber;
-
+const getUserDetails = (barcodeNumber,type) => {
+	const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/customer/v1/fetch/`+barcodeNumber;
 	return axios.get(url);
 };
 const getUserCoupons = (barcodeNumber) => {
@@ -25,7 +25,8 @@ const getUserCoupons = (barcodeNumber) => {
 // The default loyalty number must be removed once the authentication issue in the backend is fixed
 // This is just a temporary fix
 
-const getCouponsWithFilters =  (searchParams, filterParams, sortParams, loadedParams,loyaltyNumber = 2212634049593,storeId= '0478') => {
+const getCouponsWithFilters =  (searchParams, filterParams, sortParams, loadedParams,loyaltyNumber = null,storeId= '0478') => {
+	loyaltyNumber = getCheckSum(loyaltyNumber);
 	const queryParams = {
 		...filterParams,
 		...loadedParams
@@ -54,13 +55,13 @@ const getCouponsWithFilters =  (searchParams, filterParams, sortParams, loadedPa
 const getCategoriesFromServer=()=>{
 
 	const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/coupons/categories`;
-
 	return  axios.get(url)
 
 };
 
-const loadCoupon=(loyaltyNumber = 2212634049593, couponId=null, loadType=null )=>{
+const loadCoupon=(loyaltyNumber=null, couponId=null, loadType=null )=>{
 
+	loyaltyNumber = getCheckSum(loyaltyNumber);
 	const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/coupons/${loyaltyNumber}/load/${loadType}/${couponId}/`;
 
 	return  axios.put(url)
