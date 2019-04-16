@@ -17,7 +17,9 @@ class CouponCards extends React.Component {
 			loadedCouponsCheck: true,
 			checkNewCoupon: false,
 			tempLoadedCoupons: [],
-			allCoupons : []
+			allCoupons : [],
+			couponsLength : 0
+
 		}
 	}
 	componentWillReceiveProps(nextProps, nextContext) {
@@ -26,6 +28,18 @@ class CouponCards extends React.Component {
 			this.setState({allCoupons: nextProps.allCoupons})
 
 
+
+
+
+		}
+		if (this.state.searchedCouponsLength !== nextProps.allCoupons.length)
+		{
+			console.log("allCoupons old length :",  this.state.couponsLength  , "newLength : ", nextProps.allCoupons.length)
+
+			this.setState({searchedCouponsLength: nextProps.allCoupons.length},()=>{
+			this.props.updateCoupons({searchedCouponsLength :nextProps.allCoupons.length })
+
+			})
 		}
 
 	}
@@ -158,7 +172,8 @@ const mapStateToProps=(state)=>{
 		inLoadedScreen: state.SearchSortFilterReducer.loaded.loaded,
 		searchedCouponsLength: state.DisplayCouponsReducer.searchedCouponsLength,
 		isDataUpdated: state.SearchSortFilterReducer.isDataUpdated,
-		loyaltyNumber : state.DisplayCouponsReducer.loyaltyNumber
+		loyaltyNumber : state.DisplayCouponsReducer.loyaltyNumber,
+		couponsLength : state.DisplayCouponsReducer.couponsLength
 
 	};
 };
