@@ -156,7 +156,7 @@ class Coupons extends React.Component {
 		</Popup>);
 
 
-		return (<div>
+		return (<div className={buttonTrigger? "pointerEventsNone" : ""}>
 			<WelcomeHeader userName={userName} parent={this}></WelcomeHeader>
 			<Header/>
 			<PrintComponent hideLoadedCoupons={this.state.hideLoadedCoupons}

@@ -143,7 +143,6 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 				isDataUpdated :  true
 			};
 		}
-
 	default             :
 		return {...state};
 	}

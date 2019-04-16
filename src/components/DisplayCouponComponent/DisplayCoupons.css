@@ -557,3 +557,11 @@ li a:hover:not(.active) {
     text-decoration: underline;
     font-weight: bold;
 }
+
+.pointerEventsNone{
+    pointer-events: none;
+}
+
+.modal{
+    pointer-events: all;
+}

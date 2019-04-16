@@ -6,7 +6,8 @@ import PlusIcon from "../../assets/addNew.svg";
 import LogOut_Success from "../../assets/addedNew.svg";
 import {SEARCH_FIELD_NAMES, SORT_ORDERS} from "../../config/config";
 import conditionalSearch from "../../utils/conditionalSearch";
-
+import {loadCoupon} from "../../redux/actions/LoadCoupon";
+import API from "../../utils/API";
 
 class CouponCards extends React.Component {
 	constructor(props) {
@@ -20,13 +21,12 @@ class CouponCards extends React.Component {
 		}
 	}
 	componentWillReceiveProps(nextProps, nextContext) {
-		if (!!nextProps && !!nextProps.allCoupons && nextProps.allCoupons !== this.state.allCoupons)
-		{
+		if (!!nextProps && !!nextProps.allCoupons && nextProps.allCoupons !== this.state.allCoupons) {
 			console.log("new array coming in .. ")
-			this.setState({allCoupons : [...nextProps.allCoupons]})
+			this.setState({allCoupons: nextProps.allCoupons})
+
+
 		}
-
-
 
 	}
 
@@ -43,21 +43,26 @@ class CouponCards extends React.Component {
 }
 
 
-	loadCoupon = (coupon, e, index) => {
+	loadCoupon = async (coupon, e, index) => {
 		e.stopPropagation();
-		const allCoupons =  JSON.parse(JSON.stringify(this.state.allCoupons));
+		const allCoupons = JSON.parse(JSON.stringify(this.state.allCoupons));
 		const couponToFlip = allCoupons[index];
-		if (!!couponToFlip && !couponToFlip.isLoaded )
-		{
+
+		if (!!couponToFlip && !couponToFlip.isLoaded) {
 			couponToFlip.isLoaded = true;
+			this.setState({allCoupons} , async () => {
+				try {
+					await API.loadCoupon("2212634049593", coupon.id, coupon.source)
 
+				} catch (e) {
+					alert("Something went wrong in loading this coupon!")
+				}
+
+			})
 		}
-		this.setState({ allCoupons  },
-			//Add api call to load the coupon here
-		);
 
 
-	}
+	};
 
 
 
@@ -65,7 +70,6 @@ class CouponCards extends React.Component {
 	render() {
 		console.log("couponCards re-rendering")
 		let coupons = this.state.allCoupons;
-		let isDataUpdated = this.props.isDataUpdated;
 		let couponsLength = coupons.length;
 
 
@@ -119,7 +123,9 @@ class CouponCards extends React.Component {
 					</FrontSide>
 				</Flippy>
 				<div className= "plusIcon" onClick={(e) => this.loadCoupon(coupon, e,i)}>
-							<img className="addCheck" height="56px" width="56px" src={(!!coupon.isLoaded) ? LogOut_Success: PlusIcon} alt = "plus sign unable to load"/>
+							<img className="addCheck" height="56px" width="56px"
+								 src={(!!coupon.isLoaded || !! this.props.inLoadedScreen)
+									 ? LogOut_Success: PlusIcon} alt = "plus sign unable to load"/>
 						</div>
 			</div>);
 
@@ -149,7 +155,7 @@ const mapStateToProps=(state)=>{
 	return {
 		allCoupons :allCoupons,
 		LoadedCouponsTrigger: state.DisplayCouponsReducer.LoadedCouponsTrigger,
-		loaded: state.SearchSortFilterReducer.loaded.loaded,
+		inLoadedScreen: state.SearchSortFilterReducer.loaded.loaded,
 		searchedCouponsLength: state.DisplayCouponsReducer.searchedCouponsLength,
 		isDataUpdated: state.SearchSortFilterReducer.isDataUpdated
 
@@ -157,7 +163,8 @@ const mapStateToProps=(state)=>{
 };
 
 const mapDispatchToProps = (dispatch) => ({
-	updateCoupons :( updatedValue)=> updateCoupons(dispatch,  updatedValue )
+	updateCoupons :( updatedValue)=> updateCoupons(dispatch,  updatedValue ),
+	loadCoupon:(loyaltyNumber, couponId, couponSource)=>loadCoupon(dispatch,loyaltyNumber, couponId, couponSource)
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(CouponCards);

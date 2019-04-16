@@ -1,4 +1,10 @@
-import {SET_FILTERS, SET_SEARCH, SET_SORT, SET_LOADED, FETCH_CATEGORIES} from "../reducers/SearchSortFilterReducer";
+import {
+	SET_FILTERS,
+	SET_SEARCH,
+	SET_SORT,
+	SET_LOADED,
+	FETCH_CATEGORIES,
+} from "../reducers/SearchSortFilterReducer";
 import API from "../../utils/API";
 /**
  *
