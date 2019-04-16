@@ -52,7 +52,7 @@ class CouponCards extends React.Component {
 			couponToFlip.isLoaded = true;
 			this.setState({allCoupons} , async () => {
 				try {
-					await API.loadCoupon("2212634049593", coupon.id, coupon.source)
+					await API.loadCoupon(this.props.loyaltyNumber, coupon.id, coupon.source)
 
 				} catch (e) {
 					alert("Something went wrong in loading this coupon!")
@@ -157,7 +157,8 @@ const mapStateToProps=(state)=>{
 		LoadedCouponsTrigger: state.DisplayCouponsReducer.LoadedCouponsTrigger,
 		inLoadedScreen: state.SearchSortFilterReducer.loaded.loaded,
 		searchedCouponsLength: state.DisplayCouponsReducer.searchedCouponsLength,
-		isDataUpdated: state.SearchSortFilterReducer.isDataUpdated
+		isDataUpdated: state.SearchSortFilterReducer.isDataUpdated,
+		loyaltyNumber : state.DisplayCouponsReducer.loyaltyNumber
 
 	};
 };

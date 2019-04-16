@@ -127,10 +127,12 @@ class CameraScanner extends Component {
 
 			const userInfo = userDetailsResponse.data.response.Customer[0];
 			const allCoupons = couponsResponse.data.response;
+
 			this.props.updateCoupons(
 				{
 					allCoupons: allCoupons,
-					userInfo: userInfo
+					userInfo: userInfo,
+					loyaltyNumber: userInfo.ID[0].attributes.Value
 				});
 
 		} catch (error) {

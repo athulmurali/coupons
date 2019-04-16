@@ -50,8 +50,11 @@ class DialPad extends Component {
 			}
 			console.log(this.extractNumberFromFormat);
 			const response = await API.getUserDetails(this.extractNumberFromFormat);
-			const userInfo = response.data.response.Customer[0]
-			this.props.updateCoupons({userInfo: userInfo});
+
+			const userInfo = response.data.response.Customer[0];
+			this.props.updateCoupons({userInfo: userInfo
+				, loyaltyNumber: userInfo.ID[0].attributes.Value
+			});
 		} catch (error) {
 			console.log(error);
 			this.setErrorMessage();
@@ -70,7 +73,8 @@ class DialPad extends Component {
 		if (this.state.cardNumber === false) {
 			this.extractNumberFromFormat = (this.state.phoneNumber.substring(1, 4) + this.state.phoneNumber.substring(6, 9) + this.state.phoneNumber.substring(10));
 			console.log(this.extractNumberFromFormat);
-		} else {
+		}
+		else {
 			this.extractNumberFromFormat = this.state.phoneNumber.slice(0, -1);
 		}
 		//	this.searchForThePhoneNumberInDatabase(this.extractNumberFromFormat);

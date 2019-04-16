@@ -11,6 +11,7 @@ export const onChangeSearchSortFilter=(state, dispatch )=>{
 	const loadedParams = SearchSortFilterReducer.loaded
 
 	const couponsType = SearchSortFilterReducer.couponsType
+	const loyaltyNumber = state.DisplayCouponsReducer.loyaltyNumber;
 
 	console.log(SearchSortFilterReducer.toBeFetched)
 
@@ -19,9 +20,9 @@ export const onChangeSearchSortFilter=(state, dispatch )=>{
 		// if coupons type count grows greater than 2, then update the following code to a switch case
 		if (couponsType === CouponsTypeEnum.ALL)
 		{
-			fetchAllCouponsFromServer( dispatch, searchParams, filterParams , sortParams )
+			fetchAllCouponsFromServer( dispatch, searchParams, filterParams , sortParams,loyaltyNumber )
 		}
-		else {	fetchAllCouponsFromServer( dispatch, searchParams, filterParams , sortParams,loadedParams  )}
+		else {	fetchAllCouponsFromServer( dispatch, searchParams, filterParams , sortParams,loadedParams ,loyaltyNumber )}
 
 	}
 
