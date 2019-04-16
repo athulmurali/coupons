@@ -31,9 +31,19 @@ const getCouponsWithFilters =  (searchParams, filterParams, sortParams, loadedPa
 		...loadedParams
 	};
 	const processedQueryParams = processQueryParams(queryParams)
-	const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/coupons/user/${storeId}/${loyaltyNumber}/`;
+	const allCouponsUrl = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/coupons/user/${storeId}/${loyaltyNumber}/`;
 
-	return  axios.get(url, {
+	const loadedCouponsUrl = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/coupons/loaded/user/${storeId}/${loyaltyNumber}/`;
+	if (!!(loadedParams.loaded)){
+
+		return  axios.get(loadedCouponsUrl, {
+
+			params : {
+				...processedQueryParams
+			}
+		})
+	}
+	return  axios.get(allCouponsUrl, {
 
 		params : {
 			...processedQueryParams
@@ -49,12 +59,20 @@ const getCategoriesFromServer=()=>{
 
 };
 
+const loadCoupon=(loyaltyNumber = 2212634049593, couponId=null, loadType=null )=>{
+
+	const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/coupons/${loyaltyNumber}/load/${loadType}/${couponId}/`;
+
+	return  axios.put(url)
+}
+
 const API = {
 	getMap,
 	getUserDetails,
 	getUserCoupons,
 	getCouponsWithFilters,
-	getCategoriesFromServer
+	getCategoriesFromServer,
+	loadCoupon
 };
 
 export default API;
