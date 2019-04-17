@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="95px" height="95px" viewBox="0 0 95 95" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>success</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Load-Coupons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Logout-was-successful-2" transform="translate(-636.000000, -409.000000)">
+            <g id="success" transform="translate(636.000000, 409.000000)">
+                <circle id="Oval" fill="#8BC400" fill-rule="nonzero" cx="47.5" cy="47.5" r="47.5"></circle>
+                <polyline id="Stroke-1" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" points="20 46.426 41.132 67 74 35"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>
