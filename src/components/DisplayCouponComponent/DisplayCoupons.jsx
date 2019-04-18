@@ -8,7 +8,6 @@ import AllCoupons, {LoadedCouponsSideBar, PrintComponent, SideBar, WelcomeHeader
 import {reset_all_redux} from "../../redux/actions/Common";
 import {ROUTE_HOME_PAGE} from "../../utils/RouteConstants";
 import {fetchCategories, updateLoaded} from "../../redux/actions/SearchSortFilter";
-
 class Coupons extends React.Component {
 	constructor(props) {
 		super(props);
