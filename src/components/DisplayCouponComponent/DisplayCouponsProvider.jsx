@@ -29,7 +29,7 @@ export const LoadedCouponsSideBar = (props) => (
 	<Consumer>{
 		() => <div className="LoadedCoupons" hidden={props.hideNewCoupons}   >
 			<SearchCouponByName timerReset={props.timerReset} />
-			<div onClick={props.timerReset}>
+			<div onClick={props.timerReset} className="flippyCardsContainer">
 				<CouponCards  setRef={props}/>
 			</div>
 		</div>
@@ -43,8 +43,7 @@ const SideBarComp = (props) => (
 			() =>
 				<ul>
 
-					<li> <button  className={props.loaded ? "tabInactive" : "tabActive"}
-							 onClick={props.NewCoupons} > New Coupons </button></li>
+					<li> <button  className={props.loaded ? "tabInactive" : "tabActive"} onClick={props.NewCoupons} > New Coupons </button></li>
 					<li> <button  className={props.loaded ? "tabActive" : "tabInactive"} onClick={props.LoadedCoupons}> Loaded Coupons </button></li>
 					<SortComponent timerReset={props.timerReset}/>
 					<FilterComponent timerReset={props.timerReset}/>
