@@ -88,12 +88,12 @@ class CouponCards extends React.Component {
 		let couponsLength = coupons.length;
 
 
-		if(!couponsLength) {
-			return <div style={{justifyContent:"center", alignItems:"center", display:"flex", height: "670px", fontSize:"21px"}}> No Coupons Found </div>;
-		}
-
 		if(this.props.isLoading) {
 			return <div style={{justifyContent:"center", alignItems:"center", display:"flex", height: "670px", fontSize:"21px"}}><RiseLoader size={20} color="#E0004D" /> </div>
+		}
+
+		if(!couponsLength) {
+			return <div style={{justifyContent:"center", alignItems:"center", display:"flex", height: "670px", fontSize:"21px"}}> No Coupons Found </div>;
 		}
 
 
