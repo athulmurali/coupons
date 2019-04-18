@@ -56,8 +56,9 @@ class FilterComponent extends React.Component {
 	Filter_Category = () => {
 		return (
 			<div onClick={this.props.timerReset}>
-				{this.props.categoriesAvailable.map((category, index) => <div key={index} className="filter_inside"
-																hidden={!this.state.filter_arrow}>
+				{this.props.categoriesAvailable.map((category, index) => 
+				<div key={index} className="filter_inside"
+							hidden={!this.state.filter_arrow}>
 					<label className="filterLabel"> <input name="_filter" type="checkbox" onClick={(_) => this.updateChange(this.state.array_filter, category.displayName)}/>
 					{category.displayName} </label>
 				</div>)}
