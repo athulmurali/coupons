@@ -8,8 +8,7 @@ import {SEARCH_FIELD_NAMES, SORT_ORDERS} from "../../config/config";
 import conditionalSearch from "../../utils/conditionalSearch";
 import {loadCoupon} from "../../redux/actions/LoadCoupon";
 import API from "../../utils/API";
-import { css } from '@emotion/core';
-import { DotLoader } from 'react-spinners';
+import { RiseLoader } from 'react-spinners';
 
 class CouponCards extends React.Component {
 	constructor(props) {
@@ -93,9 +92,11 @@ class CouponCards extends React.Component {
 			return <div style={{justifyContent:"center", alignItems:"center", display:"flex", height: "670px", fontSize:"21px"}}> No Coupons Found </div>;
 		}
 
-		if(!couponsLength) {
-			return <div style={{justifyContent:"center", alignItems:"center", display:"flex", height: "670px", fontSize:"21px"}}><DotLoader color="#E0004D" /> </div>
+		if(this.props.isLoading) {
+			return <div style={{justifyContent:"center", alignItems:"center", display:"flex", height: "670px", fontSize:"21px"}}><RiseLoader size={20} color="#E0004D" /> </div>
 		}
+
+		debugger;
 
 
 		return coupons.map((coupon,i)=><div className="Cards" key={i} onClick={() => this.flipCard(i)}>
@@ -181,7 +182,7 @@ const mapStateToProps=(state)=>{
 		isDataUpdated: state.SearchSortFilterReducer.isDataUpdated,
 		loyaltyNumber : state.DisplayCouponsReducer.loyaltyNumber,
 		couponsLength : state.DisplayCouponsReducer.couponsLength,
-		// isLoading: state.SearchSortReducer.isLoading
+		isLoading: state.SearchSortFilterReducer.isLoading
 
 	};
 };

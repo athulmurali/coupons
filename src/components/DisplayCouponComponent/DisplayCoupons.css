@@ -30,6 +30,9 @@
 
 }
 
+.css-0{
+    width: 150px;
+}
 /* On mouse-over, add a grey background color */
 .SortFilterContainer:hover input ~ .checkmark {
     background-color: #ccc;
