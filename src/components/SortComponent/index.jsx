@@ -37,9 +37,9 @@ class SortComponent extends React.Component{
         ];
 		return (
 			<div onClick={this.props.timerReset}> 
-				<div className="filter_sort">
+				<div className="filter_sort" onClick={this.Sort}>
 					Sort
-					<img className="image_arrow" alt="Sort expansion filter" src={slideArrow_Sort[0]}  onClick={this.Sort}/>
+					<img className="image_arrow" alt="Sort expansion filter" src={slideArrow_Sort[0]}  />
 					<div className="filter_sort_list" hidden= {this.state.sort_arrow} >{this.props.selectedSortOption.displayName}</div>
 				</div>
 				{SORT_CATEGORIES.map( (category,index )=> <div key={index} className="filter_inside" hidden= {!this.state.sort_arrow}>

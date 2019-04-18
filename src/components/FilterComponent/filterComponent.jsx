@@ -57,10 +57,9 @@ class FilterComponent extends React.Component {
 		return (
 			<div onClick={this.props.timerReset}>
 				{this.props.categoriesAvailable.map((category, index) => <div key={index} className="filter_inside"
-																			  hidden={!this.state.filter_arrow}>
-					<input name="_filter" type="checkbox"
-						   onClick={(_) => this.updateChange(this.state.array_filter, category.displayName)}/>
-					<label> {category.displayName} </label>
+																hidden={!this.state.filter_arrow}>
+					<label className="filterLabel"> <input name="_filter" type="checkbox" onClick={(_) => this.updateChange(this.state.array_filter, category.displayName)}/>
+					{category.displayName} </label>
 				</div>)}
 			</div>
 		);
@@ -78,10 +77,10 @@ class FilterComponent extends React.Component {
 					<label> Recommended </label>
 					<SelectedFilters selectedFilters={[""]}/>
 				</div>
-				<div className="filter_sort">
+				<div className="filter_sort"  onClick={this.Filter}>
 					Filter
 					<img className="image_arrow" alt="Filter show/hide selector" src={slideArrow[0]}
-						 onClick={this.Filter}/>
+						/>
 					<div className="filter_sort_list" hidden={this.state.filter_arrow}>
 						<SelectedFilters selectedFilters={this.state.array_filter}/>
 					</div>

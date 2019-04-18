@@ -165,12 +165,11 @@ class Coupons extends React.Component {
 				<SideBar activeNewCoupons={this.state.activeNewCoupons} timerReset={this.timerReset}
 						 activeLoadedCoupons={this.state.activeLoadedCoupons} NewCoupons={this.NewCoupons}
 						 LoadedCoupons={this.LoadedCoupons}/>
-				{popUpLogout}
+				{popUpLogout}	
 				{sessionEndPopUp}
 				<LoadedCouponsSideBar hideNewCoupons={this.state.hideNewCoupons}
 									  timerReset={this.timerReset}></LoadedCouponsSideBar>
 			</AllCoupons>
-
 		</div>);
 	}
 }
