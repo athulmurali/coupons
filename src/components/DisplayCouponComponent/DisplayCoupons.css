@@ -38,6 +38,12 @@
     background-color: #ccc;
 }
 
+.filterContainer {
+    overflow-y: scroll;
+    max-height: 489px;
+    max-width: 229px;
+    overflow-x: hidden;
+}
 /* When the radio button is checked, add a blue background */
 .SortFilterContainer input:checked ~ .checkmark {
     background-color: #E0004D;

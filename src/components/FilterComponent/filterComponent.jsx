@@ -55,7 +55,7 @@ class FilterComponent extends React.Component {
 
 	Filter_Category = () => {
 		return (
-			<div onClick={this.props.timerReset}>
+			<div onClick={this.props.timerReset} className="filterContainer">
 				{this.props.categoriesAvailable.map((category, index) => 
 				<div key={index} className="filter_inside"
 							hidden={!this.state.filter_arrow}>
@@ -72,7 +72,7 @@ class FilterComponent extends React.Component {
 			this.Image_up
 		];
 		return (
-			<div onClick={this.props.timerReset}>
+			<div onClick={this.props.timerReset} >
 				<div className="filter_inside" hidden={!this.state.sort_arrow}>
 					<input name="_filter" type="checkbox" defaultChecked/>
 					<label> Recommended </label>
@@ -86,6 +86,7 @@ class FilterComponent extends React.Component {
 						<SelectedFilters selectedFilters={this.state.array_filter}/>
 					</div>
 				</div>
+				
 				{this.Filter_Category()}
 			</div>
 		);
