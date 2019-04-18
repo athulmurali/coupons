@@ -185,7 +185,7 @@ class DialPad extends Component {
 		this.startTimer();
 		if (this.state.count > Config.INACTIVE_USER_IDENTIFICATION) {
 			this.setState({count: 0});
-			this.handleScreenTap();
+			//this.handleScreenTap();
 		}
 		return (
 

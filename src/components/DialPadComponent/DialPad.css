@@ -45,6 +45,7 @@
 .statusMessage{
 	color:black;
 	font-weight: normal;
+	margin-top: 3%;
 }
 
 #container {
@@ -63,15 +64,15 @@
 
 #keyboard li {
 	float: left;
-	width: 60px;
-	height: 60px;
+	width: 122px;
+  height: 74px;
 	font-size: 24px;
 	line-height: 60px;
 	text-align: center;
 }
 
 #keyboard .switch {
-	width: 193px;
+	width: 349px;
 	background-color: #E0004D;
 	color: white;
 }
