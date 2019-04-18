@@ -8,6 +8,8 @@ import {SEARCH_FIELD_NAMES, SORT_ORDERS} from "../../config/config";
 import conditionalSearch from "../../utils/conditionalSearch";
 import {loadCoupon} from "../../redux/actions/LoadCoupon";
 import API from "../../utils/API";
+import { css } from '@emotion/core';
+import { DotLoader } from 'react-spinners';
 
 class CouponCards extends React.Component {
 	constructor(props) {
@@ -91,6 +93,10 @@ class CouponCards extends React.Component {
 			return <div style={{justifyContent:"center", alignItems:"center", display:"flex", height: "670px", fontSize:"21px"}}> No Coupons Found </div>;
 		}
 
+		if(!couponsLength) {
+			return <div style={{justifyContent:"center", alignItems:"center", display:"flex", height: "670px", fontSize:"21px"}}><DotLoader color="#E0004D" /> </div>
+		}
+
 
 		return coupons.map((coupon,i)=><div className="Cards" key={i} onClick={() => this.flipCard(i)}>
 
@@ -98,7 +104,7 @@ class CouponCards extends React.Component {
 					isFlipped={!!coupon.isFlipped}
 					flipOnHover={false} // default false
 					flipOnClick={false} // default false
-					flipDirection="horizontal" // horizontal or vertical
+					flipDirection="vertical" // horizontal or vertical
 					// ref={(r) => this.flippy = r} // to use toggle method like this.flippy.toggle()
 					style={{
 						width: "260px",
@@ -174,7 +180,8 @@ const mapStateToProps=(state)=>{
 		searchedCouponsLength: state.DisplayCouponsReducer.searchedCouponsLength,
 		isDataUpdated: state.SearchSortFilterReducer.isDataUpdated,
 		loyaltyNumber : state.DisplayCouponsReducer.loyaltyNumber,
-		couponsLength : state.DisplayCouponsReducer.couponsLength
+		couponsLength : state.DisplayCouponsReducer.couponsLength,
+		// isLoading: state.SearchSortReducer.isLoading
 
 	};
 };
