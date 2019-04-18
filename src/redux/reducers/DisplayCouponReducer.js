@@ -15,7 +15,7 @@ const initialState = {
 	activeNewCoupons: "active",
 	activeLoadedCoupons: "inactive",
 	loyaltyNumber: null,
-	sortArrow: false
+	sortArrow: true
 };
 
 
