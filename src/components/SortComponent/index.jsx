@@ -2,6 +2,7 @@ import React from "react";
 import {updateSort} from "../../redux/actions/SearchSortFilter";
 import {connect} from "react-redux";
 import {SORT_CATEGORIES} from "../../config/config";
+import { updateCoupons } from "../../redux/actions/DisplayCouponAction";
 
 
 class SortComponent extends React.Component{
@@ -19,10 +20,12 @@ class SortComponent extends React.Component{
 	Sort = () => {
         if(!!this.state.sort_arrow){
 			this.setState({sort_arrow : false});
+			this.props.updateCoupons({sortArrow: true});
 			this.Sort_up = require('../../assets/new-filter-arrow-down.svg');
         }
         else{
-        	this.setState({sort_arrow : true});
+					this.setState({sort_arrow : true});
+					this.props.updateCoupons({sortArrow: false});
 			this.Sort_up = require('../../assets/new-filter-arrow-up.svg');
         }
 	}
@@ -61,7 +64,8 @@ const mapStateToProps = (state) =>({
 const mapDispatcherToProps = (dispatch) => {
 	return {
 
-		updateSort:(sortParams)=>{updateSort(dispatch, sortParams) }
+		updateSort:(sortParams)=>{updateSort(dispatch, sortParams) },
+		updateCoupons: (updatedValue) => {updateCoupons(dispatch, updatedValue)}
 	}
 
 }

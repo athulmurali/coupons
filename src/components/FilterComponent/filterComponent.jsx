@@ -55,7 +55,7 @@ class FilterComponent extends React.Component {
 
 	Filter_Category = () => {
 		return (
-			<div onClick={this.props.timerReset} className="filterContainer">
+			<div onClick={this.props.timerReset} className={this.props.sortArrow?  "filterContainer" : "filterContainerOnSortClick" }>
 				{this.props.categoriesAvailable.map((category, index) => 
 				<div key={index} className="filter_inside"
 							hidden={!this.state.filter_arrow}>
@@ -95,7 +95,8 @@ class FilterComponent extends React.Component {
 
 export const mapStateToProps = (state) => {
 	return {
-		categoriesAvailable: state.SearchSortFilterReducer.categoriesAvailable
+		categoriesAvailable: state.SearchSortFilterReducer.categoriesAvailable,
+		sortArrow: state.DisplayCouponsReducer.sortArrow
 	};
 };
 
