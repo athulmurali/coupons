@@ -29,7 +29,8 @@ const initialState = {
 	array_filter: [],
 	categoriesAvailable: [],
 	isDataUpdated : false,
-	error: null
+	error: null,
+	isLoading : false
 };
 
 // to be moved to config
