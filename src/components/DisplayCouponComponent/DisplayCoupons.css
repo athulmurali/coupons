@@ -113,6 +113,9 @@ input[type="checkbox"]:checked + label{
     -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
+.filterLabel{
+    padding: 9% 80% 10% 0%;
+}
 
 .filter_inside{
     color: #63666A;
