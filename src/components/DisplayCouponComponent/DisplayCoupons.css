@@ -135,15 +135,25 @@ input[type="checkbox"]:checked + label{
     text-align: center;
     margin-top: 19px;
     height: 399px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,.2);
     width: 260px;
-    background-color: white;
+    background-color: #EEF0F3;
     align-items: flex-start;
     cursor: pointer;
     word-wrap: normal;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,.2);
 }
 
+.flippyCardsContainer{
+    overflow: scroll;
+    max-height: 700px;
+}
+
+.flippy-back {
+    background-color: white;
+}
+
+.flippy-card {
+    background-color: white;
+}
 
 .couponDescription {
     word-break: break-word;

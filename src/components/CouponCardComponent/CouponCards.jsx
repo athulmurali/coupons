@@ -122,7 +122,8 @@ class CouponCards extends React.Component {
 					<FrontSide
 
 										// ref = {el => this.flippy.toggle = el} 'http'+coupon.url.substring(5)
-										style={{
+					style={{
+						backgroundColor: "white",
 						width: "260px",
 						height: "399px",
 					}}
