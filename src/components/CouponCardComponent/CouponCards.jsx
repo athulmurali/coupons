@@ -96,7 +96,6 @@ class CouponCards extends React.Component {
 			return <div style={{justifyContent:"center", alignItems:"center", display:"flex", height: "670px", fontSize:"21px"}}><RiseLoader size={20} color="#E0004D" /> </div>
 		}
 
-		debugger;
 
 
 		return coupons.map((coupon,i)=><div className="Cards" key={i} onClick={() => this.flipCard(i)}>
