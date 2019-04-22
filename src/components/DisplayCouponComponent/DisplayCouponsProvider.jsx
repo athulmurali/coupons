@@ -53,9 +53,9 @@ const SideBarComp = (props) => (
 	</Consumer>
 );
 
-const mapStateToProps=(state)=> ({	loaded :  state.SearchSortFilterReducer.loaded.loaded})
+const mapStateToProps=(state)=> ({	loaded :  state.SearchSortFilterReducer.loaded.loaded});
 
-export const SideBar =connect(mapStateToProps,null)(SideBarComp)
+export const SideBar =connect(mapStateToProps,null)(SideBarComp);
 
 
 export const WelcomeHeader = (props) =>{

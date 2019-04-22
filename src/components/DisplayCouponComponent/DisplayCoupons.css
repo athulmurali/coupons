@@ -30,9 +30,26 @@
 
 }
 
+.css-0{
+    width: 150px;
+}
 /* On mouse-over, add a grey background color */
 .SortFilterContainer:hover input ~ .checkmark {
     background-color: #ccc;
+}
+
+.filterContainer {
+    overflow-y: scroll;
+    max-height: 489px;
+    max-width: 229px;
+    overflow-x: hidden;
+}
+
+.filterContainerOnSortClick {
+    overflow-y: scroll;
+    max-height: 250px;
+    max-width: 229px;
+    overflow-x: hidden;
 }
 
 /* When the radio button is checked, add a blue background */
