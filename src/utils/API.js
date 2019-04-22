@@ -1,10 +1,9 @@
 import axios from "axios";
 import Config from "./../config/config";
 import {processQueryParams} from "./utils";
-import getCheckSum from "./calculateCheckSum";
+
 
 const http = Config.https ? "https" : "http";
-
 const getMap = (storeNo = Config.storeNumber) => {
 	// eslint-disable-next-line indent
 	const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/customer/fetchCustomer/`;
@@ -25,47 +24,44 @@ const getUserCoupons = (barcodeNumber) => {
 // The default loyalty number must be removed once the authentication issue in the backend is fixed
 // This is just a temporary fix
 
-const getCouponsWithFilters =  (searchParams, filterParams, sortParams, loadedParams,loyaltyNumber = null,storeId= '0478') => {
-	loyaltyNumber = getCheckSum(loyaltyNumber);
+const getCouponsWithFilters =  (searchParams, filterParams, sortParams, loadedParams,loyaltyNumber = null,storeId= "0478") => {
 	const queryParams = {
 		...filterParams,
 		...loadedParams
 	};
-	const processedQueryParams = processQueryParams(queryParams)
+	const processedQueryParams = processQueryParams(queryParams);
 	const allCouponsUrl = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/coupons/user/${storeId}/${loyaltyNumber}/`;
 
 	const loadedCouponsUrl = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/coupons/loaded/user/${storeId}/${loyaltyNumber}/`;
-	if (!!(loadedParams.loaded)){
+	if (loadedParams.loaded){
 
 		return  axios.get(loadedCouponsUrl, {
 
 			params : {
 				...processedQueryParams
 			}
-		})
+		});
 	}
 	return  axios.get(allCouponsUrl, {
 
 		params : {
 			...processedQueryParams
 		}
-	})
-}
+	});
+};
 
 const getCategoriesFromServer=()=>{
 
 	const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/coupons/categories`;
-	return  axios.get(url)
+	return  axios.get(url);
 
 };
 
 const loadCoupon=(loyaltyNumber=null, couponId=null, loadType=null )=>{
-
-	loyaltyNumber = getCheckSum(loyaltyNumber);
 	const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/coupons/${loyaltyNumber}/load/${loadType}/${couponId}/`;
 
-	return  axios.put(url)
-}
+	return  axios.put(url);
+};
 
 const API = {
 	getMap,

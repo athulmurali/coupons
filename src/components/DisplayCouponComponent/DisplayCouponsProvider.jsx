@@ -29,7 +29,7 @@ export const LoadedCouponsSideBar = (props) => (
 	<Consumer>{
 		() => <div className="LoadedCoupons" hidden={props.hideNewCoupons}   >
 			<SearchCouponByName timerReset={props.timerReset} />
-			<div onClick={props.timerReset} className="flippyCardsContainer">
+			<div onClick={props.timerReset} className="flippyCardsContainer" onScroll={props.timerReset}>
 				<CouponCards  setRef={props}/>
 			</div>
 		</div>
