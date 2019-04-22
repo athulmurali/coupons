@@ -79,6 +79,8 @@ class Coupons extends React.Component {
 	};
 
 	render() {
+
+		console.log("count" + this.state.count)
 		if (!this.props.userInfo) {
 			this.props.history.push(ROUTE_HOME_PAGE);
 		}
@@ -88,7 +90,7 @@ class Coupons extends React.Component {
 		let userName = "";
 
 		if (!!this.props.userInfo) {
-			userName = this.props.userInfo.FirstName;
+			userName = this.props.userInfo.firstName;
 		}
 
 

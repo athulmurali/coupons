@@ -50,10 +50,10 @@ class DialPad extends Component {
 			}
 			console.log(this.extractNumberFromFormat);
 			const response = await API.getUserDetails(this.extractNumberFromFormat);
-
-			const userInfo = response.data.response.Customer[0];
+			debugger;
+			const userInfo = response.data.response;
 			this.props.updateCoupons({userInfo: userInfo
-				, loyaltyNumber: userInfo.ID[0].attributes.Value
+				, loyaltyNumber: userInfo.loyaltyCardNumber
 			});
 		} catch (error) {
 			console.log(error);
