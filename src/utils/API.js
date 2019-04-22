@@ -2,8 +2,8 @@ import axios from "axios";
 import Config from "./../config/config";
 import {processQueryParams} from "./utils";
 
-const http = Config.https ? "https" : "http";
 
+const http = Config.https ? "https" : "http";
 const getMap = (storeNo = Config.storeNumber) => {
 	// eslint-disable-next-line indent
 	const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/customer/fetchCustomer/`;
