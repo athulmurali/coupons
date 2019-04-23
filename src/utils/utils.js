@@ -184,16 +184,13 @@ export const  processQueryParams=(queryParams)=>{
 			continue
 		}
 		else if (queryParams[key] instanceof  Array){
-			console.log(queryParams)
 			processedQueryParams[key] = encodeSpecialChars(arrayToSemicolonString(queryParams[key]));
-
 			continue
 
 		}
 		else if (typeof queryParams[key]  === "string")
 		{
 			processedQueryParams[key] =  encodeSpecialChars(queryParams[key])
-
 			continue
 		}
 
