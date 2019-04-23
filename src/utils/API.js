@@ -31,7 +31,7 @@ const getCouponsWithFilters =  (searchParams, filterParams, sortParams, loadedPa
 		...loadedParams
 	};
 	const processedQueryParams = processQueryParams(queryParams);
-	debugger;
+
 	const allCouponsUrl = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/coupons/user/${storeId}/${loyaltyNumber}/`;
 
 	const loadedCouponsUrl = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/coupons/loaded/user/${storeId}/${loyaltyNumber}/`;
