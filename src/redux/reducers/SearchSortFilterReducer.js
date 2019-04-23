@@ -1,6 +1,7 @@
 import Config, {CouponsTypeEnum, DEFAULT_SORT, LOADED_DEFAULT} from "../../config/config";
 
 import {RESET} from "./DisplayCouponReducer";
+import axios from "axios";
 
 export const FETCH_COUPONS = "FETCH_COUPONS";
 export const SET_SORT = "SET_SORT";
@@ -108,6 +109,11 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 		};
 
 	case FETCH_COUPONS_REJECTED :
+
+		if (axios.isCancel(action.error)) {
+			console.log('Request canceled', action.error);
+		}
+
 		return {
 			...state,
 			toBeFetched: false,

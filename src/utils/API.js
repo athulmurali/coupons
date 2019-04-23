@@ -24,7 +24,18 @@ const getUserCoupons = (barcodeNumber) => {
 // The default loyalty number must be removed once the authentication issue in the backend is fixed
 // This is just a temporary fix
 
-const getCouponsWithFilters =  (searchParams, filterParams, sortParams, loadedParams,loyaltyNumber = null,storeId= "0478") => {
+ function getCouponsWithFilters (searchParams, filterParams, sortParams, loadedParams,loyaltyNumber = null,storeId= "0478")  {
+
+	// cancel the previous request
+
+	if (typeof this._source !== typeof undefined) {
+		this._source.cancel('Operation canceled due to new request.')
+	}
+
+	// save the new request for cancellation
+	this._source = axios.CancelToken.source();
+
+
 	const queryParams = {
 		...filterParams,
 		...loadedParams
@@ -36,6 +47,7 @@ const getCouponsWithFilters =  (searchParams, filterParams, sortParams, loadedPa
 	if (loadedParams.loaded){
 
 		return  axios.get(loadedCouponsUrl, {
+		cancelToken: this._source.token,
 
 			params : {
 				...processedQueryParams
@@ -44,6 +56,7 @@ const getCouponsWithFilters =  (searchParams, filterParams, sortParams, loadedPa
 	}
 	return  axios.get(allCouponsUrl, {
 
+		cancelToken: this._source.token,
 		params : {
 			...processedQueryParams
 		}
