@@ -1,12 +1,12 @@
 
 
 .act{
-	width: 200px;
+	width: 240px;
 	height: 68px;
 	margin-block-end: 1em;
 	background-color: #63666A;
 	text-align: center;
-	font-size: large;
+	font-size: 22px;
 	border: 1px solid lightgrey;
 	color: white;
 }
@@ -15,12 +15,12 @@
 }
 
 .inact {
-	width: 200px;
+	width: 240px;
 	height: 68px;
 	margin-block-end: 1em;
 	background-color: white;
 	text-align: center;
-	font-size: large;
+	font-size: 22px;
 	border: 1px solid lightgrey;
 	color: #63666A;
 }
@@ -31,21 +31,22 @@
 .image-width{
 	margin-bottom: 0px;
 	margin-right: 8px;
+	height: 19px;
 }
 
 .inputText {
-	width: 400px;
+	width: 420px;
 	height: 67px;
 	background-color: lightgray;
 	text-align: center;
- font-size: x-large;
- border: 1px solid lightgrey;
+  font-size: x-large;
+  border: 1px solid lightgrey;
 }
 
 .statusMessage{
 	color:black;
-	font-weight: normal;
-	margin-top: 3%;
+	font-size: 22px;
+	margin-top: 1%;
 }
 
 #container {
@@ -56,7 +57,7 @@
 }
 #keyboard {
 	margin: 0;
-	padding-left: 9px;
+	/* padding-left: 9px; */
 	list-style: none;
 	background-color: white;
 	border: none;
@@ -64,7 +65,7 @@
 
 #keyboard li {
 	float: left;
-	width: 131px;
+	width: 120px;
   height: 74px;
   font-size: 24px;
   line-height: 60px;
@@ -74,10 +75,10 @@
 }
 
 #keyboard .switch {
-	width: 395px;
+	width: 365px;
 	background-color: #E0004D;
 	color: white;
-	font-size: larger;
+	font-size: 23px;
 	padding-top: 3%;
 	margin-top: 4%;
 	height: 67px;
@@ -93,7 +94,7 @@
 
 .switchNoCard {
 	clear: left;
-	font-size: 16px;
+	font-size: 20px;
 	height: 50px;
 	text-decoration: underline;
 	text-underline-position: under;
