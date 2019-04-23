@@ -25,13 +25,11 @@ const getUserCoupons = (barcodeNumber) => {
 // This is just a temporary fix
 
 const getCouponsWithFilters =  (searchParams, filterParams, sortParams, loadedParams,loyaltyNumber = null,storeId= "0478") => {
-	console.log(filterParams)
 	const queryParams = {
 		...filterParams,
 		...loadedParams
 	};
 	const processedQueryParams = processQueryParams(queryParams);
-
 	const allCouponsUrl = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/coupons/user/${storeId}/${loyaltyNumber}/`;
 
 	const loadedCouponsUrl = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/coupons/loaded/user/${storeId}/${loyaltyNumber}/`;
