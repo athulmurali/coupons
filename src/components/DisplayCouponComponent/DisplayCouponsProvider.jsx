@@ -41,8 +41,7 @@ const SideBarComp = (props) => (
 	<Consumer>
 		{
 			() =>
-				<ul>
-
+				<ul className="sideBarUl">
 					<li> <button  className={props.loaded ? "tabInactive" : "tabActive"} onClick={props.NewCoupons} > New Coupons </button></li>
 					<li> <button  className={props.loaded ? "tabActive" : "tabInactive"} onClick={props.LoadedCoupons}> Loaded Coupons </button></li>
 					<SortComponent timerReset={props.timerReset}/>
