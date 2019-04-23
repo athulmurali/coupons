@@ -29,7 +29,12 @@ const initialState = {
 	array_filter: [],
 	categoriesAvailable: [],
 	isDataUpdated : false,
-	error: null
+	error: null,
+	isFetchingCoupons : false,
+	isFetchingCategories: false,
+	// set isIsLading  => if any of fetchingEvents is fetching || true if any of isFetching* is true, else false
+	// a overall flag to detect if any of the fetch events is pending
+	isLoading : false
 };
 
 // to be moved to config
@@ -96,7 +101,8 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 		return {
 			...state,
 			toBeFetched: false,
-			isLoading: false,
+			isLoading: true,
+			isFetchingCoupons: true
 
 
 		};
@@ -105,7 +111,8 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 		return {
 			...state,
 			toBeFetched: false,
-			isLoading: false,
+			isLoading: state.isFetchingCategories,
+			isFetchingCoupons: false
 
 		};
 
@@ -113,23 +120,28 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 			return {
 				...state,
 				toBeFetched: false,
-				isLoading: false,
-				arr: action.payload.data
+				isFetchingCoupons : false,
+				arr: action.payload.data,
+				isLoading: state.isFetchingCategories,
 
-		};
+
+			};
 	}
 
 		case FETCH_CATEGORIES_PENDING : {
 			return {
 				...state,
-				isLoading: true
+				isLoading: true,
+				isFetchingCategories: true,
+
 			};
 		}
 
 		case FETCH_CATEGORIES_REJECTED : {
 			return {
 				...state,
-				isLoading: false,
+				isLoading: state.isFetchingCoupons,
+				isFetchingCategories: false,
 				error : action.payload.message
 			};
 		}
@@ -138,7 +150,8 @@ const SearchSortFilterReducer = (state = initialState, action) => {
 		case FETCH_CATEGORIES_FULFILLED : {
 			return {
 				...state,
-				isLoading: false,
+				isLoading: state.isFetchingCoupons,
+				isFetchingCategories: false,
 				categoriesAvailable: action.payload.data,
 				isDataUpdated :  true
 			};

@@ -124,14 +124,14 @@ class CameraScanner extends Component {
 			const userDetailsResponse = await API.getUserDetails(searchBarcode.slice(0, -1));
 			const couponsResponse = await API.getUserCoupons(searchBarcode.slice(0, -1));
 
-			const userInfo = userDetailsResponse.data.response.Customer[0];
+			const userInfo = userDetailsResponse.data.response;
 			const allCoupons = couponsResponse.data.response;
 
 			this.props.updateCoupons(
 				{
 					allCoupons: allCoupons,
 					userInfo: userInfo,
-					loyaltyNumber: userInfo.ID[0].attributes.Value
+					loyaltyNumber: userInfo.loyaltyCardNumber
 				});
 
 		} catch (error) {

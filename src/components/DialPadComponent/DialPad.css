@@ -2,7 +2,7 @@
 
 .act{
 	width: 200px;
-	height: 55px;
+	height: 68px;
 	margin-block-end: 1em;
 	background-color: #63666A;
 	text-align: center;
@@ -16,7 +16,7 @@
 
 .inact {
 	width: 200px;
-	height: 55px;
+	height: 68px;
 	margin-block-end: 1em;
 	background-color: white;
 	text-align: center;
@@ -35,7 +35,7 @@
 
 .inputText {
 	width: 400px;
-	height: 50px;
+	height: 67px;
 	background-color: lightgray;
 	text-align: center;
  font-size: x-large;
@@ -49,14 +49,14 @@
 }
 
 #container {
-	margin: 20px auto;
+	margin: 19px auto;
 	width: 760px;
 	display: flex;
 	justify-content: center;
 }
 #keyboard {
 	margin: 0;
-	padding-left: 50px;
+	padding-left: 9px;
 	list-style: none;
 	background-color: white;
 	border: none;
@@ -64,17 +64,23 @@
 
 #keyboard li {
 	float: left;
-	width: 122px;
+	width: 131px;
   height: 74px;
-	font-size: 24px;
-	line-height: 60px;
+  font-size: 24px;
+  line-height: 60px;
+  padding-top: 2%;
 	text-align: center;
+	box-shadow: 1px 2px 2px 0px lightgrey;
 }
 
 #keyboard .switch {
-	width: 349px;
+	width: 391px;
 	background-color: #E0004D;
 	color: white;
+	font-size: larger;
+	padding-top: 3%;
+	margin-top: 4%;
+	height: 67px;
 }
 
 #keyboard li:hover {

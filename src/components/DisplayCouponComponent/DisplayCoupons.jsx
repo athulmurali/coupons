@@ -8,7 +8,6 @@ import AllCoupons, {LoadedCouponsSideBar, PrintComponent, SideBar, WelcomeHeader
 import {reset_all_redux} from "../../redux/actions/Common";
 import {ROUTE_HOME_PAGE} from "../../utils/RouteConstants";
 import {fetchCategories, updateLoaded} from "../../redux/actions/SearchSortFilter";
-
 class Coupons extends React.Component {
 	constructor(props) {
 		super(props);
@@ -80,6 +79,8 @@ class Coupons extends React.Component {
 	};
 
 	render() {
+
+		console.log("count" + this.state.count)
 		if (!this.props.userInfo) {
 			this.props.history.push(ROUTE_HOME_PAGE);
 		}
@@ -89,7 +90,7 @@ class Coupons extends React.Component {
 		let userName = "";
 
 		if (!!this.props.userInfo) {
-			userName = this.props.userInfo.FirstName;
+			userName = this.props.userInfo.firstName;
 		}
 
 
@@ -165,12 +166,11 @@ class Coupons extends React.Component {
 				<SideBar activeNewCoupons={this.state.activeNewCoupons} timerReset={this.timerReset}
 						 activeLoadedCoupons={this.state.activeLoadedCoupons} NewCoupons={this.NewCoupons}
 						 LoadedCoupons={this.LoadedCoupons}/>
-				{popUpLogout}
+				{popUpLogout}	
 				{sessionEndPopUp}
 				<LoadedCouponsSideBar hideNewCoupons={this.state.hideNewCoupons}
 									  timerReset={this.timerReset}></LoadedCouponsSideBar>
 			</AllCoupons>
-
 		</div>);
 	}
 }

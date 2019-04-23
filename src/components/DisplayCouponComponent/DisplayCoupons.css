@@ -30,9 +30,26 @@
 
 }
 
+.css-0{
+    width: 150px;
+}
 /* On mouse-over, add a grey background color */
 .SortFilterContainer:hover input ~ .checkmark {
     background-color: #ccc;
+}
+
+.filterContainer {
+    overflow-y: scroll;
+    max-height: 489px;
+    max-width: 229px;
+    overflow-x: hidden;
+}
+
+.filterContainerOnSortClick {
+    overflow-y: scroll;
+    max-height: 250px;
+    max-width: 229px;
+    overflow-x: hidden;
 }
 
 /* When the radio button is checked, add a blue background */
@@ -113,6 +130,9 @@ input[type="checkbox"]:checked + label{
     -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
+.filterLabel{
+    padding: 9% 80% 10% 0%;
+}
 
 .filter_inside{
     color: #63666A;
@@ -132,15 +152,25 @@ input[type="checkbox"]:checked + label{
     text-align: center;
     margin-top: 19px;
     height: 399px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,.2);
     width: 260px;
-    background-color: white;
+    background-color: #EEF0F3;
     align-items: flex-start;
     cursor: pointer;
     word-wrap: normal;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,.2);
 }
 
+.flippyCardsContainer{
+    overflow: scroll;
+    max-height: 700px;
+}
+
+.flippy-back {
+    background-color: white;
+}
+
+.flippy-card {
+    background-color: white;
+}
 
 .couponDescription {
     word-break: break-word;
