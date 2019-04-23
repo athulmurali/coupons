@@ -70,11 +70,11 @@
   line-height: 60px;
   padding-top: 2%;
 	text-align: center;
-	box-shadow: 1px 2px 2px 0px lightgrey;
+	border: 1px solid lightgray;
 }
 
 #keyboard .switch {
-	width: 391px;
+	width: 395px;
 	background-color: #E0004D;
 	color: white;
 	font-size: larger;
