@@ -52,7 +52,6 @@ class CouponCards extends React.Component {
 		if (!!couponToFlip)
 		{
 			couponToFlip.isFlipped = !couponToFlip.isFlipped
-
 		}
 		this.setState({ allCoupons  })
 }
@@ -104,7 +103,7 @@ class CouponCards extends React.Component {
 					isFlipped={!!coupon.isFlipped}
 					flipOnHover={false} // default false
 					flipOnClick={false} // default false
-					flipDirection="vertical" // horizontal or vertical
+					flipDirection="horizontal" // horizontal or vertical
 					// ref={(r) => this.flippy = r} // to use toggle method like this.flippy.toggle()
 					style={{
 						width: "260px",
@@ -121,9 +120,14 @@ class CouponCards extends React.Component {
 						<h5 className="couponTitle"> {coupon.title}</h5>
 						<h5 className="couponName"> {coupon.name}</h5>
 						<h5 className="couponCategory"> {coupon.couponCategory}</h5>
-						<h6 className="couponDescription"> {coupon.description} </h6>
+						<div className="couponDescription">{coupon.description} </div>
 						<h6 className="legalText"> {coupon.legalText} </h6>
 						<h6 className="viewMore"> View less </h6>
+						<div className= "plusIcon" onClick={(e) => this.loadCoupon(coupon, e,i)}>
+							<img className="addCheck" height="56px" width="56px"
+								 src={(!!coupon.isLoaded || !! this.props.inLoadedScreen)
+									 ? LogOut_Success: PlusIcon} alt = "plus sign unable to load"/>
+						</div>
 					</BackSide>
 					<FrontSide
 
@@ -138,16 +142,17 @@ class CouponCards extends React.Component {
 						<img src={coupon.url} width="80px" height="100px" alt="image_image" />
 						<h5 className="couponTitle"> {coupon.title}</h5>
 						<h5 className="couponName"> {coupon.name}</h5>
-						<h6 className="couponDescription"> {coupon.description} </h6>
+						<h6 className="couponDescription" style={{minHeight: "130px"}}> {coupon.description} </h6>
 						<h6 className="expireDate"> <span className="expire">Exp:</span>{coupon.expirationDate.slice(0,10)} </h6>
 						<h6 className="viewMore"> View more </h6>
-					</FrontSide>
-				</Flippy>
-				<div className= "plusIcon" onClick={(e) => this.loadCoupon(coupon, e,i)}>
+						<div className= "plusIcon" onClick={(e) => this.loadCoupon(coupon, e,i)}>
 							<img className="addCheck" height="56px" width="56px"
 								 src={(!!coupon.isLoaded || !! this.props.inLoadedScreen)
 									 ? LogOut_Success: PlusIcon} alt = "plus sign unable to load"/>
 						</div>
+					</FrontSide>
+				</Flippy>
+
 			</div>);
 
 	}
