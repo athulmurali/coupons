@@ -99,7 +99,7 @@
 	text-decoration: underline;
 	text-underline-position: under;
 	padding-left: 15px;
-	cursor: 'pointer';
+	cursor: pointer;
 	outline: 0
 }
 .switchNoCard:focus{
