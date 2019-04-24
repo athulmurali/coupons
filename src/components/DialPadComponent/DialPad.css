@@ -71,7 +71,7 @@
   line-height: 60px;
   padding-top: 2%;
 	text-align: center;
-	border: 1px solid lightgray;
+	/* border: 1px solid lightgray; */
 }
 
 #keyboard .switch {
