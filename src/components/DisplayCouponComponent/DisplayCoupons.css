@@ -179,7 +179,7 @@ input[type="checkbox"]:checked + label{
     font-size: 18px;
     text-align: left;
     color: grey;
-    max-height: 130px;
+    max-height: 230px;
     overflow-y: scroll;
     overflow-x: hidden;
 }
