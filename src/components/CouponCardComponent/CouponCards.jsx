@@ -120,8 +120,7 @@ class CouponCards extends React.Component {
 						<h5 className="couponTitle"> {coupon.title}</h5>
 						<h5 className="couponName"> {coupon.name}</h5>
 						<h5 className="couponCategory"> {coupon.couponCategory}</h5>
-						<div className="couponDescription">{coupon.description} </div>
-						<h6 className="legalText"> {coupon.legalText} </h6>
+						<div className="couponDescription">{coupon.description} <br/> <br/> {coupon.legalText} </div>
 						<h6 className="viewMore"> View less </h6>
 						<div className= "plusIcon" onClick={(e) => this.loadCoupon(coupon, e,i)}>
 							<img className="addCheck" height="56px" width="56px"
