@@ -1,9 +1,11 @@
+import {RESET} from "./DisplayCouponReducer";
+
 export const START_TIMER = "START_TIMER";
 
 export const TOGGLE_LOG_OUT_SUCCESS = "TOGGLE_LOG_OUT_SUCCESS";
 export const PROMPT_LOG_OUT = "PROMPT_LOG_OUT";
-export const LOG_OUT = "LOG_OUT";
 export const I_AM_HERE = "I_AM_HERE";
+export const SIGN_ME_OUT = "SIGN_ME_OUT";
 
 export const CLOSE_LOG_OUT_PROMPT = "CLOSE_LOG_OUT_PROMPT";
 export const CLOSE_LOGGED_OUT_POP_UP = "CLOSE_LOGGED_OUT_POP_UP";
@@ -20,20 +22,10 @@ export const TIMER_STATUS = {
 	STOP : "STOP"
 };
 
-const TIMER_DURATION = {
-
-	// Wait time for the pop up to show up
-	LOGGED_OUT_POP_UP: 20000,
-
-	//  time Duration for the log out success screen to stay
-	LOG_OUT_PROMPT: 200000
-};
-
-
-export const COUNT_DOWN_DURATION ={
+export const COUNTER ={
 	COUNT_DOWN_PROMPT : {
 		name : 'COUNT_DOWN_PROMPT',
-		duration : 10000
+		duration : 20000
 	},
 	COUNT_DOWN_LOGOUT: {
 		name : 'COUNT_DOWN_LOGOUT',
@@ -48,12 +40,13 @@ export const COUNT_DOWN_DURATION ={
 const initialState = {
 
 	status : TIMER_STATUS.STOP,
-	stage : COUNT_DOWN_DURATION.COUNT_DOWN_PROMPT.name,
-	countDown: COUNT_DOWN_DURATION.COUNT_DOWN_PROMPT.duration,
+	stage : COUNTER.COUNT_DOWN_PROMPT.name,
+	countDown: COUNTER.COUNT_DOWN_PROMPT.duration,
 	showLogOutPrompt: false,
 	showLogOutSuccess: false,
 
-	intervalObj : null
+	intervalObj : null,
+	isTimedOut : false
 
 
 };
@@ -78,8 +71,8 @@ const TimerReducer = (state = initialState, action) => {
 			return {state,
 				showLogOutPrompt: false,
 				showLogOutSuccess:true,
-				stage : COUNT_DOWN_DURATION.COUNT_DOWN_REDIRECT.name,
-				countDown : COUNT_DOWN_DURATION.COUNT_DOWN_REDIRECT.duration,
+				stage : COUNTER.COUNT_DOWN_REDIRECT.name,
+				countDown : COUNTER.COUNT_DOWN_REDIRECT.duration,
 				status : TIMER_STATUS.START
 
 			};
@@ -107,39 +100,44 @@ const TimerReducer = (state = initialState, action) => {
 				clearInterval(state.intervalObj);
 
 				switch (state.stage) {
-					case COUNT_DOWN_DURATION.COUNT_DOWN_PROMPT.name:
+					case COUNTER.COUNT_DOWN_PROMPT.name:
 						return {
 							...state,
 							intervalObj : null,
 							status : TIMER_STATUS.START,
-							stage: COUNT_DOWN_DURATION.COUNT_DOWN_LOGOUT.name,
-							countDown : COUNT_DOWN_DURATION.COUNT_DOWN_LOGOUT.duration,
-							showLogOutPrompt: false,
-							showLogOutSuccess:true,
+							stage: COUNTER.COUNT_DOWN_LOGOUT.name,
+							countDown : COUNTER.COUNT_DOWN_LOGOUT.duration,
+							showLogOutPrompt: true,
+							showLogOutSuccess:false,
 						}
 
-					case COUNT_DOWN_DURATION.COUNT_DOWN_LOGOUT.name :
+					case COUNTER.COUNT_DOWN_LOGOUT.name :
 
 						return {
 							...state,
 							intervalObj : null,
 							status : TIMER_STATUS.START,
-							stage: COUNT_DOWN_DURATION.COUNT_DOWN_REDIRECT.name,
-							countDown : COUNT_DOWN_DURATION.COUNT_DOWN_REDIRECT.duration
+							stage: COUNTER.COUNT_DOWN_REDIRECT.name,
+							countDown : COUNTER.COUNT_DOWN_REDIRECT.duration,
+							showLogOutPrompt: false,
+							showLogOutSuccess:true
 						};
 
-					case COUNT_DOWN_DURATION.COUNT_DOWN_REDIRECT.name :
+					case COUNTER.COUNT_DOWN_REDIRECT.name :
 						alert("Redirecting to main screen ")
 						return {
 							...state,
 							intervalObj : null,
 							status : TIMER_STATUS.STOP,
-							countDown : COUNT_DOWN_DURATION.COUNT_DOWN_REDIRECT.duration
+							countDown : COUNTER.COUNT_DOWN_REDIRECT.duration,
+							showLogOutPrompt: false,
+							showLogOutSuccess:false,
+							isTimedOut : true
 						};
 
 					default :
 						alert("Something broke bro ! ")
-						return {...initialState,}
+						return {...initialState}
 
 					}
 
@@ -150,6 +148,17 @@ const TimerReducer = (state = initialState, action) => {
 
 		}
 
+		case SIGN_ME_OUT : {
+			return {
+				...state,
+				countDown : 0,
+				stage : COUNTER.COUNT_DOWN_LOGOUT.name
+			}
+		}
+
+		case RESET :return {
+			...initialState
+		}
 
 
 		// All the following events resets to the initial state

@@ -5,6 +5,7 @@ import UserIdentificationView from "../views/UserIdentificationView";
 import DisplayCouponsView from "../views/DisplayCouponsView";
 import CameraScanner from "../components/CameraScannerComponent/CameraScanner";
 import {ROUTE_DISPLAY_COUPONS, ROUTE_SCAN_IMAGE, ROUTE_USER_IDENTIFICATION, ROUTE_HOME_PAGE, ROUTE_BARCODE_SCAN} from "./RouteConstants";
+import Test from "./Test";
 
 class Router extends Component {
 	constructor(props) {
@@ -31,6 +32,7 @@ class Router extends Component {
 					<Route exact path={ROUTE_DISPLAY_COUPONS} component={DisplayCouponsView} />
 					<Route exact path={ROUTE_SCAN_IMAGE}  component ={CameraScanner} />
 					<Route exact path={ROUTE_BARCODE_SCAN}  component ={CameraScanner} />
+					<Route exact path={"/test"}  component ={Test} />
 				</Switch>
 			</HashRouter>
 		);
