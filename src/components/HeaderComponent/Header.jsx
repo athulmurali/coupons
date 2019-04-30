@@ -17,7 +17,7 @@ class Header extends React.Component {
 	render() {
 		return(
 			<AttractHeader>
-				<h1> Savings & Coupons </h1>
+				<h1 className="MainHeader"> Savings & Coupons </h1>
 			</AttractHeader>
 		);
 	}

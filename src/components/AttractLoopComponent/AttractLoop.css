@@ -6,7 +6,7 @@ div.screen {
 	left:230px;
 	background-color: #E0004D;
 	z-index: 1;
-	/* bottom: 8%; */
+	bottom: 8%;
 	position: absolute;
 	width: 100%;
 }
@@ -20,10 +20,10 @@ div.screen {
 		left:350px;
 		background-color: #E0004D;
 		z-index: 1;
-		/* bottom: 12%; */
 		position: absolute;
 		width: 100%;
 }
+
 .couponImageCover{
 	background-size: cover;
 }
