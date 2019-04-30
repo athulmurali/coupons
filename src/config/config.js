@@ -14,8 +14,8 @@ const env = {
 	neServerPort: "3526",
 	neServerHost: "innovationd.aholdusa.com",
 	svgContainerHeight: 170,
-	storeNumber: 0,
-	brand: "GL",
+	storeNumber: 554,
+	brand: "SS",
 	https: false,
 };
 
@@ -88,11 +88,7 @@ export const SORT_CATEGORIES = [
 
 
 export const CouponsTypeEnum = Object.freeze({LOADED: "LOADED", ALL: "ALL"});
-
 export const COUPONS_SOURCE= Object.freeze({ COUPONS : 'COUPONS', COPIENT : 'COPIENT'})
-
-
 export const DEFAULT_SORT = SORT_CATEGORIES[0];
 export const LOADED_DEFAULT = false;
-
-export const  SEARCH_FIELD_NAMES = ["name","description"];
+export const SEARCH_FIELD_NAMES = ["name","description"];

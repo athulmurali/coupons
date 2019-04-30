@@ -125,14 +125,11 @@ class CameraScanner extends Component {
 
 			// the following alert to be deleted before merging
 			const userDetailsResponse = await API.getUserDetails(searchBarcode.slice(0, -1));
-			const couponsResponse = await API.getUserCoupons(searchBarcode.slice(0, -1));
 
 			const userInfo = userDetailsResponse.data.response;
-			const allCoupons = couponsResponse.data.response;
 
 			this.props.updateCoupons(
 				{
-					allCoupons: allCoupons,
 					userInfo: userInfo,
 					loyaltyNumber: userInfo.loyaltyCardNumber
 				});

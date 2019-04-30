@@ -4,11 +4,6 @@ import {processQueryParams} from "./utils";
 
 
 const http = Config.https ? "https" : "http";
-const getMap = (storeNo = Config.storeNumber) => {
-	// eslint-disable-next-line indent
-	const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/customer/fetchCustomer/`;
-	return axios.get(url, { timeout: Config.timeoutLength });
-};
 const getUserDetails = (barcodeNumber,type) => {
 	const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/customer/v1/fetch/`+barcodeNumber;
 	return axios.get(url);
@@ -24,7 +19,7 @@ const getUserCoupons = (barcodeNumber) => {
 // The default loyalty number must be removed once the authentication issue in the backend is fixed
 // This is just a temporary fix
 
- function getCouponsWithFilters (searchParams, filterParams, sortParams, loadedParams,loyaltyNumber = null,storeId= "0478")  {
+ function getCouponsWithFilters (searchParams, filterParams, sortParams, loadedParams,loyaltyNumber = null)  {
 
 	// cancel the previous request
 
@@ -41,9 +36,9 @@ const getUserCoupons = (barcodeNumber) => {
 		...loadedParams
 	};
 	const processedQueryParams = processQueryParams(queryParams);
-	const allCouponsUrl = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/coupons/user/${storeId}/${loyaltyNumber}/`;
+	const allCouponsUrl = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/coupons/user/${Config.storeNumber}/${loyaltyNumber}/`;
 
-	const loadedCouponsUrl = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/coupons/loaded/user/${storeId}/${loyaltyNumber}/`;
+	const loadedCouponsUrl = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/coupons/loaded/user/${Config.storeNumber}/${loyaltyNumber}/`;
 	if (loadedParams.loaded){
 
 		return  axios.get(loadedCouponsUrl, {
@@ -77,7 +72,6 @@ const loadCoupon=(loyaltyNumber=null, couponId=null, loadType=null )=>{
 };
 
 const API = {
-	getMap,
 	getUserDetails,
 	getUserCoupons,
 	getCouponsWithFilters,

@@ -28,11 +28,6 @@ class CouponCards extends React.Component {
 		if (!!nextProps && !!nextProps.allCoupons && nextProps.allCoupons !== this.state.allCoupons) {
 			console.log("new array coming in .. ")
 			this.setState({allCoupons: nextProps.allCoupons})
-
-
-
-
-
 		}
 		if (this.state.searchedCouponsLength !== nextProps.allCoupons.length)
 		{
@@ -139,7 +134,7 @@ class CouponCards extends React.Component {
 					}}
 					>
 
-						<img src={coupon.url} width="80px" height="100px" alt="image_image" />
+						<img src={coupon.url.replace("https", "http")} width="80px" height="100px" alt="image_image" />
 						<h5 className="couponTitle"> {coupon.title}</h5>
 						<h5 className="couponName"> {coupon.name}</h5>
 						<h6 className="couponDescription" style={{minHeight: "130px"}}> {coupon.description} </h6>
@@ -157,6 +152,8 @@ class CouponCards extends React.Component {
 
 	}
 }
+
+
 
 
 const mapStateToProps=(state)=>{
@@ -190,4 +187,3 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(CouponCards);
-
