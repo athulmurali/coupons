@@ -9,6 +9,7 @@ import conditionalSearch from "../../utils/conditionalSearch";
 import {loadCoupon} from "../../redux/actions/LoadCoupon";
 import API from "../../utils/API";
 import { RiseLoader } from 'react-spinners';
+import SortByKey from "../../utils/SortByKey";
 
 class CouponCards extends React.Component {
 	constructor(props) {
@@ -160,13 +161,6 @@ class CouponCards extends React.Component {
 
 const mapStateToProps=(state)=>{
 
-	const comparator=(order ,ascOrderVal)=>
-		(order === ascOrderVal ? (obj1, obj2)=>(obj1 > obj2) : (obj1, obj2)=>(obj1 < obj2));
-
-	const sortByKey = (arr, key, ascOrderVal, order)=>
-		(arr.sort((obj1,obj2)=>
-			(comparator(order,ascOrderVal)(obj1[key].toString().toLowerCase(),obj2[key].toString().toLowerCase()) ? 1 : -1 )));
-
 	let toBeSearched = state.SearchSortFilterReducer.toBeSearched;
 	let searchText =state.SearchSortFilterReducer.search.searchString;
 	let sortOption = state.SearchSortFilterReducer.sort;
@@ -175,7 +169,7 @@ const mapStateToProps=(state)=>{
 	allCoupons = JSON.parse(JSON.stringify(allCoupons));
 
 	allCoupons =   toBeSearched ? conditionalSearch(allCoupons,SEARCH_FIELD_NAMES, searchText) : allCoupons;
-	allCoupons = sortByKey(allCoupons, sortOption.sortBy,SORT_ORDERS.ASC, sortOption.sortOrder);
+	allCoupons = SortByKey(allCoupons, sortOption.sortBy,SORT_ORDERS.ASC, sortOption.sortOrder);
 
 	return {
 		allCoupons :allCoupons,
