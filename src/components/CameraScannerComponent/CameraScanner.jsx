@@ -16,6 +16,9 @@ class CameraScanner extends Component {
 		};
 		this._onDetected = this._onDetected.bind(this);
 		this._searchUserInDatabase = this._searchUserInDatabase.bind(this);
+		if(props.match.params.barcode){
+      this._searchUserInDatabase(props.match.params.barcode)
+    }
 	}
 
 	componentWillUnmount = () => {
@@ -162,6 +165,19 @@ CameraScanner.propTypes = {
 	history: PropTypes.shape({
 		push: PropTypes.func,
 	}).isRequired,
+	match: PropTypes.shape({
+    params: PropTypes.shape({
+      barcode: PropTypes.string,
+    }),
+  }),
+};
+
+CameraScanner.defaultProps = {
+  match: {
+    params: {
+      barcode: null
+    }
+  }
 };
 
 
