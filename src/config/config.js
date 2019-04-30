@@ -12,7 +12,7 @@ const env = {
 	},
 	currentAI: "LUIS",
 	neServerPort: "3526",
-	neServerHost: "innovationd.aholdusa.com",
+	neServerHost: "innovationq.aholdusa.com",
 	svgContainerHeight: 170,
 	storeNumber: 0,
 	brand: "GL",
