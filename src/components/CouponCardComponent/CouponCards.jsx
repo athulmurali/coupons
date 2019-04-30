@@ -142,7 +142,7 @@ class CouponCards extends React.Component {
 						<img src={coupon.url} width="80px" height="100px" alt="image_image" />
 						<h5 className="couponTitle"> {coupon.title}</h5>
 						<h5 className="couponName"> {coupon.name}</h5>
-						<h6 className="couponDescription" style={{minHeight: "130px"}}> {coupon.description} </h6>
+						<h6 className="couponDescription" style={{minHeight: "88px", maxHeight:"88px"}}> {coupon.description} </h6>
 						<h6 className="expireDate"> <span className="expire">Exp:</span>{coupon.expirationDate.slice(0,10)} </h6>
 						<h6 className="viewMore"> View more </h6>
 						<div className= "plusIcon" onClick={(e) => this.loadCoupon(coupon, e,i)}>
