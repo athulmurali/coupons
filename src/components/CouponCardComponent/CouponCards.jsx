@@ -4,116 +4,186 @@ import Flippy, {BackSide, FrontSide} from "react-flippy";
 import {updateCoupons} from "../../redux/actions/DisplayCouponAction";
 import PlusIcon from "../../assets/addNew.svg";
 import LogOut_Success from "../../assets/addedNew.svg";
-let loadedSet = new Set([]);
-let x = [];
+import {SEARCH_FIELD_NAMES, SORT_ORDERS} from "../../config/config";
+import conditionalSearch from "../../utils/conditionalSearch";
+import {loadCoupon} from "../../redux/actions/LoadCoupon";
+import API from "../../utils/API";
+import { RiseLoader } from 'react-spinners';
+import SortByKey from "../../utils/SortByKey";
 
 class CouponCards extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			values: [],
-			loadedCouponsCheck: true, 
+			loadedCouponsCheck: true,
 			checkNewCoupon: false,
 			tempLoadedCoupons: [],
+			allCoupons : [],
+			couponsLength : 0
+
 		}
+	}
+	componentWillReceiveProps(nextProps, nextContext) {
+		if (!!nextProps && !!nextProps.allCoupons && nextProps.allCoupons !== this.state.allCoupons) {
+			console.log("new array coming in .. ")
+			this.setState({allCoupons: nextProps.allCoupons})
+		}
+		if (this.state.searchedCouponsLength !== nextProps.allCoupons.length)
+		{
+			console.log("allCoupons old length :",  this.state.couponsLength  , "newLength : ", nextProps.allCoupons.length)
+
+			this.setState({searchedCouponsLength: nextProps.allCoupons.length},()=>{
+			this.props.updateCoupons({searchedCouponsLength :nextProps.allCoupons.length })
+
+			})
+		}
+
 	}
 
-	swapIcon = (coupon, e) => {
-		if(!loadedSet.has(coupon._id) && e.target !== e.currentTarget && !!coupon.loaded === false) {
-			coupon.loaded = true;
-			loadedSet.add(coupon._id);
-			x.push(coupon);
-			this.setState({tempLoadedCoupons : x});
-			this.props.updateCoupons({loadedCouponIds: loadedSet});
+	flipCard =(index)=>{
+
+		const allCoupons =  JSON.parse(JSON.stringify(this.state.allCoupons));
+		const couponToFlip = allCoupons[index];
+		if (!!couponToFlip)
+		{
+			couponToFlip.isFlipped = !couponToFlip.isFlipped
 		}
-		else if(coupon.loaded === false){
-			coupon.loaded = true;
-			this.setState({checkNewCoupon: true});
+		this.setState({ allCoupons  })
+}
+
+
+	loadCoupon = async (coupon, e, index) => {
+		e.stopPropagation();
+		const allCoupons = JSON.parse(JSON.stringify(this.state.allCoupons));
+		const couponToFlip = allCoupons[index];
+
+		if (!!couponToFlip && !couponToFlip.isLoaded) {
+			couponToFlip.isLoaded = true;
+			this.setState({allCoupons} , async () => {
+				try {
+					await API.loadCoupon(this.props.loyaltyNumber, coupon.id, coupon.source)
+
+				} catch (e) {
+					alert("Something went wrong in loading this coupon!")
+				}
+
+			})
 		}
-	}
+
+
+	};
+
+
 
 
 	render() {
-		let coupons = this.props.allCoupons
+		console.log("couponCards re-rendering")
+		let coupons = this.state.allCoupons;
 		let couponsLength = coupons.length;
-		this.props.updateCoupons({"searchedCouponsLength": couponsLength});
 
 
-		if(couponsLength === 0) {
-			return <div> No Coupons Found </div>;
+		if(this.props.isLoading) {
+			return <div style={{justifyContent:"center", alignItems:"center", display:"flex", height: "670px", fontSize:"21px"}}><RiseLoader size={20} color="#E0004D" /> </div>
 		}
 
-		if(this.props.loaded){
-			coupons = coupons.concat(this.state.tempLoadedCoupons);
-			couponsLength = coupons.length;
-			this.props.updateCoupons({"searchedCouponsLength": couponsLength});
+		if(!couponsLength) {
+			return <div style={{justifyContent:"center", alignItems:"center", display:"flex", height: "670px", fontSize:"21px"}}> No Coupons Found </div>;
 		}
-		
-		return coupons.map((coupon,i)=><div className="Cards" key={i}>
-				
-				<Flippy flipOnHover={false} // default false
-					flipOnClick={true} // default false
+
+
+
+		return coupons.map((coupon,i)=><div className="Cards" key={i} onClick={() => this.flipCard(i)}>
+
+				<Flippy
+					isFlipped={!!coupon.isFlipped}
+					flipOnHover={false} // default false
+					flipOnClick={false} // default false
 					flipDirection="horizontal" // horizontal or vertical
-					ref={(r) => this.flippy = r} // to use toggle method like this.flippy.toggle()
+					// ref={(r) => this.flippy = r} // to use toggle method like this.flippy.toggle()
 					style={{
 						width: "260px",
 						height: "343px",
 						padding: "30",
 					}}>
-					<BackSide 
+					<BackSide
 					style={{
 						backgroundColor: "white",
 						color: "black",
 						width: "260px",
 						height: "399px",
 					}} >
-						<h5 className="couponTitle"> {coupon.title}</h5> 
-						<h5 className="couponName"> {coupon.name}</h5> 
-						<h5 className="couponCategory"> {coupon.couponCategory}</h5> 
-						<h6 className="couponDescription"> {coupon.description} </h6>
-						<h6 className="legalText"> {coupon.legalText} </h6>
+						<h5 className="couponTitle"> {coupon.title}</h5>
+						<h5 className="couponName"> {coupon.name}</h5>
+						<h5 className="couponCategory"> {coupon.couponCategory}</h5>
+						<div className="couponDescription">{coupon.description} <br/> <br/> {coupon.legalText} </div>
 						<h6 className="viewMore"> View less </h6>
+						<div className= "plusIcon" onClick={(e) => this.loadCoupon(coupon, e,i)}>
+							<img className="addCheck" height="56px" width="56px"
+								 src={(!!coupon.isLoaded || !! this.props.inLoadedScreen)
+									 ? LogOut_Success: PlusIcon} alt = "plus sign unable to load"/>
+						</div>
 					</BackSide>
-					<FrontSide 
-										
+					<FrontSide
+
 										// ref = {el => this.flippy.toggle = el} 'http'+coupon.url.substring(5)
-										style={{
+					style={{
+						backgroundColor: "white",
 						width: "260px",
 						height: "399px",
-					}} 
+					}}
 					>
-					
+
 						<img src={coupon.url} width="80px" height="100px" alt="image_image" />
-						<h5 className="couponTitle"> {coupon.title}</h5> 
-						<h5 className="couponName"> {coupon.name}</h5> 
-						<h6 className="couponDescription"> {coupon.description} </h6>
+						<h5 className="couponTitle"> {coupon.title}</h5>
+						<h5 className="couponName"> {coupon.name}</h5>
+						<h6 className="couponDescription" style={{minHeight: "88px", maxHeight:"88px"}}> {coupon.description} </h6>
 						<h6 className="expireDate"> <span className="expire">Exp:</span>{coupon.expirationDate.slice(0,10)} </h6>
 						<h6 className="viewMore"> View more </h6>
+						<div className= "plusIcon" onClick={(e) => this.loadCoupon(coupon, e,i)}>
+							<img className="addCheck" height="56px" width="56px"
+								 src={(!!coupon.isLoaded || !! this.props.inLoadedScreen)
+									 ? LogOut_Success: PlusIcon} alt = "plus sign unable to load"/>
+						</div>
 					</FrontSide>
 				</Flippy>
-				<div className= "plusIcon" onClick={(e) => this.swapIcon(coupon, e)}>
-							<img className="addCheck" height="56px" width="56px" src={(coupon.loaded) ? LogOut_Success: PlusIcon} alt = "plus sign unable to load"/>	
-						</div>
+
 			</div>);
 
 	}
 }
 
 
+
+
 const mapStateToProps=(state)=>{
+
+	let toBeSearched = state.SearchSortFilterReducer.toBeSearched;
+	let searchText =state.SearchSortFilterReducer.search.searchString;
+	let sortOption = state.SearchSortFilterReducer.sort;
+
+	let allCoupons=  state.SearchSortFilterReducer.arr;
+	allCoupons = JSON.parse(JSON.stringify(allCoupons));
+
+	allCoupons =   toBeSearched ? conditionalSearch(allCoupons,SEARCH_FIELD_NAMES, searchText) : allCoupons;
+	allCoupons = SortByKey(allCoupons, sortOption.sortBy,SORT_ORDERS.ASC, sortOption.sortOrder);
+
 	return {
-		allCoupons :state.DisplayCouponsReducer.allCoupons,
+		allCoupons :allCoupons,
 		LoadedCouponsTrigger: state.DisplayCouponsReducer.LoadedCouponsTrigger,
-		loaded: state.SearchSortFilterReducer.loaded.loaded,
-		searchedCouponsLength: state.DisplayCouponsReducer.searchedCouponsLength
+		inLoadedScreen: state.SearchSortFilterReducer.loaded.loaded,
+		searchedCouponsLength: state.DisplayCouponsReducer.searchedCouponsLength,
+		isDataUpdated: state.SearchSortFilterReducer.isDataUpdated,
+		loyaltyNumber : state.DisplayCouponsReducer.loyaltyNumber,
+		couponsLength : state.DisplayCouponsReducer.couponsLength,
+		isLoading: state.SearchSortFilterReducer.isLoading
 
 	};
 };
 
 const mapDispatchToProps = (dispatch) => ({
-	updateCoupons :( updatedValue)=> updateCoupons(dispatch,  updatedValue )
-}
-);
- 
-export default connect(mapStateToProps,mapDispatchToProps)(CouponCards);
+	updateCoupons :( updatedValue)=> updateCoupons(dispatch,  updatedValue ),
+	loadCoupon:(loyaltyNumber, couponId, couponSource)=>loadCoupon(dispatch,loyaltyNumber, couponId, couponSource)
+});
 
+export default connect(mapStateToProps,mapDispatchToProps)(CouponCards);

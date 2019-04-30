@@ -29,7 +29,7 @@ export const LoadedCouponsSideBar = (props) => (
 	<Consumer>{
 		() => <div className="LoadedCoupons" hidden={props.hideNewCoupons}   >
 			<SearchCouponByName timerReset={props.timerReset} />
-			<div onClick={props.timerReset}>
+			<div onClick={props.timerReset} className="flippyCardsContainer" onScroll={props.timerReset}>
 				<CouponCards  setRef={props}/>
 			</div>
 		</div>
@@ -41,10 +41,8 @@ const SideBarComp = (props) => (
 	<Consumer>
 		{
 			() =>
-				<ul>
-
-					<li> <button  className={props.loaded ? "tabInactive" : "tabActive"}
-							 onClick={props.NewCoupons} > New Coupons </button></li>
+				<ul className="sideBarUl">
+					<li> <button  className={props.loaded ? "tabInactive" : "tabActive"} onClick={props.NewCoupons} > New Coupons </button></li>
 					<li> <button  className={props.loaded ? "tabActive" : "tabInactive"} onClick={props.LoadedCoupons}> Loaded Coupons </button></li>
 					<SortComponent timerReset={props.timerReset}/>
 					<FilterComponent timerReset={props.timerReset}/>
@@ -54,9 +52,9 @@ const SideBarComp = (props) => (
 	</Consumer>
 );
 
-const mapStateToProps=(state)=> ({	loaded :  state.SearchSortFilterReducer.loaded.loaded})
+const mapStateToProps=(state)=> ({	loaded :  state.SearchSortFilterReducer.loaded.loaded});
 
-export const SideBar =connect(mapStateToProps,null)(SideBarComp)
+export const SideBar =connect(mapStateToProps,null)(SideBarComp);
 
 
 export const WelcomeHeader = (props) =>{

@@ -1,5 +1,11 @@
-import {SET_FILTERS, SET_SEARCH, SET_SORT, SET_LOADED} from "../reducers/SearchSortFilterReducer";
-
+import {
+	SET_FILTERS,
+	SET_SEARCH,
+	SET_SORT,
+	SET_LOADED,
+	FETCH_CATEGORIES,
+} from "../reducers/SearchSortFilterReducer";
+import API from "../../utils/API";
 /**
  *
  * @param dispatch
@@ -71,6 +77,22 @@ export const updateLoaded=(dispatch, loadedParams)=>{
 		type : SET_LOADED,
 		payload :  loadedParams
 
+	})
+
+};
+
+
+/** fetchCategories
+ *
+ * @param dispatch
+ *
+ * The following action, passed the api function and  returns the axios call (promise).
+ * A function reference is being passed into the payload
+ */
+export const fetchCategories=(dispatch)=>{
+	dispatch({
+		type : FETCH_CATEGORIES,
+		payload : API.getCategoriesFromServer
 	})
 
 }

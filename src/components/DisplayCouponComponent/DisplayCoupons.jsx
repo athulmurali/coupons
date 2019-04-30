@@ -7,9 +7,7 @@ import {connect} from "react-redux";
 import AllCoupons, {LoadedCouponsSideBar, PrintComponent, SideBar, WelcomeHeader} from "./DisplayCouponsProvider";
 import {reset_all_redux} from "../../redux/actions/Common";
 import {ROUTE_HOME_PAGE} from "../../utils/RouteConstants";
-import {updateCoupons} from "../../redux/actions/DisplayCouponAction";
-import {updateLoaded} from "../../redux/actions/SearchSortFilter";
-
+import {fetchCategories, updateLoaded} from "../../redux/actions/SearchSortFilter";
 class Coupons extends React.Component {
 	constructor(props) {
 		super(props);
@@ -37,12 +35,13 @@ class Coupons extends React.Component {
 
 	componentDidMount() {
 		this.props.updateLoaded({loaded: false});
+		this.props.fetchCategories();
 		this.startTimer();
 		this.tick();
 	}
 
 	shouldComponentUpdate() {
-		if (this.state.logOutTrigger || this.state.logOutReload || this.state.count === 20 || this.state.count >= 30) {
+		if (this.state.logOutTrigger || this.state.logOutReload || this.state.count >= 20 || this.state.count >= 30) {
 			return true;
 		}
 		return false;
@@ -80,6 +79,8 @@ class Coupons extends React.Component {
 	};
 
 	render() {
+
+		console.log("count" + this.state.count)
 		if (!this.props.userInfo) {
 			this.props.history.push(ROUTE_HOME_PAGE);
 		}
@@ -89,7 +90,7 @@ class Coupons extends React.Component {
 		let userName = "";
 
 		if (!!this.props.userInfo) {
-			userName = this.props.userInfo.FirstName;
+			userName = this.props.userInfo.firstName;
 		}
 
 
@@ -156,7 +157,7 @@ class Coupons extends React.Component {
 		</Popup>);
 
 
-		return (<div>
+		return (<div className={buttonTrigger? "pointerEventsNone" : ""}>
 			<WelcomeHeader userName={userName} parent={this}></WelcomeHeader>
 			<Header/>
 			<PrintComponent hideLoadedCoupons={this.state.hideLoadedCoupons}
@@ -165,12 +166,11 @@ class Coupons extends React.Component {
 				<SideBar activeNewCoupons={this.state.activeNewCoupons} timerReset={this.timerReset}
 						 activeLoadedCoupons={this.state.activeLoadedCoupons} NewCoupons={this.NewCoupons}
 						 LoadedCoupons={this.LoadedCoupons}/>
-				{popUpLogout}
+				{popUpLogout}	
 				{sessionEndPopUp}
 				<LoadedCouponsSideBar hideNewCoupons={this.state.hideNewCoupons}
 									  timerReset={this.timerReset}></LoadedCouponsSideBar>
 			</AllCoupons>
-
 		</div>);
 	}
 }
@@ -178,14 +178,14 @@ class Coupons extends React.Component {
 const mapStateToProps = (state) => {
 	return {
 		userInfo: state.DisplayCouponsReducer.userInfo,
-		allCoupons: state.DisplayCouponsReducer.allCoupons
+		allCoupons : state.SearchSortFilterReducer.arr
 	};
 };
 
 const mapDispatchToProps = (dispatch) => ({
 	resetRedux: () => reset_all_redux(dispatch),
-	updateCoupons: (updatedValue) => updateCoupons(dispatch, updatedValue),
-	updateLoaded: (updatedLoadedParams) => updateLoaded(dispatch, updatedLoadedParams)
+	updateLoaded: (updatedLoadedParams) => updateLoaded(dispatch, updatedLoadedParams),
+	fetchCategories: ()=>fetchCategories(dispatch)
 
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Coupons);

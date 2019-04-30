@@ -1,8 +1,8 @@
 .scanBarcode{
-    right: 250px;
-    position: absolute;
+	right: 79px;
+	position: absolute;
+	bottom: 1px;
 }
-
 @media screen and (min-width: 1700px) {
     .scanBarcode{
       right: 350px;

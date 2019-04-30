@@ -16,6 +16,9 @@ class CameraScanner extends Component {
 		};
 		this._onDetected = this._onDetected.bind(this);
 		this._searchUserInDatabase = this._searchUserInDatabase.bind(this);
+		if(props.match.params.barcode){
+      this._searchUserInDatabase(props.match.params.barcode)
+    }
 	}
 
 	componentWillUnmount = () => {
@@ -121,16 +124,14 @@ class CameraScanner extends Component {
 		try {
 
 			// the following alert to be deleted before merging
-			alert("searching user In database  ")
 			const userDetailsResponse = await API.getUserDetails(searchBarcode.slice(0, -1));
-			const couponsResponse = await API.getUserCoupons(searchBarcode.slice(0, -1));
 
-			const userInfo = userDetailsResponse.data.response.Customer[0];
-			const allCoupons = couponsResponse.data.response;
+			const userInfo = userDetailsResponse.data.response;
+
 			this.props.updateCoupons(
 				{
-					allCoupons: allCoupons,
-					userInfo: userInfo
+					userInfo: userInfo,
+					loyaltyNumber: userInfo.loyaltyCardNumber
 				});
 
 		} catch (error) {
@@ -161,6 +162,19 @@ CameraScanner.propTypes = {
 	history: PropTypes.shape({
 		push: PropTypes.func,
 	}).isRequired,
+	match: PropTypes.shape({
+    params: PropTypes.shape({
+      barcode: PropTypes.string,
+    }),
+  }),
+};
+
+CameraScanner.defaultProps = {
+  match: {
+    params: {
+      barcode: null
+    }
+  }
 };
 
 

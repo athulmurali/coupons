@@ -12,10 +12,10 @@ const env = {
 	},
 	currentAI: "LUIS",
 	neServerPort: "3526",
-	neServerHost: "innovationd.aholdusa.com",
+	neServerHost: "innovationq.aholdusa.com",
 	svgContainerHeight: 170,
-	storeNumber: 0,
-	brand: "GL",
+	storeNumber: 554,
+	brand: "SS",
 	https: false,
 };
 
@@ -56,81 +56,8 @@ let config = {
 export default config;
 
 
-export const FILTER_CATEGORIES = [
-	{
-		displayName: "Baby & ChildCare",
-		sequenceNumber: 0,
-		name: "Baby & ChildCare"
-	}, {
-		displayName: "Bakery",
-		sequenceNumber: 1,
-		name: "Bakery"
-	},
-	{
-		displayName: "Beverages",
-		sequenceNumber: 2,
-		name: "Beverages"
-	}, {
-		displayName: "Breakfast",
-		sequenceNumber: 3,
-		name: "Breakfast"
-	}, {
-		displayName: "Condiments & Sauces",
-		sequenceNumber: 4,
-		name: "Condiments & Sauces"
-	},
-	{
-		displayName: "Dairy",
-		sequenceNumber: 5,
-		name: "Dairy"
-	}, {
-		displayName: "Ethnic Products",
-		sequenceNumber: 6,
-		name: "Ethnic Products"
-	},
-	{
-		displayName: "Frozen Food",
-		sequenceNumber: 7,
-		name: "Frozen Food"
-	},
-	{
-		displayName: "Health & Wellness",
-		sequenceNumber: 8,
-		name: "Health & Wellness"
-	},
-	{
-		displayName: "Household",
-		sequenceNumber: 9,
-		name: "Household"
-	},
 
-
-	{
-		displayName: "Meat & Seafood",
-		sequenceNumber: 10,
-		name: "Meat & Seafood"
-	},
-	{
-		displayName: "Personal Care",
-		sequenceNumber: 11,
-		name: "Personal Care"
-	}, {
-		displayName: "Pet Care",
-		sequenceNumber: 12,
-		name: "Pet Care"
-	},
-	{
-		displayName: "Snacks",
-		sequenceNumber: 13,
-		name: "Snacks"
-	},
-	{
-		displayName: "Soups & Canned Goods",
-		sequenceNumber: 14,
-		name: "Soups & Canned Goods"
-	}
-];
-const SORT_ORDERS = Object.freeze({
+export const SORT_ORDERS = Object.freeze({
 	ASC: "asc",
 	DESC: "desc"
 });
@@ -161,6 +88,7 @@ export const SORT_CATEGORIES = [
 
 
 export const CouponsTypeEnum = Object.freeze({LOADED: "LOADED", ALL: "ALL"});
-
+export const COUPONS_SOURCE= Object.freeze({ COUPONS : 'COUPONS', COPIENT : 'COPIENT'})
 export const DEFAULT_SORT = SORT_CATEGORIES[0];
 export const LOADED_DEFAULT = false;
+export const SEARCH_FIELD_NAMES = ["name","description"];

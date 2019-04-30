@@ -168,9 +168,9 @@ export const importAll = (r) => {
 };
 
 
-// The following functions have been added for URL params processing :
-const arrayToArrayString = (arrayObject )=>("["+ arrayObject.toString() +"]")
 const encodeSpecialChars=(strToEncode)=>(strToEncode.replace('&', '_'))
+
+const arrayToSemicolonString = (arrayObject)=>(arrayObject.join(';').toString());
 
 export const  processQueryParams=(queryParams)=>{
 
@@ -179,14 +179,12 @@ export const  processQueryParams=(queryParams)=>{
 
 	for (let key in queryParams){
 
-		console.log(key,queryParams[key] )
-
 		if (queryParams[key] === "")
 		{
 			continue
 		}
 		else if (queryParams[key] instanceof  Array){
-			processedQueryParams[key] = arrayToArrayString(queryParams[key])
+			processedQueryParams[key] = encodeSpecialChars(arrayToSemicolonString(queryParams[key]));
 			continue
 
 		}

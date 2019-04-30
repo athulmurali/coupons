@@ -49,18 +49,18 @@ class FilterComponent extends React.Component {
 			this.setState({array_filter: checkedFilters});
 		}
 
-		this.props.updateCheckedFilters({filterByCategory: checkedFilters});
+		this.props.updateCheckedFilters({categories: checkedFilters});
 
 	};
 
 	Filter_Category = () => {
 		return (
-			<div onClick={this.props.timerReset}>
-				{this.props.categoriesAvailable.map((category, index) => <div key={index} className="filter_inside"
-																			  hidden={!this.state.filter_arrow}>
-					<input name="_filter" type="checkbox"
-						   onClick={(_) => this.updateChange(this.state.array_filter, category.displayName)}/>
-					<label> {category.displayName} </label>
+			<div onClick={this.props.timerReset} className={this.props.sortArrow?  "filterContainer" : "filterContainerOnSortClick" }>
+				{this.props.categoriesAvailable.map((category, index) => 
+				<div key={index} className="filter_inside"
+							hidden={!this.state.filter_arrow}>
+					<label className="filterLabel"> <input name="_filter" type="checkbox" onClick={(_) => this.updateChange(this.state.array_filter, category.displayName)}/>
+					{category.displayName} </label>
 				</div>)}
 			</div>
 		);
@@ -72,20 +72,21 @@ class FilterComponent extends React.Component {
 			this.Image_up
 		];
 		return (
-			<div onClick={this.props.timerReset}>
+			<div onClick={this.props.timerReset} >
 				<div className="filter_inside" hidden={!this.state.sort_arrow}>
 					<input name="_filter" type="checkbox" defaultChecked/>
 					<label> Recommended </label>
 					<SelectedFilters selectedFilters={[""]}/>
 				</div>
-				<div className="filter_sort">
+				<div className="filter_sort"  onClick={this.Filter}>
 					Filter
 					<img className="image_arrow" alt="Filter show/hide selector" src={slideArrow[0]}
-						 onClick={this.Filter}/>
+						/>
 					<div className="filter_sort_list" hidden={this.state.filter_arrow}>
 						<SelectedFilters selectedFilters={this.state.array_filter}/>
 					</div>
 				</div>
+				
 				{this.Filter_Category()}
 			</div>
 		);
@@ -94,7 +95,8 @@ class FilterComponent extends React.Component {
 
 export const mapStateToProps = (state) => {
 	return {
-		categoriesAvailable: state.SearchSortFilterReducer.categoriesAvailable
+		categoriesAvailable: state.SearchSortFilterReducer.categoriesAvailable,
+		sortArrow: state.DisplayCouponsReducer.sortArrow
 	};
 };
 

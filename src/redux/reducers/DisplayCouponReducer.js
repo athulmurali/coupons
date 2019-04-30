@@ -14,6 +14,8 @@ const initialState = {
 	loadedCouponIds: [],
 	activeNewCoupons: "active",
 	activeLoadedCoupons: "inactive",
+	loyaltyNumber: null,
+	sortArrow: true
 };
 
 
@@ -37,15 +39,15 @@ const DisplayCouponsReducer = (state = initialState, action) => {
 		};
 
 
+
 	case FETCH_COUPONS_FULFILLED : {
 		return {
 			...state,
 			toBeFetched: false,
 			isLoading: false,
-			allCoupons: action.payload.data.response
+			allCoupons: action.payload.data
 
 		};
-
 	}
 	default :
 		return state;
