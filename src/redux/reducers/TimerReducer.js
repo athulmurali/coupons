@@ -25,7 +25,7 @@ export const TIMER_STATUS = {
 export const COUNTER ={
 	COUNT_DOWN_PROMPT : {
 		name : 'COUNT_DOWN_PROMPT',
-		duration : 20000
+		duration : 5000
 	},
 	COUNT_DOWN_LOGOUT: {
 		name : 'COUNT_DOWN_LOGOUT',
@@ -124,7 +124,6 @@ const TimerReducer = (state = initialState, action) => {
 						};
 
 					case COUNTER.COUNT_DOWN_REDIRECT.name :
-						alert("Redirecting to main screen ")
 						return {
 							...state,
 							intervalObj : null,
@@ -165,7 +164,8 @@ const TimerReducer = (state = initialState, action) => {
 		case I_AM_HERE :
 		case CLOSE_LOG_OUT_PROMPT:
 		default:
-			return {...initialState,status :START_TIMER};
+			clearInterval(state.intervalObj);
+			return {...initialState,status :TIMER_STATUS.START};
 	}
 
 };
