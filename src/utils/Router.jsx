@@ -30,7 +30,7 @@ class Router extends Component {
 					<Route exact path={ROUTE_HOME_PAGE}  component={AttractLoopView} />
 					<Route exact path={ROUTE_USER_IDENTIFICATION} component={UserIdentificationView} />
 					<Route exact path={ROUTE_DISPLAY_COUPONS} component={DisplayCouponsView} />
-					<Route exact path={ROUTE_SCAN_IMAGE}  component ={CameraScanner} />
+					{/*<Route exact path={ROUTE_SCAN_IMAGE}  component ={CameraScanner} />*/}
 					{/*<Route exact path={ROUTE_BARCODE_SCAN}  component ={CameraScanner} />*/}
 					<Route exact path={"/test"}  component ={Test} />
 				</Switch>
