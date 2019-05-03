@@ -62,8 +62,8 @@ const TimerReducer = (state = initialState, action) => {
 
 		case SET_INTERVAL_OBJ :return {
 			...state,
-			intervalObj : action.payload.intervalObj,
-			status: TIMER_STATUS.COUNT_DOWN
+			// intervalObj : action.payload.intervalObj,
+			// status: TIMER_STATUS.COUNT_DOWN
 		}
 
 

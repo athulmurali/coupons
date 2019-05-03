@@ -10,7 +10,7 @@ import LogOutPromptPopup from "../TimedComponents/LogOutPromptPopup";
 import LogOutSuccessPopUp from "../TimedComponents/LogOutSuccessPopUp";
 import {iAmHere, startTimer} from "../../redux/actions/Timer";
 import PrintComponent from "../PrintComponent";
-import LoadedCouponsSideBar from "./LoadedCouponsSideBar";
+import LoadedCouponsSideBar from "../LoadedCouponsSideBar";
 import SideBar from "../SideBar";
 import AllCoupons from "../AllCoupons";
 
@@ -21,7 +21,7 @@ class Coupons extends React.Component {
 	}
 
 	componentWillUnmount() {
-		this.props.resetRedux();
+		// this.props.resetRedux();
 	}
 
 	componentDidMount() {
@@ -31,26 +31,14 @@ class Coupons extends React.Component {
 	}
 
 
-	timerReset = () => this.props.iAmHere();
-
-
-	NewCoupons = () => {
-		this.props.updateLoaded({loaded: false});
-		alert("New Coupons clicked ! ")
-	};
-
-	LoadedCoupons = () => {
-		this.props.updateLoaded({loaded: true});
-		alert("Loaded Coupons clicked ! ")
-
-	};
+	timerReset = () => {};
 
 
 	componentWillReceiveProps(nextProps, nextContext) {
-		if (!!nextProps.isTimedOut) {
-
-			nextProps.history.push(ROUTE_HOME_PAGE);
-		}
+		// if (!!nextProps.isTimedOut) {
+		//
+		// 	nextProps.history.push(ROUTE_HOME_PAGE);
+		// }
 	}
 
 	render() {
@@ -62,11 +50,9 @@ class Coupons extends React.Component {
 			{/*<PrintComponent hideLoadedCoupons={this.state.hideLoadedCoupons}*/}
 							{/*componentRef={this.componentRef}></PrintComponent>*/}
 			<AllCoupons>
-				<SideBar activeNewCoupons={this.state.activeNewCoupons} timerReset={this.timerReset}
-						 activeLoadedCoupons={this.state.activeLoadedCoupons} NewCoupons={this.NewCoupons}
-						 LoadedCoupons={this.LoadedCoupons}/>
-				<LogOutPromptPopup/>
-				<LogOutSuccessPopUp/>
+				<SideBar  timerReset={this.timerReset}/>
+				{/*<LogOutPromptPopup/>*/}
+				{/*<LogOutSuccessPopUp/>*/}
 				<LoadedCouponsSideBar hideNewCoupons={this.state.hideNewCoupons}
 									  timerReset={this.timerReset}></LoadedCouponsSideBar>
 			</AllCoupons>
@@ -79,7 +65,7 @@ const mapStateToProps = (state) => {
 	return {
 		userInfo: state.DisplayCouponsReducer.userInfo,
 		allCoupons: state.SearchSortFilterReducer.arr,
-		isTimedOut: state.TimerReducer.isTimedOut
+		// isTimedOut: state.TimerReducer.isTimedOut
 	};
 };
 
@@ -87,8 +73,8 @@ const mapDispatchToProps = (dispatch) => ({
 	resetRedux: () => reset_all_redux(dispatch),
 	updateLoaded: (updatedLoadedParams) => updateLoaded(dispatch, updatedLoadedParams),
 	fetchCategories: () => fetchCategories(dispatch),
-	iAmHere: () => iAmHere(dispatch),
-	startTimer: () => startTimer(dispatch)
+	// iAmHere: () => iAmHere(dispatch),
+	// startTimer: () => startTimer(dispatch)
 
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Coupons);

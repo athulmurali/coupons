@@ -1,8 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-
-import {App} from "./utils/App";
 import * as serviceWorker from "./serviceWorker";
 import Router from "./utils/Router";
 
@@ -22,15 +20,13 @@ const middleware = applyMiddleware(promise(), thunk ,logger);
 const store = createStore(combinedReducer,composeWithDevTools(middleware));
 
 store.subscribe(()=>{onChangeSearchSortFilter( store.getState(), store.dispatch )
-					timerCountDown(store.getState(), store.dispatch);
+					// timerCountDown(store.getState(), store.dispatch);
 })
 window.store=store
 
 ReactDOM.render(
 	<Provider store={store}>
-		<App>
 			<Router/>
-		</App>
 	</Provider>,
 	document.getElementById("root"));
  
@@ -38,4 +34,4 @@ ReactDOM.render(
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+// serviceWorker.unregister();

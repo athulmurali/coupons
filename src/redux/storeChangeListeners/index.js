@@ -4,17 +4,14 @@ import {COUNT_DOWN, COUNT_DOWN_INTERVAL, SET_INTERVAL_OBJ, TIMER_STATUS} from ".
 
 export const onChangeSearchSortFilter=(state, dispatch )=>{
 
-	const SearchSortFilterReducer = state.SearchSortFilterReducer
+	const SearchSortFilterReducer = state.SearchSortFilterReducer;
+	const searchParams = SearchSortFilterReducer.search;
+	const filterParams = SearchSortFilterReducer.filters;
+	const sortParams = SearchSortFilterReducer.sort;
+	const loadedParams = SearchSortFilterReducer.loaded;
 
-	const searchParams = SearchSortFilterReducer.search
-	const filterParams = SearchSortFilterReducer.filters
-	const sortParams = SearchSortFilterReducer.sort
-	const loadedParams = SearchSortFilterReducer.loaded
-
-	const couponsType = SearchSortFilterReducer.couponsType
+	const couponsType = SearchSortFilterReducer.couponsType;
 	const loyaltyNumber = state.DisplayCouponsReducer.loyaltyNumber;
-
-	console.log(SearchSortFilterReducer.toBeFetched)
 
 	if (!!SearchSortFilterReducer.toBeFetched){
 
@@ -45,3 +42,8 @@ export const timerCountDown=(state, dispatch)=>{
 
 
 };
+
+// Notes
+// Removed 	console.log(SearchSortFilterReducer.toBeFetched)
+// Added semicolons
+

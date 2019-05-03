@@ -603,7 +603,7 @@ li a:hover:not(.active) {
 }
 
 .pointerEventsNone{
-    pointer-events: none;
+    /*pointer-events: none;*/
 }
 
 .modal{
