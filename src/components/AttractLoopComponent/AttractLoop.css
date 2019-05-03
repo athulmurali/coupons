@@ -4,7 +4,7 @@ div.screen {
 	text-align: center;
 	border-radius:50%;
 	left:230px;
-	background-color: #E0004D;
+	background-color: #84c34d;
 	z-index: 1;
 	bottom: 8%;
 	position: absolute;
@@ -18,7 +18,7 @@ div.screen {
 		text-align: center;
 		border-radius:50%;
 		left:350px;
-		background-color: #E0004D;
+		background-color: #84c34d;
 		z-index: 1;
 		position: absolute;
 		width: 100%;
@@ -44,7 +44,7 @@ background-size: cover;
 #one {
 	height: 180px;
 	width: 180px;
-	border-color: #E0004D;
+	border-color: #84c34d;
 }
 
 .tapAnywhere {
@@ -63,12 +63,7 @@ div.container {
 	margin-top: -15px;
 }
 
-.couponScreenBackground{
-height: 647px;
-width:  1228px;
-background-color: lightgrey;
-margin:auto;
-background-repeat: repeat-y;
-background-size: 100%;
-
+.couponIcon{
+	height: 650px;
+	padding: 0 25%;
 }

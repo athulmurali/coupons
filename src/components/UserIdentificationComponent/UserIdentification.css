@@ -57,7 +57,7 @@
 }
 
 .status-block{
-	text-align: center;	
+	text-align: center;
 }
 #keyboard {
 	margin: 0;
@@ -103,7 +103,7 @@
 
 #keyboard .switch {
 	width: 193px;
-	background-color: #E0004D;
+	background-color: #e53253;
 	color: white;
 }
 

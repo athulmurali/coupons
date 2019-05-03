@@ -1,6 +1,6 @@
 const SSTheme = () => ({
-  primary: '#E0004D',
-  secondary: '#8BC400',
+  primary: '#e53253',
+  secondary: '#84c34d',
   tertiary: '#00965E',
   descriptionText: '#63666A',
 });
