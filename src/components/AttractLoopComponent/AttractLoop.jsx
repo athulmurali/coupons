@@ -42,7 +42,8 @@ class AttractLoop extends Component {
 
 
     render() {
-		
+
+    const couponImage = require('../../assets/icon-coupons.png');
     const Image_coupon1 = require('../../assets/coupons-attract-Images-03.png');
     const Image_coupon2 = require('../../assets/coupons-attract-Images-04.png');
     const Image_coupon3 = require('../../assets/coupons-attract-Images-05.png');
@@ -52,7 +53,7 @@ class AttractLoop extends Component {
       Image_coupon2,
       Image_coupon3,
     ];
-    
+
     const slide_properties = {
       duration: Config.ATTRACT_LOOP_SLIDE_DURATION,
       transitionDuration: 500,
@@ -62,23 +63,10 @@ class AttractLoop extends Component {
     }
 
     return (
-      
+
       <div className="AttractLoop" onClick={this.handleScreenTap}  >
         <Header />
-        <Slide {...slide_properties} className="couponScreenBackground">
-          <div className="each-slide">
-            <div className="couponImageCover" style={{ 'backgroundImage': `url(${slideImages[0]})` }}>
-          </div>
-          </div>
-          <div className="each-slide">
-            <div className="couponImageCover" style={{ 'backgroundImage': `url(${slideImages[1]})` }}>
-            </div>
-          </div>
-          <div className="each-slide">
-            <div className="couponImageCover" style={{ 'backgroundImage': `url(${slideImages[2]})` }}>
-          </div>
-          </div>
-        </Slide>
+        <img src={couponImage} alt="coupon icon" className="couponIcon"/>
         <div id="one" className="screen">
           <div className="container">
             <span className="tapAnywhere">Tap anywhere to start</span>

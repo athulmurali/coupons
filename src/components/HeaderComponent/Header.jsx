@@ -5,7 +5,6 @@ import styled from "styled-components";
 const AttractHeader = styled.div`
 	display: flex;
 	justify-content: center;
-	font-family: sans-serif;
 	font-size: calc(13px + .7vmin);
 	// font-size: 22px;
 	color: black;
@@ -13,11 +12,11 @@ const AttractHeader = styled.div`
 `;
 
 class Header extends React.Component {
-	
+
 	render() {
 		return(
 			<AttractHeader>
-				<h1 className="MainHeader"> Savings & Coupons </h1>
+				<h1 className="MainHeader"> More Savings </h1>
 			</AttractHeader>
 		);
 	}
