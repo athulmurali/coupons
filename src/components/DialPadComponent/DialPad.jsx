@@ -1,15 +1,13 @@
 import React, {Component} from "react";
-import API from "../../utils/API";
 import "./DialPad.css";
 import Config from "../../config/config";
 import AssistancePopUpComponent from "../AssitancePopUpComponent/AssistancePopUpComponent";
 import {connect} from "react-redux";
 import {ROUTE_DISPLAY_COUPONS, ROUTE_HOME_PAGE} from "../../utils/RouteConstants";
-import {updateCoupons} from "../../redux/actions/DisplayCouponAction";
 import {CardNuumberComponent, InputText, KeyBoard, PhoneNumberImage} from "./KeyBoard";
 import {MessageDisplay} from "../../utils/App";
-import { loginSuccess } from "../../redux/actions/Login";
-import { RiseLoader } from 'react-spinners';
+import {loginSuccess} from "../../redux/actions/Login";
+import {RiseLoader} from "react-spinners";
 
 class DialPad extends Component {
 	constructor(props) {
@@ -219,7 +217,9 @@ class DialPad extends Component {
 
 					<InputText phoneNumber = {this.state.phoneNumber} defaultMessage = {this.state.defaultMessage} />
 				</div>
-				<KeyBoard handleTheKeyClicks = {this.handleTheKeyClicks} deleteTheLastDigit = {this.deleteTheLastDigit} checkPhoneNumber = {this.checkPhoneNumber}></KeyBoard>
+				<KeyBoard handleTheKeyClicks = {this.handleTheKeyClicks}
+						  deleteTheLastDigit = {this.deleteTheLastDigit}
+						  checkPhoneNumber = {this.checkPhoneNumber}/>
 				<AssistancePopUpComponent/>
 
 			</MessageDisplay>
@@ -242,7 +242,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => (
 	{
-		updateCoupons: (couponDetails) => updateCoupons(dispatch, couponDetails),
 		loginByBarcode : (barcode) => loginSuccess(dispatch, barcode),
 
 	}
