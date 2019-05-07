@@ -1,5 +1,5 @@
-import {FETCH_COUPONS_FULFILLED} from "./SearchSortFilterReducer";
 import {LOGIN_BARCODE_FULFILLED} from "./LoginReducer";
+
 export const UPDATE_DISPLAY_COUPON_STATE = "UPDATE_DISPLAY_COUPON_STATE";
 export const UPDATE_COUPON_DETAILS = "UPDATE_COUPON_DETAILS";
 
@@ -41,13 +41,13 @@ const DisplayCouponsReducer = (state = initialState, action) => {
 
 
 	
-		case LOGIN_BARCODE_FULFILLED : 
-		console.log("i am here ")
+		case LOGIN_BARCODE_FULFILLED :
+			const userInfo =  action.payload.data.response;
 			return {
 				...state,
 				isLoading: false,
-				userInfo: action.payload.data.response,
-				loyaltyNumber:action.payload.data.response.loyaltyNumber
+				userInfo: userInfo,
+				loyaltyNumber:userInfo.loyaltyCardNumber
 			};
 		
 	default :

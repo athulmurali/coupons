@@ -32,16 +32,6 @@ export const CardNuumberComponent = (props) => {
 	);
 };
 
-export const phoneNumberComponent = (props) => {
-	return(
-		
-		<button className={props.cardButton} onClick={props.handleCardClick}>
-			<img className="image-width" alt ="card number" src={props.slideImages[0]}/>
-                        Card Number
-		</button>
-	);
-};
-
 export const InputText = (props)  => {
 	return(
 		<div>

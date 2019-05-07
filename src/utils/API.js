@@ -4,15 +4,8 @@ import {processQueryParams} from "./utils";
 
 
 const http = Config.https ? "https" : "http";
-const getUserDetails = (barcodeNumber,type) => {
-	const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/customer/v1/fetch/`+barcodeNumber;
-	return axios.get(url);
-};
-const getUserCoupons = (barcodeNumber) => {
-	//change in the api , hence barcode parameter will not be used
-	//to be changed to new a function in the  later build
-	const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/coupons/fetchCouponsByFilter`;
-
+const getUserDetailsByBarcode = (barcodeWithoutCheckSum) => {
+	const url = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/customer/v1/fetch/`+barcodeWithoutCheckSum;
 	return axios.get(url);
 };
 
@@ -56,7 +49,7 @@ const getUserCoupons = (barcodeNumber) => {
 			...processedQueryParams
 		}
 	});
-};
+}
 
 const getCategoriesFromServer=()=>{
 
@@ -72,8 +65,7 @@ const loadCoupon=(loyaltyNumber=null, couponId=null, loadType=null )=>{
 };
 
 const API = {
-	getUserDetails,
-	getUserCoupons,
+	getUserDetails: getUserDetailsByBarcode,
 	getCouponsWithFilters,
 	getCategoriesFromServer,
 	loadCoupon
