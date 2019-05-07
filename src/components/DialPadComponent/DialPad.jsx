@@ -8,7 +8,8 @@ import {ROUTE_DISPLAY_COUPONS, ROUTE_HOME_PAGE} from "../../utils/RouteConstants
 import {updateCoupons} from "../../redux/actions/DisplayCouponAction";
 import {CardNuumberComponent, InputText, KeyBoard, PhoneNumberImage} from "./KeyBoard";
 import {MessageDisplay} from "../../utils/App";
-
+import { loginSuccess } from "../../redux/actions/Login";
+import { RiseLoader } from 'react-spinners';
 
 class DialPad extends Component {
 	constructor(props) {
@@ -41,6 +42,7 @@ class DialPad extends Component {
 	};
 
 	searchForThePhoneNumberInDatabase = async () => {
+		
 		try {
 			if (this.state.cardNumber === false) {
 				this.extractNumberFromFormat = (this.state.phoneNumber.substring(1, 4) + this.state.phoneNumber.substring(6, 9) + this.state.phoneNumber.substring(10));
@@ -49,11 +51,13 @@ class DialPad extends Component {
 				this.extractNumberFromFormat = this.state.phoneNumber.slice(0, -1);
 			}
 			console.log(this.extractNumberFromFormat);
-			const response = await API.getUserDetails(this.extractNumberFromFormat);
-			const userInfo = response.data.response;
-			this.props.updateCoupons({userInfo: userInfo
-				, loyaltyNumber: userInfo.loyaltyCardNumber
-			});
+			this.props.loginByBarcode(this.extractNumberFromFormat);
+			
+			// const response = await API.getUserDetails(this.extractNumberFromFormat);
+			// const userInfo = response.data.response;
+			// this.props.updateCoupons({userInfo: this.props.loginResult
+			// 	, loyaltyNumber: this.props.loginResult.loyaltyCardNumber
+			// });
 		} catch (error) {
 			console.log(error);
 			this.setErrorMessage();
@@ -62,6 +66,14 @@ class DialPad extends Component {
 
 	};
 
+	componentWillReceiveProps(nextProps, nextContext){
+		// if(!!nextProps.loginResult  && !nextProps.userInfo)
+		// this.props.updateCoupons({userInfo: this.props.loginResult
+		// 	, loyaltyNumber: this.props.loginResult.loyaltyCardNumber
+		// });
+
+
+	}
 	setErrorMessage = () => {
 		this.setState({phoneNumber: "", defaultMessage: "Not a valid number Please re enter"});
 
@@ -171,7 +183,7 @@ class DialPad extends Component {
 
 	render() {
 
-		if(this.props.userInfo ){
+		if(!!this.props.userInfo ){
 			this.props.history.push(ROUTE_DISPLAY_COUPONS);
 		}
 
@@ -186,6 +198,12 @@ class DialPad extends Component {
 			this.setState({count: 0});
 			this.handleScreenTap();
 		}
+
+
+		if(this.props.isLoginLoading) {
+			return <div style={{justifyContent:"center", alignItems:"center", display:"flex", height: "670px", fontSize:"21px"}}><RiseLoader size={20} color="#E0004D" /> </div>
+		}
+
 		return (
 
 			<MessageDisplay >
@@ -214,7 +232,9 @@ class DialPad extends Component {
 const mapStateToProps = (state) => {
 	return {
 		userInfo: state.DisplayCouponsReducer.userInfo,
-		allCoupons: state.SearchSortFilterReducer.arr
+		allCoupons: state.SearchSortFilterReducer.arr,
+		isLoginLoading : state.LoginReducer.isLoading,
+		loginResult : state.LoginReducer.loginResult
 
 	};
 };
@@ -223,6 +243,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => (
 	{
 		updateCoupons: (couponDetails) => updateCoupons(dispatch, couponDetails),
+		loginByBarcode : (barcode) => loginSuccess(dispatch, barcode),
 
 	}
 );
