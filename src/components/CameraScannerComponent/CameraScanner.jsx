@@ -1,38 +1,37 @@
-import {Component} from "react";
 import PropTypes from "prop-types";
-import {ROUTE_DISPLAY_COUPONS} from "../../utils/RouteConstants";
+import {ROUTE_DISPLAY_COUPONS, ROUTE_USER_IDENTIFICATION} from "../../utils/RouteConstants";
 import {connect} from "react-redux";
 import {updateCoupons} from "../../redux/actions/DisplayCouponAction";
 import {loginByBarcode} from "../../redux/actions/Login";
+import * as React from "react";
 
-class CameraScanner extends Component {
+class CameraScanner extends React.Component {
 
 
-	_searchUserInDatabase = async (searchBarcode) => {
-		this.props.loginByBarcode(searchBarcode.slice(0, -1));
 
-	};
+
+
 
 
 	constructor(props) {
 		super(props);
-		this.state = {
+	}
 
-		};
-		this._searchUserInDatabase = this._searchUserInDatabase.bind(this);
-		if(props.match.params.barcode){
-      this._searchUserInDatabase(props.match.params.barcode)
-    }
+	async componentWillReceiveProps(nextProps, nextContext) {
+
+		if (!!nextProps.userInfo)
+			nextProps.history.push({pathname: ROUTE_DISPLAY_COUPONS});
+		else if (!!nextProps.scanError)
+			nextProps.history.push({pathname: ROUTE_USER_IDENTIFICATION});
+
+		else if (nextProps.match.params.barcode)
+			await this.props.loginByBarcode(nextProps.match.params.barcode.slice(0, -1));
+
 	}
 
 
-
 	render() {
-		// reroute to Display coupons if the userInfo is set
-		if (!!this.props.userInfo){
-			this.props.history.push({pathname: ROUTE_DISPLAY_COUPONS});
 
-		}
 		return null
 
 	}
@@ -61,9 +60,10 @@ CameraScanner.defaultProps = {
 };
 
 
-const mapStateToProps = (props) => {
+const mapStateToProps = (state) => {
 	return {
-		userInfo : props.DisplayCouponsReducer.userInfo
+		userInfo : state.DisplayCouponsReducer.userInfo,
+		scanError: state.LoginReducer.error
 	};
 };
 const mapDispatchToProps = (dispatch) => {

@@ -9,7 +9,7 @@ export const LOGIN_BARCODE_REJECTED = LOGIN_BARCODE + '_REJECTED';
 const initialState = {
 	loginResult : null,
 	isLoading : false,
-	error: null
+	error: false
 };
 
 const LoginReducer = (state = initialState, action) => {

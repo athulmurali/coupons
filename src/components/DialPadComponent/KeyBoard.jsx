@@ -26,17 +26,7 @@ export const KeyBoard = (props ) => {
 export const CardNuumberComponent = (props) => {
 	return(
 		<button className={props.cardButton} onClick={props.handleCardClick}>
-			<img className="image-width" alt ="card number" src={props.slideImages[0]}/>
-                        Card Number
-		</button>
-	);
-};
-
-export const phoneNumberComponent = (props) => {
-	return(
-		
-		<button className={props.cardButton} onClick={props.handleCardClick}>
-			<img className="image-width" alt ="card number" src={props.slideImages[0]}/>
+			<img className="image-width" alt ="card number" src={props.}/>
                         Card Number
 		</button>
 	);
