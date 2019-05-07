@@ -6,7 +6,7 @@ import {connect} from "react-redux";
 import {ROUTE_DISPLAY_COUPONS, ROUTE_HOME_PAGE} from "../../utils/RouteConstants";
 import {CardNuumberComponent, InputText, KeyBoard, PhoneNumberImage} from "./KeyBoard";
 import {MessageDisplay} from "../../utils/App";
-import {loginSuccess} from "../../redux/actions/Login";
+import {loginByBarcode} from "../../redux/actions/Login";
 import {RiseLoader} from "react-spinners";
 
 class DialPad extends Component {
@@ -242,7 +242,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => (
 	{
-		loginByBarcode : (barcode) => loginSuccess(dispatch, barcode),
+		loginByBarcode : (barcode) => loginByBarcode(dispatch, barcode),
 
 	}
 );

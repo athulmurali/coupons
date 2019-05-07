@@ -1,11 +1,11 @@
 import React, {Component} from "react";
 import Result from "./Result";
 import Scanner from "./Scanner";
-import API from "../../utils/API";
 import PropTypes from "prop-types";
 import {ROUTE_DISPLAY_COUPONS} from "../../utils/RouteConstants";
 import {connect} from "react-redux";
 import {updateCoupons} from "../../redux/actions/DisplayCouponAction";
+import {loginByBarcode} from "../../redux/actions/Login";
 
 class CameraScanner extends Component {
 	constructor(props) {
@@ -121,22 +121,8 @@ class CameraScanner extends Component {
 	}
 
 	_searchUserInDatabase = async (searchBarcode) => {
-		try {
+		this.props.loginByBarcode(searchBarcode.slice(0, -1));
 
-			// the following alert to be deleted before merging
-			const userDetailsResponse = await API.getUserDetails(searchBarcode.slice(0, -1));
-
-			const userInfo = userDetailsResponse.data.response;
-
-			this.props.updateCoupons(
-				{
-					userInfo: userInfo,
-					loyaltyNumber: userInfo.loyaltyCardNumber
-				});
-
-		} catch (error) {
-			console.log(error);
-		}
 	};
 
 	_onDetected(result) {
@@ -185,8 +171,8 @@ const mapStateToProps = (props) => {
 };
 const mapDispatchToProps = (dispatch) => {
 	return {
-		updateCoupons: (couponDetails) => updateCoupons(dispatch, couponDetails)
-
+		updateCoupons: (couponDetails) => updateCoupons(dispatch, couponDetails),
+		loginByBarcode : (barcodeWithoutCheckSum) => loginByBarcode(dispatch, barcodeWithoutCheckSum),
 	};
 };
 
