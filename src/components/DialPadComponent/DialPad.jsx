@@ -1,14 +1,15 @@
-// toDo :  Move all native css styling  to a new css class in DisplayCoupons.css
+// toDo :  Move all native css styling  to a new css class in DialPad.css
 // toDo :  Move all react styling to  something like this -
-//  const styles = {containerStyle:{fontSize :"12"},buttonStyle :{color:"red"}    }
+// const styles = {containerStyle:{fontSize :"12"},buttonStyle :{color:"red"}    }
 
 // toDo :  USE this constant IMG inside the components.
 // toDo :  Remove array based state manipulation and replace it with conditional rendering based on isActive flags to switch between phone number and card number component
 // toDo  : Remove event listeners on unmount
+// toDo : replace slideImages with conditional rendering.
+//  Avoid doing any state manipulation or storage inside rendering
 
-// to be used for refactoring
+// to be used for refactoring and suggested changes above
 // const IMG = {
-//
 // 	PHONE : {
 // 		ACTIVE : require("../../assets/icon-phone-white.svg"),
 // 		INACTIVE :require("../../assets/icon-phone-gray.svg")
@@ -16,7 +17,6 @@
 // 	CARD : {
 // 		ACTIVE :require("../../assets/icon-card-white"),
 // 		INACTIVE :require("../../assets/icon-card-gray.svg"),
-//
 // 	}
 // }
 
@@ -206,6 +206,7 @@ class DialPad extends Component {
 		}
 
 
+		// todo : Created a new Component StyledLoader, use it across all places in the app
 		if(this.props.isLoginLoading) {
 			return <div style={{justifyContent:"center", alignItems:"center", display:"flex", height: "670px", fontSize:"21px"}}><RiseLoader size={20} color="#E0004D" /> </div>
 		}
@@ -222,8 +223,7 @@ class DialPad extends Component {
 						<CardNuumberComponent  isActive={false } cardButton = {this.state.cardButton} handleCardClick = {this.handleCardClick} slideImages={slideImages} />
 					</PhoneNumberImage>
 				</div>
-				<div style={{display: "flex",
-					justifyContent: "center"}}>
+				<div style={{display: "flex", justifyContent: "center"}}>
 
 					<InputText phoneNumber = {this.state.phoneNumber} defaultMessage = {this.state.defaultMessage} />
 				</div>
