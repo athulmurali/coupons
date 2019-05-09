@@ -7,30 +7,23 @@ import {RiseLoader} from "react-spinners";
 
 class CameraScanner extends React.Component {
 
-	constructor(props) {
-		super(props);
+	componentDidMount() {
+		if (this.props.match.params.barcode)
+			this.props.loginByBarcode(this.props.match.params.barcode.slice(0, -1));
 	}
 
 	async componentWillReceiveProps(nextProps, nextContext) {
-
 		if (!!nextProps.userInfo)
 			nextProps.history.push({pathname: ROUTE_DISPLAY_COUPONS});
 		else if (!!nextProps.scanError)
 			nextProps.history.push({pathname: ROUTE_USER_IDENTIFICATION});
-
-		else if (nextProps.match.params.barcode)
-			await this.props.loginByBarcode(nextProps.match.params.barcode.slice(0, -1));
 	}
 
 
 	render() {
-		if(!!this.props.isLoginLoading) {
-			return <div style={{justifyContent:"center", alignItems:"center", display:"flex", height: "670px", fontSize:"21px"}}>
-				<RiseLoader size={20} color="#E0004D" />
-			</div>
-		}
-		return null
-
+		return <div style={{justifyContent:"center", alignItems:"center", display:"flex", height: "670px", fontSize:"21px"}}>
+			<RiseLoader size={20} color="#E0004D" />
+		</div>
 	}
 
 }
