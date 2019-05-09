@@ -9,9 +9,9 @@
 	font-size: 22px;
 	border: 1px solid lightgrey;
 	color: white;
-}
-.act:focus{
-	outline: 0em;
+	cursor: pointer;
+	outline: none;
+
 }
 
 .inact {
@@ -23,9 +23,8 @@
 	font-size: 22px;
 	border: 1px solid lightgrey;
 	color: #63666A;
-}
-.inact:focus{
-	outline: 0em;
+	cursor: pointer;
+
 }
 
 .image-width{

@@ -1,7 +1,22 @@
 import React from "react";
 import "./DialPad.css";
+import Proptypes from "prop-types";
 
-export const KeyBoard = (props ) => {
+const EnterMessage = (props) => {
+	return <div className="status-block">
+		<h3 className="statusMessage"> Enter the {props.inputType} number</h3>
+		<h3 className="statusMessage">associated with your account</h3>
+	</div>;
+};
+
+const ErrorMessage = (props) => {
+	return <div className="status-block">
+		<h3 className="statusMessage"> {props.errorMessage}</h3>
+	</div>;
+};
+
+
+export const KeyBoard = (props) => {
 	return(
 		<div id="container">
 			<ul id="keyboard">
@@ -14,7 +29,7 @@ export const KeyBoard = (props ) => {
 				<li className="letter clearl" onClick={ props.handleTheKeyClicks}>7</li>
 				<li className="letter " onClick={ props.handleTheKeyClicks}>8</li>
 				<li className="letter" onClick={ props.handleTheKeyClicks}>9</li>
-				<li className="letter clearl"></li>
+				<li className="letter clearl"/>
 				<li className="letter" onClick={ props.handleTheKeyClicks}>0</li>
 				<li className="letter" onClick={ props.deleteTheLastDigit}>&lt;</li>
 				<li className="switch" onClick={ props.checkPhoneNumber}>Sign in</li>
@@ -23,36 +38,23 @@ export const KeyBoard = (props ) => {
 	);
 };
 
-export const CardNuumberComponent = (props) => {
-	return(
-		<button className={props.cardButton} onClick={props.handleCardClick}>
-			<img className="image-width" alt ="card number" src={props.slideImages[0]}/>
-                        Card Number
-		</button>
-	);
-};
 
 export const InputText = (props)  => {
 	return(
-		<div>
-			<input className="inputText" id="test-input" maxLength={12} defaultValue={props.phoneNumber} />
-			<div className="status-block">
-				<h3 className="statusMessage"> {props.defaultMessage} </h3>
-				<h3 className="statusMessage">associated with your account</h3>
+		<div style={props.containerStyle}>
+			<div>
+				<input className="inputText" id="test-input" maxLength={12} defaultValue={props.phoneNumber}/>
 			</div>
-		</div>						
-	);
-};
 
-export const PhoneNumberImage = (props) => {
-	return(
-		<div >
-			<button className={props.phoneButton} onClick={props.handlePhoneClick}>
-				<img className="image-width" alt="phone number" src={props.slideImages[1]}/>
-                        Phone Number
-			</button>
-			{props.children}
-                    
+			{props.error ? <EnterMessage/> : <ErrorMessage errorMessage={"Invalid Barcode Scan!"}/>}
+
 		</div>
 	);
 };
+InputText.propTypes = {
+	containerStyle: Proptypes.object,
+	inputType: Proptypes.string,
+	error: Proptypes.bool
+};
+
+

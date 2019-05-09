@@ -8,17 +8,7 @@
 // toDo : replace slideImages with conditional rendering.
 //  Avoid doing any state manipulation or storage inside rendering
 // TODO : test1
-// to be used for refactoring and suggested changes above
-// const IMG = {
-// 	PHONE : {
-// 		ACTIVE : require("../../assets/icon-phone-white.svg"),
-// 		INACTIVE :require("../../assets/icon-phone-gray.svg")
-// 	},
-// 	CARD : {
-// 		ACTIVE :require("../../assets/icon-card-white"),
-// 		INACTIVE :require("../../assets/icon-card-gray.svg"),
-// 	}
-// }
+
 
 import React, {Component} from "react";
 import "./DialPad.css";
@@ -26,13 +16,17 @@ import Config from "../../config/config";
 import AssistancePopUpComponent from "../AssitancePopUpComponent/AssistancePopUpComponent";
 import {connect} from "react-redux";
 import {ROUTE_DISPLAY_COUPONS, ROUTE_HOME_PAGE} from "../../utils/RouteConstants";
-import {CardNuumberComponent, InputText, KeyBoard, PhoneNumberImage} from "./KeyBoard";
+import {InputText, KeyBoard} from "./KeyBoard";
 import {MessageDisplay} from "../../utils/App";
 import {loginByBarcode} from "../../redux/actions/Login";
-import {RiseLoader} from "react-spinners";
+import LoaderComponent from "../LoaderComponent";
+import LoginTypeSelector from "../LoginTypeSelector";
 
-const Image_card = require("../../assets/icon-card-gray.svg");
-const Image_phone = require("../../assets/icon-phone-white.svg");
+const styles = {
+	inputTextContainer: {display: "flex", justifyContent: "center"},
+	loginTypeContainer: {display: "flex", justifyContent: "center", maxHeight: "80px"}
+};
+
 
 class DialPad extends Component {
 	constructor(props) {
@@ -40,17 +34,13 @@ class DialPad extends Component {
 		this.state = {
 			phoneNumber: "",
 			disableTextArea: false,
-			defaultMessage: "Enter the Phone number",
+			defaultMessage: "Phone",
 			count: 0,
 			cardNumber: false,
 			mouseHover: false,
-			phoneButton: "act",
-			cardButton: "inact",
 		};
 		window.addEventListener("orientationchange", this.orientationChange);
-		this.couponsDetails = [];
 	}
-
 
 	deleteTheLastDigit = () => {
 		let prev = this.state.phoneNumber.slice(0, -1);
@@ -63,19 +53,17 @@ class DialPad extends Component {
 	};
 
 	searchForThePhoneNumberInDatabase = async () => {
-		
+
 		try {
 			if (this.state.cardNumber === false) {
 				this.extractNumberFromFormat = (this.state.phoneNumber.substring(1, 4) + this.state.phoneNumber.substring(6, 9) + this.state.phoneNumber.substring(10));
 			} else {
-
 				this.extractNumberFromFormat = this.state.phoneNumber.slice(0, -1);
 			}
 			console.log(this.extractNumberFromFormat);
 			this.props.loginByBarcode(this.extractNumberFromFormat);
 
 		} catch (error) {
-			console.log(error);
 			this.setErrorMessage();
 		}
 
@@ -92,8 +80,7 @@ class DialPad extends Component {
 		if (this.state.cardNumber === false) {
 			this.extractNumberFromFormat = (this.state.phoneNumber.substring(1, 4) + this.state.phoneNumber.substring(6, 9) + this.state.phoneNumber.substring(10));
 			console.log(this.extractNumberFromFormat);
-		}
-		else {
+		} else {
 			this.extractNumberFromFormat = this.state.phoneNumber.slice(0, -1);
 		}
 		//	this.searchForThePhoneNumberInDatabase(this.extractNumberFromFormat);
@@ -101,6 +88,17 @@ class DialPad extends Component {
 		(this.extractNumberFromFormat.length === 10 || this.extractNumberFromFormat.length === 12) && this.state.phoneNumber ? this.searchForThePhoneNumberInDatabase() : this.setErrorMessage();
 
 	};
+
+	startTimer() {
+		clearInterval(this.timer);
+		this.timer = setInterval(this.tick.bind(this), 1000);
+	}
+
+	tick() {
+		alert("hi");
+		this.setState({count: (this.state.count + 1)});
+	}
+
 
 	handleTheKeyClicks = e => {
 		this.setState({count: 0});
@@ -146,25 +144,6 @@ class DialPad extends Component {
 		}
 	};
 
-	componentWillUnmount() {
-		clearInterval(this.timer);
-	}
-
-	componentWillReceiveProps(nextProps, nextContext) {
-		if(!!nextProps.userInfo ){
-			this.props.history.push(ROUTE_DISPLAY_COUPONS);
-		}
-
-	}
-
-	tick() {
-		this.setState({count: (this.state.count + 1)});
-	}
-
-	startTimer() {
-		clearInterval(this.timer);
-		this.timer = setInterval(this.tick.bind(this), 1000);
-	}
 
 	handleScreenTap = () => {
 		this.props.history.push(ROUTE_HOME_PAGE);
@@ -173,7 +152,7 @@ class DialPad extends Component {
 		this.setState({
 			count: 0,
 			cardNumber: false,
-			defaultMessage: "Enter the Phone number",
+			defaultMessage: "Phone",
 			phoneNumber: "",
 		});
 
@@ -184,22 +163,32 @@ class DialPad extends Component {
 			cardNumber: true,
 			cardButton: "act",
 			phoneButton: "inact",
-			defaultMessage: "Enter the Card number",
+			defaultMessage: "Card",
 			phoneNumber: "",
 		});
 		console.log(this.state.cardNumber);
 	};
 
+	componentWillUnmount() {
+		clearInterval(this.timer);
+	}
+
+	componentDidMount() {
+		this.startTimer();
+
+		//When scan barcode fails the following will be executed
+		if (!!this.props.error)
+			this.setState({defaultMessage: "Invalid Barcode Scanned ! "});
+	}
+
+	componentWillReceiveProps(nextProps, nextContext) {
+		if (!!nextProps.userInfo)
+			this.props.history.push(ROUTE_DISPLAY_COUPONS);
+	}
+
 	render() {
 
 
-
-		const slideImages = [
-			Image_card,
-			Image_phone
-		];
-
-		this.startTimer();
 		if (this.state.count > Config.INACTIVE_USER_IDENTIFICATION) {
 			this.setState({count: 0});
 			this.handleScreenTap();
@@ -207,33 +196,26 @@ class DialPad extends Component {
 
 
 		// todo : Created a new Component StyledLoader, use it across all places in the app
-		if(this.props.isLoginLoading) {
-			return <div style={{justifyContent:"center", alignItems:"center", display:"flex", height: "670px", fontSize:"21px"}}><RiseLoader size={20} color="#E0004D" /> </div>
+		if (this.props.isLoginLoading) {
+			return <LoaderComponent/>;
 		}
 
 		return (
-
-			<MessageDisplay >
-				<div style={{display: "flex",
-					justifyContent: "center", maxHeight: "80px"}}>
-					{!!this.props.error && <div> Scan error! </div>}
-
-					<PhoneNumberImage  phoneButton = {this.state.phoneButton} handlePhoneClick = {this.handlePhoneClick} slideImages = {slideImages} >
-						{/*{toDo :isActive state and prop refactoring }*/}
-						<CardNuumberComponent  isActive={false } cardButton = {this.state.cardButton} handleCardClick = {this.handleCardClick} slideImages={slideImages} />
-					</PhoneNumberImage>
+			<MessageDisplay>
+				<div style={styles.loginTypeContainer}>
+					<LoginTypeSelector
+						handleCardClick={this.handleCardClick}
+						handlePhoneClick={this.handlePhoneClick}
+					/>
 				</div>
-				<div style={{display: "flex", justifyContent: "center"}}>
-
-					<InputText phoneNumber = {this.state.phoneNumber} defaultMessage = {this.state.defaultMessage} />
+				<div style={styles.inputTextContainer}>
+					<InputText phoneNumber={this.state.phoneNumber} defaultMessage={this.state.defaultMessage}
+							   error={!this.props.error}/>
 				</div>
-				<KeyBoard handleTheKeyClicks = {this.handleTheKeyClicks}
-						  deleteTheLastDigit = {this.deleteTheLastDigit}
-						  checkPhoneNumber = {this.checkPhoneNumber}
-						  slideImages = {slideImages}
-				/>
+				<KeyBoard handleTheKeyClicks={this.handleTheKeyClicks}
+						  deleteTheLastDigit={this.deleteTheLastDigit}
+						  checkPhoneNumber={this.checkPhoneNumber}/>
 				<AssistancePopUpComponent/>
-
 			</MessageDisplay>
 
 		);
@@ -245,9 +227,9 @@ const mapStateToProps = (state) => {
 	return {
 		userInfo: state.DisplayCouponsReducer.userInfo,
 		allCoupons: state.SearchSortFilterReducer.arr,
-		isLoginLoading : state.LoginReducer.isLoading,
-		loginResult : state.LoginReducer.loginResult,
-		error :state.LoginReducer.error
+		isLoginLoading: state.LoginReducer.isLoading,
+		loginResult: state.LoginReducer.loginResult,
+		error: state.LoginReducer.error
 
 	};
 };
@@ -255,7 +237,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => (
 	{
-		loginByBarcode : (barcode) => loginByBarcode(dispatch, barcode),
+		loginByBarcode: (barcode) => loginByBarcode(dispatch, barcode),
 
 	}
 );
