@@ -5,6 +5,7 @@ export const LOGIN_BARCODE ='LOGIN_BARCODE';
 export const LOGIN_BARCODE_PENDING = LOGIN_BARCODE + '_PENDING';
 export const LOGIN_BARCODE_FULFILLED = LOGIN_BARCODE + '_FULFILLED';
 export const LOGIN_BARCODE_REJECTED = LOGIN_BARCODE + '_REJECTED';
+export const CLEAR_LOGIN_ERROR = "CLEAR_LOGIN_ERROR";
 
 const initialState = {
 	loginResult : null,
@@ -30,7 +31,6 @@ const LoginReducer = (state = initialState, action) => {
 		}
 
 		case LOGIN_BARCODE_REJECTED : {
-			alert("Something went wrong while logging in !")
 			return {
 				...state,
 				isLoading: false,
@@ -38,9 +38,15 @@ const LoginReducer = (state = initialState, action) => {
 			};
 		}
 
+		case  CLEAR_LOGIN_ERROR :
+			return {
+				...state,
+				error: false
+			};
+
 
 		case LOGIN_BARCODE_FULFILLED : {
-			
+
 			return {
 				...state,
 				isLoading: false,

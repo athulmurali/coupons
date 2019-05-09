@@ -9,6 +9,7 @@
     "babel-preset-react-app": "^7.0.2",
     "barcode-reader": "^1.6.1",
     "eslint-plugin-jsx-a11y": "^6.1.2",
+    "prop-types": "^15.7.2",
     "quagga": "^0.12.1",
     "react": "^16.7.0",
     "react-barcode-reader": "0.0.1",
