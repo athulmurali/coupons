@@ -7,7 +7,7 @@
 // toDo  : Remove event listeners on unmount
 // toDo : replace slideImages with conditional rendering.
 //  Avoid doing any state manipulation or storage inside rendering
-
+// TODO : test1
 // to be used for refactoring and suggested changes above
 // const IMG = {
 // 	PHONE : {
@@ -229,7 +229,9 @@ class DialPad extends Component {
 				</div>
 				<KeyBoard handleTheKeyClicks = {this.handleTheKeyClicks}
 						  deleteTheLastDigit = {this.deleteTheLastDigit}
-						  checkPhoneNumber = {this.checkPhoneNumber}/>
+						  checkPhoneNumber = {this.checkPhoneNumber}
+						  slideImages = {slideImages}
+				/>
 				<AssistancePopUpComponent/>
 
 			</MessageDisplay>
