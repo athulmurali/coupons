@@ -1,3 +1,25 @@
+// toDo :  Move all native css styling  to a new css class in DisplayCoupons.css
+// toDo :  Move all react styling to  something like this -
+//  const styles = {containerStyle:{fontSize :"12"},buttonStyle :{color:"red"}    }
+
+// toDo :  USE this constant IMG inside the components.
+// toDo :  Remove array based state manipulation and replace it with conditional rendering based on isActive flags to switch between phone number and card number component
+// toDo  : Remove event listeners on unmount
+
+// to be used for refactoring
+// const IMG = {
+//
+// 	PHONE : {
+// 		ACTIVE : require("../../assets/icon-phone-white.svg"),
+// 		INACTIVE :require("../../assets/icon-phone-gray.svg")
+// 	},
+// 	CARD : {
+// 		ACTIVE :require("../../assets/icon-card-white"),
+// 		INACTIVE :require("../../assets/icon-card-gray.svg"),
+//
+// 	}
+// }
+
 import React, {Component} from "react";
 import "./DialPad.css";
 import Config from "../../config/config";
@@ -11,20 +33,6 @@ import {RiseLoader} from "react-spinners";
 
 const Image_card = require("../../assets/icon-card-gray.svg");
 const Image_phone = require("../../assets/icon-phone-white.svg");
-
-const IMG = {
-
-	PHONE : {
-		ACTIVE : require("../../assets/icon-phone-white.svg"),
-		INACTIVE :require("../../assets/icon-phone-gray.svg")
-	},
-	CARD : {
-		ACTIVE :require("../../assets/icon-card-white"),
-		INACTIVE :require("../../assets/icon-card-gray.svg"),
-
-	}
-}
-
 
 class DialPad extends Component {
 	constructor(props) {
@@ -205,12 +213,13 @@ class DialPad extends Component {
 		return (
 
 			<MessageDisplay >
-				{!!this.props.error && <div> Scan error </div>}
 				<div style={{display: "flex",
 					justifyContent: "center", maxHeight: "80px"}}>
+					{!!this.props.error && <div> Scan error! </div>}
+
 					<PhoneNumberImage  phoneButton = {this.state.phoneButton} handlePhoneClick = {this.handlePhoneClick} slideImages = {slideImages} >
-						
-						<CardNuumberComponent  isActive={this.state.     } cardButton = {this.state.cardButton} handleCardClick = {this.handleCardClick} slideImages={slideImages} />
+						{/*{toDo :isActive state and prop refactoring }*/}
+						<CardNuumberComponent  isActive={false } cardButton = {this.state.cardButton} handleCardClick = {this.handleCardClick} slideImages={slideImages} />
 					</PhoneNumberImage>
 				</div>
 				<div style={{display: "flex",

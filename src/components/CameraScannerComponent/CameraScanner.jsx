@@ -1,17 +1,11 @@
 import PropTypes from "prop-types";
 import {ROUTE_DISPLAY_COUPONS, ROUTE_USER_IDENTIFICATION} from "../../utils/RouteConstants";
 import {connect} from "react-redux";
-import {updateCoupons} from "../../redux/actions/DisplayCouponAction";
 import {loginByBarcode} from "../../redux/actions/Login";
 import * as React from "react";
+import {RiseLoader} from "react-spinners";
 
 class CameraScanner extends React.Component {
-
-
-
-
-
-
 
 	constructor(props) {
 		super(props);
@@ -26,16 +20,18 @@ class CameraScanner extends React.Component {
 
 		else if (nextProps.match.params.barcode)
 			await this.props.loginByBarcode(nextProps.match.params.barcode.slice(0, -1));
-
 	}
 
 
 	render() {
-
+		if(!!this.props.isLoginLoading) {
+			return <div style={{justifyContent:"center", alignItems:"center", display:"flex", height: "670px", fontSize:"21px"}}>
+				<RiseLoader size={20} color="#E0004D" />
+			</div>
+		}
 		return null
 
 	}
-
 
 }
 
@@ -63,12 +59,12 @@ CameraScanner.defaultProps = {
 const mapStateToProps = (state) => {
 	return {
 		userInfo : state.DisplayCouponsReducer.userInfo,
-		scanError: state.LoginReducer.error
+		scanError: state.LoginReducer.error,
+		isLoginLoading:  state.LoginReducer.isLoginLoading
 	};
 };
 const mapDispatchToProps = (dispatch) => {
 	return {
-		updateCoupons: (couponDetails) => updateCoupons(dispatch, couponDetails),
 		loginByBarcode : (barcodeWithoutCheckSum) => loginByBarcode(dispatch, barcodeWithoutCheckSum),
 	};
 };
