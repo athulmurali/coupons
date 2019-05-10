@@ -12,6 +12,7 @@ import SideBar from "../SideBar";
 import {RESTART_TIMER_EVENTS} from "../../config/config";
 import CouponCardsWithSearch from "../CouponCardComponent/CouponCardsWithSearch";
 
+import ExpiringCoupons from "../ExpiringCouponsComponent/ExpiringCoupons";
 class Coupons extends React.Component {
 
 	componentDidMount() {
@@ -50,6 +51,7 @@ class Coupons extends React.Component {
 		return props.userInfo && <div className="pointerEventsNone">
 			<WelcomeHeader userName={props.userInfo.firstName}/>
 			<Header/>
+			<ExpiringCoupons gasRewards={"$0.02"} totalSavings={"$366.12"} userName={userName} />
 			{/*<PrintComponent hideLoadedCoupons={this.state.hideLoadedCoupons}*/}
 							{/*componentRef={this.componentRef}></PrintComponent>*/}
 
@@ -60,8 +62,6 @@ class Coupons extends React.Component {
 					 <LogOutPromptPopup/>
 				</div>
 		</div>
-
-	};
 }
 
 const mapStateToProps = (state) => {

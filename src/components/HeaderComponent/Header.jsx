@@ -11,6 +11,8 @@ const AttractHeader = styled.div`
 	padding: 30px;
 `;
 
+
+
 class Header extends React.Component {
 
 	render() {
