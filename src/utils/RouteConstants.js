@@ -2,5 +2,5 @@ const ROUTE_DISPLAY_COUPONS = "/DisplayCoupons";
 const ROUTE_USER_IDENTIFICATION = "/userIdentification";
 const ROUTE_SCAN_IMAGE = "/ScanImage";
 const ROUTE_HOME_PAGE = "/";
-const ROUTE_BARCODE_SCAN = "/:barcode";
+const ROUTE_BARCODE_SCAN = "/barcode/:barcode";
 export {ROUTE_DISPLAY_COUPONS,ROUTE_HOME_PAGE,ROUTE_SCAN_IMAGE,ROUTE_USER_IDENTIFICATION,ROUTE_BARCODE_SCAN};

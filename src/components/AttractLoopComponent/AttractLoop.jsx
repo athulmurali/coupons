@@ -73,7 +73,6 @@ class AttractLoop extends Component {
           </div>
         </div>
 				<ScanBarcode history= {this.props.history}/>
-				<CameraScanner history={this.props.history}></CameraScanner>
       </div>
     );
   }
