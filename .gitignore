@@ -19,6 +19,9 @@
 .scannerwork
 .idea/
 
+#intellij project files
+*.iml
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

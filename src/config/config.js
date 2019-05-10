@@ -28,7 +28,7 @@ const constants = {
 	TOP_RIGHT_CORNER: "top_right",
 	BOTTOM_LEFT_CORNER: "bottom_left",
 	BOTTOM_RIGHT_CORNER: "bottom_right",
-	INACTIVE_USER_IDENTIFICATION: 15,   // in seconds
+	INACTIVE_USER_IDENTIFICATION: 15000,   // in ms
 	POPUPTIMER: 20,						// in seconds
 	LOGOUTTIMER: 30,						// in seconds
 	ATTRACT_LOOP_SLIDE_DURATION: 3000,  // in milli-seconds
@@ -88,7 +88,7 @@ export const SORT_CATEGORIES = [
 
 
 export const CouponsTypeEnum = Object.freeze({LOADED: "LOADED", ALL: "ALL"});
-export const COUPONS_SOURCE= Object.freeze({ COUPONS : 'COUPONS', COPIENT : 'COPIENT'})
 export const DEFAULT_SORT = SORT_CATEGORIES[0];
 export const LOADED_DEFAULT = false;
 export const SEARCH_FIELD_NAMES = ["name","description"];
+export const RESTART_TIMER_EVENTS = ["scroll", "touchstart", "touchend", "click"];
