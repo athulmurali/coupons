@@ -1,6 +1,6 @@
 import API from "../../utils/API";
 
-import {LOGIN_BARCODE} from "../reducers/LoginReducer";
+import {CLEAR_LOGIN_ERROR, LOGIN_BARCODE} from "../reducers/LoginReducer";
 
 export const loginByBarcode=(dispatch, barcodeNumber)=>{
 	const getDetails = API.getUserDetails(barcodeNumber, null);
@@ -9,3 +9,5 @@ export const loginByBarcode=(dispatch, barcodeNumber)=>{
 		payload : getDetails
 	})
 };
+
+export const clearLoginError = (dispatch) => dispatch({type: CLEAR_LOGIN_ERROR});

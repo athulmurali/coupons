@@ -4,7 +4,7 @@ import Proptypes from "prop-types";
 
 const EnterMessage = (props) => {
 	return <div className="status-block">
-		<h3 className="statusMessage"> Enter the {props.inputType} number</h3>
+		<h3 className="statusMessage"> Enter the {props.loginType} number</h3>
 		<h3 className="statusMessage">associated with your account</h3>
 	</div>;
 };
@@ -40,20 +40,22 @@ export const KeyBoard = (props) => {
 
 
 export const InputText = (props)  => {
+	console.log(props);
 	return(
 		<div style={props.containerStyle}>
 			<div>
 				<input className="inputText" id="test-input" maxLength={12} defaultValue={props.phoneNumber}/>
 			</div>
 
-			{props.error ? <EnterMessage/> : <ErrorMessage errorMessage={"Invalid Barcode Scan!"}/>}
+			{!props.error ? <EnterMessage loginType={props.loginType}/> :
+				<ErrorMessage errorMessage={"Invalid Barcode Scan!"}/>}
 
 		</div>
 	);
 };
 InputText.propTypes = {
 	containerStyle: Proptypes.object,
-	inputType: Proptypes.string,
+	loginType: Proptypes.string,
 	error: Proptypes.bool
 };
 

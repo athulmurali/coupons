@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import "./DialPadComponent/DialPad.css";
 
 import PHONE_ACTIVE_IMG from "../assets/icon-phone-white.svg";
@@ -10,8 +9,8 @@ import MEMBERSHIP_CARD_INACTIVE_IMG from "../assets/icon-card-gray.svg";
 import LoginTypeCard from "./LoginTypeCard";
 
 const INPUT_TYPE = Object.freeze({
-	PHONE: Symbol("PHONE"),
-	MEMBERSHIP_CARD: Symbol("MEMBERSHIP_CARD"),
+	PHONE: "PHONE",
+	MEMBERSHIP_CARD: "MEMBERSHIP_CARD",
 });
 
 export default class LoginTypeSelector extends React.Component {
@@ -20,7 +19,20 @@ export default class LoginTypeSelector extends React.Component {
 		this.state = {selectedType: INPUT_TYPE.PHONE};
 	}
 
-	selectType = (inputType) => this.setState({selectedType: inputType});
+	handleClicks = (loginType, handlePhoneClick, handleCardClick) => {
+		if (loginType === INPUT_TYPE.PHONE)
+			handlePhoneClick();
+		else
+			handleCardClick();
+	};
+
+	selectType = (loginType) => {
+		const {props} = this;
+		this.setState({selectedType: loginType},
+			() => {
+				this.handleClicks(loginType, props.handlePhoneClick, props.handleCardClick);
+			});
+	};
 
 	render() {
 		return <div>
@@ -32,7 +44,9 @@ export default class LoginTypeSelector extends React.Component {
 				inactiveIconImgSrc={PHONE_INACTIVE_IMG}
 				activeClassName="act"
 				inactiveClassName="inact"
-				onSelect={this.selectType}
+				onSelect={(loginType) => {
+					this.selectType(loginType);
+				}}
 			/>
 			<LoginTypeCard
 				cardName={"Member"}
@@ -42,9 +56,11 @@ export default class LoginTypeSelector extends React.Component {
 				inactiveIconImgSrc={MEMBERSHIP_CARD_INACTIVE_IMG}
 				activeClassName="act"
 				inactiveClassName="inact"
-				onSelect={this.selectType}
+				onSelect={(loginType) => {
+					this.selectType(loginType);
+					this.props.handleCardClick();
+				}}
 			/>
 		</div>;
 	}
-
 }

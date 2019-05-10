@@ -12,7 +12,7 @@ export const InputText = (props) => {
 	return (
 		<div style={props.containerStyle}>
 			<input className="inputText" id="test-input" maxLength={12} defaultValue={props.phoneNumber}/>
-			<EnterMessage inputType={props.defaultMessage}/>
+			<EnterMessage inputType={props.loginType}/>
 		</div>
 	);
 };

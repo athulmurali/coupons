@@ -18,8 +18,8 @@ LoginTypeCard.propTypes = {
 	cardName: Proptypes.string,
 	cardType: Proptypes.string,
 	isActive: Proptypes.bool,
-	activeIconImgSrc: Proptypes.object,
-	inactiveIconImgSrc: Proptypes.object,
+	activeIconImgSrc: Proptypes.string,
+	inactiveIconImgSrc: Proptypes.string,
 	activeClassName: Proptypes.string,
 	inactiveClassName: Proptypes.string,
 	onSelect: Proptypes.func

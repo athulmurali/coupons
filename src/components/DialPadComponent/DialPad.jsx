@@ -12,13 +12,13 @@
 
 import React, {Component} from "react";
 import "./DialPad.css";
-import Config from "../../config/config";
+import Config, {RESTART_TIMER_EVENTS} from "../../config/config";
 import AssistancePopUpComponent from "../AssitancePopUpComponent/AssistancePopUpComponent";
 import {connect} from "react-redux";
 import {ROUTE_DISPLAY_COUPONS, ROUTE_HOME_PAGE} from "../../utils/RouteConstants";
 import {InputText, KeyBoard} from "./KeyBoard";
 import {MessageDisplay} from "../../utils/App";
-import {loginByBarcode} from "../../redux/actions/Login";
+import {clearLoginError, loginByBarcode} from "../../redux/actions/Login";
 import LoaderComponent from "../LoaderComponent";
 import LoginTypeSelector from "../LoginTypeSelector";
 
@@ -28,19 +28,22 @@ const styles = {
 };
 
 
+
 class DialPad extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			phoneNumber: "",
 			disableTextArea: false,
-			defaultMessage: "Phone",
+			loginType: "Phone",
 			count: 0,
 			cardNumber: false,
 			mouseHover: false,
 		};
 		window.addEventListener("orientationchange", this.orientationChange);
 	}
+
+	setErrorMessage = () => this.setState({phoneNumber: "", loginType: "Not a valid number Please re enter"});
 
 	deleteTheLastDigit = () => {
 		let prev = this.state.phoneNumber.slice(0, -1);
@@ -70,9 +73,11 @@ class DialPad extends Component {
 
 	};
 
-	setErrorMessage = () => {
-		this.setState({phoneNumber: "", defaultMessage: "Not a valid number Please re enter"});
-
+	startTimer = () => {
+		console.log("clearing timer : ", this.timer);
+		clearTimeout(this.timer);
+		this.timer = setTimeout(() => this.props.history.push(ROUTE_HOME_PAGE), Config.INACTIVE_USER_IDENTIFICATION);
+		console.log("Timer started : ", this.timer);
 	};
 
 	checkPhoneNumber = () => {
@@ -89,19 +94,19 @@ class DialPad extends Component {
 
 	};
 
-	startTimer() {
-		clearInterval(this.timer);
-		this.timer = setInterval(this.tick.bind(this), 1000);
-	}
+	handlePhoneClick = () => {
+		this.setState({
+			cardNumber: false,
+			loginType: "Phone",
+			phoneNumber: "",
+		});
 
-	tick() {
-		alert("hi");
-		this.setState({count: (this.state.count + 1)});
-	}
+		console.log("phone clicked!");
+		this.props.clearLoginError();
 
+	};
 
 	handleTheKeyClicks = e => {
-		this.setState({count: 0});
 		if (this.state.cardNumber === false) {
 			if (this.state.phoneNumber.length < 14) {
 
@@ -144,61 +149,35 @@ class DialPad extends Component {
 		}
 	};
 
-
-	handleScreenTap = () => {
-		this.props.history.push(ROUTE_HOME_PAGE);
-	};
-	handlePhoneClick = () => {
-		this.setState({
-			count: 0,
-			cardNumber: false,
-			defaultMessage: "Phone",
-			phoneNumber: "",
-		});
-
-	};
 	handleCardClick = () => {
-		this.setState({
-			count: 0,
-			cardNumber: true,
-			cardButton: "act",
-			phoneButton: "inact",
-			defaultMessage: "Card",
-			phoneNumber: "",
-		});
-		console.log(this.state.cardNumber);
+		this.setState({cardNumber: true, phoneNumber: "", loginType: "Card"});
+		this.props.clearLoginError();
+
 	};
 
 	componentWillUnmount() {
 		clearInterval(this.timer);
+		RESTART_TIMER_EVENTS.map(event => window.removeEventListener(event, this.startTimer));
+
 	}
+
 
 	componentDidMount() {
+		RESTART_TIMER_EVENTS.map(event => window.addEventListener(event, this.startTimer));
 		this.startTimer();
-
 		//When scan barcode fails the following will be executed
 		if (!!this.props.error)
-			this.setState({defaultMessage: "Invalid Barcode Scanned ! "});
+			this.setState({loginType: "Error! Invalid Barcode Scanned ! "});
 	}
 
-	componentWillReceiveProps(nextProps, nextContext) {
+	componentWillReceiveProps(nextProps) {
 		if (!!nextProps.userInfo)
 			this.props.history.push(ROUTE_DISPLAY_COUPONS);
 	}
 
 	render() {
-
-
-		if (this.state.count > Config.INACTIVE_USER_IDENTIFICATION) {
-			this.setState({count: 0});
-			this.handleScreenTap();
-		}
-
-
-		// todo : Created a new Component StyledLoader, use it across all places in the app
-		if (this.props.isLoginLoading) {
+		if (this.props.isLoginLoading)
 			return <LoaderComponent/>;
-		}
 
 		return (
 			<MessageDisplay>
@@ -209,8 +188,9 @@ class DialPad extends Component {
 					/>
 				</div>
 				<div style={styles.inputTextContainer}>
-					<InputText phoneNumber={this.state.phoneNumber} defaultMessage={this.state.defaultMessage}
-							   error={!this.props.error}/>
+					<InputText phoneNumber={this.state.phoneNumber}
+							   loginType={this.state.loginType}
+							   error={this.props.error}/>
 				</div>
 				<KeyBoard handleTheKeyClicks={this.handleTheKeyClicks}
 						  deleteTheLastDigit={this.deleteTheLastDigit}
@@ -238,7 +218,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => (
 	{
 		loginByBarcode: (barcode) => loginByBarcode(dispatch, barcode),
-
+		clearLoginError: () => clearLoginError(dispatch)
 	}
 );
 
