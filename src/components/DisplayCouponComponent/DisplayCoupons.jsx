@@ -1,3 +1,9 @@
+// Todo : Confirm bubble layout designs with UX designer
+// Todo : Confirm about the location of gas savings
+// Todo : Too many apis to manage if gas rewards is a an api and total savings is another
+// Todo : The position of more savings and savings dashboard is to be changed after discussion
+//  CheckConfirm for possible backend api
+
 import React from "react";
 import Header from "../HeaderComponent/Header";
 import "./DisplayCoupons.css";
