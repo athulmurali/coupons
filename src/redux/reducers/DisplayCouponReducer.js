@@ -14,8 +14,7 @@ const initialState = {
 	loadedCouponIds: [],
 	activeNewCoupons: "active",
 	activeLoadedCoupons: "inactive",
-	loyaltyNumber: null,
-	sortArrow: true
+	loyaltyNumber: null
 };
 
 
@@ -37,8 +36,6 @@ const DisplayCouponsReducer = (state = initialState, action) => {
 		return {
 			...initialState
 		};
-
-
 
 	
 		case LOGIN_BARCODE_FULFILLED :

@@ -1,12 +1,10 @@
 import React, {Component} from "react";
 import AttractLoop from "../components/AttractLoopComponent/AttractLoop";
+
 // import BarcodeScanner from "../components/BarcodeScanner/BarcodeScanner";
-import {connect} from "react-redux";
 
 class AttractLoopView extends Component{
-	// constructor(props){
-	// 	super(props);
-	// }  
+
 
 	render(){
 		return(
@@ -17,11 +15,5 @@ class AttractLoopView extends Component{
 	}
 }
 
-const mapStateToProps = state => ({
-	...state
-});
-// const mapDispatchToProps = dispatch => ({
-	
-// });
 
-export default connect(mapStateToProps, null)(AttractLoopView);
+export default AttractLoopView;

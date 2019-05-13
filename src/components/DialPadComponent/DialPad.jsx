@@ -1,49 +1,50 @@
-// toDo :  Move all native css styling  to a new css class in DialPad.css
-// toDo :  Move all react styling to  something like this -
-// const styles = {containerStyle:{fontSize :"12"},buttonStyle :{color:"red"}    }
-
-// toDo :  USE this constant IMG inside the components.
-// toDo :  Remove array based state manipulation and replace it with conditional rendering based on isActive flags to switch between phone number and card number component
-// toDo  : Remove event listeners on unmount
-// toDo : replace slideImages with conditional rendering.
-//  Avoid doing any state manipulation or storage inside rendering
-// TODO : test1
-
-
 import React, {Component} from "react";
-import "./DialPad.css";
-import Config, {RESTART_TIMER_EVENTS} from "../../config/config";
-import AssistancePopUpComponent from "../AssitancePopUpComponent/AssistancePopUpComponent";
 import {connect} from "react-redux";
+import "./DialPad.css";
+import Config, {
+	ERROR_MSG_BARCODE_INVALID,
+	ERROR_MSG_INVALID_INPUT,
+	ERROR_MSG_VALIDATION,
+	RESTART_TIMER_EVENTS
+} from "../../config/config";
+import AssistancePopUpComponent from "../AssitancePopUpComponent/AssistancePopUpComponent";
 import {ROUTE_DISPLAY_COUPONS, ROUTE_HOME_PAGE} from "../../utils/RouteConstants";
-import {InputText, KeyBoard} from "./KeyBoard";
 import {MessageDisplay} from "../../utils/App";
 import {clearLoginError, loginByBarcode} from "../../redux/actions/Login";
 import LoaderComponent from "../LoaderComponent";
 import LoginTypeSelector from "../LoginTypeSelector";
+import InputText from "./InputText";
+import KeyBoard from "./KeyBoard";
 
 const styles = {
-	inputTextContainer: {display: "flex", justifyContent: "center"},
+	inputTextContainer: {display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center"},
 	loginTypeContainer: {display: "flex", justifyContent: "center", maxHeight: "80px"}
 };
 
 
+// Quick info
+// ''  == false == null =>true
+// false == null => true
+// Since the propType is string and marked as required, use ''
+
+const initialState = {
+	phoneNumber: "",
+	disableTextArea: false,
+	loginType: "Phone",
+	count: 0,
+	cardNumber: false,
+	mouseHover: false,
+	error: ""
+};
 
 class DialPad extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			phoneNumber: "",
-			disableTextArea: false,
-			loginType: "Phone",
-			count: 0,
-			cardNumber: false,
-			mouseHover: false,
-		};
+		this.state = {...initialState};
 		window.addEventListener("orientationchange", this.orientationChange);
 	}
 
-	setErrorMessage = () => this.setState({phoneNumber: "", loginType: "Not a valid number Please re enter"});
+	setErrorMessage = () => this.setState({phoneNumber: "", error: ERROR_MSG_VALIDATION});
 
 	deleteTheLastDigit = () => {
 		let prev = this.state.phoneNumber.slice(0, -1);
@@ -63,7 +64,6 @@ class DialPad extends Component {
 			} else {
 				this.extractNumberFromFormat = this.state.phoneNumber.slice(0, -1);
 			}
-			console.log(this.extractNumberFromFormat);
 			this.props.loginByBarcode(this.extractNumberFromFormat);
 
 		} catch (error) {
@@ -74,10 +74,8 @@ class DialPad extends Component {
 	};
 
 	startTimer = () => {
-		console.log("clearing timer : ", this.timer);
 		clearTimeout(this.timer);
 		this.timer = setTimeout(() => this.props.history.push(ROUTE_HOME_PAGE), Config.INACTIVE_USER_IDENTIFICATION);
-		console.log("Timer started : ", this.timer);
 	};
 
 	checkPhoneNumber = () => {
@@ -95,18 +93,18 @@ class DialPad extends Component {
 	};
 
 	handlePhoneClick = () => {
+		!!this.props.error && this.props.clearLoginError();
+
 		this.setState({
 			cardNumber: false,
 			loginType: "Phone",
 			phoneNumber: "",
+			error: ""
 		});
-
-		console.log("phone clicked!");
-		this.props.clearLoginError();
-
 	};
 
 	handleTheKeyClicks = e => {
+
 		if (this.state.cardNumber === false) {
 			if (this.state.phoneNumber.length < 14) {
 
@@ -124,10 +122,11 @@ class DialPad extends Component {
 						prev += " ";
 					}
 
-
+					!!this.props.error && this.props.clearLoginError();
 					this.setState({
 						phoneNumber: prev + clickedValue,
-						disableTextArea: disableInputArea
+						disableTextArea: disableInputArea,
+						error: ""
 					});
 				}
 			}
@@ -140,9 +139,11 @@ class DialPad extends Component {
 				if (!clickedValue) {
 					// alert("Passed nothing");
 				} else {
+					!!this.props.error && this.props.clearLoginError();
 					this.setState({
 						phoneNumber: prev + clickedValue,
-						disableTextArea: disableInputArea
+						disableTextArea: disableInputArea,
+						error: ""
 					});
 				}
 			}
@@ -150,8 +151,8 @@ class DialPad extends Component {
 	};
 
 	handleCardClick = () => {
-		this.setState({cardNumber: true, phoneNumber: "", loginType: "Card"});
-		this.props.clearLoginError();
+		!!this.props.error && this.props.clearLoginError();
+		this.setState({cardNumber: true, phoneNumber: "", loginType: "Card", error: ""});
 
 	};
 
@@ -165,14 +166,16 @@ class DialPad extends Component {
 	componentDidMount() {
 		RESTART_TIMER_EVENTS.map(event => window.addEventListener(event, this.startTimer));
 		this.startTimer();
-		//When scan barcode fails the following will be executed
+		//When scan barcode scan fails the following will be executed
 		if (!!this.props.error)
-			this.setState({loginType: "Error! Invalid Barcode Scanned ! "});
+			this.setState({error: ERROR_MSG_BARCODE_INVALID});
 	}
 
 	componentWillReceiveProps(nextProps) {
 		if (!!nextProps.userInfo)
 			this.props.history.push(ROUTE_DISPLAY_COUPONS);
+		if (!!nextProps.error)
+			this.setState({error: ERROR_MSG_INVALID_INPUT});
 	}
 
 	render() {
@@ -187,11 +190,10 @@ class DialPad extends Component {
 						handlePhoneClick={this.handlePhoneClick}
 					/>
 				</div>
-				<div style={styles.inputTextContainer}>
-					<InputText phoneNumber={this.state.phoneNumber}
-							   loginType={this.state.loginType}
-							   error={this.props.error}/>
-				</div>
+				<InputText phoneNumber={this.state.phoneNumber}
+						   loginType={this.state.loginType}
+						   error={this.state.error}
+						   containerStyle={styles.inputTextContainer}/>
 				<KeyBoard handleTheKeyClicks={this.handleTheKeyClicks}
 						  deleteTheLastDigit={this.deleteTheLastDigit}
 						  checkPhoneNumber={this.checkPhoneNumber}/>
@@ -201,7 +203,6 @@ class DialPad extends Component {
 		);
 	};
 }
-
 
 const mapStateToProps = (state) => {
 	return {
@@ -213,7 +214,6 @@ const mapStateToProps = (state) => {
 
 	};
 };
-
 
 const mapDispatchToProps = (dispatch) => (
 	{

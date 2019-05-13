@@ -45,7 +45,7 @@
     overflow-x: hidden;
 }
 
-.filterContainerOnSortClick {
+.filterContainerExpanded {
     overflow-y: scroll;
     max-height: 250px;
     max-width: 229px;
@@ -131,7 +131,7 @@ input[type="checkbox"]:checked + label{
 }
 
 .filterLabel{
-    padding: 9% 80% 10% 0%;
+    padding: 9% 10% 10% 0%;
 }
 
 .filter_inside{
@@ -417,7 +417,7 @@ h6.viewMore{
 }
 
 
-.AllCoupons {
+.displayCouponsContainer {
     margin-top: 0;
     display: flex;
     width: 100%;
@@ -601,7 +601,7 @@ li a:hover:not(.active) {
 }
 
 .pointerEventsNone{
-    pointer-events: none;
+    /*pointer-events: none;*/
 }
 
 .modal{

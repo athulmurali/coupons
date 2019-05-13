@@ -2,46 +2,32 @@ import React from "react";
 import {connect} from "react-redux";
 import Search_Icon from "../../assets/new-filter-search.png";
 import {updateSearch} from "../../redux/actions/SearchSortFilter";
-import {updateCoupons} from "../../redux/actions/DisplayCouponAction";
 
-class SearchCouponByName extends React.Component {
+class SearchCoupon extends React.Component {
 
-	inputChange = (e) => {
-		this.props.updateSearchParams({searchString : e.target.value});
-	}
+	inputChange = (e) => this.props.updateSearchParams({searchString: e.target.value});
 
-	render(){
-		console.log(this.props)
-		let couponsLength = this.props.couponsLength;
+	render() {
+		return  <div className="CouponSearch">
+					<div className="SearchBarImage">
+						<img className="SearchImage" src={Search_Icon} alt="Search icon not found"/>
+						<input type="text" className="SearchBar" placeholder="Search"
+							   onChange={this.inputChange}
+						/>
+					</div>
+					<h4 className="LoadedCouponCount"> Available Coupons ({this.props.couponsLength}) </h4>
+				</div>
 
-		return(
-			<div className="CouponSearch" onKeyDown={this.props.timerReset}>
-				<div className="SearchBarImage">
-					<img className="SearchImage" src={Search_Icon} alt ="Search icon not found" />
-					<input type="text" className = "SearchBar" placeholder="Search"
-						onChange ={this.inputChange}
-						// onClick={this.timerReset}
-					/>
-				</div> 
-				<h4 className="LoadedCouponCount"> Available Coupons ({couponsLength}) </h4>
-			</div>
-		);
 	}
 }
 
 
-const mapStateToProps = (state) => {
-	return {
-		couponsLength : state.DisplayCouponsReducer.searchedCouponsLength
-	};
-};
 
 const mapDispatchToProps = (dispatch) => (
 	{
-		updateSearchParams : (searchParams) => updateSearch(dispatch, searchParams),
-		updateCoupons: (searchParams) => updateCoupons(dispatch, searchParams)
+		updateSearchParams: (searchParams) => updateSearch(dispatch, searchParams),
 	}
 
 );
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchCouponByName);
+export default connect(_=>({}), mapDispatchToProps)(SearchCoupon);

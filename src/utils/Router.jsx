@@ -13,13 +13,6 @@ import {
 } from "./RouteConstants";
 
 class Router extends Component {
-	constructor(props) {
-		super(props);
-		// todo: to be removed if not used in the swift app
-		this.flag = false;
-
-	}
-
 	render() {
 
 		return (
