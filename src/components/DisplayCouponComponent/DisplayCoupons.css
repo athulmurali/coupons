@@ -286,6 +286,7 @@ h6.viewMore{
 
 .WelcomeUser_Logout {
     display: flex;
+    flex: 1;
     justify-content: flex-end;
     margin-right: 20px;
     margin-bottom: 0;

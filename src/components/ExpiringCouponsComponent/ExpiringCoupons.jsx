@@ -19,15 +19,19 @@ const styles = {
 
 class ExpiringCoupons extends React.Component {
 
+	componentDidMount() {
+		console.log("gasRewards : ", this.props.gasRewards);
+	}
+
 	render() {
 		return (
 			<ExpiringCouponsDiv>
-				<div class="saving_div">
-					<div class="total_savings" style={styles.totalSavingsContainer}>
+				<div className="saving_div">
+					<div className="total_savings" style={styles.totalSavingsContainer}>
 						Your total Savings.
 						<p style={styles.totalSavingsText}>{this.props.totalSavings}</p>
 					</div>
-					<div class="total_savings">
+					<div className="total_savings">
 						Your total Gas Rewards.
 						<p style={styles.totalSavingsText}>{this.props.gasRewards}</p>
 					</div>

@@ -20,9 +20,6 @@
 	flex-direction: column;
 }
 .saving_div .total_savings{
-	
-    /* display: flex; */
-    text-align: center;
     /* border-right: 2px solid; */
     margin-top: 52px;
     margin-bottom: 52px;

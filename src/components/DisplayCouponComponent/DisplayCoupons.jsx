@@ -7,7 +7,6 @@ import Header from "../HeaderComponent/Header";
 import "./DisplayCoupons.css";
 import {ROUTE_HOME_PAGE} from "../../utils/RouteConstants";
 import {fetchCategories, updateLoaded} from "../../redux/actions/SearchSortFilter";
-import WelcomeHeader from "../WelcomeHeader";
 import LogOutPromptPopup from "../PopUps/LogOutPromptPopup";
 import LogOutSuccessPopUp from "../PopUps/LogOutSuccessPopUp";
 import {startTimer} from "../../redux/actions/Timer";
@@ -17,8 +16,9 @@ import CouponCardsWithSearch from "../CouponCardComponent/CouponCardsWithSearch"
 
 import ExpiringCoupons from "../ExpiringCouponsComponent/ExpiringCoupons";
 import connect from "react-redux/es/connect/connect";
+import {getUserGasRewards} from "../../redux/actions/ExpiringCoupons";
 
-class Coupons extends React.Component {
+class DisplayCoupons extends React.Component {
 
 	componentDidMount() {
 		console.log("Mounted!");
@@ -29,6 +29,7 @@ class Coupons extends React.Component {
 		if (!props.userInfo) {
 			props.history.push(ROUTE_HOME_PAGE);
 		} else if (!props.isTimedOut) {
+			props.getUserGasRewards(this.props.userInfo.loyaltyCardNumber);
 			props.fetchCategories();
 			props.updateLoaded({loaded: false});
 		}
@@ -53,9 +54,9 @@ class Coupons extends React.Component {
 		const {props} = this;
 		console.log("rendering DisplayCoupons.jsx");
 		return props.userInfo && <div className="pointerEventsNone">
-			<WelcomeHeader userName={props.userInfo.firstName}/>
-			<Header/>
-			<ExpiringCoupons gasRewards={"$0.02"} totalSavings={"$366.12"} userName={props.userInfo.firstName}/>
+			<Header name={this.props.userInfo.firstName}/>
+			<ExpiringCoupons gasRewards={"$" + this.props.gasRewardsValue} totalSavings={"$366.12"}
+							 userName={props.userInfo.firstName}/>
 			{/*<PrintComponent hideLoadedCoupons={this.state.hideLoadedCoupons}*/}
 			{/*componentRef={this.componentRef}></PrintComponent>*/}
 
@@ -71,14 +72,16 @@ class Coupons extends React.Component {
 const mapStateToProps = (state) => {
 	return {
 		userInfo: state.DisplayCouponsReducer.userInfo,
-		isTimedOut: state.TimerReducer.isTimedOut
+		isTimedOut: state.TimerReducer.isTimedOut,
+		gasRewardsValue: state.ExpiringCouponsReducer.gasRewards
 	};
 };
 
 const mapDispatchToProps = (dispatch) => ({
 	updateLoaded: (updatedLoadedParams) => updateLoaded(dispatch, updatedLoadedParams),
 	fetchCategories: () => fetchCategories(dispatch),
-	startTimer: () => startTimer(dispatch)
+	startTimer: () => startTimer(dispatch),
+	getUserGasRewards: (loyaltyNumber) => getUserGasRewards(dispatch, loyaltyNumber)
 
 });
-export default connect(mapStateToProps, mapDispatchToProps)(Coupons);
+export default connect(mapStateToProps, mapDispatchToProps)(DisplayCoupons);
