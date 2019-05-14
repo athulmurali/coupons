@@ -22,13 +22,6 @@ class ExpiringCoupons extends React.Component {
 	render() {
 		return (
 			<ExpiringCouponsDiv>
-				<div class="talk-bubble tri-right border round btm-left-in" style={{width: "400px"}}>
-					<div class="talktext">
-						<div>
-							{this.props.userName}, start saving with digital coupons.
-						</div>
-					</div>
-				</div>
 				<div class="saving_div">
 					<div class="total_savings" style={styles.totalSavingsContainer}>
 						Your total Savings.
