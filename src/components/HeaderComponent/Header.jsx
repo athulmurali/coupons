@@ -5,19 +5,17 @@ import PropTypes from "prop-types";
 import WelcomeHeader from "../WelcomeHeader";
 
 const AttractHeader = styled.div`
-	display: flex;
-	flex :1
-    justify-content: center;
+  	flex:1;    
+  	position: relative;
+    text-align:center;
 	font-size: calc(13px + .7vmin);
-	// font-size: 22px;
 	color: black;
-	// padding: 30px;
+	padding-top: 30px;
 `;
 
 const StyledHeader = styled.div`
 	display : flex;
 	flex-direction:row;
-	width : 100%;
 `;
 
 const TITLE = "Savings & Coupons";

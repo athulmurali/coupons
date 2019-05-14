@@ -16,7 +16,7 @@ import CouponCardsWithSearch from "../CouponCardComponent/CouponCardsWithSearch"
 
 import ExpiringCoupons from "../ExpiringCouponsComponent/ExpiringCoupons";
 import connect from "react-redux/es/connect/connect";
-import {getUserGasRewards} from "../../redux/actions/ExpiringCoupons";
+import {getTotalSavingFromServer, getUserGasRewards} from "../../redux/actions/ExpiringCoupons";
 
 class DisplayCoupons extends React.Component {
 
@@ -32,6 +32,7 @@ class DisplayCoupons extends React.Component {
 			props.getUserGasRewards(this.props.userInfo.loyaltyCardNumber);
 			props.fetchCategories();
 			props.updateLoaded({loaded: false});
+			props.getTotalSavingFromServer(this.props.userInfo.loyaltyCardNumber);
 		}
 
 	}
@@ -55,11 +56,10 @@ class DisplayCoupons extends React.Component {
 		console.log("rendering DisplayCoupons.jsx");
 		return props.userInfo && <div className="pointerEventsNone">
 			<Header name={this.props.userInfo.firstName}/>
-			<ExpiringCoupons gasRewards={"$" + this.props.gasRewardsValue} totalSavings={"$366.12"}
-							 userName={props.userInfo.firstName}/>
+			<ExpiringCoupons gasRewards={"$" + props.gasRewardsValue}
+							 totalSavings={`$${props.totalSavingsValue}`}/>
 			{/*<PrintComponent hideLoadedCoupons={this.state.hideLoadedCoupons}*/}
 			{/*componentRef={this.componentRef}></PrintComponent>*/}
-
 			<div className="displayCouponsContainer">
 				<SideBar/>
 				<CouponCardsWithSearch/>
@@ -73,7 +73,8 @@ const mapStateToProps = (state) => {
 	return {
 		userInfo: state.DisplayCouponsReducer.userInfo,
 		isTimedOut: state.TimerReducer.isTimedOut,
-		gasRewardsValue: state.ExpiringCouponsReducer.gasRewards
+		gasRewardsValue: state.ExpiringCouponsReducer.gasRewards,
+		totalSavingsValue: state.ExpiringCouponsReducer.totalSavings,
 	};
 };
 
@@ -81,7 +82,8 @@ const mapDispatchToProps = (dispatch) => ({
 	updateLoaded: (updatedLoadedParams) => updateLoaded(dispatch, updatedLoadedParams),
 	fetchCategories: () => fetchCategories(dispatch),
 	startTimer: () => startTimer(dispatch),
-	getUserGasRewards: (loyaltyNumber) => getUserGasRewards(dispatch, loyaltyNumber)
+	getUserGasRewards: (loyaltyNumber) => getUserGasRewards(dispatch, loyaltyNumber),
+	getTotalSavingFromServer: (loyaltyNumber) => getTotalSavingFromServer(dispatch, loyaltyNumber)
 
 });
 export default connect(mapStateToProps, mapDispatchToProps)(DisplayCoupons);

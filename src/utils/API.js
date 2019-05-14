@@ -60,12 +60,27 @@ const getUserGasRewardsFromServer = (loyaltyNumber = null) => {
 	return axios.get(url);
 };
 
+const getCouponsFromServer = function (loadedParams, loyaltyNumber) {
+
+
+	const allCouponsUrl = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/coupons/user/${Config.storeNumber}/${loyaltyNumber}/`;
+
+	const loadedCouponsUrl = `${http}://${Config.neServerHost}:${Config.neServerPort}/couponServer/coupons/loaded/user/${Config.storeNumber}/${loyaltyNumber}/`;
+	if (loadedParams.loaded) {
+
+		return axios.get(loadedCouponsUrl);
+	}
+	return axios.get(allCouponsUrl);
+
+};
+
 const API = {
 	getUserDetails: getUserDetailsByBarcode,
 	getCouponsWithFilters,
 	getCategoriesFromServer,
 	loadCoupon,
 	getUserGasRewardsFromServer,
+	getCouponsFromServer
 };
 
 export default API;

@@ -4,10 +4,18 @@ export const FETCH_GAS_REWARDS_PENDING = FETCH_GAS_REWARDS + "_PENDING";
 export const FETCH_GAS_REWARDS_FULFILLED = FETCH_GAS_REWARDS + "_FULFILLED";
 export const FETCH_GAS_REWARDS_REJECTED = FETCH_GAS_REWARDS + "_REJECTED";
 
+export const FETCH_NEW_AND_LOADED_COUPONS = "FETCH_NEW_AND_LOADED_COUPONS";
+export const FETCH_NEW_AND_LOADED_COUPONS_PENDING = FETCH_NEW_AND_LOADED_COUPONS + "_PENDING";
+export const FETCH_NEW_AND_LOADED_COUPONS_FULFILLED = FETCH_NEW_AND_LOADED_COUPONS + "_FULFILLED";
+export const FETCH_NEW_AND_LOADED_COUPONS_REJECTED = FETCH_NEW_AND_LOADED_COUPONS + "_REJECTED";
+
+export const DIGITS_AFTER_DECIMAL = 2;
+
 const initialState = {
 	allCoupons: [],
 	loadedCoupons: [],
-	gasRewards: null,
+	gasRewards: 0,
+	totalSavings: 0,
 
 };
 
@@ -49,7 +57,27 @@ const ExpiringCouponsReducer = (state = initialState, action) => {
 		case FETCH_GAS_REWARDS_FULFILLED :
 			return {
 				...state,
-				gasRewards: action.payload.data.calculatedRate
+				gasRewards: parseFloat(action.payload.data.calculatedRate).toFixed(DIGITS_AFTER_DECIMAL)
+			};
+
+		case FETCH_NEW_AND_LOADED_COUPONS_PENDING:
+			return {
+				...state, isLoading: true
+			};
+
+		case FETCH_NEW_AND_LOADED_COUPONS_FULFILLED:
+			//this event expects an array of two objects
+			// object @index 0 - all coupons or new coupons
+			// object @index 1 - loaded coupons
+
+			const newCoupons = action.payload[0].data;
+			const loadedCoupons = action.payload[1].data;
+
+			const newCouponsSavings = newCoupons.reduce((accVal, coupon) => accVal + coupon.price, 0);
+			const loadedCouponsSavings = loadedCoupons.reduce((accVal, coupon) => accVal + coupon.price, 0);
+			return {
+				...state,
+				totalSavings: parseFloat(newCouponsSavings + loadedCouponsSavings).toFixed(DIGITS_AFTER_DECIMAL),
 			};
 
 		default:

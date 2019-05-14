@@ -18,11 +18,6 @@ const styles = {
 };
 
 class ExpiringCoupons extends React.Component {
-
-	componentDidMount() {
-		console.log("gasRewards : ", this.props.gasRewards);
-	}
-
 	render() {
 		return (
 			<ExpiringCouponsDiv>
