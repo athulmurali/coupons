@@ -84,7 +84,7 @@ export const SORT_CATEGORIES = [
 ];
 
 
-export const CouponsTypeEnum = Object.freeze({LOADED: "LOADED", ALL: "ALL"});
+export const CouponsTypeEnum = Object.freeze({LOADED: "LOADED", NEW: "NEW"});
 export const DEFAULT_SORT = SORT_CATEGORIES[0];
 export const LOADED_DEFAULT = false;
 export const SEARCH_FIELD_NAMES = ["name","description"];
