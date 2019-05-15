@@ -16,8 +16,6 @@ const ExpiringCouponsDiv = styled.div`
 	
 `;
 const styles = {
-	totalSavingsContainer: {borderRight: "3px solid black"},
-	totalSavingsText: {fontWeight: "bold", marginTop: "7px"},
 };
 
 class ExpiringCoupons extends React.Component {
@@ -25,13 +23,13 @@ class ExpiringCoupons extends React.Component {
 		return (
 			<ExpiringCouponsDiv>
 				<div className="saving_div">
-					<div className="total_savings" style={styles.totalSavingsContainer}>
-						Your total Savings.
-						<p style={styles.totalSavingsText}>{this.props.totalSavings}</p>
+					<div className="total_savings rightBordered">
+						<span className="value">{this.props.totalSavings}</span>&nbsp;
+						<span className="info">Your total savings</span>
 					</div>
 					<div className="total_savings">
-						Your total Gas Rewards.
-						<p style={styles.totalSavingsText}>{this.props.gasRewards}</p>
+						<span className="value">{this.props.gasRewards}</span>&nbsp;
+						<span className="info">Your gas rewards</span>
 					</div>
 				</div>
 			</ExpiringCouponsDiv>

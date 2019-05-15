@@ -10,7 +10,7 @@ const AttractHeader = styled.div`
     text-align:center;
 	font-size: calc(13px + .7vmin);
 	color: black;
-	padding-top: 30px;
+	padding-bottom: 10px;
 `;
 
 const StyledHeader = styled.div`
@@ -29,7 +29,7 @@ class Header extends React.Component {
 			<StyledHeader>
 				{this.props.name && <WelcomeHeader userName={this.props.name}/>}
 				<AttractHeader>
-					<h1 className="MainHeader">{TITLE}</h1>
+					<div className="MainHeader">{TITLE}</div>
 				</AttractHeader>
 			</StyledHeader>
 		);
