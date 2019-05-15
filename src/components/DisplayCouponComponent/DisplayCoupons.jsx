@@ -17,6 +17,7 @@ import CouponCardsWithSearch from "../CouponCardComponent/CouponCardsWithSearch"
 import ExpiringCoupons from "../ExpiringCouponsComponent/ExpiringCoupons";
 import connect from "react-redux/es/connect/connect";
 import {getTotalSavingFromServer, getUserGasRewards} from "../../redux/actions/ExpiringCoupons";
+import WelcomeHeader from "../WelcomeHeader";
 
 class DisplayCoupons extends React.Component {
 
@@ -55,6 +56,7 @@ class DisplayCoupons extends React.Component {
 		const {props} = this;
 		console.log("rendering DisplayCoupons.jsx");
 		return props.userInfo && <div className="pointerEventsNone">
+
 			<Header name={this.props.userInfo.firstName}/>
 			<ExpiringCoupons gasRewards={"$" + props.gasRewardsValue}
 							 totalSavings={`$${props.totalSavingsValue}`}/>

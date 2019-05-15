@@ -11,8 +11,8 @@ const handleClickLogOut = (e, logOutHandler) => {
 };
 const WelcomeHeader = (props) => {
 	return (<div className="WelcomeUser_Logout">
-			<h2 className="userName" style={{display: "inline-block"}}> Welcome {props.userName}! </h2>
-			<button className="logoutButton" style={{display: "inline-block"}}
+			<h2 className="userName" > Welcome {props.userName}! </h2>
+			<button className="logoutButton"
 					onClick={e => handleClickLogOut(e, props.signMeOut)}> Log Out
 			</button>
 		</div>

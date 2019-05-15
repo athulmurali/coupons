@@ -285,17 +285,26 @@ h6.viewMore{
 }
 
 .WelcomeUser_Logout {
-    position: relative;
+    width: 100%;
+    margin-left: auto;
+    position: absolute;
     margin-right: 20px;
     margin-bottom: 0;
+    display: flex;
+    flex :1;
+    justify-content: flex-end;
+    z-index:10;
 }
 
 .userName {
+
     font-style: italic;
     color: grey;
-    display: inline-block;
     margin-top: 25px;
     margin-right: 10px;
+    display: inline-block;
+
+
 }
 
 .logoutButton {
@@ -307,7 +316,8 @@ h6.viewMore{
     color: grey;
     background-color: white;
     border: 1px solid gray;
-    display: inline-block;
+
+
 
 }
 

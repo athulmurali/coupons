@@ -16,6 +16,7 @@ const AttractHeader = styled.div`
 const StyledHeader = styled.div`
 	display : flex;
 	flex-direction:row;
+	flex :1;
 `;
 
 const TITLE = "Savings & Coupons";
@@ -26,10 +27,10 @@ class Header extends React.Component {
 		return(
 
 			<StyledHeader>
+				{this.props.name && <WelcomeHeader userName={this.props.name}/>}
 				<AttractHeader>
 					<h1 className="MainHeader">{TITLE}</h1>
 				</AttractHeader>
-				{this.props.name && <WelcomeHeader userName={this.props.name}/>}
 			</StyledHeader>
 		);
 	}

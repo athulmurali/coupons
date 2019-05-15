@@ -5,11 +5,14 @@ import PropTypes from "prop-types";
 
 const ExpiringCouponsDiv = styled.div`
 	display: flex;
+	flex :1;
 	justify-content: center;
 	font-family: sans-serif;
 	font-size: calc(13px + .7vmin);
-	// font-size: 22px;
 	color: black;
+	justify-self:center;
+	text-align:center;
+
 	
 `;
 const styles = {

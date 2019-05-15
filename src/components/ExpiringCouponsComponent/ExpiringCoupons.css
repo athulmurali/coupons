@@ -13,6 +13,7 @@
 	-webkit-border-radius: 30px;
 	flex-direction: row;
 	display: flex;
+	justify-content: center;
 }
 .saving_div .savings_description{
 	margin: 47px;
