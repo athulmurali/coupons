@@ -161,7 +161,7 @@ input[type="checkbox"]:checked + label{
 
 .flippyCardsContainer{
     overflow: scroll;
-    max-height: 700px;
+    max-height: 800px;
 }
 
 .flippy-back {
@@ -285,28 +285,39 @@ h6.viewMore{
 }
 
 .WelcomeUser_Logout {
+    width: 98%;
+    margin-left: auto;
+    position: absolute;
+    margin-bottom: 0;
     display: flex;
     justify-content: flex-end;
-    margin-right: 20px;
-    margin-bottom: 0;
+    z-index:10;
 }
 
 .userName {
     font-style: italic;
+    font-size: 22px;
     color: grey;
-    margin-top: 25px;
+    margin-top: 18px;
     margin-right: 10px;
+    display: inline-block;
+
+
 }
 
 .logoutButton {
-    width: 150px;
-    height: 45px;
-    margin: 18px 5px 10px 10px;
-    font-size: 20px;
+
+    margin: 15px 5px 10px 10px;
+    padding-left: 14px;
+    padding-right: 14px;
+    font-size: 16px;
     font-weight: bold;
     color: grey;
     background-color: white;
     border: 1px solid gray;
+
+
+
 }
 
 .logoutButton:hover {

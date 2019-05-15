@@ -5,6 +5,7 @@ import DisplayCouponsReducer from "./DisplayCouponReducer";
 import TimerReducer from "./TimerReducer";
 import LoginReducer from "./LoginReducer";
 import LoadCouponReducer from "./LoadCouponReducer";
+import ExpiringCouponsReducer from "./ExpiringCouponsReducer";
 
 
 const combinedReducers = combineReducers({
@@ -13,6 +14,7 @@ const combinedReducers = combineReducers({
 	DisplayCouponsReducer,
 	LoginReducer,
 	TimerReducer,
-	LoadCouponReducer
+	LoadCouponReducer,
+	ExpiringCouponsReducer
 });
 export default  combinedReducers
