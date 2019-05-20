@@ -1,15 +1,26 @@
-##### Note : 
+#### Note : 
 
-This project requires backend to allow user navigation. 
+This project requires a backend to validate the user phone number numbers, card numbers and etc in order to 
+navigate  to the next screen. 
 
 I am trying to build a backend for this now, so that it is fully functional. 
 
 
 This will be a project just for reference : React, Redux and other middlewares that I use in a production environment
 
+
 Only for educational purposes. 
 
-Sharing and redistribution of code is strictly prohibited
+
+
+##### About ViewPort :
+
+This project was designed to be integrated in an iOS app using web views for ipad Pro.
+It will deployed as a kiosk application.
+
+Please select the responsive design and  select ipadPro 12"  in safari or Google Chrome for better viewing experience.
+
+
 
 
 ----------------------
