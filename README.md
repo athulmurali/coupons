@@ -11,6 +11,14 @@ This will be a project just for reference : React, Redux and other middlewares t
 
 Only for educational purposes. 
 
+#### Currently working on:
+
+1. Moving all styled components to css classNames to mainatain consistency. 
+
+2. Code formatting.
+
+3. Re-organizing the messy API.js file
+
 
 
 ##### About ViewPort :
