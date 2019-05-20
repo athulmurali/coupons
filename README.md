@@ -1,3 +1,21 @@
+##### Note : 
+
+This project requires backend to allow user navigation. 
+
+I am trying to build a backend for this now, so that it is fully functional. 
+
+
+This will be a project just for reference : React, Redux and other middlewares that I use in a production environment
+
+Only for educational purposes. 
+
+Sharing and redistribution of code is strictly prohibited
+
+
+----------------------
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
